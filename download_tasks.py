@@ -1,15 +1,4 @@
-import argparse
-import os
-os.environ["HF_DATASETS_OFFLINE"]="1" # 1 for offline
-os.environ["TRANSFORMERS_OFFLINE"]="1" # 1 for offline
-os.environ["TRANSFORMERS_CACHE"]="/gpfswork/rech/six/commun/models"
-os.environ["HF_DATASETS_CACHE"]="/gpfswork/rech/six/commun/datasets"
-os.environ["HF_MODULES_CACHE"]="/gpfswork/rech/six/commun/modules"
-os.environ["HF_METRICS_CACHE"]="/gpfswork/rech/six/commun/metrics"
-os.environ["TOKENIZERS_PARALLELISM"] = "false"
-
-from mteb import MTEB
-from sentence_transformers import SentenceTransformer
+#!/usr/bin/env python
 
 
 TASK_LIST = [
@@ -69,25 +58,29 @@ TASK_LIST = [
     "SummEval",
 ]
 
-def parse_args():
-    # Parse command line arguments
-    parser = argparse.ArgumentParser()
+import os
+os.environ["HF_DATASETS_OFFLINE"]="0" # 1 for offline
+os.environ["TRANSFORMERS_OFFLINE"]="0" # 1 for offline
+os.environ["TRANSFORMERS_CACHE"]="/gpfswork/rech/six/commun/models"
+os.environ["HF_DATASETS_CACHE"]="/gpfswork/rech/six/commun/datasets"
+os.environ["HF_MODULES_CACHE"]="/gpfswork/rech/six/commun/modules"
+os.environ["HF_METRICS_CACHE"]="/gpfswork/rech/six/commun/metrics"
+from mteb import MTEB
+import numpy as np
+class ToyModel():
+    def __init__(self):
+        pass
+    def encode(self, sentences, batch_size=32, **kwargs):
+        """ Returns a list of embeddings for the given sentences.
+        Args:
+            sentences (`List[str]`): List of sentences to encode
+            batch_size (`int`): Batch size for the encoding
 
-    parser.add_argument("--startid", type=int)
-    parser.add_argument("--endid", type=int)
+        Returns:
+            `List[np.ndarray]` or `List[tensor]`: List of embeddings for the given sentences
+        """
+        raise ValueError("Downloading only")
 
-    args = parser.parse_args()
-    return args
-
-def main(args):
-    for task in TASK_LIST[args.startid-1:args.endid-1]:
-        print("TASK: ", task)
-        model_path = "/gpfswork/rech/six/commun/models/sentence-transformers_sentence-t5-base/"
-        model_name = model_path.split("/")[-1].split("_")[-1]
-        model = SentenceTransformer(model_path)
-        evaluation = MTEB(tasks=[task])
-        evaluation.run(model, output_folder=f"results/{model_name}")
-
-if __name__ == "__main__":
-    args = parse_args()
-    main(args)
+model = ToyModel()
+evaluation = MTEB(tasks=TASK_LIST, task_langs=["en"])
+evaluation.run(model, output_folder=f"toy_results/")

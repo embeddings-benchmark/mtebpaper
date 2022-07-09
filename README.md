@@ -16,7 +16,7 @@ from sentence_transformers import SentenceTransformer
 model_path = "/gpfswork/rech/six/commun/models/Muennighoff_SGPT-125M-weightedmean-nli-bitfit"
 model_name = model_path.split("/")[-1].split("_")[-1]
 model = SentenceTransformer(model_path)
-evaluation = MTEB(tasks=["STS12"])
+evaluation = MTEB(tasks=["TRECCOVID"])
 evaluation.run(model, output_folder=f"../results/{model_name}")
 ```
 
@@ -138,6 +138,8 @@ conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
 
 !pip install --upgrade git+https://github.com/Muennighoff/mteb.git@offlineaccess
 !pip install --upgrade git+https://github.com/Muennighoff/sentence-transformers.git@sgpt_poolings
+# If you want to run BEIR tasks
+!pip install --upgrade git+https://github.com/beir-cellar/beir.git
 ```
 
 
@@ -164,6 +166,12 @@ model = SentenceTransformer(model_repo, cache_folder=cache_folder)
 ```
 
 #### Download
+
+##### Data
+
+
+
+##### Model
 
 Download
 ```python
