@@ -18,7 +18,7 @@ echo "START TIME: $(date)"
 
 cd /gpfsscratch/rech/six/commun/commun/experiments/muennighoff/
 
-NUM_TASKS=54
+NUM_TASKS=19
 NUM_TASKS_PER_JOB=1
 
 TASK_START=$(expr $SLURM_ARRAY_TASK_ID \* $NUM_TASKS_PER_JOB )
@@ -26,4 +26,5 @@ TASK_END=$(expr $TASK_START + $NUM_TASKS_PER_JOB )
 
 python mteb/run_array.py \
 	--startid $TASK_START \
-	--endid $TASK_END
+	--endid $TASK_END \
+    --modelpath /gpfswork/rech/six/commun/models/sentence-transformers_sentence-t5-base

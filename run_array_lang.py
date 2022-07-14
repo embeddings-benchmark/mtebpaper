@@ -147,8 +147,10 @@ def main(args):
     for task in TASK_LIST[args.startid-1:args.endid-1]:
         print("Running task: ", task)
         model_name = args.modelpath.split("/")[-1].split("_")[-1]
-        evaluation = MTEB(tasks=[task], task_langs=[args.lang], eval_splits=["test"])
+        evaluation = MTEB(task_langs=[args.lang])
         evaluation.run(model, output_folder=f"results/{model_name}")
+
+        
 
 if __name__ == "__main__":
     args = parse_args()

@@ -1,6 +1,27 @@
 # MTEB + SGPT
 
 
+tmp
+python beir_dense_retriever.py --modelname /gpfswork/rech/six/commun/models/Muennighoff_SGPT-125M-weightedmean-nli-bitfit --method weightedmean --dataset trec-covid --specb
+
+<!-- TOC -->
+
+- [MTEB + SGPT](#mteb--sgpt)
+    - [Run](#run)
+        - [sentence-transformers/sentence-t5-base](#sentence-transformerssentence-t5-base)
+    - [Benchmark](#benchmark)
+    - [Env Setup](#env-setup)
+    - [Model setup](#model-setup)
+        - [Python](#python)
+            - [Load](#load)
+            - [Download](#download)
+                - [Data](#data)
+                - [Model](#model)
+        - [Bash](#bash)
+        - [Dataiku](#dataiku)
+
+<!-- /TOC -->
+
 ## Run
 
 ```python

@@ -1,7 +1,10 @@
-#!/usr/bin/env python
+"""
+Usage: python results_to_csv results_folder_path
+"""
 
+from mteb import MTEB
 
-TASK_LIST = [
+TASK_LIST_CLASSIFICATION = [
     "AmazonCounterfactualClassification",
     "AmazonPolarityClassification",
     "AmazonReviewsClassification",
@@ -14,6 +17,9 @@ TASK_LIST = [
     "MTOPIntentClassification",
     "ToxicConversationsClassification",
     "TweetSentimentExtractionClassification",
+]
+
+TASK_LIST_CLUSTERING = [
     "ArxivClusteringP2P",
     "ArxivClusteringS2S",
     "BiorxivClusteringP2P",
@@ -25,12 +31,21 @@ TASK_LIST = [
     "StackExchangeClustering",
     "StackExchangeClusteringP2P",
     "TwentyNewsgroupsClustering",
+]
+
+TASK_LIST_PAIR_CLASSIFICATION = [
     "SprintDuplicateQuestions",
     "TwitterSemEval2015",
     "TwitterURLCorpus",
+]
+
+TASK_LIST_RERANKING = [
     "AskUbuntuDupQuestions",
-    "SciDocs"
+    "SciDocs",
     "StackOverflowDupQuestions",
+]
+
+TASK_LIST_RETRIEVAL = [
     "ArguAna",
     "ClimateFEVER",
     "DBPedia",
@@ -45,6 +60,9 @@ TASK_LIST = [
     "SciFact",
     "Touche2020",
     "TRECCOVID",
+]
+
+TASK_LIST_STS = [
     "BIOSSES",
     "SICK-R",
     "STS12",
@@ -57,6 +75,8 @@ TASK_LIST = [
     "STSBenchmark",
     "SummEval",
 ]
+
+TASK_LIST = TASK_LIST_CLASSIFICATION + TASK_LIST_CLUSTERING + TASK_LIST_PAIR_CLASSIFICATION + TASK_LIST_RERANKING + TASK_LIST_RETRIEVAL + TASK_LIST_STS
 
 import os
 import sys
@@ -73,7 +93,7 @@ for file_name in os.listdir(results_folder):
         continue
     with io.open(os.path.join(results_folder, file_name), 'r', encoding='utf-8') as f:
         results = json.load(f)
-        all_results = {**all_results, **results}
+        all_results = {**all_results, **{file_name.replace(".json", ""): results}}
 
 csv_file = f"{results_folder}_results.csv"
 print(f"Converting {results_folder} to {csv_file}")
@@ -83,20 +103,27 @@ with io.open(csv_file, 'w', encoding='utf-8') as f:
     writer.writerow(["dataset", "metric", "value"])
 
     for task_name in TASK_LIST:
-        writer.writerow([task_name, all_results["acc"], v["acc_stderr"], versions[k]])
-
-
-    for k,v in sorted(results["results"].items()):
-        if k not in versions:
-            versions[k] = -1
-
-        if "acc" in v:
-            writer.writerow([k, "acc", v["acc"], v["acc_stderr"], versions[k]])
-        if "acc_norm" in v:
-            writer.writerow([k, "acc_norm", v["acc_norm"], v["acc_norm_stderr"], versions[k]])
-        if "f1" in v:
-            writer.writerow([k, "f1", v["f1"], v["f1_stderr"] if "f1_stderr" in v else "", versions[k]])
-        # if "ppl" in v:
-        #     writer.writerow([k, "ppl", v["ppl"], v["ppl_stderr"], versions[k]])
-        # if "em" in v:
-        #     writer.writerow([k, "em", v["em"], v["em_stderr"] if "em_stderr" in v else "", versions[k]])
+        tasks = MTEB(tasks=[task_name]).tasks
+        if len(tasks) == 0:
+            print(f"No tasks found for name {task_name}")
+        main_metric = tasks[0].description["main_score"]
+        test_result = all_results.get(task_name, {}).get("test")
+        if test_result is None:
+            print(f"{task_name} / test set not found - Writing empty row")
+            writer.writerow([task_name, main_metric, ""])
+            continue
+        if "en" in test_result:
+            test_result = test_result["en"]
+        elif "en-en" in test_result:
+            test_result = test_result["en-en"]
+        if main_metric == "cosine_spearman":
+            test_result = test_result.get("cos_sim", {}).get("spearman")
+        elif main_metric == "ap":
+            test_result = test_result.get("cos_sim", {}).get("ap")
+        else:
+            test_result = test_result.get(main_metric)
+        if test_result is None:
+            print(f"{main_metric} not found for task {task_name}")
+            writer.writerow([task_name, main_metric, ""])
+            continue
+        writer.writerow([task_name, main_metric, test_result])
