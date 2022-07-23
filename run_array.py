@@ -134,6 +134,7 @@ def parse_args():
     parser.add_argument("--addspecbquery", action='store_true',)
     parser.add_argument("--modelpath", type=str, default="/gpfswork/rech/six/commun/models/sentence-transformers_sentence-t5-base")
     parser.add_argument("--lang", type=str, default="en")
+    parser.add_argument("--taskname", type=str, default=None)
     args = parser.parse_args()
     return args
 
@@ -144,7 +145,14 @@ def main(args):
     else:
         model = SentenceTransformer(args.modelpath)
 
-    for task in TASK_LIST[args.startid-1:args.endid-1]:
+    if args.taskname is not None:
+        task = args.taskname
+        model_name = args.modelpath.split("/")[-1].split("_")[-1]
+        evaluation = MTEB(tasks=[task], task_langs=[args.lang], eval_splits=["test"])
+        evaluation.run(model, output_folder=f"results/{model_name}")
+        exit()
+
+    for task in TASK_LIST[args.startid:args.endid]:
         print("Running task: ", task)
         model_name = args.modelpath.split("/")[-1].split("_")[-1]
         evaluation = MTEB(tasks=[task], task_langs=[args.lang], eval_splits=["test"])

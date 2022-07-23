@@ -1,12 +1,11 @@
-# MTEB + SGPT
+# MTEB Scripts
 
 
-tmp
 python beir_dense_retriever.py --modelname /gpfswork/rech/six/commun/models/Muennighoff_SGPT-125M-weightedmean-nli-bitfit --method weightedmean --dataset trec-covid --specb
 
 <!-- TOC -->
 
-- [MTEB + SGPT](#mteb--sgpt)
+- [MTEB Scripts](#mteb-scripts)
     - [Run](#run)
         - [sentence-transformers/sentence-t5-base](#sentence-transformerssentence-t5-base)
     - [Benchmark](#benchmark)
@@ -200,8 +199,8 @@ import os
 import sentence_transformers
 os.environ["SENTENCE_TRANSFORMERS_HOME"] = "/gpfswork/rech/six/commun/models"
 sentence_transformers_cache_dir = os.getenv("SENTENCE_TRANSFORMERS_HOME")
-model_repo="sentence-transformers/sentence-t5-xxl"
-revision="0a2f720e57c36306fbfca6025baba48828555764"
+model_repo="Muennighoff/SGPT-5.8B-weightedmean-msmarco-specb-bitfit"
+revision="62a5cc04518c1339a2c88bdaa63f1dedaa61146a"
 model_path = os.path.join(sentence_transformers_cache_dir, model_repo.replace("/", "_"))
 model_path_tmp = sentence_transformers.util.snapshot_download(
     repo_id=model_repo,
