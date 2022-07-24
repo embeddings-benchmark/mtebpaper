@@ -41,6 +41,7 @@ TASK_LIST_PAIR_CLASSIFICATION = [
 
 TASK_LIST_RERANKING = [
     "AskUbuntuDupQuestions",
+    "MindSmallReranking",
     "SciDocs",
     "StackOverflowDupQuestions",
 ]
@@ -48,6 +49,7 @@ TASK_LIST_RERANKING = [
 TASK_LIST_RETRIEVAL = [
     "ArguAna",
     "ClimateFEVER",
+    "CQADupstackRetrieval",
     "DBPedia",
     "FEVER",
     "FiQA2018",
