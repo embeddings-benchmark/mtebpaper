@@ -197,10 +197,10 @@ Download
 ```python
 import os
 import sentence_transformers
-os.environ["SENTENCE_TRANSFORMERS_HOME"] = "/gpfswork/rech/six/commun/models"
+os.environ["SENTENCE_TRANSFORMERS_HOME"] = "./gpfswork/rech/six/commun/models"
 sentence_transformers_cache_dir = os.getenv("SENTENCE_TRANSFORMERS_HOME")
-model_repo="Muennighoff/SGPT-5.8B-weightedmean-msmarco-specb-bitfit"
-revision="62a5cc04518c1339a2c88bdaa63f1dedaa61146a"
+model_repo="sentence-transformers/average_word_embeddings_glove.6B.300d"
+revision="5d2b7d1c127036ae98b9d487eca4d48744edc709"
 model_path = os.path.join(sentence_transformers_cache_dir, model_repo.replace("/", "_"))
 model_path_tmp = sentence_transformers.util.snapshot_download(
     repo_id=model_repo,

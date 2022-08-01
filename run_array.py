@@ -135,6 +135,7 @@ def parse_args():
     parser.add_argument("--modelpath", type=str, default="/gpfswork/rech/six/commun/models/sentence-transformers_sentence-t5-base")
     parser.add_argument("--lang", type=str, default="en")
     parser.add_argument("--taskname", type=str, default=None)
+    parser.add_argument("--batchsize", type=int, default=128)
     args = parser.parse_args()
     return args
 
@@ -149,14 +150,14 @@ def main(args):
         task = args.taskname
         model_name = args.modelpath.split("/")[-1].split("_")[-1]
         evaluation = MTEB(tasks=[task], task_langs=[args.lang], eval_splits=["test"])
-        evaluation.run(model, output_folder=f"results/{model_name}")
+        evaluation.run(model, output_folder=f"results/{model_name}", batch_size=args.batchsize)
         exit()
 
     for task in TASK_LIST[args.startid:args.endid]:
         print("Running task: ", task)
         model_name = args.modelpath.split("/")[-1].split("_")[-1]
         evaluation = MTEB(tasks=[task], task_langs=[args.lang], eval_splits=["test"])
-        evaluation.run(model, output_folder=f"results/{model_name}")
+        evaluation.run(model, output_folder=f"results/{model_name}", batch_size=args.batchsize)
 
 if __name__ == "__main__":
     args = parse_args()
