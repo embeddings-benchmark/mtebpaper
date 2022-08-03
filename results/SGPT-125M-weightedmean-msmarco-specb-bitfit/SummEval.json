@@ -1,13 +1,13 @@
 {
   "test": {
     "cos_sim": {
-      "pearson": NaN,
-      "spearman": NaN
+      "pearson": 0.295961822471627,
+      "spearman": 0.2890145030911965
     },
     "dot": {
-      "pearson": NaN,
-      "spearman": NaN
+      "pearson": 0.2917474339962901,
+      "spearman": 0.2736297597081396
     },
-    "evaluation_time": 250.17
+    "evaluation_time": 39.55
   }
 }
