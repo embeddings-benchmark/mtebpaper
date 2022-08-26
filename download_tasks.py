@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-
 TASK_LIST = [
     "AmazonCounterfactualClassification",
     "AmazonPolarityClassification",
@@ -66,7 +65,7 @@ os.environ["HF_DATASETS_CACHE"]="/gpfswork/rech/six/commun/datasets"
 os.environ["HF_MODULES_CACHE"]="/gpfswork/rech/six/commun/modules"
 os.environ["HF_METRICS_CACHE"]="/gpfswork/rech/six/commun/metrics"
 from mteb import MTEB
-import numpy as np
+
 class ToyModel():
     def __init__(self):
         pass

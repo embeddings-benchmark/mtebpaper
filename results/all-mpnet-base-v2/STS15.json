@@ -1,0 +1,17 @@
+{
+  "test": {
+    "cos_sim": {
+      "pearson": 0.8498824030948604,
+      "spearman": 0.856627539164948
+    },
+    "euclidean": {
+      "pearson": 0.8488733530073506,
+      "spearman": 0.8566275062257035
+    },
+    "evaluation_time": 4.76,
+    "manhattan": {
+      "pearson": 0.8470100813924224,
+      "spearman": 0.8550318526944763
+    }
+  }
+}

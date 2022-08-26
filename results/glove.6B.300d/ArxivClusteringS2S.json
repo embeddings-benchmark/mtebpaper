@@ -1,0 +1,7 @@
+{
+  "test": {
+    "evaluation_time": 39.23,
+    "v_measure": 0.23143703465994314,
+    "v_measure_std": 0.15301945420732257
+  }
+}

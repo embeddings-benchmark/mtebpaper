@@ -23,7 +23,7 @@ NUM_TASKS_PER_JOB=1
 TASK_START=$(expr $SLURM_ARRAY_TASK_ID \* $NUM_TASKS_PER_JOB )
 TASK_END=$(expr $TASK_START + $NUM_TASKS_PER_JOB )
 
-python mteb/run_array.py \
+python mteb/run_array_simcse.py \
 	--startid $TASK_START \
 	--endid $TASK_END \
     --modelpath /gpfswork/rech/six/commun/models/princeton-nlp_unsup-simcse-bert-base-uncased

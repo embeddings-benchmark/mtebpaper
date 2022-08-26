@@ -1,5 +1,5 @@
 """
-Usage: python results_to_csv results_folder_path
+Usage: python results_to_csv.py results_folder_path
 """
 
 from mteb import MTEB
@@ -87,6 +87,7 @@ import io
 import csv
 
 results_folder = sys.argv[1]
+results_folder = results_folder.strip("/")
 all_results = {}
 
 for file_name in os.listdir(results_folder):
