@@ -42,7 +42,7 @@ TASK_LIST_PAIR_CLASSIFICATION = [
 TASK_LIST_RERANKING = [
     "AskUbuntuDupQuestions",
     "MindSmallReranking",
-    "SciDocs",
+    "SciDocsRR",
     "StackOverflowDupQuestions",
 ]
 

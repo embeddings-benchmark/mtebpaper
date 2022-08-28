@@ -12,6 +12,7 @@ os.environ["HF_MODULES_CACHE"]="/gpfswork/rech/six/commun/modules"
 os.environ["HF_METRICS_CACHE"]="/gpfswork/rech/six/commun/metrics"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
+import numpy as np
 from mteb import MTEB
 from transformers import AutoModel, AutoTokenizer
 import torch
@@ -54,13 +55,26 @@ TASK_LIST_PAIR_CLASSIFICATION = [
 
 TASK_LIST_RERANKING = [
     "AskUbuntuDupQuestions",
-    "SciDocs",
+    "MindSmallReranking",
+    "SciDocsRR",
     "StackOverflowDupQuestions",
 ]
 
 TASK_LIST_RETRIEVAL = [
     "ArguAna",
     "ClimateFEVER",
+    "CQADupstackAndroid",
+    "CQADupstackEnglish",
+    "CQADupstackGaming",
+    "CQADupstackGisRetrieval"
+    "CQADupstackMathematicaRetrieval",
+    "CQADupstackPhysicsRetrieval",
+    "CQADupstackProgrammersRetrieval",
+    "CQADupstackStatsRetrieval",
+    "CQADupstackTexRetrieval",
+    "CQADupstackUnixRetrieval",
+    "CQADupstackWebmastersRetrieval",
+    "CQADupstackWordpressRetrieval",
     "DBPedia",
     "FEVER",
     "FiQA2018",
@@ -109,12 +123,20 @@ class SimCSEWrapper:
         Returns:
             `List[np.ndarray]` or `List[tensor]`: List of embeddings for the given sentences
         """
-        inputs = self.tokenizer(sentences, padding=True, truncation=True, return_tensors="pt")
-        inputs = {k: v.to(self.device) for k,v in inputs.items()}
-        # Get the embeddings
-        with torch.no_grad():
-            embeddings = self.model(**inputs, output_hidden_states=True, return_dict=True).pooler_output
-        return list(embeddings.cpu().numpy())
+        all_embeddings = []
+        length_sorted_idx = np.argsort([len(sen) for sen in sentences])
+        sentences_sorted = [sentences[idx] for idx in length_sorted_idx]
+
+        for start_index in range(0, len(sentences), batch_size):
+            sentences_batch = sentences_sorted[start_index:start_index+batch_size]
+            inputs = self.tokenizer(sentences_batch, padding=True, truncation=True, return_tensors="pt")
+            inputs = {k: v.to(self.device) for k,v in inputs.items()}
+            # Get the embeddings
+            with torch.no_grad():
+                embeddings = self.model(**inputs, output_hidden_states=True, return_dict=True).pooler_output
+            all_embeddings.extend(embeddings.cpu().numpy())
+        all_embeddings = [all_embeddings[idx] for idx in np.argsort(length_sorted_idx)]
+        return all_embeddings
 
 def parse_args():
     # Parse command line arguments
@@ -134,16 +156,18 @@ def main(args):
 
     if args.taskname is not None:
         task = args.taskname
+        eval_splits = ["validation"] if task == "MSMARCO" else ["test"]
         model_name = args.modelpath.split("/")[-1].split("_")[-1]
-        evaluation = MTEB(tasks=[task], task_langs=[args.lang], eval_splits=["test"])
+        evaluation = MTEB(tasks=[task], task_langs=[args.lang], eval_splits=eval_splits)
         evaluation.run(model, output_folder=f"results/{model_name}", batch_size=args.batchsize)
         exit()
 
     for task in TASK_LIST[args.startid:args.endid]:
         print("Running task: ", task)
+        eval_splits = ["validation"] if task == "MSMARCO" else ["test"]
         model_name = args.modelpath.split("/")[-1].split("_")[-1]
-        evaluation = MTEB(tasks=[task], task_langs=[args.lang], eval_splits=["test"])
-        evaluation.run(model, output_folder=f"results/{model_name}", batch_size=args.batchsize)
+        evaluation = MTEB(tasks=[task], task_langs=[args.lang])
+        evaluation.run(model, output_folder=f"results/{model_name}", batch_size=args.batchsize, eval_splits=eval_splits)
 
 if __name__ == "__main__":
     args = parse_args()

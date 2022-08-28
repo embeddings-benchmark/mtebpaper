@@ -59,7 +59,8 @@ TASK_LIST_PAIR_CLASSIFICATION = [
 
 TASK_LIST_RERANKING = [
     "AskUbuntuDupQuestions",
-    "SciDocs",
+    "MindSmallReranking",
+    "SciDocsRR",
     "StackOverflowDupQuestions",
 ]
 
@@ -149,14 +150,16 @@ def main(args):
 
     if args.taskname is not None:
         task = args.taskname
-        evaluation = MTEB(tasks=[task], task_langs=[args.lang], eval_splits=["test"])
-        evaluation.run(model, output_folder=f"results/{model_name}", batch_size=args.batchsize)
+        eval_splits = ["validation"] if task == "MSMARCO" else ["test"]
+        evaluation = MTEB(tasks=[task], task_langs=[args.lang])
+        evaluation.run(model, output_folder=f"results/{model_name}", batch_size=args.batchsize, eval_splits=eval_splits)
         exit()
 
     for task in TASK_LIST[args.startid:args.endid]:
         print("Running task: ", task)
-        evaluation = MTEB(tasks=[task], task_langs=[args.lang], eval_splits=["test"])
-        evaluation.run(model, output_folder=f"results/{model_name}", batch_size=args.batchsize)
+        eval_splits = ["validation"] if task == "MSMARCO" else ["test"]
+        evaluation = MTEB(tasks=[task], task_langs=[args.lang])
+        evaluation.run(model, output_folder=f"results/{model_name}", batch_size=args.batchsize, eval_splits=eval_splits)
 
 if __name__ == "__main__":
     args = parse_args()

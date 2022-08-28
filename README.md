@@ -198,8 +198,8 @@ import os
 import sentence_transformers
 os.environ["SENTENCE_TRANSFORMERS_HOME"] = "/gpfswork/rech/six/commun/models"
 sentence_transformers_cache_dir = os.getenv("SENTENCE_TRANSFORMERS_HOME")
-model_repo="princeton-nlp/unsup-simcse-bert-base-uncased"
-revision="6504ae026e02a1464538d443b15e36afc318e034"
+model_repo="bert-base-uncased"
+revision="418430c3b5df7ace92f2aede75700d22c78a0f95"
 model_path = os.path.join(sentence_transformers_cache_dir, model_repo.replace("/", "_"))
 model_path_tmp = sentence_transformers.util.snapshot_download(
     repo_id=model_repo,

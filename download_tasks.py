@@ -28,7 +28,8 @@ TASK_LIST = [
     "TwitterSemEval2015",
     "TwitterURLCorpus",
     "AskUbuntuDupQuestions",
-    "SciDocs"
+    "MindSmallReranking",
+    "SciDocsRR",
     "StackOverflowDupQuestions",
     "ArguAna",
     "ClimateFEVER",
@@ -64,22 +65,14 @@ os.environ["TRANSFORMERS_CACHE"]="/gpfswork/rech/six/commun/models"
 os.environ["HF_DATASETS_CACHE"]="/gpfswork/rech/six/commun/datasets"
 os.environ["HF_MODULES_CACHE"]="/gpfswork/rech/six/commun/modules"
 os.environ["HF_METRICS_CACHE"]="/gpfswork/rech/six/commun/metrics"
+
 from mteb import MTEB
-
-class ToyModel():
-    def __init__(self):
-        pass
-    def encode(self, sentences, batch_size=32, **kwargs):
-        """ Returns a list of embeddings for the given sentences.
-        Args:
-            sentences (`List[str]`): List of sentences to encode
-            batch_size (`int`): Batch size for the encoding
-
-        Returns:
-            `List[np.ndarray]` or `List[tensor]`: List of embeddings for the given sentences
-        """
-        raise ValueError("Downloading only")
-
-model = ToyModel()
 evaluation = MTEB(tasks=TASK_LIST, task_langs=["en"])
-evaluation.run(model, output_folder=f"toy_results/")
+
+for task in evaluation.tasks:
+    task.load_data()
+    #path = "/gpfsscratch/rech/six/commun/commun/experiments/muennighoff/" + task.description["hf_hub_name"]
+    #from git import Repo
+    #Repo.clone_from("https://huggingface.co/datasets/" + self.description["hf_hub_name"], path)
+    #self.dataset = datasets.load_dataset(path, revision=self.description.get("revision", None))
+
