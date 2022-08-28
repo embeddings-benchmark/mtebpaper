@@ -1,5 +1,5 @@
 dataset,metric,value
-AmazonCounterfactualClassification,accuracy,
+AmazonCounterfactualClassification,accuracy,0.5691044776119403
 AmazonPolarityClassification,accuracy,0.6032235
 AmazonReviewsClassification,accuracy,0.2967000000000001
 Banking77Classification,accuracy,0.6768831168831169
@@ -26,8 +26,8 @@ SprintDuplicateQuestions,ap,0.8696278773063988
 TwitterSemEval2015,ap,0.48454642053467223
 TwitterURLCorpus,ap,0.7734926843948666
 AskUbuntuDupQuestions,map,0.4957211733829243
-MindSmallReranking,map,
-SciDocs,map,
+MindSmallReranking,map,0.27006016291330964
+SciDocsRR,map,0.6255895801677928
 StackOverflowDupQuestions,map,0.3403090098227517
 ArguAna,ndcg_at_10,0.363
 ClimateFEVER,ndcg_at_10,0.14441
@@ -40,7 +40,7 @@ MSMARCO,ndcg_at_10,0.27094
 NFCorpus,ndcg_at_10,0.13871
 NQ,ndcg_at_10,0.1287
 QuoraRetrieval,ndcg_at_10,0.71318
-SCIDOCS,ndcg_at_10,
+SCIDOCS,ndcg_at_10,0.08041
 SciFact,ndcg_at_10,0.29575
 Touche2020,ndcg_at_10,0.13987
 TRECCOVID,ndcg_at_10,0.36219

@@ -1,5 +1,5 @@
 dataset,metric,value
-AmazonCounterfactualClassification,accuracy,
+AmazonCounterfactualClassification,accuracy,0.7891044776119402
 AmazonPolarityClassification,accuracy,
 AmazonReviewsClassification,accuracy,0.30578
 Banking77Classification,accuracy,0.5775974025974026
@@ -18,7 +18,7 @@ BiorxivClusteringS2S,v_measure,0.08827421024926384
 MedrxivClusteringP2P,v_measure,0.17908142247465778
 MedrxivClusteringS2S,v_measure,0.1662952889451872
 RedditClustering,v_measure,0.0996202584007419
-RedditClusteringP2P,v_measure,
+RedditClusteringP2P,v_measure,0.264185580282609
 StackExchangeClustering,v_measure,0.15794084761797694
 StackExchangeClusteringP2P,v_measure,0.18627980064437472
 TwentyNewsgroupsClustering,v_measure,0.11378130183913912
@@ -27,11 +27,11 @@ TwitterSemEval2015,ap,0.5956789548901481
 TwitterURLCorpus,ap,0.8147393118163185
 AskUbuntuDupQuestions,map,0.4898595820868522
 MindSmallReranking,map,
-SciDocs,map,
+SciDocsRR,map,0.5498656851897086
 StackOverflowDupQuestions,map,0.36983704984940896
 ArguAna,ndcg_at_10,0.12856
 ClimateFEVER,ndcg_at_10,0.0036
-CQADupstackRetrieval,ndcg_at_10,
+CQADupstackRetrieval,ndcg_at_10,0.04119
 DBPedia,ndcg_at_10,0.01526
 FEVER,ndcg_at_10,0.00767
 FiQA2018,ndcg_at_10,0.01725
@@ -40,7 +40,7 @@ MSMARCO,ndcg_at_10,0.03593
 NFCorpus,ndcg_at_10,0.02439
 NQ,ndcg_at_10,0.00642
 QuoraRetrieval,ndcg_at_10,0.71145
-SCIDOCS,ndcg_at_10,
+SCIDOCS,ndcg_at_10,0.00777
 SciFact,ndcg_at_10,0.04038
 Touche2020,ndcg_at_10,0.0106
 TRECCOVID,ndcg_at_10,0.10972
@@ -53,5 +53,5 @@ STS15,cosine_spearman,0.7156560343816677
 STS16,cosine_spearman,0.7075338261767046
 STS17,cosine_spearman,0.7672812705124583
 STS22,cosine_spearman,-0.3974427076488482
-STSBenchmark,cosine_spearman,
-SummEval,cosine_spearman,
+STSBenchmark,cosine_spearman,0.6977241730309153
+SummEval,cosine_spearman,0.268033428993562

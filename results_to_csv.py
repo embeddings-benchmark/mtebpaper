@@ -101,12 +101,14 @@ for file_name in os.listdir(results_folder):
 csv_file = f"{results_folder}_results.csv"
 print(f"Converting {results_folder} to {csv_file}")
 
+not_found = []
+
 with io.open(csv_file, 'w', encoding='utf-8') as f:
     writer = csv.writer(f)
     writer.writerow(["dataset", "metric", "value"])
 
     for task_name in TASK_LIST:
-        tasks = MTEB(tasks=[task_name]).tasks
+        tasks = MTEB(tasks=[task_name.replace("CQADupstackRetrieval", "CQADupstackTexRetrieval")]).tasks
         if len(tasks) == 0:
             print(f"No tasks found for name {task_name}")
         main_metric = tasks[0].description["main_score"]
@@ -114,6 +116,7 @@ with io.open(csv_file, 'w', encoding='utf-8') as f:
         if test_result is None:
             print(f"{task_name} / test set not found - Writing empty row")
             writer.writerow([task_name, main_metric, ""])
+            not_found.append(task_name)
             continue
         if "en" in test_result:
             test_result = test_result["en"]
@@ -130,3 +133,5 @@ with io.open(csv_file, 'w', encoding='utf-8') as f:
             writer.writerow([task_name, main_metric, ""])
             continue
         writer.writerow([task_name, main_metric, test_result])
+
+print("'"+"','".join(not_found)+"'", len(not_found))

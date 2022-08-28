@@ -1,0 +1,21 @@
+{
+  "dataset_version": null,
+  "mteb_version": "0.0.2",
+  "test": {
+    "en-en": {
+      "cos_sim": {
+        "pearson": 0.6231308830233162,
+        "spearman": 0.6410023907260639
+      },
+      "euclidean": {
+        "pearson": 0.6307087042929564,
+        "spearman": 0.633020011946463
+      },
+      "manhattan": {
+        "pearson": 0.6311994657459719,
+        "spearman": 0.6328228165157621
+      }
+    },
+    "evaluation_time": 1.96
+  }
+}

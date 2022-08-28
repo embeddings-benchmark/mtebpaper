@@ -1,0 +1,9 @@
+{
+  "dataset_version": null,
+  "mteb_version": "0.0.2",
+  "test": {
+    "evaluation_time": 45.27,
+    "map": 0.3890480943394549,
+    "mrr": 0.39057911043205157
+  }
+}

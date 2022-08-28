@@ -1,12 +1,31 @@
 {
+  "dataset_version": null,
+  "mteb_version": "0.0.2",
   "test": {
-    "evaluation_time": 77.77,
-    "map": 0.6835710819755543,
-    "mrr": 0.8805442832403617
-  },
-  "validation": {
-    "evaluation_time": 77.43,
-    "map": 0.6845690508305391,
-    "mrr": 0.8806643062483304
+    "evaluation_time": 44.1,
+    "map_at_1": 0.0172,
+    "map_at_10": 0.03824,
+    "map_at_100": 0.04727,
+    "map_at_1000": 0.04932,
+    "map_at_3": 0.02867,
+    "map_at_5": 0.03323,
+    "ndcg_at_1": 0.085,
+    "ndcg_at_10": 0.07133,
+    "ndcg_at_100": 0.11911,
+    "ndcg_at_1000": 0.16962,
+    "ndcg_at_3": 0.06763,
+    "ndcg_at_5": 0.05832,
+    "precision_at_1": 0.085,
+    "precision_at_10": 0.0368,
+    "precision_at_100": 0.01067,
+    "precision_at_1000": 0.0023,
+    "precision_at_3": 0.06233,
+    "precision_at_5": 0.0502,
+    "recall_at_1": 0.0172,
+    "recall_at_10": 0.07487,
+    "recall_at_100": 0.21683,
+    "recall_at_1000": 0.46688,
+    "recall_at_3": 0.03798,
+    "recall_at_5": 0.05113
   }
 }
