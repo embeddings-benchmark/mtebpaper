@@ -1,14 +1,14 @@
 {
     "test": {
         "cos_sim": {
-            "pearson": NaN,
-            "spearman": NaN
+            "pearson": 0.2457438758817976,
+            "spearman": 0.24747448399760644
         },
         "dot": {
-            "pearson": NaN,
-            "spearman": NaN
+            "pearson": 0.2658901758418499,
+            "spearman": 0.25653620812462785
         },
-        "evaluation_time": 1684.84
+        "evaluation_time": 1684.65
     },
     "dataset_version": null,
     "mteb_version": "0.0.2"

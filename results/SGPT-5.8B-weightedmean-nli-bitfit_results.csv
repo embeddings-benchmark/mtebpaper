@@ -18,7 +18,7 @@ BiorxivClusteringS2S,v_measure,0.29128241446157166
 MedrxivClusteringP2P,v_measure,0.30327566856300814
 MedrxivClusteringS2S,v_measure,0.2801650210863619
 RedditClustering,v_measure,0.42171313610410677
-RedditClusteringP2P,v_measure,
+RedditClusteringP2P,v_measure,0.4801815621479994
 StackExchangeClustering,v_measure,0.5413314692311623
 StackExchangeClusteringP2P,v_measure,0.31115181648287144
 TwentyNewsgroupsClustering,v_measure,0.37202082549859794
@@ -31,14 +31,14 @@ SciDocsRR,map,0.7753549990038017
 StackOverflowDupQuestions,map,0.44771112666694335
 ArguAna,ndcg_at_10,0.3507
 ClimateFEVER,ndcg_at_10,0.17574
-CQADupstackRetrieval,ndcg_at_10,
+CQADupstackRetrieval,ndcg_at_10,0.29978333333333335
 DBPedia,ndcg_at_10,0.26098
-FEVER,ndcg_at_10,
+FEVER,ndcg_at_10,0.38644
 FiQA2018,ndcg_at_10,0.18591
-HotpotQA,ndcg_at_10,
+HotpotQA,ndcg_at_10,0.33995
 MSMARCO,ndcg_at_10,
 NFCorpus,ndcg_at_10,0.28256
-NQ,ndcg_at_10,
+NQ,ndcg_at_10,0.24628
 QuoraRetrieval,ndcg_at_10,0.8468
 SCIDOCS,ndcg_at_10,0.13554
 SciFact,ndcg_at_10,0.46662
@@ -52,6 +52,6 @@ STS14,cosine_spearman,0.7920612995350826
 STS15,cosine_spearman,0.8552171407629341
 STS16,cosine_spearman,0.8253853238521991
 STS17,cosine_spearman,0.904389369935707
-STS22,cosine_spearman,-0.6319719780439462
+STS22,cosine_spearman,0.6319719780439462
 STSBenchmark,cosine_spearman,0.8566816193002651
 SummEval,cosine_spearman,0.30384175038360195

@@ -52,6 +52,6 @@ STS14,cosine_spearman,0.7450891052510561
 STS15,cosine_spearman,0.8329896673390621
 STS16,cosine_spearman,0.7967145670824619
 STS17,cosine_spearman,0.863170912160602
-STS22,cosine_spearman,-0.6463838183557634
+STS22,cosine_spearman,0.6463838183557634
 STSBenchmark,cosine_spearman,0.7880678352766406
 SummEval,cosine_spearman,0.30361250428863945

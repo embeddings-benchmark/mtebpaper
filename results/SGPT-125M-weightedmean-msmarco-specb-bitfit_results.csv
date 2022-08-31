@@ -36,7 +36,7 @@ DBPedia,ndcg_at_10,0.22365
 FEVER,ndcg_at_10,
 FiQA2018,ndcg_at_10,0.21472
 HotpotQA,ndcg_at_10,
-MSMARCO,ndcg_at_10,
+MSMARCO,ndcg_at_10,0.54238
 NFCorpus,ndcg_at_10,0.2303
 NQ,ndcg_at_10,0.27858
 QuoraRetrieval,ndcg_at_10,0.82688
@@ -52,6 +52,6 @@ STS14,cosine_spearman,0.6904572664009687
 STS15,cosine_spearman,0.7923677712825851
 STS16,cosine_spearman,0.7606792422441928
 STS17,cosine_spearman,0.8495398260629698
-STS22,cosine_spearman,-0.6566183708171826
+STS22,cosine_spearman,0.6566183708171826
 STSBenchmark,cosine_spearman,0.7533716094627373
 SummEval,cosine_spearman,0.2890145030911965
