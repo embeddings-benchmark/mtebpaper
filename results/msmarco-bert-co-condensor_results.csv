@@ -18,7 +18,7 @@ BiorxivClusteringS2S,v_measure,0.28155732412289625
 MedrxivClusteringP2P,v_measure,0.3023226235842047
 MedrxivClusteringS2S,v_measure,0.2700892040743902
 RedditClustering,v_measure,0.48044277851861944
-RedditClusteringP2P,v_measure,
+RedditClusteringP2P,v_measure,0.5352963896499805
 StackExchangeClustering,v_measure,0.5953788370911354
 StackExchangeClusteringP2P,v_measure,0.30481638824199886
 TwentyNewsgroupsClustering,v_measure,0.3867893425770875
@@ -29,14 +29,14 @@ AskUbuntuDupQuestions,map,0.5898600276337803
 MindSmallReranking,map,0.2713298598749459
 SciDocsRR,map,0.7277578387510362
 StackOverflowDupQuestions,map,0.4848067606975988
-ArguAna,ndcg_at_10,
+ArguAna,ndcg_at_10,0.45154
 ClimateFEVER,ndcg_at_10,0.16957
-CQADupstackRetrieval,ndcg_at_10,
+CQADupstackRetrieval,ndcg_at_10,0.2771733333333333
 DBPedia,ndcg_at_10,0.27859
 FEVER,ndcg_at_10,0.45684
 FiQA2018,ndcg_at_10,0.15619
 HotpotQA,ndcg_at_10,0.35608
-MSMARCO,ndcg_at_10,
+MSMARCO,ndcg_at_10,0.56235
 NFCorpus,ndcg_at_10,0.22291
 NQ,ndcg_at_10,0.29855
 QuoraRetrieval,ndcg_at_10,0.86506

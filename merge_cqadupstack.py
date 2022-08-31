@@ -19,7 +19,7 @@ TASK_LIST_CQA = [
 ]
 
 NOAVG_KEYS = [
-    "evaluation_time",
+    "evaluation_time", # TODO: Sum this one
     "version"
 ]
 

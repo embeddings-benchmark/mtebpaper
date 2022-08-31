@@ -1,6 +1,6 @@
 dataset,metric,value
 AmazonCounterfactualClassification,accuracy,0.7891044776119402
-AmazonPolarityClassification,accuracy,
+AmazonPolarityClassification,accuracy,0.6100945
 AmazonReviewsClassification,accuracy,0.30578
 Banking77Classification,accuracy,0.5775974025974026
 EmotionClassification,accuracy,0.24830000000000002
@@ -26,7 +26,7 @@ SprintDuplicateQuestions,ap,0.6554452704075004
 TwitterSemEval2015,ap,0.5956789548901481
 TwitterURLCorpus,ap,0.8147393118163185
 AskUbuntuDupQuestions,map,0.4898595820868522
-MindSmallReranking,map,
+MindSmallReranking,map,0.24788913161151171
 SciDocsRR,map,0.5498656851897086
 StackOverflowDupQuestions,map,0.36983704984940896
 ArguAna,ndcg_at_10,0.12856

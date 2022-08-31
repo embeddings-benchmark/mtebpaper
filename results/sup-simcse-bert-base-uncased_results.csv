@@ -1,5 +1,5 @@
 dataset,metric,value
-AmazonCounterfactualClassification,accuracy,
+AmazonCounterfactualClassification,accuracy,0.7574626865671641
 AmazonPolarityClassification,accuracy,0.8247332500000001
 AmazonReviewsClassification,accuracy,0.39598000000000005
 Banking77Classification,accuracy,0.7575974025974027
@@ -18,7 +18,7 @@ BiorxivClusteringS2S,v_measure,0.24667587465067067
 MedrxivClusteringP2P,v_measure,0.2624813884919727
 MedrxivClusteringS2S,v_measure,0.24119581645899563
 RedditClustering,v_measure,0.4022796798210619
-RedditClusteringP2P,v_measure,
+RedditClusteringP2P,v_measure,0.4773761279854133
 StackExchangeClustering,v_measure,0.4755177976262692
 StackExchangeClusteringP2P,v_measure,0.29453502158512795
 TwentyNewsgroupsClustering,v_measure,0.3486285218255636
@@ -31,12 +31,12 @@ SciDocsRR,map,0.7013643643529786
 StackOverflowDupQuestions,map,0.3890480943394549
 ArguAna,ndcg_at_10,0.38331
 ClimateFEVER,ndcg_at_10,0.11985
-CQADupstackRetrieval,ndcg_at_10,
+CQADupstackRetrieval,ndcg_at_10,0.1449675
 DBPedia,ndcg_at_10,0.19729
 FEVER,ndcg_at_10,0.20411
 FiQA2018,ndcg_at_10,0.1041
 HotpotQA,ndcg_at_10,0.22895
-MSMARCO,ndcg_at_10,
+MSMARCO,ndcg_at_10,0.25193
 NFCorpus,ndcg_at_10,0.12418
 NQ,ndcg_at_10,0.1608
 QuoraRetrieval,ndcg_at_10,0.79621

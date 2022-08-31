@@ -31,12 +31,12 @@ SciDocsRR,map,0.6835710819755543
 StackOverflowDupQuestions,map,0.3996520488022785
 ArguAna,ndcg_at_10,0.3104
 ClimateFEVER,ndcg_at_10,0.11007
-CQADupstackRetrieval,ndcg_at_10,
+CQADupstackRetrieval,ndcg_at_10,0.20290166666666667
 DBPedia,ndcg_at_10,0.10868
 FEVER,ndcg_at_10,0.18399
 FiQA2018,ndcg_at_10,0.0894
 HotpotQA,ndcg_at_10,0.17727
-MSMARCO,ndcg_at_10,
+MSMARCO,ndcg_at_10,0.18159
 NFCorpus,ndcg_at_10,0.11805
 NQ,ndcg_at_10,0.07626
 QuoraRetrieval,ndcg_at_10,0.7896
