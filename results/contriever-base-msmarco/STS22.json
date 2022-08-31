@@ -1,19 +1,21 @@
 {
-  "test": {
-    "en": {
-      "cos_sim": {
-        "pearson": -0.6339650672853292,
-        "spearman": -0.6463838183557634
-      },
-      "euclidean": {
-        "pearson": -0.6622635825657481,
-        "spearman": -0.6633256987310795
-      },
-      "manhattan": {
-        "pearson": -0.6608342668265812,
-        "spearman": -0.6618496447994282
-      }
+    "test": {
+        "en": {
+            "cos_sim": {
+                "pearson": 0.6339650672853292,
+                "spearman": 0.6463838183557634
+            },
+            "euclidean": {
+                "pearson": 0.6622635825657481,
+                "spearman": 0.6633256987310795
+            },
+            "manhattan": {
+                "pearson": 0.6608342668265812,
+                "spearman": 0.6618496447994282
+            }
+        },
+        "evaluation_time": 6.49
     },
-    "evaluation_time": 6.49
-  }
+    "dataset_version": null,
+    "mteb_version": "0.0.2"
 }

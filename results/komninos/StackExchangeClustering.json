@@ -1,10 +1,12 @@
 {
-  "test": {
-    "v_measure": 0.39038573398030996,
-    "v_measure_std": 0.03611545083723053
-  },
-  "validation": {
-    "v_measure": 0.3617145133386117,
-    "v_measure_std": 0.04100954883999049
-  }
+    "test": {
+        "v_measure": 0.39038573398030996,
+        "v_measure_std": 0.03611545083723053
+    },
+    "validation": {
+        "v_measure": 0.3617145133386117,
+        "v_measure_std": 0.04100954883999049
+    },
+    "dataset_version": null,
+    "mteb_version": "0.0.2"
 }

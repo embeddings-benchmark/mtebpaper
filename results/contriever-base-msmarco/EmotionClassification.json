@@ -1,10 +1,12 @@
 {
-  "test": {
-    "accuracy": 0.44770000000000004,
-    "accuracy_stderr": 0.02123464150862924,
-    "evaluation_time": 21.66,
-    "f1": 0.4105047924723437,
-    "f1_stderr": 0.01776928937331317,
-    "main_score": 0.44770000000000004
-  }
+    "test": {
+        "accuracy": 0.44770000000000004,
+        "accuracy_stderr": 0.02123464150862924,
+        "evaluation_time": 21.66,
+        "f1": 0.4105047924723437,
+        "f1_stderr": 0.01776928937331317,
+        "main_score": 0.44770000000000004
+    },
+    "dataset_version": null,
+    "mteb_version": "0.0.2"
 }

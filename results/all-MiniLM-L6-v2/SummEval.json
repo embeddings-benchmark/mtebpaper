@@ -1,12 +1,14 @@
 {
-  "test": {
-    "cos_sim": {
-      "pearson": 0.30508420334813535,
-      "spearman": 0.3080875767124449
+    "test": {
+        "cos_sim": {
+            "pearson": 0.30508420334813535,
+            "spearman": 0.3080875767124449
+        },
+        "dot": {
+            "pearson": 0.3050841824063386,
+            "spearman": 0.3080875767124449
+        }
     },
-    "dot": {
-      "pearson": 0.3050841824063386,
-      "spearman": 0.3080875767124449
-    }
-  }
+    "dataset_version": null,
+    "mteb_version": "0.0.2"
 }

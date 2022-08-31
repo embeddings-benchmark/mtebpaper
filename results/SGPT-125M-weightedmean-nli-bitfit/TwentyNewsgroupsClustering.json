@@ -1,12 +1,14 @@
 {
-  "test": {
-    "evaluation_time": 29.9,
-    "v_measure": 0.2824295128553035,
-    "v_measure_std": 0.01193355616024277
-  },
-  "validation": {
-    "evaluation_time": 0.01,
-    "v_measure": NaN,
-    "v_measure_std": NaN
-  }
+    "test": {
+        "evaluation_time": 29.9,
+        "v_measure": 0.2824295128553035,
+        "v_measure_std": 0.01193355616024277
+    },
+    "validation": {
+        "evaluation_time": 0.01,
+        "v_measure": NaN,
+        "v_measure_std": NaN
+    },
+    "dataset_version": null,
+    "mteb_version": "0.0.2"
 }

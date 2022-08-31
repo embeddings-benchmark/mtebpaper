@@ -1,30 +1,32 @@
 {
-  "test": {
-    "cos_sim": {
-      "pearson": 0.5894057921685631,
-      "spearman": 0.6155281748776228
+    "test": {
+        "cos_sim": {
+            "pearson": 0.5894057921685631,
+            "spearman": 0.6155281748776228
+        },
+        "euclidean": {
+            "pearson": 0.5347624664922954,
+            "spearman": 0.5803155209269462
+        },
+        "manhattan": {
+            "pearson": 0.5351820501615676,
+            "spearman": 0.5801574792939825
+        }
     },
-    "euclidean": {
-      "pearson": 0.5347624664922954,
-      "spearman": 0.5803155209269462
+    "validation": {
+        "cos_sim": {
+            "pearson": 0.7338501906479112,
+            "spearman": 0.7386438106221631
+        },
+        "euclidean": {
+            "pearson": 0.6941844826268905,
+            "spearman": 0.7073287286037779
+        },
+        "manhattan": {
+            "pearson": 0.6933791821803095,
+            "spearman": 0.7068020902716851
+        }
     },
-    "manhattan": {
-      "pearson": 0.5351820501615676,
-      "spearman": 0.5801574792939825
-    }
-  },
-  "validation": {
-    "cos_sim": {
-      "pearson": 0.7338501906479112,
-      "spearman": 0.7386438106221631
-    },
-    "euclidean": {
-      "pearson": 0.6941844826268905,
-      "spearman": 0.7073287286037779
-    },
-    "manhattan": {
-      "pearson": 0.6933791821803095,
-      "spearman": 0.7068020902716851
-    }
-  }
+    "dataset_version": null,
+    "mteb_version": "0.0.2"
 }

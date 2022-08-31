@@ -1,6 +1,8 @@
 {
-  "test": {
-    "v_measure": 0.3440873490143895,
-    "v_measure_std": 0.013806141410955541
-  }
+    "test": {
+        "v_measure": 0.3440873490143895,
+        "v_measure_std": 0.013806141410955541
+    },
+    "dataset_version": null,
+    "mteb_version": "0.0.2"
 }

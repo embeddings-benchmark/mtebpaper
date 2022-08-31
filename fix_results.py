@@ -2,11 +2,9 @@
 Usage: python fix_results.py results_folder_path
 """
 import json
-import os
 import sys
 import json
 import io
-import csv
 import glob
 
 results_folder = sys.argv[1]
@@ -23,11 +21,18 @@ for file_name in files:
             results["mteb_version"] = "0.0.2"
         if "STS22" in file_name:
             for split, split_results in results.items():
-                if split not in ("train", "validation", "test"):
-                    continue
-                for metric, score in split_results.items():
-                    results[split][metric] = abs(score)
+                if isinstance(split_results, dict):
+                    for metric, score in split_results.items():
+                        if isinstance(score, dict):
+                            for sub_metric, sub_score in score.items():
+                                if isinstance(sub_score, dict):
+                                    for sub_sub_metric, sub_sub_score in sub_score.items():
+                                        results[split][metric][sub_metric][sub_sub_metric] = abs(sub_sub_score)
+                                else:
+                                    results[split][metric][sub_metric] = abs(sub_score)
+                        else:
+                            results[split][metric] = abs(score)
                 results.setdefault(split, {})
         with io.open(file_name, 'w', encoding='utf-8') as f:
-            json.dump(results, f)
+            json.dump(results, f, indent=4)
 

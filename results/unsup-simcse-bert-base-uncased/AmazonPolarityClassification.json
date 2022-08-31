@@ -1,14 +1,14 @@
 {
-  "dataset_version": null,
-  "mteb_version": "0.0.2",
-  "test": {
-    "accuracy": 0.7447925,
-    "accuracy_stderr": 0.03128738499779102,
-    "ap": 0.6960719086052706,
-    "ap_stderr": 0.033678210098256944,
-    "evaluation_time": 1153.3,
-    "f1": 0.7418817209421561,
-    "f1_stderr": 0.03225731958553349,
-    "main_score": 0.7447925
-  }
+    "dataset_version": null,
+    "mteb_version": "0.0.2",
+    "test": {
+        "accuracy": 0.7447925,
+        "accuracy_stderr": 0.03128738499779102,
+        "ap": 0.6960719086052706,
+        "ap_stderr": 0.033678210098256944,
+        "evaluation_time": 1153.3,
+        "f1": 0.7418817209421561,
+        "f1_stderr": 0.03225731958553349,
+        "main_score": 0.7447925
+    }
 }

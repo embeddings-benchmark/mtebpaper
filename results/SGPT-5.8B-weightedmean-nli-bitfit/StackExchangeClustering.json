@@ -1,12 +1,14 @@
 {
-  "test": {
-    "evaluation_time": 9133.33,
-    "v_measure": 0.5413314692311623,
-    "v_measure_std": 0.04329727708632633
-  },
-  "validation": {
-    "evaluation_time": 6353.52,
-    "v_measure": 0.5081277923768738,
-    "v_measure_std": 0.04069835520984064
-  }
+    "test": {
+        "evaluation_time": 9133.33,
+        "v_measure": 0.5413314692311623,
+        "v_measure_std": 0.04329727708632633
+    },
+    "validation": {
+        "evaluation_time": 6353.52,
+        "v_measure": 0.5081277923768738,
+        "v_measure_std": 0.04069835520984064
+    },
+    "dataset_version": null,
+    "mteb_version": "0.0.2"
 }

@@ -1,12 +1,14 @@
 {
-  "test": {
-    "en": {
-      "accuracy": 0.6956624075319435,
-      "accuracy_stderr": 0.01168424909847828,
-      "f1": 0.676441918578462,
-      "f1_stderr": 0.011982007673905129,
-      "main_score": 0.6956624075319435
+    "test": {
+        "en": {
+            "accuracy": 0.6956624075319435,
+            "accuracy_stderr": 0.01168424909847828,
+            "f1": 0.676441918578462,
+            "f1_stderr": 0.011982007673905129,
+            "main_score": 0.6956624075319435
+        },
+        "evaluation_time": 29.26
     },
-    "evaluation_time": 29.26
-  }
+    "dataset_version": null,
+    "mteb_version": "0.0.2"
 }

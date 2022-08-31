@@ -1,7 +1,9 @@
 {
-  "test": {
-    "evaluation_time": 12613.95,
-    "v_measure": 0.42171313610410677,
-    "v_measure_std": 0.06367647348823195
-  }
+    "test": {
+        "evaluation_time": 12613.95,
+        "v_measure": 0.42171313610410677,
+        "v_measure_std": 0.06367647348823195
+    },
+    "dataset_version": null,
+    "mteb_version": "0.0.2"
 }

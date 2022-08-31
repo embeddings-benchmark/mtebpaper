@@ -1,15 +1,15 @@
 {
-  "dataset_version": null,
-  "mteb_version": "0.0.2",
-  "test": {
-    "cos_sim": {
-      "pearson": 0.24526207933011906,
-      "spearman": 0.23308772096174835
-    },
-    "dot": {
-      "pearson": 0.26133788672820163,
-      "spearman": 0.24994794298618017
-    },
-    "evaluation_time": 338.87
-  }
+    "dataset_version": null,
+    "mteb_version": "0.0.2",
+    "test": {
+        "cos_sim": {
+            "pearson": 0.24526207933011906,
+            "spearman": 0.23308772096174835
+        },
+        "dot": {
+            "pearson": 0.26133788672820163,
+            "spearman": 0.24994794298618017
+        },
+        "evaluation_time": 338.87
+    }
 }
