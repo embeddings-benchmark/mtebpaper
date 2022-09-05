@@ -1,0 +1,31 @@
+{
+    "test": {
+        "evaluation_time": 718.89,
+        "map_at_1": 0.00717,
+        "map_at_10": 0.03985,
+        "map_at_100": 0.10611,
+        "map_at_1000": 0.13357,
+        "map_at_3": 0.01698,
+        "map_at_5": 0.02497,
+        "ndcg_at_1": 0.28682,
+        "ndcg_at_10": 0.27094,
+        "ndcg_at_100": 0.24724,
+        "ndcg_at_1000": 0.32035,
+        "ndcg_at_3": 0.28341,
+        "ndcg_at_5": 0.27568,
+        "precision_at_1": 0.46512,
+        "precision_at_10": 0.37209,
+        "precision_at_100": 0.17,
+        "precision_at_1000": 0.03779,
+        "precision_at_3": 0.4186,
+        "precision_at_5": 0.4093,
+        "recall_at_1": 0.00717,
+        "recall_at_10": 0.05425,
+        "recall_at_100": 0.21345,
+        "recall_at_1000": 0.41901,
+        "recall_at_3": 0.0183,
+        "recall_at_5": 0.02988
+    },
+    "dataset_version": null,
+    "mteb_version": "0.0.2"
+}

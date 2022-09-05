@@ -41,7 +41,7 @@ TASK_LIST_CLUSTERING = [
     "MedrxivClusteringP2P",
     "MedrxivClusteringS2S",
     "RedditClustering",
-#    "RedditClusteringP2P",
+    "RedditClusteringP2P",
     "StackExchangeClustering",
     "StackExchangeClusteringP2P",
     "TwentyNewsgroupsClustering",
@@ -104,7 +104,6 @@ TASK_LIST_STS = [
 ]
 
 TASK_LIST = TASK_LIST_CLASSIFICATION + TASK_LIST_CLUSTERING + TASK_LIST_PAIR_CLASSIFICATION + TASK_LIST_RERANKING + TASK_LIST_RETRIEVAL + TASK_LIST_STS
-
 
 
 class SimCSEWrapper:

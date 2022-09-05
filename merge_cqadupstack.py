@@ -1,4 +1,5 @@
 """
+Merges CQADupstack subset results
 Usage: python merge_cqadupstack.py results_folder_path
 """
 import json
@@ -27,7 +28,6 @@ import os
 import sys
 import json
 import io
-import csv
 import glob
 
 results_folder = sys.argv[1]
@@ -54,4 +54,5 @@ if len(files) == len(TASK_LIST_CQA):
     print("Saving ", all_results)
     with io.open(os.path.join(results_folder, "CQADupstackRetrieval.json"), 'w', encoding='utf-8') as f:
         json.dump(all_results, f)
-
+else:
+    print(f"Missing files {set(TASK_LIST_CQA) - set(files)} or got too many files.")

@@ -1,4 +1,33 @@
 {
+    "dataset_version": null,
+    "dev": {
+        "evaluation_time": 20397.17,
+        "map_at_1": 0.21174,
+        "map_at_10": 0.33,
+        "map_at_100": 0.34178,
+        "map_at_1000": 0.34227,
+        "map_at_3": 0.29275,
+        "map_at_5": 0.31341,
+        "ndcg_at_1": 0.21777,
+        "ndcg_at_10": 0.39746,
+        "ndcg_at_100": 0.45488,
+        "ndcg_at_1000": 0.46734,
+        "ndcg_at_3": 0.32086,
+        "ndcg_at_5": 0.35792,
+        "precision_at_1": 0.21777,
+        "precision_at_10": 0.06324,
+        "precision_at_100": 0.00922,
+        "precision_at_1000": 0.00103,
+        "precision_at_3": 0.13696,
+        "precision_at_5": 0.101,
+        "recall_at_1": 0.21174,
+        "recall_at_10": 0.60488,
+        "recall_at_100": 0.87234,
+        "recall_at_1000": 0.96806,
+        "recall_at_3": 0.39582,
+        "recall_at_5": 0.48474
+    },
+    "mteb_version": "0.0.2",
     "test": {
         "evaluation_time": 18073.89,
         "map_at_1": 0.01756,
@@ -25,7 +54,5 @@
         "recall_at_1000": 0.73129,
         "recall_at_3": 0.05393,
         "recall_at_5": 0.08324
-    },
-    "dataset_version": null,
-    "mteb_version": "0.0.2"
+    }
 }

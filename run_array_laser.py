@@ -20,7 +20,6 @@ os.environ["HF_METRICS_CACHE"]="/gpfswork/rech/six/commun/metrics"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 from mteb import MTEB
-from sentence_transformers import SentenceTransformer
 
 TASK_LIST_CLASSIFICATION = [
     "AmazonCounterfactualClassification",
@@ -45,7 +44,7 @@ TASK_LIST_CLUSTERING = [
     "MedrxivClusteringP2P",
     "MedrxivClusteringS2S",
     "RedditClustering",
-#    "RedditClusteringP2P",
+    "RedditClusteringP2P",
     "StackExchangeClustering",
     "StackExchangeClusteringP2P",
     "TwentyNewsgroupsClustering",
@@ -97,7 +96,7 @@ TASK_LIST_STS = [
 
 TASK_LIST = TASK_LIST_CLASSIFICATION + TASK_LIST_CLUSTERING + TASK_LIST_PAIR_CLASSIFICATION + TASK_LIST_RERANKING + TASK_LIST_RETRIEVAL + TASK_LIST_STS
 
-
+### Setup prior to running ###
 #with open("LASER_script.sh", "w") as f:
 #    f.write("LASER=/content/LASER ./LASER/tasks/embed/embed.sh tmp.txt tmp.bin")
 # Run `chmod u+rx LASER_script.sh` to give permissions
@@ -105,7 +104,8 @@ TASK_LIST = TASK_LIST_CLASSIFICATION + TASK_LIST_CLUSTERING + TASK_LIST_PAIR_CLA
 
 class LASER():
     def encode(self, sentences, batch_size=32, **kwargs):
-        """ Returns a list of embeddings for the given sentences.
+        """
+        Returns a list of embeddings for the given sentences.
         Args:
             sentences (`List[str]`): List of sentences to encode
             batch_size (`int`): Batch size for the encoding

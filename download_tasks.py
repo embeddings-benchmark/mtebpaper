@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+"""Downloads all MTEB tasks"""
 
 TASK_LIST = [
     "AmazonCounterfactualClassification",
@@ -71,8 +71,9 @@ evaluation = MTEB(tasks=TASK_LIST, task_langs=["en"])
 
 for task in evaluation.tasks:
     task.load_data()
+
+    # Alternatively clone to desired place
     #path = "/gpfsscratch/rech/six/commun/commun/experiments/muennighoff/" + task.description["hf_hub_name"]
     #from git import Repo
     #Repo.clone_from("https://huggingface.co/datasets/" + self.description["hf_hub_name"], path)
     #self.dataset = datasets.load_dataset(path, revision=self.description.get("revision", None))
-

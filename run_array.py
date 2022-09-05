@@ -39,7 +39,7 @@ TASK_LIST_CLUSTERING = [
     "MedrxivClusteringP2P",
     "MedrxivClusteringS2S",
     "RedditClustering",
-#    "RedditClusteringP2P",
+    "RedditClusteringP2P",
     "StackExchangeClustering",
     "StackExchangeClusteringP2P",
     "TwentyNewsgroupsClustering",
@@ -134,7 +134,7 @@ class SentenceTransformerSpecb(SentenceTransformer):
         Returns:
             `List[np.ndarray]` or `List[tensor]`: List of embeddings for the given sentences
         """
-        # Add specb token
+        # Add specb query token
         sentences = ["[SOS]" + sent for sent in sentences]
         return super().encode(sentences, **kwargs)
 
@@ -143,8 +143,8 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--startid", type=int)
     parser.add_argument("--endid", type=int)
-    parser.add_argument("--addspecbdoc", action='store_true',)
-    parser.add_argument("--addspecbquery", action='store_true',)
+    parser.add_argument("--addspecbdoc", action='store_true')
+    parser.add_argument("--addspecbquery", action='store_true')
     parser.add_argument("--modelpath", type=str, default="/gpfswork/rech/six/commun/models/sentence-transformers_sentence-t5-base")
     parser.add_argument("--lang", type=str, default="en")
     parser.add_argument("--taskname", type=str, default=None)
@@ -155,7 +155,7 @@ def parse_args():
 def main(args):
 
     if args.addspecbdoc or args.addspecbquery:
-        model = SentenceTransformerSpecb(args.modelpath)
+        model = SentenceTransformerSpecb(args.modelpath) # Only used for SGPT-msmarco models
     else:
         model = SentenceTransformer(args.modelpath)
 

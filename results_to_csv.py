@@ -113,6 +113,16 @@ with io.open(csv_file, 'w', encoding='utf-8') as f:
             print(f"No tasks found for name {task_name}")
         main_metric = tasks[0].description["main_score"]
         test_result = all_results.get(task_name, {}).get("test")
+
+        # Special case for MSMARCO
+        if "MSMARCO" in csv_file:
+            test_result = all_results.get(task_name, None)
+            if "dev" in test_result:
+                test_result = test_result.get("dev")
+            elif "validation" in test_result:
+                test_result = test_result.get("validation")
+
+
         if test_result is None:
             print(f"{task_name} / test set not found - Writing empty row")
             writer.writerow([task_name, main_metric, ""])
@@ -134,4 +144,4 @@ with io.open(csv_file, 'w', encoding='utf-8') as f:
             continue
         writer.writerow([task_name, main_metric, test_result])
 
-print("'"+"','".join(not_found)+"'", len(not_found))
+print("Not found: " + "'"+"','".join(not_found)+"'", len(not_found))
