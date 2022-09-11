@@ -81,6 +81,9 @@ TASK_LIST_STS = [
     "STS17",
     "STS22",
     "STSBenchmark",
+]
+
+TASK_LIST_SUMMARIZATION = [
     "SummEval",
 ]
 
@@ -89,7 +92,27 @@ TASK_LIST_BITEXT = [
     "Tatoeba",
 ]
 
-TASK_LIST = TASK_LIST_CLASSIFICATION + TASK_LIST_CLUSTERING + TASK_LIST_PAIR_CLASSIFICATION + TASK_LIST_RERANKING + TASK_LIST_RETRIEVAL + TASK_LIST_STS
+TASK_LIST = (
+    TASK_LIST_BITEXT
+    + TASK_LIST_CLASSIFICATION
+    + TASK_LIST_CLUSTERING
+    + TASK_LIST_PAIR_CLASSIFICATION
+    + TASK_LIST_RERANKING
+    + TASK_LIST_RETRIEVAL
+    + TASK_LIST_STS
+    + TASK_LIST_SUMMARIZATION
+)
+
+TASK_LIST_NAMES = [
+    ("Classification", TASK_LIST_CLASSIFICATION, ["en", "en-en"]),
+    ("Clustering", TASK_LIST_CLUSTERING, ["en", "en-en"]),
+    ("PairClassification", TASK_LIST_PAIR_CLASSIFICATION, ["en", "en-en"]),
+    ("Reranking", TASK_LIST_RERANKING, ["en", "en-en"]),
+    ("Retrieval", TASK_LIST_RETRIEVAL, ["en", "en-en"]),
+    ("STS", TASK_LIST_STS, ["en", "en-en"]),
+    ("all", TASK_LIST, ["en", "en-en"]),
+    ("BitextMining", TASK_LIST_BITEXT, []),
+]
 
 results_folder = sys.argv[1]
 results_folder = results_folder.strip("/")
@@ -102,7 +125,7 @@ for file_name in os.listdir(results_folder):
     if not file_name.endswith(".json"):
         print(f"Skipping non-json {file_name}")
         continue
-    with io.open(os.path.join(results_folder, file_name), 'r', encoding='utf-8') as f:
+    with io.open(os.path.join(results_folder, file_name), "r", encoding="utf-8") as f:
         results = json.load(f)
         all_results = {**all_results, **{file_name.replace(".json", ""): results}}
 
@@ -111,26 +134,30 @@ print(f"Converting {results_folder} to {csv_file}")
 
 NOT_FOUND = []
 
-def get_rows(task_name, limit_langs=[]):
+
+def get_rows(task, dataset, limit_langs=[]):
     rows = []
     # CQADupstackRetrieval uses the same metric as its subsets
-    tasks = MTEB(tasks=[task_name.replace("CQADupstackRetrieval", "CQADupstackTexRetrieval")]).tasks
-    assert len(tasks) == 1, f"Found {len(tasks)} for {task_name}. Expected 1."
+    tasks = MTEB(tasks=[dataset.replace("CQADupstackRetrieval", "CQADupstackTexRetrieval")]).tasks
+    assert len(tasks) == 1, f"Found {len(tasks)} for {dataset}. Expected 1."
     main_metric = tasks[0].description["main_score"]
-    test_result = all_results.get(task_name, {})
-    
+    test_result = all_results.get(dataset, {})
+
     # Dev / Val set is used for MSMARCO (See BEIR paper)
-    if "MSMARCO" in task_name:
-        test_result = test_result.get("dev") if "dev" in test_result else test_result.get("validation")
+    if "MSMARCO" in dataset:
+        test_result = (
+            test_result.get("dev") if "dev" in test_result else test_result.get("validation")
+        )
     else:
         test_result = test_result.get("test")
     if test_result is None:
-        print(f"{task_name} - test set not found")
-        NOT_FOUND.append(task_name)
-        return [[model_name, task_name, "", main_metric, ""]]
+        print(f"{dataset} - test set not found")
+        NOT_FOUND.append(dataset)
+        return [[model_name, task, dataset, "", main_metric, ""]]
 
     for lang in tasks[0].description["eval_langs"]:
-        if limit_langs and lang not in limit_langs: continue
+        if limit_langs and lang not in limit_langs:
+            continue
         test_result_lang = test_result.get(lang, test_result)
         if main_metric == "cosine_spearman":
             test_result_lang = test_result_lang.get("cos_sim", {}).get("spearman")
@@ -140,24 +167,47 @@ def get_rows(task_name, limit_langs=[]):
             test_result_lang = test_result_lang.get(main_metric)
 
         if test_result_lang is None:
-            print(f"{lang} & {main_metric} not found for task {task_name}.")
-            rows.append([model_name, task_name, lang, main_metric, ""])
-        rows.append([model_name, task_name, lang, main_metric, test_result_lang])
+            print(f"{lang} & {main_metric} not found for task {dataset}.")
+            rows.append([model_name, task, dataset, lang, main_metric, ""])
+        rows.append([model_name, task, dataset, lang, main_metric, test_result_lang])
     return rows
 
-with io.open(csv_file, 'w', encoding='utf-8') as f:
+
+with io.open(csv_file, "w", encoding="utf-8") as f:
     writer = csv.writer(f)
-    writer.writerow(["model", "dataset", "language", "metric", "value"])
-    for task_name in TASK_LIST:
-        writer.writerows(get_rows(task_name))
+    writer.writerow(["model", "task", "dataset", "language", "metric", "value"])
+    for task, dataset_list in [
+        ("BitextMining", TASK_LIST_BITEXT),
+        ("Classification", TASK_LIST_CLASSIFICATION),
+        ("Clustering", TASK_LIST_CLUSTERING),
+        ("PairClassification", TASK_LIST_PAIR_CLASSIFICATION),
+        ("Reranking", TASK_LIST_RERANKING),
+        ("Retrieval", TASK_LIST_RETRIEVAL),
+        ("STS", TASK_LIST_STS),
+        ("Summarization", TASK_LIST_SUMMARIZATION),
+    ]:
+        for dataset in dataset_list:
+            writer.writerows(get_rows(task, dataset))
 
     # Add average scores
-    for shortcut, task_list in [("clf",TASK_LIST_CLASSIFICATION), ("cls", TASK_LIST_CLUSTERING), ("pairclf", TASK_LIST_PAIR_CLASSIFICATION), ("rrk", TASK_LIST_RERANKING), ('rtr', TASK_LIST_RETRIEVAL), ('sts', TASK_LIST_STS), ("all", TASK_LIST)]:
-        if all([x in all_results for x in task_list]):
-            rows = [y for x in task_list for y in get_rows(x, limit_langs=["en", "en-en"])]
-            avg = sum([float(x[-1]) for x in rows]) / len(rows)
-            metric = "multiple" if shortcut == "all" else rows[-1][-2]
-            writer.writerow([model_name, "en", f"average_{shortcut}", metric, avg])
+    for task, dataset_list, limit_langs in [
+        ("BitextMining", TASK_LIST_BITEXT, []),
+        ("Classification", TASK_LIST_CLASSIFICATION, ["en", "en-en"]),
+        ("Clustering", TASK_LIST_CLUSTERING, ["en", "en-en"]),
+        ("PairClassification", TASK_LIST_PAIR_CLASSIFICATION, ["en", "en-en"]),
+        ("Reranking", TASK_LIST_RERANKING, ["en", "en-en"]),
+        ("Retrieval", TASK_LIST_RETRIEVAL, ["en", "en-en"]),
+        ("STS", TASK_LIST_STS, ["en", "en-en"]),
+        ("all", TASK_LIST, ["en", "en-en"]),
+    ]:
+        if all([x in all_results for x in dataset_list]):
+            rows = [y for x in dataset_list for y in get_rows(task, x, limit_langs=limit_langs)]
+            try:
+                avg = sum([float(x[-1]) for x in rows]) / len(rows)
+            except:
+                continue
+            metric = "multiple" if task == "all" else rows[-1][-2]
+            writer.writerow([model_name, task, "average", "en", metric, avg])
 
-
-print("Not found: " + "'"+"','".join(NOT_FOUND)+"'", len(NOT_FOUND))
+if NOT_FOUND:
+    print("Not found: " + "'" + "','".join(NOT_FOUND) + "'", len(NOT_FOUND))

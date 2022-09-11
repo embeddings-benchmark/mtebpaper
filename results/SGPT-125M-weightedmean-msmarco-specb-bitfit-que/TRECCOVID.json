@@ -1,6 +1,6 @@
 {
     "test": {
-        "evaluation_time": 956.14,
+        "evaluation_time": 837.12,
         "map_at_1": 0.00162,
         "map_at_10": 0.01311,
         "map_at_100": 0.06562,

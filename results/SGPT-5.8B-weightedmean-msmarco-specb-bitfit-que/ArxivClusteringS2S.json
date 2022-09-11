@@ -1,0 +1,9 @@
+{
+    "test": {
+        "evaluation_time": 15111.26,
+        "v_measure": 0.3886371701986363,
+        "v_measure_std": 0.13693041258907623
+    },
+    "dataset_version": null,
+    "mteb_version": "0.0.2"
+}
