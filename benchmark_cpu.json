@@ -1,0 +1,135 @@
+{
+    "specs": "40 physical cores Intel(R) Xeon(R) Gold 6248 CPU @ 2.50GHz",
+    "LASER2": {
+        "STS15": {
+            "speed_ms": 1.7676252921422322,
+            "embedding_size_kb": 4.096
+        }
+    },
+    "komninos": {
+        "STS15": {
+            "speed_ms": 0.0499413808186849,
+            "embedding_size_kb": 1.2
+        }
+    },
+    "glove.6B.300d": {
+        "STS15": {
+            "speed_ms": 0.030161738395690918,
+            "embedding_size_kb": 1.2
+        }
+    },
+    "SGPT-125M-weightedmean-nli-bitfit": {
+        "STS15": {
+            "speed_ms": 2.4868786334991455,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "SGPT-125M-weightedmean-msmarco-specb-bitfit": {
+        "STS15": {
+            "speed_ms": 2.5849834283192954,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "SGPT-5.8B-weightedmean-nli-bitfit": {
+        "STS15": {
+            "speed_ms": 85.45560284455617,
+            "embedding_size_kb": 16.384
+        }
+    },
+    "SGPT-5.8B-weightedmean-msmarco-specb-bitfit": {
+        "STS15": {
+            "speed_ms": 93.10031072298686,
+            "embedding_size_kb": 16.384
+        }
+    },
+    "sgpt-bloom-7b1-msmarco": {
+        "STS15": {
+            "speed_ms": 94.6647084156672,
+            "embedding_size_kb": 16.384
+        }
+    },
+    "sgpt-bloom-1b3-nli": {
+        "STS15": {
+            "speed_ms": 22.807186206181843,
+            "embedding_size_kb": 8.192
+        }
+    },
+    "all-MiniLM-L6-v2": {
+        "STS15": {
+            "speed_ms": 0.7018327713012695,
+            "embedding_size_kb": 1.536
+        }
+    },
+    "all-mpnet-base-v2": {
+        "STS15": {
+            "speed_ms": 2.3693505128224692,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "paraphrase-multilingual-mpnet-base-v2": {
+        "STS15": {
+            "speed_ms": 2.5322985649108887,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "sentence-t5-base": {
+        "STS15": {
+            "speed_ms": 2.6654910643895464,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "sentence-t5-xxl": {
+        "STS15": {
+            "speed_ms": 100.74411475658417,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "gtr-t5-base": {
+        "STS15": {
+            "speed_ms": 2.6517693201700845,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "gtr-t5-xxl": {
+        "STS15": {
+            "speed_ms": 111.34227963288625,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "contriever-base-msmarco": {
+        "STS15": {
+            "speed_ms": 2.9111892779668174,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "msmarco-bert-co-condensor": {
+        "STS15": {
+            "speed_ms": 2.296683271725972,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "bert-base-uncased": {
+        "STS15": {
+            "speed_ms": 2.3029622236887617,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "sup-simcse-bert-base-uncased": {
+        "STS15": {
+            "speed_ms": 2.281556685765584,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "unsup-simcse-bert-base-uncased": {
+        "STS15": {
+            "speed_ms": 2.299041231473287,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "LaBSE": {
+        "STS15": {
+            "speed_ms": 2.2967191139856977,
+            "embedding_size_kb": 3.072
+        }
+    }
+}
