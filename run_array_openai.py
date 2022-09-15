@@ -20,7 +20,7 @@ os.environ["HF_MODULES_CACHE"]="/gpfswork/rech/six/commun/modules"
 os.environ["HF_METRICS_CACHE"]="/gpfswork/rech/six/commun/metrics"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-API_KEY = "sk-ZwVUDlOIKSBjtGFpM2Fj6tHViduQVtvPyEXSTK6i"
+API_KEY = "YOUR_KEY"
 
 from mteb import MTEB
 
