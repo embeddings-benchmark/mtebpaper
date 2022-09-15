@@ -1,13 +1,17 @@
 #!/bin/bash
-#SBATCH --job-name=run-array-v100    # job name
+#SBATCH --job-name=run-array-a100    # job name
 #SBATCH --ntasks=1                   # number of MP tasks
 #SBATCH --nodes=1
 #SBATCH --gres=gpu:1
-#SBATCH --cpus-per-task=10         # number of cores per tasks
+#SBATCH --cpus-per-task=8         # number of cores per tasks
 #SBATCH --hint=nomultithread         # we get physical cores not logical
-#SBATCH --time=20:00:00             # maximum execution time (HH:MM:SS)
+#SBATCH --time 80:00:00              # maximum execution time (HH:MM:SS)
 #SBATCH --output=%x-%j.out           # output file name
-#SBATCH --account=six@gpu
+#SBATCH --account=six@a100
+#SBATCH --reservation=hug
+#SBATCH --constraint=a100
+#SBATCH --partition=gpu_p5
+#SBATCH --qos=qos_gpu-gc             # up to 100h
 
 set -x -e
 
@@ -18,7 +22,6 @@ echo "START TIME: $(date)"
 
 cd /gpfsscratch/rech/six/commun/commun/experiments/muennighoff/
 
-NUM_TASKS=20
 NUM_TASKS_PER_JOB=1
 
 TASK_START=$(expr $SLURM_ARRAY_TASK_ID \* $NUM_TASKS_PER_JOB )
@@ -27,5 +30,5 @@ TASK_END=$(expr $TASK_START + $NUM_TASKS_PER_JOB )
 python mteb/run_array_sgpt.py \
 	--startid $TASK_START \
 	--endid $TASK_END \
-	--modelpath /gpfswork/rech/six/commun/models/Muennighoff_SGPT-125M-weightedmean-msmarco-specb-bitfit \
-	--addspecbquery
+	--modelpath /gpfswork/rech/six/commun/models/Muennighoff_SGPT-5.8B-weightedmean-msmarco-specb-bitfit \
+    --addspecbquery

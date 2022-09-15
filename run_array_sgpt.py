@@ -16,9 +16,7 @@ os.environ["HF_METRICS_CACHE"]="/gpfswork/rech/six/commun/metrics"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 from mteb import MTEB
-import numpy as np
 from sentence_transformers import SentenceTransformer
-from torch import Tensor
 import torch.multiprocessing as mp
 
 
@@ -110,27 +108,26 @@ TASK_LIST_STS = [
 TASK_LIST = TASK_LIST_CLASSIFICATION + TASK_LIST_CLUSTERING + TASK_LIST_PAIR_CLASSIFICATION + TASK_LIST_RERANKING + TASK_LIST_RETRIEVAL + TASK_LIST_STS
 
 
-class SentenceTransformerSpecb:
+class SentenceTransformerSpecb(SentenceTransformer):
     # Requires: 
     # https://github.com/Muennighoff/sentence-transformers/tree/sgpt_poolings_specb
     # pip install git+https://github.com/Muennighoff/sentence-transformers.git@sgpt_poolings_specb
-    def __init__(self, model):
-        self.model = SentenceTransformer(model)
-        self.sep = " "
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         tokens = ["[SOS]", "{SOS}"]
-        self.model._first_module().tokenizer.add_tokens(tokens, special_tokens=True)
-        self.model._first_module().auto_model.resize_token_embeddings(len(self.model._first_module().tokenizer))
+        self._first_module().tokenizer.add_tokens(tokens, special_tokens=True)
+        self._first_module().auto_model.resize_token_embeddings(len(self._first_module().tokenizer))
         # Will be replaced with the rep tokens in the model ones
         # The problem is we don't know if a text is query or document when tokenizing in the Transformer.py module, 
         # so we use the SOS tokens as an identifier if we have a query or document at hand & then replace them
         # If we would directly use the brackets here, they may become part of another token
-        self.model._first_module().bos_spec_token_q = self.model._first_module().tokenizer.encode("[SOS]", add_special_tokens=False)[0]
-        self.model._first_module().bos_spec_token_d = self.model._first_module().tokenizer.encode("{SOS}", add_special_tokens=False)[0]
-        self.model._first_module().bos_spec_token_q_rep = self.model._first_module().tokenizer.encode("[", add_special_tokens=False)[0]
-        self.model._first_module().eos_spec_token_q = self.model._first_module().tokenizer.encode("]", add_special_tokens=False)[0]
-        self.model._first_module().bos_spec_token_d_rep = self.model._first_module().tokenizer.encode("{", add_special_tokens=False)[0]
-        self.model._first_module().eos_spec_token_d = self.model._first_module().tokenizer.encode("}", add_special_tokens=False)[0]
-        self.model._first_module().replace_bos = True
+        self._first_module().bos_spec_token_q = self._first_module().tokenizer.encode("[SOS]", add_special_tokens=False)[0]
+        self._first_module().bos_spec_token_d = self._first_module().tokenizer.encode("{SOS}", add_special_tokens=False)[0]
+        self._first_module().bos_spec_token_q_rep = self._first_module().tokenizer.encode("[", add_special_tokens=False)[0]
+        self._first_module().eos_spec_token_q = self._first_module().tokenizer.encode("]", add_special_tokens=False)[0]
+        self._first_module().bos_spec_token_d_rep = self._first_module().tokenizer.encode("{", add_special_tokens=False)[0]
+        self._first_module().eos_spec_token_d = self._first_module().tokenizer.encode("}", add_special_tokens=False)[0]
+        self._first_module().replace_bos = True
 
     def encode(self, sentences, **kwargs):
         """Returns a list of embeddings for the given sentences.
@@ -143,7 +140,7 @@ class SentenceTransformerSpecb:
         """
         # Add specb query token
         sentences = ["[SOS]" + sent for sent in sentences]
-        return self.model.encode(sentences, **kwargs)
+        return super().encode(sentences, **kwargs)
 
     def encode_queries(self, queries: List[str], batch_size: int = 16, **kwargs) -> Union[List[Tensor], np.ndarray, Tensor]:
         # Will be replaced with [ in the models tokenization
@@ -213,7 +210,7 @@ def parse_args():
     parser.add_argument("--endid", type=int)
     parser.add_argument("--addspecbdoc", action='store_true')
     parser.add_argument("--addspecbquery", action='store_true')
-    parser.add_argument("--modelpath", type=str, default="/gpfswork/rech/six/commun/models/sentence-transformers_sentence-t5-base")
+    parser.add_argument("--modelpath", type=str, default="/gpfswork/rech/six/commun/models/Muennighoff_SGPT-125M-weightedmean-msmarco-specb-bitfit")
     parser.add_argument("--lang", type=str, default="en")
     parser.add_argument("--taskname", type=str, default=None)
     parser.add_argument("--batchsize", type=int, default=128)
