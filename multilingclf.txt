@@ -1,0 +1,119 @@
+Dataset & Language & Glove & Komninos & LASER2 & LaBSE & paraphrase-multilingual-MiniLM-L12-v2 & paraphrase-multilingual-mpnet-base-v2 & SGPT-bloom-7b1-msmarco & SGPT-bloom-1b3-nli \\
+AmazonCounterfactualClassification & de &  &  &  & 73.17 & 68.35 & 69.95 &  &  \\
+AmazonCounterfactualClassification & ja &  &  &  & 76.42 & 63.45 & 69.79 &  &  \\
+AmazonReviewsClassification & de &  &  &  & 39.92 & 35.91 & 39.52 &  &  \\
+AmazonReviewsClassification & es &  &  &  & 39.39 & 37.49 & 39.99 &  &  \\
+AmazonReviewsClassification & fr &  &  &  & 38.52 & 35.3 & 39.0 &  & 39.29 \\
+AmazonReviewsClassification & ja &  &  &  & 36.44 & 33.24 & 36.64 &  &  \\
+AmazonReviewsClassification & zh &  &  &  & 36.45 & 35.26 & 37.74 &  & 37.63 \\
+MassiveIntentClassification & af &  &  &  & 56.12 & 45.88 & 52.32 &  &  \\
+MassiveIntentClassification & am &  &  &  & 55.71 & 36.75 & 41.55 &  &  \\
+MassiveIntentClassification & ar &  &  &  & 50.86 & 45.14 & 51.43 &  &  \\
+MassiveIntentClassification & az &  &  &  & 58.97 & 47.42 & 56.98 &  &  \\
+MassiveIntentClassification & bn &  &  &  & 58.22 & 35.34 & 48.79 &  &  \\
+MassiveIntentClassification & cy &  &  &  & 50.16 & 26.12 & 27.87 &  &  \\
+MassiveIntentClassification & da &  &  &  & 58.25 & 57.73 & 62.77 &  &  \\
+MassiveIntentClassification & de &  &  &  & 56.21 & 50.71 & 59.57 &  &  \\
+MassiveIntentClassification & el &  &  &  & 57.03 & 58.7 & 62.62 &  &  \\
+MassiveIntentClassification & es &  &  &  & 58.32 & 59.66 & 64.43 &  &  \\
+MassiveIntentClassification & fa &  &  &  & 62.33 & 61.02 & 65.34 &  &  \\
+MassiveIntentClassification & fi &  &  &  & 60.12 & 57.54 & 62.28 &  &  \\
+MassiveIntentClassification & fr &  &  &  & 60.47 & 60.25 & 64.82 &  & 64.58 \\
+MassiveIntentClassification & he &  &  &  & 56.55 & 52.51 & 58.21 &  &  \\
+MassiveIntentClassification & hi &  &  &  & 59.4 & 58.37 & 62.77 &  &  \\
+MassiveIntentClassification & hu &  &  &  & 59.52 & 60.41 & 63.87 &  &  \\
+MassiveIntentClassification & hy &  &  &  & 56.2 & 51.6 & 57.74 &  &  \\
+MassiveIntentClassification & id &  &  &  & 61.12 & 59.85 & 65.43 &  &  \\
+MassiveIntentClassification & is &  &  &  & 54.9 & 30.83 & 37.05 &  &  \\
+MassiveIntentClassification & it &  &  &  & 59.83 & 59.61 & 64.68 &  &  \\
+MassiveIntentClassification & ja &  &  &  & 63.11 & 60.89 & 63.74 &  &  \\
+MassiveIntentClassification & jv &  &  &  & 50.98 & 32.37 & 36.49 &  &  \\
+MassiveIntentClassification & ka &  &  &  & 48.35 & 43.03 & 49.85 &  &  \\
+MassiveIntentClassification & km &  &  &  & 48.55 & 40.04 & 45.47 &  &  \\
+MassiveIntentClassification & kn &  &  &  & 56.24 & 40.98 & 50.63 &  &  \\
+MassiveIntentClassification & ko &  &  &  & 60.99 & 50.3 & 61.82 &  &  \\
+MassiveIntentClassification & lv &  &  &  & 57.1 & 54.68 & 61.29 &  &  \\
+MassiveIntentClassification & ml &  &  &  & 57.91 & 42.41 & 54.34 &  &  \\
+MassiveIntentClassification & mn &  &  &  & 58.5 & 51.77 & 56.59 &  &  \\
+MassiveIntentClassification & ms &  &  &  & 58.6 & 54.76 & 60.7 &  &  \\
+MassiveIntentClassification & my &  &  &  & 57.35 & 52.01 & 57.09 &  &  \\
+MassiveIntentClassification & nb &  &  &  & 57.91 & 55.5 & 62.6 &  &  \\
+MassiveIntentClassification & nl &  &  &  & 59.37 & 59.51 & 63.57 &  &  \\
+MassiveIntentClassification & pl &  &  &  & 59.71 & 59.43 & 64.3 &  &  \\
+MassiveIntentClassification & pt &  &  &  & 60.16 & 61.27 & 64.89 &  &  \\
+MassiveIntentClassification & ro &  &  &  & 57.92 & 58.39 & 62.8 &  &  \\
+MassiveIntentClassification & ru &  &  &  & 60.67 & 59.04 & 63.26 &  &  \\
+MassiveIntentClassification & sl &  &  &  & 59.37 & 57.36 & 63.51 &  &  \\
+MassiveIntentClassification & sq &  &  &  & 58.03 & 56.59 & 62.49 &  &  \\
+MassiveIntentClassification & sv &  &  &  & 59.66 & 59.43 & 64.73 &  &  \\
+MassiveIntentClassification & sw &  &  &  & 51.62 & 29.57 & 31.95 &  &  \\
+MassiveIntentClassification & ta &  &  &  & 55.04 & 36.77 & 50.17 &  &  \\
+MassiveIntentClassification & te &  &  &  & 58.32 & 40.72 & 52.82 &  &  \\
+MassiveIntentClassification & th &  &  &  & 56.58 & 58.97 & 61.11 &  &  \\
+MassiveIntentClassification & tl &  &  &  & 55.28 & 33.67 & 38.83 &  &  \\
+MassiveIntentClassification & tr &  &  &  & 60.91 & 59.9 & 64.54 &  &  \\
+MassiveIntentClassification & ur &  &  &  & 56.7 & 52.8 & 56.37 &  &  \\
+MassiveIntentClassification & vi &  &  &  & 56.67 & 56.61 & 59.68 &  &  \\
+MassiveIntentClassification & zh-CN &  &  &  & 63.86 & 61.99 & 65.33 &  &  \\
+MassiveIntentClassification & zh-TW &  &  &  & 59.51 & 58.77 & 62.35 &  &  \\
+MassiveScenarioClassification & af &  &  &  & 63.39 & 53.64 & 59.67 &  &  \\
+MassiveScenarioClassification & am &  &  &  & 62.02 & 41.89 & 48.97 &  &  \\
+MassiveScenarioClassification & ar &  &  &  & 57.72 & 51.74 & 57.78 &  &  \\
+MassiveScenarioClassification & az &  &  &  & 63.48 & 52.06 & 61.53 &  &  \\
+MassiveScenarioClassification & bn &  &  &  & 61.84 & 41.17 & 54.53 &  &  \\
+MassiveScenarioClassification & cy &  &  &  & 56.13 & 31.72 & 35.26 &  &  \\
+MassiveScenarioClassification & da &  &  &  & 65.24 & 66.87 & 71.0 &  &  \\
+MassiveScenarioClassification & de &  &  &  & 62.39 & 57.4 & 67.34 &  &  \\
+MassiveScenarioClassification & el &  &  &  & 64.58 & 66.14 & 68.81 &  &  \\
+MassiveScenarioClassification & es &  &  &  & 63.61 & 65.04 & 70.42 &  &  \\
+MassiveScenarioClassification & fa &  &  &  & 67.46 & 65.86 & 69.88 &  &  \\
+MassiveScenarioClassification & fi &  &  &  & 64.58 & 63.75 & 67.6 &  &  \\
+MassiveScenarioClassification & fr &  &  &  & 65.1 & 66.06 & 70.69 &  & 69.6 \\
+MassiveScenarioClassification & he &  &  &  & 63.53 & 59.2 & 65.16 &  &  \\
+MassiveScenarioClassification & hi &  &  &  & 64.4 & 65.21 & 67.92 &  &  \\
+MassiveScenarioClassification & hu &  &  &  & 65.82 & 66.56 & 70.3 &  &  \\
+MassiveScenarioClassification & hy &  &  &  & 61.25 & 56.11 & 63.02 &  &  \\
+MassiveScenarioClassification & id &  &  &  & 65.84 & 66.16 & 70.73 &  &  \\
+MassiveScenarioClassification & is &  &  &  & 61.94 & 37.52 & 44.16 &  &  \\
+MassiveScenarioClassification & it &  &  &  & 64.09 & 65.0 & 69.73 &  &  \\
+MassiveScenarioClassification & ja &  &  &  & 67.72 & 66.5 & 69.69 &  &  \\
+MassiveScenarioClassification & jv &  &  &  & 58.29 & 38.6 & 44.2 &  &  \\
+MassiveScenarioClassification & ka &  &  &  & 53.38 & 50.66 & 57.3 &  &  \\
+MassiveScenarioClassification & km &  &  &  & 56.18 & 46.96 & 53.14 &  &  \\
+MassiveScenarioClassification & kn &  &  &  & 61.74 & 45.73 & 56.08 &  &  \\
+MassiveScenarioClassification & ko &  &  &  & 67.26 & 55.66 & 68.52 &  &  \\
+MassiveScenarioClassification & lv &  &  &  & 61.87 & 59.8 & 66.28 &  &  \\
+MassiveScenarioClassification & ml &  &  &  & 62.26 & 47.69 & 60.13 &  &  \\
+MassiveScenarioClassification & mn &  &  &  & 62.6 & 57.07 & 60.85 &  &  \\
+MassiveScenarioClassification & ms &  &  &  & 65.63 & 61.71 & 65.81 &  &  \\
+MassiveScenarioClassification & my &  &  &  & 62.94 & 59.1 & 63.03 &  &  \\
+MassiveScenarioClassification & nb &  &  &  & 64.29 & 64.25 & 70.24 &  &  \\
+MassiveScenarioClassification & nl &  &  &  & 65.16 & 65.52 & 70.37 &  &  \\
+MassiveScenarioClassification & pl &  &  &  & 64.56 & 65.04 & 68.99 &  &  \\
+MassiveScenarioClassification & pt &  &  &  & 63.28 & 65.79 & 70.09 &  &  \\
+MassiveScenarioClassification & ro &  &  &  & 62.41 & 64.17 & 67.95 &  &  \\
+MassiveScenarioClassification & ru &  &  &  & 65.25 & 65.24 & 69.92 &  &  \\
+MassiveScenarioClassification & sl &  &  &  & 64.25 & 64.01 & 70.81 &  &  \\
+MassiveScenarioClassification & sq &  &  &  & 64.54 & 64.31 & 69.63 &  &  \\
+MassiveScenarioClassification & sv &  &  &  & 66.01 & 67.14 & 71.6 &  &  \\
+MassiveScenarioClassification & sw &  &  &  & 58.36 & 34.86 & 37.29 &  &  \\
+MassiveScenarioClassification & ta &  &  &  & 59.08 & 42.62 & 55.96 &  &  \\
+MassiveScenarioClassification & te &  &  &  & 64.13 & 46.46 & 58.81 &  &  \\
+MassiveScenarioClassification & th &  &  &  & 64.34 & 67.01 & 69.44 &  &  \\
+MassiveScenarioClassification & tl &  &  &  & 60.23 & 37.37 & 43.99 &  &  \\
+MassiveScenarioClassification & tr &  &  &  & 65.43 & 66.55 & 70.4 &  &  \\
+MassiveScenarioClassification & ur &  &  &  & 61.52 & 60.43 & 62.9 &  &  \\
+MassiveScenarioClassification & vi &  &  &  & 61.05 & 60.72 & 65.71 &  &  \\
+MassiveScenarioClassification & zh-CN &  &  &  & 70.85 & 67.44 & 71.23 &  &  \\
+MassiveScenarioClassification & zh-TW &  &  &  & 67.08 & 65.7 & 68.73 &  &  \\
+MTOPDomainClassification & de &  &  &  & 86.95 & 79.2 & 85.73 & 82.05 &  \\
+MTOPDomainClassification & es &  &  &  & 84.07 & 83.04 & 86.96 & 93.55 &  \\
+MTOPDomainClassification & fr &  &  &  & 84.14 & 78.63 & 81.21 & 90.98 & 83.8 \\
+MTOPDomainClassification & hi &  &  &  & 85.11 & 81.36 & 84.76 & 89.33 &  \\
+MTOPDomainClassification & th &  &  &  & 81.24 & 79.99 & 82.51 & 60.49 &  \\
+MTOPIntentClassification & de &  &  &  & 63.42 & 54.23 & 61.27 & 61.92 &  \\
+MTOPIntentClassification & es &  &  &  & 64.44 & 60.28 & 66.59 & 74.49 &  \\
+MTOPIntentClassification & fr &  &  &  & 62.01 & 54.05 & 59.76 & 69.12 & 63.36 \\
+MTOPIntentClassification & hi &  &  &  & 62.58 & 59.9 & 62.37 & 64.85 &  \\
+MTOPIntentClassification & th &  &  &  & 64.61 & 61.96 & 64.8 & 49.36 &  \\
+Average & mix &  &  &  & 60.77 & 54.87 & 60.39 &  &  \\
