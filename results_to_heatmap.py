@@ -1,6 +1,7 @@
 """
 Usage: python results_to_heatmap.py results_folder_path
 results_folder_path contains results of multiple models whose folders should be named after them
+Source: https://medium.com/@szabo.bibor/how-to-create-a-seaborn-correlation-heatmap-in-python-834c0686b88e
 """
 import io
 import json
@@ -9,6 +10,7 @@ import sys
 
 from mteb import MTEB
 import numpy as np
+import pandas as pd
 
 TASK_LIST_BITEXT = [
     "BUCC",
@@ -140,7 +142,7 @@ for model_name in os.listdir(results_folder):
                 results = json.load(f)
                 all_results[model_name] = {**all_results[model_name], **{file_name.replace(".json", ""): results}}
 
-def get_rows(dataset, model_name, limit_langs=[], skip_langs=[]):
+def get_row(dataset, model_name, limit_langs=[], skip_langs=[]):
     rows = []
     # CQADupstackRetrieval uses the same metric as its subsets
     tasks = MTEB(tasks=[dataset.replace("CQADupstackRetrieval", "CQADupstackTexRetrieval")]).tasks
@@ -160,8 +162,7 @@ def get_rows(dataset, model_name, limit_langs=[], skip_langs=[]):
         if (limit_langs and lang not in limit_langs) or (skip_langs and lang in skip_langs):
             continue
         elif test_result is None:
-            rows.append([lang, main_metric, None])
-            continue
+            raise NotImplementedError(f"Got no test result {test_result} for ds: {dataset} model: {model_name}")
 
         test_result_lang = test_result.get(lang, test_result)
         if main_metric == "cosine_spearman":
@@ -172,9 +173,70 @@ def get_rows(dataset, model_name, limit_langs=[], skip_langs=[]):
             test_result_lang = test_result_lang.get(main_metric)
 
         if test_result_lang is None:
-            rows.append([lang, main_metric, None])
-            continue
+            raise NotImplementedError
 
-        rows.append([lang, main_metric, test_result_lang])
-    return rows
+        return test_result_lang
+    raise NotImplementedError
 
+
+MODELS_TO_CORRELATE = [
+    ("Glove", "glove.6B.300d"),
+    ("Komninos", "komninos"),
+    ("LASER2", "LASER2"),
+    # ("LaBSE", "LaBSE"),
+    ("bert-base-uncased", "bert-base-uncased"),
+    ("BERT Co-Condensor", "msmarco-bert-co-condensor"),
+    ("SimCSE-bert-base-unsup", "unsup-simcse-bert-base-uncased"),
+    ("SimCSE-bert-base-sup", "sup-simcse-bert-base-uncased"),
+    ("all-MiniLM-L6-v2", "all-MiniLM-L6-v2"),
+    ("all-mpnet-base-v2", "all-mpnet-base-v2"),
+    ("Contriever", "contriever-base-msmarco"),
+    ("SGPT-125M-nli", "SGPT-125M-weightedmean-nli-bitfit",),
+    ("SGPT-125M-msmarco", "SGPT-125M-weightedmean-msmarco-specb-bitfit",),
+    ("SGPT-5.8B-nli", "SGPT-5.8B-weightedmean-nli-bitfit",),
+    ("SGPT-5.8B-msmarco", "SGPT-5.8B-weightedmean-msmarco-specb-bitfit",),
+    ("GTR-Base", "gtr-t5-base",), # 110M
+    ("GTR-XXL", "gtr-t5-xxl",), # 4.8B
+    ("ST5-Base", "sentence-t5-base",), # 110M
+    ("ST5-XXL", "sentence-t5-xxl",), # 4.8B
+]
+
+### MODEL HEATMAP
+
+model_dict = []
+
+for ds in TASK_LIST_EN:
+    model_dict.append({model[0]: get_row(ds, model[-1], limit_langs=["en", "en-en"]) for model in MODELS_TO_CORRELATE})
+
+model_df = pd.DataFrame(model_dict)
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(16, 6))
+# define the mask to set the values in the upper triangle to True
+mask = np.triu(np.ones_like(model_df.corr(), dtype=np.bool))
+heatmap = sns.heatmap(model_df.corr(), mask=mask, vmin=-1, vmax=1, annot=True, cmap='BrBG')
+heatmap.set_title('Pearson Correlations of scores on MTEB', fontdict={'fontsize':18}, pad=16);
+
+plt.savefig('heatmap_model.png', dpi=300, bbox_inches='tight')
+
+data_dict = []
+
+
+### DATA HEATMAP
+# This is to be differentiated from a heatmap of actual data content (e.g. via unigram Jaccard similarity)
+# E.g. for BEIR SciFact & HotpotQA have very low unigram Jaccard similarity, but in this method,
+# they get a high similarity score, because model scores seem to correlate on the datasrt
+
+for model in MODELS_TO_CORRELATE:
+    data_dict.append({ds: get_row(ds, model[-1], limit_langs=["en", "en-en"]) for ds in TASK_LIST_EN})
+
+data_df = pd.DataFrame(data_dict)
+
+plt.figure(figsize=(128, 48))
+# define the mask to set the values in the upper triangle to True
+mask = np.triu(np.ones_like(data_df.corr(), dtype=np.bool))
+heatmap = sns.heatmap(data_df.corr(), mask=mask, vmin=-1, vmax=1, annot=True, cmap='BrBG')
+heatmap.set_title('Pearson Correlations of scores on MTEB', fontdict={'fontsize':18}, pad=16);
+
+plt.savefig('heatmap_data.png', dpi=300, bbox_inches='tight')
