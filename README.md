@@ -89,8 +89,8 @@ import os
 import sentence_transformers
 os.environ["SENTENCE_TRANSFORMERS_HOME"] = "/gpfswork/rech/six/commun/models"
 sentence_transformers_cache_dir = os.getenv("SENTENCE_TRANSFORMERS_HOME")
-model_repo="Muennighoff/SGPT-1.3B-weightedmean-msmarco-specb-bitfit"
-revision="7853d0d3eef3dd556b99ae342e7461c61d8faed5"
+model_repo="sentence-transformers/gtr-t5-base"
+revision="967b0854e46f8d3a0d42429301397715821a682f"
 model_path = os.path.join(sentence_transformers_cache_dir, model_repo.replace("/", "_"))
 model_path_tmp = sentence_transformers.util.snapshot_download(
     repo_id=model_repo,

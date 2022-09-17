@@ -67,10 +67,10 @@ TASK_LIST_RERANKING = [
 TASK_LIST_RETRIEVAL = [
     "ArguAna",
     "ClimateFEVER",
-    "CQADupstackAndroid",
-    "CQADupstackEnglish",
-    "CQADupstackGaming",
-    "CQADupstackGisRetrieval"
+    "CQADupstackAndroidRetrieval",
+    "CQADupstackEnglishRetrieval",
+    "CQADupstackGamingRetrieval",
+    "CQADupstackGisRetrieval",
     "CQADupstackMathematicaRetrieval",
     "CQADupstackPhysicsRetrieval",
     "CQADupstackProgrammersRetrieval",
