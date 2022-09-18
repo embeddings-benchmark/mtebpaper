@@ -269,7 +269,7 @@ SGPT-5.8B-weightedmean-msmarco-specb-bitfit,Reranking,SciDocsRR,en,map,0.8078825
 SGPT-5.8B-weightedmean-msmarco-specb-bitfit,Reranking,StackOverflowDupQuestions,en,map,0.5152800990025549
 SGPT-5.8B-weightedmean-msmarco-specb-bitfit,Retrieval,ArguAna,en,ndcg_at_10,0.51375
 SGPT-5.8B-weightedmean-msmarco-specb-bitfit,Retrieval,ClimateFEVER,en,ndcg_at_10,0.30462
-SGPT-5.8B-weightedmean-msmarco-specb-bitfit,Retrieval,CQADupstackRetrieval,en,ndcg_at_10,0.381195
+SGPT-5.8B-weightedmean-msmarco-specb-bitfit,Retrieval,CQADupstackRetrieval,en,ndcg_at_10,0.3940316666666666
 SGPT-5.8B-weightedmean-msmarco-specb-bitfit,Retrieval,DBPedia,en,ndcg_at_10,0.39874
 SGPT-5.8B-weightedmean-msmarco-specb-bitfit,Retrieval,FEVER,en,ndcg_at_10,0.7824
 SGPT-5.8B-weightedmean-msmarco-specb-bitfit,Retrieval,FiQA2018,en,ndcg_at_10,0.37202
@@ -351,5 +351,5 @@ SGPT-5.8B-weightedmean-msmarco-specb-bitfit,Classification,average,en,accuracy,0
 SGPT-5.8B-weightedmean-msmarco-specb-bitfit,Clustering,average,en,v_measure,0.4034614737833592
 SGPT-5.8B-weightedmean-msmarco-specb-bitfit,PairClassification,average,en,ap,0.8199887425602891
 SGPT-5.8B-weightedmean-msmarco-specb-bitfit,Reranking,average,en,map,0.5655884105367412
-SGPT-5.8B-weightedmean-msmarco-specb-bitfit,Retrieval,average,en,ndcg_at_10,0.5016830000000001
+SGPT-5.8B-weightedmean-msmarco-specb-bitfit,Retrieval,average,en,ndcg_at_10,0.5025387777777779
 SGPT-5.8B-weightedmean-msmarco-specb-bitfit,STS,average,en,cosine_spearman,0.7809617067628566
