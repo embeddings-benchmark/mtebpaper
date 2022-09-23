@@ -1,0 +1,15 @@
+{
+  "dataset_version": null,
+  "mteb_version": "0.0.2",
+  "test": {
+    "cos_sim": {
+      "pearson": 0.24276810356195672,
+      "spearman": 0.24989532429036973
+    },
+    "dot": {
+      "pearson": 0.26468920496607706,
+      "spearman": 0.27254486462692024
+    },
+    "evaluation_time": 1594.54
+  }
+}

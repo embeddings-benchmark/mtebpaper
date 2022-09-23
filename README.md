@@ -89,8 +89,8 @@ import os
 import sentence_transformers
 os.environ["SENTENCE_TRANSFORMERS_HOME"] = "/gpfswork/rech/six/commun/models"
 sentence_transformers_cache_dir = os.getenv("SENTENCE_TRANSFORMERS_HOME")
-model_repo="sentence-transformers/gtr-t5-large"
-revision="fd31cff184d356b3a9a5794706551fc5306071a2"
+model_repo="sentence-transformers/allenai-specter"
+revision="29f9f45ff2a85fe9dfe8ce2cef3d8ec4e65c5f37"
 model_path = os.path.join(sentence_transformers_cache_dir, model_repo.replace("/", "_"))
 model_path_tmp = sentence_transformers.util.snapshot_download(
     repo_id=model_repo,
