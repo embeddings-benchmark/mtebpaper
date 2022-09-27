@@ -47,6 +47,11 @@ MODELS = [
     "/gpfswork/rech/six/commun/models/sentence-transformers_LaBSE",
 ]
 
+MODELS = [
+    "/gpfswork/rech/six/commun/models/sentence-transformers_all-MiniLM-L12-v2",
+    "/gpfswork/rech/six/commun/models/sentence-transformers_allenai-specter",
+]
+
 TASKS = [
     "STS15",
 ]
@@ -175,6 +180,8 @@ def main(args):
             # Encode all with the same batch size for a fair comparison of speed / sentence
             data = task.dataset["test"]["sentence1"] + task.dataset["test"]["sentence2"]
             data_len = len(data)
+            # Warmup run to build py caches etc
+            embeddings = np.asarray(model.encode(data, batch_size=args.batchsize))
             tick = time.time()
             embeddings = np.asarray(model.encode(data, batch_size=args.batchsize))
             tock = time.time()

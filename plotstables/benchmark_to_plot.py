@@ -102,6 +102,7 @@ TASK_LIST_EN = (
 )
 
 MODEL_TO_NAME = {
+    "bert-base-uncased": "BERT",
     "gtr-t5-base": "GTR-Base",
     "gtr-t5-large": "GTR-Large",
     "gtr-t5-xl": "GTR-XL",
@@ -114,32 +115,69 @@ MODEL_TO_NAME = {
     "SGPT-1.3B-weightedmean-msmarco-specb-bitfit": "SGPT-1.3B-msmarco",
     "SGPT-2.7B-weightedmean-msmarco-specb-bitfit": "SGPT-2.7B-msmarco",
     "SGPT-5.8B-weightedmean-msmarco-specb-bitfit": "SGPT-5.8B-msmarco",
-    "sgpt-bloom-7b1-msmarco": "SGPT-7.1B-msmarco",
+    "sgpt-bloom-7b1-msmarco": "SGPT-BLOOM-7.1B-msmarco",
     "SGPT-125M-weightedmean-nli-bitfit": "SGPT-125M-nli",
     "SGPT-5.8B-weightedmean-nli-bitfit": "SGPT-5.8B-nli",
-    "sup-simcse-bert-base-uncased": "SimCSE-bert-base-sup",
+    "sup-simcse-bert-base-uncased": "SimCSE-BERT-sup",
     "contriever-base-msmarco": "Contriever",
-    "msmarco-bert-co-condensor": "BERT Co-Condensor",
-    "unsup-simcse-bert-base-uncased": "SimCSE-bert-base-unsup",
+    "msmarco-bert-co-condensor": "coCondenser-msmarco", # They write it as coCondenser in the paper
+    "unsup-simcse-bert-base-uncased": "SimCSE-BERT-unsup",
     "glove.6B.300d": "Glove",
     "komninos": "Komninos",
-    "all-MiniLM-L6-v2": "MiniLM-L6-v2",
-    "all-mpnet-base-v2": "MPNet-base-v2",
+    "all-MiniLM-L6-v2": "MiniLM-L6",
+    "all-MiniLM-L12-v2": "MiniLM-L12",
+    "paraphrase-multilingual-MiniLM-L12-v2": "MiniLM-L12-multilingual",
+    "all-mpnet-base-v2": "MPNet",
+    "paraphrase-multilingual-mpnet-base-v2": "MPNet-multilingual",
+    "allenai-specter": "SPECTER",
+    "text-similarity-ada-001": "Ada Similarity",
 }
 
 NAME_TO_ARCH = {
-    "gtr": ("T5", "darkorange"),
-    "st5": ("T5", "darkorange"),
-    "sgpt": ("GPT", "deepskyblue"),
-    "simcse": ("BERT", "gold"),
-    "contriever": ("BERT", "gold"),
-    "bert": ("BERT", "gold"),
-    "mpnet": ("MPNet", "steelblue"),
-    "minilm": ("MiniLM", "lightblue"),
-    "laser2": ("LASER", "darkblue"),
-    "labse": ("BERT", "gold"),
-    "glove": ("WordEmbeddings", "blue"),
-    "komninos": ("WordEmbeddings", "blue"),
+    "gtr": "T5",
+    "st5": "T5",
+    "sgpt": "GPT",
+    "simcse": "BERT",
+    "contriever": "BERT",
+    "bert": "BERT",
+    "cocondenser": "BERT",
+    "specter": "SciBERT",
+    "mpnet": "MPNet",
+    "minilm": "MiniLM",
+    "laser2": "LASER",
+    "labse": "BERT",
+    "glove": "WordEmbeddings",
+    "komninos": "WordEmbeddings",
+}
+
+# Base from:
+# https://coolors.co/palette/ff5400-ff6d00-ff8500-ff9100-ff9e00-00b4d8-0096c7-0077b6-023e8a-03045e
+# Yellow tones from:
+# https://coolors.co/palette/6ab6dc-49a6d4-2f94c6-277ba5-1f6284-e0b700-ffd20a-ffda33-ffe15c-ffe570
+# Green from:
+# https://coolors.co/palette/f94144-f3722c-f8961e-f9844a-f9c74f-90be6d-43aa8b-4d908e-577590-277da1
+MODEL_TO_COLOR = {
+    "MiniLM": "#BAF19C",#"#017600", # Green
+    "MPNet": "#F94144",#"#007A7A", # Light Green
+    "GTR": "#FF5400",#"#221D91", # Blue 1
+    "ST5": "#FF9E00",#"#86D4F1", # Blue 2
+    "SGPT": "#00B4D8",#"#7B3FB9", # Purple
+    "SimCSE": "#F9C74F",#"#2070B4", # Blue 3
+    "LaBSE": "#F9C74F",#"#2070B4", # Blue 3
+    "SPECTER": "#E0B700", # Shade of #2070B4
+    "Glove": "#023E8A",#"#9BC7DD", # Light Blue
+    "LASER2": "#03045E", # Grey
+}
+
+ARCH_TO_COLOR = {
+    "T5": MODEL_TO_COLOR["GTR"],
+    "GPT": MODEL_TO_COLOR["SGPT"],
+    "BERT": MODEL_TO_COLOR["SimCSE"],
+    "SciBERT": MODEL_TO_COLOR["SPECTER"],
+    "MiniLM": MODEL_TO_COLOR["MiniLM"],
+    "MPNet": MODEL_TO_COLOR["MPNet"],
+    "WordEmbeddings": MODEL_TO_COLOR["Glove"],
+    "LASER": MODEL_TO_COLOR["LASER2"],
 }
 
 
@@ -217,10 +255,12 @@ import numpy as np
 fig, ax = plt.subplots(figsize=(8,8))
 
 for k, v in gpu_bench.items():
-    if k == "specs":
+    if k in ("specs", "sgpt-bloom-7b1-msmarco", "paraphrase-multilingual-MiniLM-L12-v2", "paraphrase-multilingual-mpnet-base-v2"):
         continue
+
     model_name = MODEL_TO_NAME.get(k, k)
-    (model_arch, color) = NAME_TO_ARCH.get(model_name.split(" ")[0].split("-")[0].lower(), (model_name, None))
+    model_arch = NAME_TO_ARCH.get(model_name.split(" ")[0].split("-")[0].lower(), (model_name))
+    color = ARCH_TO_COLOR[model_arch]
 
     if k not in results_avg:
         print(f"Missing average score for {k}")
@@ -240,12 +280,13 @@ for k, v in gpu_bench.items():
     # Empirical offsets
     x_offset = y_offset = 0
     if model_name in ("ST5-Base"):
-        x_offset = -0.5 * speed
+        x_offset = 0.7 * speed
     elif model_name in ("GTR-Base"):
         x_offset = 0.7 * speed
         y_offset = -0.01 * score
     elif model_name in ("Contriever"):
-        x_offset = 0.75 * speed
+        x_offset = -0.45 * speed
+        y_offset = 0.018 * score
     elif model_name in ("LaBSE"):
         x_offset = 0.65 * speed
         y_offset = 0.01 * score
@@ -254,16 +295,22 @@ for k, v in gpu_bench.items():
         if model_name == "GTR-XXL":
             y_offset = 0.01 * score
     elif model_name == "Komninos":
-        x_offset = 0.2 * speed
-        y_offset = 0.03 * score
-    elif model_name == "Glove":
+        x_offset = 0.4 * speed
+        y_offset = 0.05 * score
+    elif model_name in ("Glove", "SPECTER"):
         x_offset = 0.2 * speed
         y_offset = -0.025 * score
     elif model_name.startswith("SGPT-5.8B"):
         x_offset = 0.3 * speed
-        y_offset = 0.04 * score
+        y_offset = 0.05 * score
+    elif model_name.startswith("SGPT-125M-nli"):
+        x_offset = -0.45 * speed
+        y_offset = -0.008 * score
+    elif model_name.startswith("MiniLM-L12"):
+        y_offset = -0.01 * score
+        x_offset = -0.35 * speed
     elif model_arch in ("BERT", "MiniLM", "MPNet", "LASER") or model_name.startswith("SGPT-125M"):
-        x_offset = -0.5 * speed
+        x_offset = -0.48 * speed
     
     ax.text(
         speed - x_offset,

@@ -1,0 +1,134 @@
+{
+    "LASER2": {
+        "STS15": {
+            "speed_ms": 1.095552682876587,
+            "embedding_size_kb": 4.096
+        }
+    },
+    "komninos": {
+        "STS15": {
+            "speed_ms": 0.014420787493387857,
+            "embedding_size_kb": 1.2
+        }
+    },
+    "glove.6B.300d": {
+        "STS15": {
+            "speed_ms": 0.015402833620707195,
+            "embedding_size_kb": 1.2
+        }
+    },
+    "SGPT-125M-weightedmean-nli-bitfit": {
+        "STS15": {
+            "speed_ms": 0.3835549751917521,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "SGPT-125M-weightedmean-msmarco-specb-bitfit": {
+        "STS15": {
+            "speed_ms": 0.40986963113149005,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "SGPT-5.8B-weightedmean-nli-bitfit": {
+        "STS15": {
+            "speed_ms": 13.105161627133688,
+            "embedding_size_kb": 16.384
+        }
+    },
+    "SGPT-5.8B-weightedmean-msmarco-specb-bitfit": {
+        "STS15": {
+            "speed_ms": 14.537005225817362,
+            "embedding_size_kb": 16.384
+        }
+    },
+    "all-MiniLM-L6-v2": {
+        "STS15": {
+            "speed_ms": 0.1488305727640788,
+            "embedding_size_kb": 1.536
+        }
+    },
+    "all-mpnet-base-v2": {
+        "STS15": {
+            "speed_ms": 0.35439515113830566,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "paraphrase-multilingual-mpnet-base-v2": {
+        "STS15": {
+            "speed_ms": 0.39108145236968994,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "sentence-t5-base": {
+        "STS15": {
+            "speed_ms": 0.41539565722147626,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "sentence-t5-xxl": {
+        "STS15": {
+            "speed_ms": 15.400389790534973,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "gtr-t5-base": {
+        "STS15": {
+            "speed_ms": 0.41492275396982825,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "gtr-t5-xxl": {
+        "STS15": {
+            "speed_ms": 15.39513130982717,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "contriever-base-msmarco": {
+        "STS15": {
+            "speed_ms": 0.34681657950083417,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "msmarco-bert-co-condensor": {
+        "STS15": {
+            "speed_ms": 0.3462672630945841,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "bert-base-uncased": {
+        "STS15": {
+            "speed_ms": 0.34756950537363684,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "sup-simcse-bert-base-uncased": {
+        "STS15": {
+            "speed_ms": 0.3426841100056966,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "unsup-simcse-bert-base-uncased": {
+        "STS15": {
+            "speed_ms": 0.3423287868499756,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "LaBSE": {
+        "STS15": {
+            "speed_ms": 0.3441281318664551,
+            "embedding_size_kb": 3.072
+        }
+    },
+    "all-MiniLM-L12-v2": {
+        "STS15": {
+            "speed_ms": 0.2361156940460205,
+            "embedding_size_kb": 1.536
+        }
+    },
+    "allenai-specter": {
+        "STS15": {
+            "speed_ms": 0.3867043654123942,
+            "embedding_size_kb": 3.072
+        }
+    }
+}

@@ -26,8 +26,8 @@ BITEXT_MODELS = MULTILING_MODELS = [
     # "sgpt-bloom-1b3-nli", # Not too interesting
 ]
 
-
 MODEL_TO_NAME = {
+    "bert-base-uncased": "BERT",
     "gtr-t5-base": "GTR-Base",
     "gtr-t5-large": "GTR-Large",
     "gtr-t5-xl": "GTR-XL",
@@ -40,31 +40,43 @@ MODEL_TO_NAME = {
     "SGPT-1.3B-weightedmean-msmarco-specb-bitfit": "SGPT-1.3B-msmarco",
     "SGPT-2.7B-weightedmean-msmarco-specb-bitfit": "SGPT-2.7B-msmarco",
     "SGPT-5.8B-weightedmean-msmarco-specb-bitfit": "SGPT-5.8B-msmarco",
-    "sgpt-bloom-7b1-msmarco": "SGPT-7.1B-msmarco",
+    "sgpt-bloom-7b1-msmarco": "SGPT-BLOOM-7.1B-msmarco",
     "SGPT-125M-weightedmean-nli-bitfit": "SGPT-125M-nli",
     "SGPT-5.8B-weightedmean-nli-bitfit": "SGPT-5.8B-nli",
-    "sup-simcse-bert-base-uncased": "SimCSE-bert-base-sup",
+    "sup-simcse-bert-base-uncased": "SimCSE-BERT-sup",
     "contriever-base-msmarco": "Contriever",
-    "msmarco-bert-co-condensor": "BERT Co-Condensor",
-    "unsup-simcse-bert-base-uncased": "SimCSE-bert-base-unsup",
+    "msmarco-bert-co-condensor": "coCondenser-msmarco", # They write it as coCondenser in the paper
+    "unsup-simcse-bert-base-uncased": "SimCSE-BERT-unsup",
     "glove.6B.300d": "Glove",
     "komninos": "Komninos",
-    "all-MiniLM-L6-v2": "MiniLM-L6-v2",
-    "all-mpnet-base-v2": "MPNet-base-v2",
+    "all-MiniLM-L6-v2": "MiniLM-L6",
+    "all-MiniLM-L12-v2": "MiniLM-L12",
+    "paraphrase-multilingual-MiniLM-L12-v2": "MiniLM-L12-multilingual",
+    "all-mpnet-base-v2": "MPNet",
+    "paraphrase-multilingual-mpnet-base-v2": "MPNet-multilingual",
+    "allenai-specter": "SPECTER",
+    "text-similarity-ada-001": "Ada Similarity",
 }
 
-
+# Base from:
+# https://coolors.co/palette/ff5400-ff6d00-ff8500-ff9100-ff9e00-00b4d8-0096c7-0077b6-023e8a-03045e
+# Yellow tones from:
+# https://coolors.co/palette/6ab6dc-49a6d4-2f94c6-277ba5-1f6284-e0b700-ffd20a-ffda33-ffe15c-ffe570
+# Green from:
+# https://coolors.co/palette/f94144-f3722c-f8961e-f9844a-f9c74f-90be6d-43aa8b-4d908e-577590-277da1
 MODEL_TO_COLOR = {
-    "LaBSE": "#221D91", # blue1
-    "LASER2": "#86D4F1", # blue2
-    "sgpt-bloom-7b1-msmarco": "#7B3FB9", # purple # "lightpurple": "#CBB3E3",
-    "paraphrase-multilingual-MiniLM-L12-v2": "#B6B4DB", # lightblue1
-    "paraphrase-multilingual-mpnet-base-v2": "#AAF2F2", # lightblue2
-#    "blue": "#221D91",
-#    "lightblue": "#B6B4DB",
-#    "blue2": "#86D4F1",
-#   "lightblue2": "#AAF2F2",
+    "MiniLM": "#BAF19C",#"#017600", # Green
+    "MPNet": "#F94144",#"#007A7A", # Light Green
+    "GTR": "#FF5400",#"#221D91", # Blue 1
+    "ST5": "#FF9E00",#"#86D4F1", # Blue 2
+    "SGPT": "#00B4D8",#"#7B3FB9", # Purple
+    "SimCSE": "#F9C74F",#"#2070B4", # Blue 3
+    "LaBSE": "#F9C74F",#"#2070B4", # Blue 3
+    "SPECTER": "#E0B700", # Shade of #2070B4
+    "Glove": "#023E8A",#"#9BC7DD", # Light Blue
+    "LASER2": "#03045E", # Grey
 }
+
 
 MULTILINGUAL_CLF = [
     "AmazonCounterfactualClassification",
@@ -146,7 +158,8 @@ for i, model in enumerate(BITEXT_MODELS):
     x_langs = [x[0] for x in scores_sorted]
     y_scores = [x[1] for x in scores_sorted]
 
-    ax.plot(x_langs, y_scores, label=MODEL_TO_NAME.get(model, model), marker=markers[i], color=MODEL_TO_COLOR.get(model))
+    model_name = MODEL_TO_NAME.get(model, model)
+    ax.plot(x_langs, y_scores, linewidth=6.0, label=model_name, marker=markers[i], color=MODEL_TO_COLOR.get(model_name.split("-")[0]))
 
 ax.set_ylabel("F1 score", fontsize=20)
 ax.margins(x=0.01) # Reduce whitespace left & right
@@ -203,7 +216,8 @@ for i, model in enumerate(BITEXT_MODELS):
     scores_sorted = sorted(scores.items(), key=lambda x: global_idx[x[0]], reverse=False)
     x_langs = [x[0] for x in scores_sorted]
     y_scores = [x[1] for x in scores_sorted]
-    ax.plot(x_langs, y_scores, label=MODEL_TO_NAME.get(model, model), marker=markers[i], color=MODEL_TO_COLOR.get(model))
+    model_name = MODEL_TO_NAME.get(model, model)
+    ax.plot(x_langs, y_scores, linewidth=6.0, label=model_name, marker=markers[i], color=MODEL_TO_COLOR.get(model_name.split("-")[0]))
 
 ax.set_ylabel("Accuracy", fontsize=20)
 
@@ -288,20 +302,25 @@ for i, model in enumerate(BITEXT_MODELS):
     scores_sorted_multi = sorted(scores_multi.items(), key=lambda x: global_idx_multi[x[0]], reverse=False)
     scores_sorted_cross = sorted(scores_cross.items(), key=lambda x: global_idx_cross[x[0]], reverse=False)
 
+    model_name = MODEL_TO_NAME.get(model, model)
+    model_color = MODEL_TO_COLOR.get(model_name.split("-")[0])
+
     ax_multi.plot(
         [x[0] for x in scores_sorted_multi],
         [x[1] for x in scores_sorted_multi],
-        label=MODEL_TO_NAME.get(model, model), 
+        label=model_name, 
         marker=markers[i], 
-        color=MODEL_TO_COLOR.get(model)
+        color=model_color,
+        linewidth=6.0,
     )
 
     ax_cross.plot(        
         [x[0] for x in scores_sorted_cross],
         [x[1] for x in scores_sorted_cross],
-        label=MODEL_TO_NAME.get(model, model), 
+        label=model_name,
         marker=markers[i], 
-        color=MODEL_TO_COLOR.get(model)
+        color=model_color,
+        linewidth=6.0,
     )
 
 ax_multi.set_ylabel("Cos. Sim. Spearman Corr.", fontsize=20)

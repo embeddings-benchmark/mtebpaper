@@ -129,14 +129,14 @@ TASK_LIST_NAMES = [
 ]
 
 BITEXT_MODELS = MULTILING_MODELS = [
-    "glove.6B.300d",
-    "komninos",
+    # "glove.6B.300d",
+    # "komninos",
     "LASER2",
     "LaBSE",
     "paraphrase-multilingual-MiniLM-L12-v2",
     "paraphrase-multilingual-mpnet-base-v2",
     "sgpt-bloom-7b1-msmarco",
-    "sgpt-bloom-1b3-nli",
+    # "sgpt-bloom-1b3-nli",
 ]
 
 SELFSUPERVISED_MODELS = [
@@ -146,20 +146,26 @@ SELFSUPERVISED_MODELS = [
     "LaBSE",
     "bert-base-uncased",
     "msmarco-bert-co-condensor",
+    "allenai-specter",
     "unsup-simcse-bert-base-uncased",
 ]
 
 SUPERVISED_MODELS = [
     "sup-simcse-bert-base-uncased",
     "all-MiniLM-L6-v2",
+    "all-MiniLM-L12-v2",
+    "paraphrase-multilingual-MiniLM-L12-v2",
     "all-mpnet-base-v2",
+    "paraphrase-multilingual-mpnet-base-v2",
     "contriever-base-msmarco",
+    "text-similarity-ada-001",
     "SGPT-125M-weightedmean-nli-bitfit",
     "SGPT-5.8B-weightedmean-nli-bitfit",
     "SGPT-125M-weightedmean-msmarco-specb-bitfit",
     "SGPT-1.3B-weightedmean-msmarco-specb-bitfit",
     "SGPT-2.7B-weightedmean-msmarco-specb-bitfit",
     "SGPT-5.8B-weightedmean-msmarco-specb-bitfit",
+    "sgpt-bloom-7b1-msmarco",
     "gtr-t5-base", # 110M
     "gtr-t5-large",
     "gtr-t5-xl",
@@ -170,7 +176,9 @@ SUPERVISED_MODELS = [
     "sentence-t5-xxl", # 4.8B
 ]
 
+
 MODEL_TO_NAME = {
+    "bert-base-uncased": "BERT",
     "gtr-t5-base": "GTR-Base",
     "gtr-t5-large": "GTR-Large",
     "gtr-t5-xl": "GTR-XL",
@@ -183,18 +191,24 @@ MODEL_TO_NAME = {
     "SGPT-1.3B-weightedmean-msmarco-specb-bitfit": "SGPT-1.3B-msmarco",
     "SGPT-2.7B-weightedmean-msmarco-specb-bitfit": "SGPT-2.7B-msmarco",
     "SGPT-5.8B-weightedmean-msmarco-specb-bitfit": "SGPT-5.8B-msmarco",
-    "sgpt-bloom-7b1-msmarco": "SGPT-7.1B-msmarco",
+    "sgpt-bloom-7b1-msmarco": "SGPT-BLOOM-7.1B-msmarco",
     "SGPT-125M-weightedmean-nli-bitfit": "SGPT-125M-nli",
     "SGPT-5.8B-weightedmean-nli-bitfit": "SGPT-5.8B-nli",
-    "sup-simcse-bert-base-uncased": "SimCSE-bert-base-sup",
+    "sup-simcse-bert-base-uncased": "SimCSE-BERT-sup",
     "contriever-base-msmarco": "Contriever",
-    "msmarco-bert-co-condensor": "BERT Co-Condensor",
-    "unsup-simcse-bert-base-uncased": "SimCSE-bert-base-unsup",
+    "msmarco-bert-co-condensor": "coCondenser-msmarco", # They write it as coCondenser in the paper
+    "unsup-simcse-bert-base-uncased": "SimCSE-BERT-unsup",
     "glove.6B.300d": "Glove",
     "komninos": "Komninos",
-    "all-MiniLM-L6-v2": "MiniLM-L6-v2",
-    "all-mpnet-base-v2": "MPNet-base-v2",
+    "all-MiniLM-L6-v2": "MiniLM-L6",
+    "all-MiniLM-L12-v2": "MiniLM-L12",
+    "paraphrase-multilingual-MiniLM-L12-v2": "MiniLM-L12-multilingual",
+    "all-mpnet-base-v2": "MPNet",
+    "paraphrase-multilingual-mpnet-base-v2": "MPNet-multilingual",
+    "allenai-specter": "SPECTER",
+    "text-similarity-ada-001": "Ada Similarity"
 }
+
 
 
 ### LOGIC ###
@@ -265,7 +279,7 @@ def get_table(models, task_list, limit_langs=[], skip_langs=[], name="table"):
             scores = [x[lang_idx][-1] for x in results]
             scores_all.append(scores)
             lang = results[0][lang_idx][0]
-            one_line = " & ".join([ds, lang] + [str(round(x*100, 2)) if x else "" for x in scores])
+            one_line = " & ".join([ds, lang] + [str(round(x*100, 2)) if x is not None else "" for x in scores])
             TABLE += one_line + " \\\\" + "\n"
 
     arr = np.array(scores_all, dtype=np.float32)
@@ -286,7 +300,7 @@ def get_table(models, task_list, limit_langs=[], skip_langs=[], name="table"):
         f.write(TABLE)
 
 
-get_table(SELFSUPERVISED_MODELS, TASK_LIST_EN, limit_langs=["en", "en-en",], name="unsupervised_en")
+get_table(SELFSUPERVISED_MODELS, TASK_LIST_EN, limit_langs=["en", "en-en",], name="selfsupervised_en")
 get_table(SUPERVISED_MODELS, TASK_LIST_EN, limit_langs=["en", "en-en",], name="supervised_en")
 get_table(BITEXT_MODELS, TASK_LIST_BITEXT, limit_langs=[], name="bitext")
 get_table(MULTILING_MODELS, TASK_LIST_CLASSIFICATION, limit_langs=[], skip_langs=["en", "en-en", "en-ext"], name="multilingclf")

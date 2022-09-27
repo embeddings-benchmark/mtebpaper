@@ -264,7 +264,7 @@ SGPT-2.7B-weightedmean-msmarco-specb-bitfit,PairClassification,SprintDuplicateQu
 SGPT-2.7B-weightedmean-msmarco-specb-bitfit,PairClassification,TwitterSemEval2015,en,ap,0.6368133990830133
 SGPT-2.7B-weightedmean-msmarco-specb-bitfit,PairClassification,TwitterURLCorpus,en,ap,0.8480240716354543
 SGPT-2.7B-weightedmean-msmarco-specb-bitfit,Reranking,AskUbuntuDupQuestions,en,map,0.5963466199039206
-SGPT-2.7B-weightedmean-msmarco-specb-bitfit,Reranking,MindSmallReranking,,map,
+SGPT-2.7B-weightedmean-msmarco-specb-bitfit,Reranking,MindSmallReranking,en,map,0.31716396735210756
 SGPT-2.7B-weightedmean-msmarco-specb-bitfit,Reranking,SciDocsRR,en,map,0.7771580844366375
 SGPT-2.7B-weightedmean-msmarco-specb-bitfit,Reranking,StackOverflowDupQuestions,en,map,0.4961186384154483
 SGPT-2.7B-weightedmean-msmarco-specb-bitfit,Retrieval,ArguAna,en,ndcg_at_10,0.50491
@@ -350,5 +350,6 @@ SGPT-2.7B-weightedmean-msmarco-specb-bitfit,Summarization,SummEval,en,cosine_spe
 SGPT-2.7B-weightedmean-msmarco-specb-bitfit,Classification,average,en,accuracy,0.6713040365015015
 SGPT-2.7B-weightedmean-msmarco-specb-bitfit,Clustering,average,en,v_measure,0.39833144224085476
 SGPT-2.7B-weightedmean-msmarco-specb-bitfit,PairClassification,average,en,ap,0.8065166543410891
+SGPT-2.7B-weightedmean-msmarco-specb-bitfit,Reranking,average,en,map,0.5466968275270284
 SGPT-2.7B-weightedmean-msmarco-specb-bitfit,Retrieval,average,en,ndcg_at_10,0.4653783888888888
 SGPT-2.7B-weightedmean-msmarco-specb-bitfit,STS,average,en,cosine_spearman,0.768315074100644

@@ -5,6 +5,8 @@ import sys
 
 from mteb import MTEB
 
+### GLOBAL VARIABLES ###
+
 TASK_LIST_CLASSIFICATION = [
     "AmazonCounterfactualClassification",
     "AmazonPolarityClassification",
@@ -102,11 +104,81 @@ TASK_LIST_NAMES = [
     ("Retr.", TASK_LIST_RETRIEVAL, ["en", "en-en"]),
     ("STS", TASK_LIST_STS, ["en", "en-en"]),
     ("Summ.", TASK_LIST_SUMMARIZATION, ["en", "en-en"]),
-    #("BitextMining", TASK_LIST_BITEXT, []),
+    # ("BitextMining", TASK_LIST_BITEXT, []),
     ("Avg.", TASK_LIST_EN, ["en", "en-en"]),
 ]
 
-### Get average MTEB performance ###
+SELFSUPERVISED_MODELS = [
+    "glove.6B.300d",
+    "komninos",
+    "LASER2",
+    "LaBSE",
+    "bert-base-uncased",
+    "msmarco-bert-co-condensor",
+    "allenai-specter",
+    "unsup-simcse-bert-base-uncased",
+]
+
+SUPERVISED_MODELS = [
+    "sup-simcse-bert-base-uncased",
+    "all-MiniLM-L6-v2",
+    "all-MiniLM-L12-v2",
+    "paraphrase-multilingual-MiniLM-L12-v2",
+    "all-mpnet-base-v2",
+    "paraphrase-multilingual-mpnet-base-v2",
+    "contriever-base-msmarco",
+    "text-similarity-ada-001",
+    "SGPT-125M-weightedmean-nli-bitfit",
+    "SGPT-5.8B-weightedmean-nli-bitfit",
+    "SGPT-125M-weightedmean-msmarco-specb-bitfit",
+    "SGPT-1.3B-weightedmean-msmarco-specb-bitfit",
+    "SGPT-2.7B-weightedmean-msmarco-specb-bitfit",
+    "SGPT-5.8B-weightedmean-msmarco-specb-bitfit",
+    "sgpt-bloom-7b1-msmarco",
+    "gtr-t5-base", # 110M
+    "gtr-t5-large",
+    "gtr-t5-xl",
+    "gtr-t5-xxl", # 4.8B
+    "sentence-t5-base", # 110M
+    "sentence-t5-large", # 110M
+    "sentence-t5-xl", # 110M
+    "sentence-t5-xxl", # 4.8B
+]
+
+MODEL_TO_NAME = {
+    "bert-base-uncased": "BERT",
+    "gtr-t5-base": "GTR-Base",
+    "gtr-t5-large": "GTR-Large",
+    "gtr-t5-xl": "GTR-XL",
+    "gtr-t5-xxl": "GTR-XXL",
+    "sentence-t5-base": "ST5-Base",
+    "sentence-t5-large": "ST5-Large",
+    "sentence-t5-xl": "ST5-XL",
+    "sentence-t5-xxl": "ST5-XXL",
+    "SGPT-125M-weightedmean-msmarco-specb-bitfit": "SGPT-125M-msmarco",
+    "SGPT-1.3B-weightedmean-msmarco-specb-bitfit": "SGPT-1.3B-msmarco",
+    "SGPT-2.7B-weightedmean-msmarco-specb-bitfit": "SGPT-2.7B-msmarco",
+    "SGPT-5.8B-weightedmean-msmarco-specb-bitfit": "SGPT-5.8B-msmarco",
+    "sgpt-bloom-7b1-msmarco": "SGPT-BLOOM-7.1B-msmarco",
+    "SGPT-125M-weightedmean-nli-bitfit": "SGPT-125M-nli",
+    "SGPT-5.8B-weightedmean-nli-bitfit": "SGPT-5.8B-nli",
+    "sup-simcse-bert-base-uncased": "SimCSE-BERT-sup",
+    "contriever-base-msmarco": "Contriever",
+    "msmarco-bert-co-condensor": "coCondenser-msmarco", # They write it as coCondenser in the paper
+    "unsup-simcse-bert-base-uncased": "SimCSE-BERT-unsup",
+    "glove.6B.300d": "Glove",
+    "komninos": "Komninos",
+    "all-MiniLM-L6-v2": "MiniLM-L6",
+    "all-MiniLM-L12-v2": "MiniLM-L12",
+    "paraphrase-multilingual-MiniLM-L12-v2": "MiniLM-L12-multilingual",
+    "all-mpnet-base-v2": "MPNet",
+    "paraphrase-multilingual-mpnet-base-v2": "MPNet-multilingual",
+    "allenai-specter": "SPECTER",
+    "text-similarity-ada-001": "Ada Similarity",
+}
+
+
+### LOGIC ###
 
 results_folder = sys.argv[1].strip("/")
 all_results = {}
@@ -158,49 +230,14 @@ def get_row(dataset, model_name, limit_langs=[], skip_langs=[]):
         return test_result_lang
     raise NotImplementedError
 
-UNSUPERVISED_MODELS = [
-    ("Glove", "glove.6B.300d"),
-    ("Komninos", "komninos"),
-    ("LASER2", "LASER2"),
-    ("LaBSE", "LaBSE"),
-    ("bert-base-uncased", "bert-base-uncased"),
-    ("BERT Co-Condensor", "msmarco-bert-co-condensor"),
-    ("SimCSE-bert-base-unsup", "unsup-simcse-bert-base-uncased"),
-]
 
-SUPERVISED_MODELS = [
-    ("SimCSE-bert-base-sup", "sup-simcse-bert-base-uncased"),
-    ("MiniLM-L6-v2", "all-MiniLM-L6-v2"),
-    ("MiniLM-L12-v2-multilingual", "paraphrase-multilingual-MiniLM-L12-v2"),
-    ("MPNet-base-v2", "all-mpnet-base-v2"),
-    ("MPNet-base-v2-multilingual", "paraphrase-multilingual-mpnet-base-v2"),
-    ("Contriever", "contriever-base-msmarco"),
-    ("Ada Similarity", "text-similarity-ada-001"),
-    ("SGPT-125M-nli", "SGPT-125M-weightedmean-nli-bitfit",),
-    ("SGPT-5.8B-nli", "SGPT-5.8B-weightedmean-nli-bitfit",),
-    ("SGPT-125M-msmarco", "SGPT-125M-weightedmean-msmarco-specb-bitfit",),
-    ("SGPT-1.3B-msmarco", "SGPT-1.3B-weightedmean-msmarco-specb-bitfit",),
-    ("SGPT-2.7B-msmarco", "SGPT-2.7B-weightedmean-msmarco-specb-bitfit",),
-    ("SGPT-5.8B-msmarco", "SGPT-5.8B-weightedmean-msmarco-specb-bitfit",),
-    ("SGPT-BLOOM-7.1B-msmarco", "sgpt-bloom-7b1-msmarco",),
-    ("GTR-Base", "gtr-t5-base",), # 110M
-    ("GTR-Large", "gtr-t5-large",),
-    ("GTR-XL", "gtr-t5-xl",),
-    ("GTR-XXL", "gtr-t5-xxl",), # 4.8B
-    ("ST5-Base", "sentence-t5-base",), # 110M
-    ("ST5-Large", "sentence-t5-large",), # 110M
-    ("ST5-XL", "sentence-t5-xl",), # 110M
-    ("ST5-XXL", "sentence-t5-xxl",), # 4.8B
-]
-
-
-table = "Task ($\rightarrow$) & " + " & ".join([x[0] for x in TASK_LIST_NAMES]) + " \\\\" + "\n"
-table = "Num. Datasets ($\rightarrow$) & " + " & ".join([len(x[1]) for x in TASK_LIST_NAMES]) + " \\\\" + "\n"
-table = "Model ($\downarrow$) & " + " & ".join([x[0] for x in TASK_LIST_NAMES]) + " \\\\" + "\n"
+table = "Task ($\ rightarrow$) & " + " & ".join([x[0] for x in TASK_LIST_NAMES]) + " \\\\" + "\n"
+table += "Num. Datasets ($\ rightarrow$) & " + " & ".join([str(len(x[1])) for x in TASK_LIST_NAMES]) + " \\\\" + "\n"
+table += "Model ($\downarrow$) & " + " & ".join([x[0] for x in TASK_LIST_NAMES]) + " \\\\" + "\n"
 
 
 def add_to_table(model_list, table):
-    for (model_name, model) in model_list:
+    for model in model_list:
         results = []
         for (task_name, task_list, limit_langs) in TASK_LIST_NAMES:
             try:
@@ -209,12 +246,13 @@ def add_to_table(model_list, table):
                 results.append("")
                 continue
             results.append(str(round(100 * (sum(model_task_results) / len(model_task_results)), 2)))
-        
+
+        model_name = MODEL_TO_NAME.get(model, model)
         table += model_name + " & " + " & ".join(results) + " \\\\" + "\n"
     return table
 
 
-table = add_to_table(UNSUPERVISED_MODELS, table)
+table = add_to_table(SELFSUPERVISED_MODELS, table)
 table = add_to_table(SUPERVISED_MODELS, table)
 
 with open("avg_table.txt", "w") as f:

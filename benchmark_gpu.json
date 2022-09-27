@@ -60,6 +60,18 @@
             "embedding_size_kb": 1.536
         }
     },
+    "all-MiniLM-L12-v2": {
+        "STS15": {
+            "speed_ms": 0.9688050746917725, 
+            "embedding_size_kb": 1.536
+        }
+    },
+    "allenai-specter": {
+        "STS15": {
+            "speed_ms": 0.38967605431874597, 
+            "embedding_size_kb": 3.072
+        }
+    },
     "all-mpnet-base-v2": {
         "STS15": {
             "speed_ms": 0.36792703469594323,

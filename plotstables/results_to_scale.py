@@ -88,6 +88,11 @@ TASK_LIST_STS = [
 
 # Parameter counts in millions
 MODELS = [
+# Doesnt add a lot of value to the figure
+#    [
+#        ("MiniLM-L6", "all-MiniLM-L6-v2", 22.713216), # 22.7 M
+#        ("MiniLM-L12", "all-MiniLM-L12-v2", 33.360000), # 33.4 M
+#    ],
     [
         ("GTR-Base", "gtr-t5-base", 110),
         ("GTR-Large", "gtr-t5-large", 335),
@@ -107,6 +112,46 @@ MODELS = [
         ("SGPT-5.8B-msmarco", "SGPT-5.8B-weightedmean-msmarco-specb-bitfit", 5800),
     ],
 ]
+
+# todo: remove
+lines = ["blue2", "blue", "purple"]
+shades = ["lightblue2", "lightblue", "lightpurple"]
+colors = {
+    "purple": "#7B3FB9",
+    "lightpurple": "#CBB3E3",
+    "blue": "#221D91",
+    "lightblue": "#B6B4DB",
+    "blue2": "#86D4F1",
+    "lightblue2": "#AAF2F2",
+}
+
+
+MODEL_TO_MARKER = {
+    "MiniLM": "o",
+    "GTR": "x",
+    "ST5": "*",
+    "SGPT": "v",
+}
+
+# Base from:
+# https://coolors.co/palette/ff5400-ff6d00-ff8500-ff9100-ff9e00-00b4d8-0096c7-0077b6-023e8a-03045e
+# Yellow tones from:
+# https://coolors.co/palette/6ab6dc-49a6d4-2f94c6-277ba5-1f6284-e0b700-ffd20a-ffda33-ffe15c-ffe570
+# Green from:
+# https://coolors.co/palette/f94144-f3722c-f8961e-f9844a-f9c74f-90be6d-43aa8b-4d908e-577590-277da1
+MODEL_TO_COLOR = {
+    "MiniLM": "#BAF19C",#"#017600", # Green
+    "MPNet": "#F94144",#"#007A7A", # Light Green
+    "GTR": "#FF5400",#"#221D91", # Blue 1
+    "ST5": "#FF9E00",#"#86D4F1", # Blue 2
+    "SGPT": "#00B4D8",#"#7B3FB9", # Purple
+    "SimCSE": "#F9C74F",#"#2070B4", # Blue 3
+    "LaBSE": "#F9C74F",#"#2070B4", # Blue 3
+    "SPECTER": "#E0B700", # Shade of #2070B4
+    "Glove": "#023E8A",#"#9BC7DD", # Light Blue
+    "LASER2": "#03045E", # Grey
+}
+
 
 TASK_LIST_NAMES = [
     ("Classification", TASK_LIST_CLASSIFICATION, ["en", "en-en"], "accuracy"),
@@ -181,27 +226,11 @@ fig, axes = plt.subplots(figsize=(16, 20), facecolor='w', edgecolor='k', ncols=2
 
 # Create each boxplot
 model_xticks_global = ['0.1B', '1B','2B','4B']
-model_xticks_num_global = [np.log2(100_000_000), np.log2(1_000_000_000), np.log2(2_000_000_000), np.log2(4_000_000_000)]
-
-lines = ["blue2", "blue", "purple"]
-shades = ["lightblue2", "lightblue", "lightpurple"]
-markers = ["o", "x", "v"]
-
-colors = {
-    "purple": "#7B3FB9",
-    "lightpurple": "#CBB3E3",
-    "blue": "#221D91",
-    "lightblue": "#B6B4DB",
-    "blue2": "#86D4F1",
-    "lightblue2": "#AAF2F2",
-}
-
-# #7B3FB9 #CBB3E3
-#
+model_xticks_num_global = [np.log10(100_000_000), np.log10(1_000_000_000), np.log10(2_000_000_000), np.log10(4_000_000_000)]
 
 for ax, (task_name, task_list, limit_langs, metric) in zip(axes.flatten(), TASK_LIST_NAMES):
     for i, model_group in enumerate(MODELS):
-        model_xticks_num = [np.log2(x[-1] * 1_000_000) for x in model_group]
+        model_xticks_num = [np.log10(x[-1] * 1_000_000) for x in model_group]
         avg_scores = []
         std_scores = []
         for model in model_group:
@@ -214,7 +243,14 @@ for ax, (task_name, task_list, limit_langs, metric) in zip(axes.flatten(), TASK_
             avg_scores.append(np.mean(np.array(model_task_results)).item())
             std_scores.append(np.std(np.array(model_task_results)).item())
 
-        ax.plot(model_xticks_num, avg_scores, label=model_name.split("-")[0], color=colors.get(lines[i]), marker=markers[i])
+        ax.plot(
+            model_xticks_num, 
+            avg_scores, 
+            label=model_name.split("-")[0], 
+            color=MODEL_TO_COLOR.get(model_name.split("-")[0]),
+            marker=MODEL_TO_MARKER.get(model_name.split("-")[0])
+        )
+
         # Shade doesn't look good, as std is too big
         # ax.fill_between(model_xticks_num, [avg-std for avg, std in zip(avg_scores, std_scores)], [avg+std for avg, std in zip(avg_scores, std_scores)], color=colors.get(shades[i]), alpha=0.5)
 
