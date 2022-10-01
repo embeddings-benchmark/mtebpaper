@@ -10,5 +10,6 @@
             "main_score": 0.5922708618331054
         },
         "evaluation_time": 36.68
-    }
+    },
+    "mteb_dataset_name": "MTOPIntentClassification"
 }

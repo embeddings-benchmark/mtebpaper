@@ -15,5 +15,6 @@
             "pearson": 0.6131562281089615,
             "spearman": 0.6305751564486292
         }
-    }
+    },
+    "mteb_dataset_name": "STS15"
 }

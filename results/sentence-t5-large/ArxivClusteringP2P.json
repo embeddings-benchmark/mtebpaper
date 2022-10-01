@@ -1,9 +1,10 @@
 {
-  "dataset_version": null,
-  "mteb_version": "0.0.2",
-  "test": {
-    "evaluation_time": 7272.72,
-    "v_measure": 0.41615732189987376,
-    "v_measure_std": 0.13609873509753742
-  }
+    "dataset_version": null,
+    "mteb_version": "0.0.2",
+    "test": {
+        "evaluation_time": 7272.72,
+        "v_measure": 0.41615732189987376,
+        "v_measure_std": 0.13609873509753742
+    },
+    "mteb_dataset_name": "ArxivClusteringP2P"
 }

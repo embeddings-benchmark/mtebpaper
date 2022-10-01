@@ -1,19 +1,20 @@
 {
-  "dataset_version": null,
-  "mteb_version": "0.0.2",
-  "test": {
-    "cos_sim": {
-      "pearson": 0.800678607605045,
-      "spearman": 0.7339148682744103
+    "dataset_version": null,
+    "mteb_version": "0.0.2",
+    "test": {
+        "cos_sim": {
+            "pearson": 0.800678607605045,
+            "spearman": 0.7339148682744103
+        },
+        "euclidean": {
+            "pearson": 0.7707421996305414,
+            "spearman": 0.7339150748421669
+        },
+        "evaluation_time": 16.55,
+        "manhattan": {
+            "pearson": 0.7700586982204344,
+            "spearman": 0.7330782288728133
+        }
     },
-    "euclidean": {
-      "pearson": 0.7707421996305414,
-      "spearman": 0.7339150748421669
-    },
-    "evaluation_time": 16.55,
-    "manhattan": {
-      "pearson": 0.7700586982204344,
-      "spearman": 0.7330782288728133
-    }
-  }
+    "mteb_dataset_name": "SICK-R"
 }

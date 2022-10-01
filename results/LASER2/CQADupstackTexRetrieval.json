@@ -27,5 +27,6 @@
         "recall_at_1000": 0.26865,
         "recall_at_3": 0.03175,
         "recall_at_5": 0.0398
-    }
+    },
+    "mteb_dataset_name": "CQADupstackTexRetrieval"
 }

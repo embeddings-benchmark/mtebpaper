@@ -12,5 +12,6 @@
             "main_score": 0.7425373134328358
         },
         "evaluation_time": 10.21
-    }
+    },
+    "mteb_dataset_name": "AmazonCounterfactualClassification"
 }

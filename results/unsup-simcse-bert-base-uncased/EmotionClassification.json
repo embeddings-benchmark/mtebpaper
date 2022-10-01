@@ -8,5 +8,6 @@
         "f1": 0.37671161655726626,
         "f1_stderr": 0.020128885954158487,
         "main_score": 0.42219999999999996
-    }
+    },
+    "mteb_dataset_name": "EmotionClassification"
 }

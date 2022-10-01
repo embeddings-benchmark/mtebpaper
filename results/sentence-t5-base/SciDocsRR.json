@@ -10,5 +10,6 @@
         "mrr": 0.9165454559953429
     },
     "dataset_version": null,
-    "mteb_version": "0.0.2"
+    "mteb_version": "0.0.2",
+    "mteb_dataset_name": "SciDocsRR"
 }

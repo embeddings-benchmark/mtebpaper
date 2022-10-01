@@ -5,5 +5,6 @@
         "evaluation_time": 5.64,
         "map": 0.4584088706528255,
         "mrr": 0.595351316888713
-    }
+    },
+    "mteb_dataset_name": "AskUbuntuDupQuestions"
 }

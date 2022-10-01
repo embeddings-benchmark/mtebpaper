@@ -5,5 +5,6 @@
         "evaluation_time": 576.83,
         "v_measure": 0.2850446706405736,
         "v_measure_std": 0.017318589898673013
-    }
+    },
+    "mteb_dataset_name": "StackExchangeClusteringP2P"
 }

@@ -10,5 +10,6 @@
         "v_measure_std": 0.04115778825128091
     },
     "dataset_version": null,
-    "mteb_version": "0.0.2"
+    "mteb_version": "0.0.2",
+    "mteb_dataset_name": "StackExchangeClustering"
 }

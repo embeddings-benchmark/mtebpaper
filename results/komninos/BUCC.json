@@ -27,5 +27,6 @@
             "precision": 0.000526592943654555,
             "recall": 0.000526592943654555
         }
-    }
+    },
+    "mteb_dataset_name": "BUCC"
 }

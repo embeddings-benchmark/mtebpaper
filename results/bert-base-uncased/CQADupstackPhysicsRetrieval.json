@@ -27,5 +27,6 @@
         "recall_at_1000": 0.52636,
         "recall_at_3": 0.07265,
         "recall_at_5": 0.09233
-    }
+    },
+    "mteb_dataset_name": "CQADupstackPhysicsRetrieval"
 }

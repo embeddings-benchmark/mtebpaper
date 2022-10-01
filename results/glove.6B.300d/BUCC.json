@@ -27,5 +27,6 @@
             "precision": 0.0,
             "recall": 0.0
         }
-    }
+    },
+    "mteb_dataset_name": "BUCC"
 }

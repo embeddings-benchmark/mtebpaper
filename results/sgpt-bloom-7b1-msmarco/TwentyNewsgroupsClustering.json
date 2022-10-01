@@ -1,9 +1,10 @@
 {
-  "dataset_version": null,
-  "mteb_version": "0.0.2",
-  "test": {
-    "evaluation_time": 726.25,
-    "v_measure": 0.3727891385518074,
-    "v_measure_std": 0.021999664969677667
-  }
+    "dataset_version": null,
+    "mteb_version": "0.0.2",
+    "test": {
+        "evaluation_time": 726.25,
+        "v_measure": 0.3727891385518074,
+        "v_measure_std": 0.021999664969677667
+    },
+    "mteb_dataset_name": "TwentyNewsgroupsClustering"
 }

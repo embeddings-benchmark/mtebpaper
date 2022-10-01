@@ -1,9 +1,10 @@
 {
-  "dataset_version": null,
-  "mteb_version": "0.0.2",
-  "test": {
-    "evaluation_time": 15252.68,
-    "v_measure": 0.3602531869469809,
-    "v_measure_std": 0.014764028857366412
-  }
+    "dataset_version": null,
+    "mteb_version": "0.0.2",
+    "test": {
+        "evaluation_time": 15252.68,
+        "v_measure": 0.3602531869469809,
+        "v_measure_std": 0.014764028857366412
+    },
+    "mteb_dataset_name": "BiorxivClusteringP2P"
 }

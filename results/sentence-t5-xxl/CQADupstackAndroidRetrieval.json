@@ -27,5 +27,6 @@
         "recall_at_1000": 0.9829,
         "recall_at_3": 0.5398,
         "recall_at_5": 0.60764
-    }
+    },
+    "mteb_dataset_name": "CQADupstackAndroidRetrieval"
 }

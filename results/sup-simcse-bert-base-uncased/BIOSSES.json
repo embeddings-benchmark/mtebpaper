@@ -15,5 +15,6 @@
             "pearson": 0.6798334630698282,
             "spearman": 0.6655934792519601
         }
-    }
+    },
+    "mteb_dataset_name": "BIOSSES"
 }

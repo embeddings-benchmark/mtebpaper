@@ -11,5 +11,6 @@
             "spearman": 0.2589231500305044
         },
         "evaluation_time": 23.88
-    }
+    },
+    "mteb_dataset_name": "SummEval"
 }

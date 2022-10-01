@@ -1,9 +1,10 @@
 {
-  "dataset_version": null,
-  "mteb_version": "0.0.2",
-  "test": {
-    "evaluation_time": 60.27,
-    "map": 0.6872126456907719,
-    "mrr": 0.8883407351544607
-  }
+    "dataset_version": null,
+    "mteb_version": "0.0.2",
+    "test": {
+        "evaluation_time": 60.27,
+        "map": 0.6872126456907719,
+        "mrr": 0.8883407351544607
+    },
+    "mteb_dataset_name": "SciDocsRR"
 }

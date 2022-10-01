@@ -27,5 +27,6 @@
         "recall_at_1000": 0.13195,
         "recall_at_3": 0.00439,
         "recall_at_5": 0.00607
-    }
+    },
+    "mteb_dataset_name": "TRECCOVID"
 }

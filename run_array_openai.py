@@ -119,7 +119,7 @@ class OpenAIEmbedder:
         self.engine = engine
         self.max_token_len = 2046 # 2048 - 2 special tokens
         self.batch_size = batch_size
-        self.save_emb = save_emb
+        self.save_emb = False # Problematic
         self.base_path = f"embeddings/{engine.split('/')[-1]}/"
         self.tokenizer = GPT2TokenizerFast.from_pretrained("gpt2")
         self.task_name = task_name
@@ -180,7 +180,6 @@ class OpenAIEmbedder:
                 fin_embeddings.extend(out)
         # Save embeddings
         if fin_embeddings and self.save_emb:
-            embedding_path
             dump = {
                 "fin_embeddings": fin_embeddings,
             }

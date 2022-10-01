@@ -27,5 +27,6 @@
         "recall_at_5": 0.08857
     },
     "dataset_version": null,
-    "mteb_version": "0.0.2"
+    "mteb_version": "0.0.2",
+    "mteb_dataset_name": "Touche2020"
 }

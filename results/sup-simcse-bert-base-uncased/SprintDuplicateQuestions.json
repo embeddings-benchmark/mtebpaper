@@ -44,5 +44,6 @@
             "ap": 0.7304389974018467,
             "f1": 0.6963350785340313
         }
-    }
+    },
+    "mteb_dataset_name": "SprintDuplicateQuestions"
 }

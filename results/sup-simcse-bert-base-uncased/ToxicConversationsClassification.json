@@ -10,5 +10,6 @@
         "f1": 0.5495815026309718,
         "f1_stderr": 0.022437774339051843,
         "main_score": 0.720444
-    }
+    },
+    "mteb_dataset_name": "ToxicConversationsClassification"
 }

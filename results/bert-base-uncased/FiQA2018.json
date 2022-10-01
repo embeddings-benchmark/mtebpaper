@@ -27,5 +27,6 @@
         "recall_at_1000": 0.34439,
         "recall_at_3": 0.01241,
         "recall_at_5": 0.02199
-    }
+    },
+    "mteb_dataset_name": "FiQA2018"
 }

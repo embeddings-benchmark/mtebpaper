@@ -1,14 +1,15 @@
 {
-  "dataset_version": null,
-  "mteb_version": "0.0.2",
-  "test": {
-    "accuracy": 0.74581775,
-    "accuracy_stderr": 0.036962512283562385,
-    "ap": 0.6887116317753317,
-    "ap_stderr": 0.03428181905626473,
-    "evaluation_time": 9898.62,
-    "f1": 0.7445618292644824,
-    "f1_stderr": 0.03789879489828736,
-    "main_score": 0.74581775
-  }
+    "dataset_version": null,
+    "mteb_version": "0.0.2",
+    "test": {
+        "accuracy": 0.74581775,
+        "accuracy_stderr": 0.036962512283562385,
+        "ap": 0.6887116317753317,
+        "ap_stderr": 0.03428181905626473,
+        "evaluation_time": 9898.62,
+        "f1": 0.7445618292644824,
+        "f1_stderr": 0.03789879489828736,
+        "main_score": 0.74581775
+    },
+    "mteb_dataset_name": "AmazonPolarityClassification"
 }

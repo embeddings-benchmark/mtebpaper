@@ -27,5 +27,6 @@
         "recall_at_1000": 0.43835,
         "recall_at_3": 0.00589,
         "recall_at_5": 0.00825
-    }
+    },
+    "mteb_dataset_name": "NFCorpus"
 }

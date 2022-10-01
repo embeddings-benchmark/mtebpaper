@@ -10,5 +10,6 @@
             "main_score": 0.7078345662407532
         },
         "evaluation_time": 9.21
-    }
+    },
+    "mteb_dataset_name": "MassiveScenarioClassification"
 }

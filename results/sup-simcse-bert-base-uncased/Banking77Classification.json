@@ -8,5 +8,6 @@
         "f1": 0.7565616472610698,
         "f1_stderr": 0.007501698528521926,
         "main_score": 0.7575974025974027
-    }
+    },
+    "mteb_dataset_name": "Banking77Classification"
 }

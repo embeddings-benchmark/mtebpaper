@@ -27,5 +27,6 @@
         "recall_at_1000": 0.61912,
         "recall_at_3": 0.14295,
         "recall_at_5": 0.17686
-    }
+    },
+    "mteb_dataset_name": "FEVER"
 }

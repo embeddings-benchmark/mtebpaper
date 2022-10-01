@@ -10,5 +10,6 @@
             "main_score": 0.5983860121049093
         },
         "evaluation_time": 22.84
-    }
+    },
+    "mteb_dataset_name": "MassiveIntentClassification"
 }

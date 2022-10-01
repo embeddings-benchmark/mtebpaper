@@ -1,12 +1,13 @@
 {
-  "dataset_version": null,
-  "mteb_version": "0.0.2",
-  "test": {
-    "accuracy": 0.8321753246753246,
-    "accuracy_stderr": 0.008047037149251285,
-    "evaluation_time": 109.45,
-    "f1": 0.8315394543120915,
-    "f1_stderr": 0.008443343664861741,
-    "main_score": 0.8321753246753246
-  }
+    "dataset_version": null,
+    "mteb_version": "0.0.2",
+    "test": {
+        "accuracy": 0.8321753246753246,
+        "accuracy_stderr": 0.008047037149251285,
+        "evaluation_time": 109.45,
+        "f1": 0.8315394543120915,
+        "f1_stderr": 0.008443343664861741,
+        "main_score": 0.8321753246753246
+    },
+    "mteb_dataset_name": "Banking77Classification"
 }

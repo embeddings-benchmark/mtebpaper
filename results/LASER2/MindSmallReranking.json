@@ -5,5 +5,6 @@
         "evaluation_time": 103.4,
         "map": 0.24788913161151171,
         "mrr": 0.25454137908041313
-    }
+    },
+    "mteb_dataset_name": "MindSmallReranking"
 }

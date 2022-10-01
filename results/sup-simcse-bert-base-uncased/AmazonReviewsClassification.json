@@ -10,5 +10,6 @@
             "main_score": 0.39598000000000005
         },
         "evaluation_time": 18.36
-    }
+    },
+    "mteb_dataset_name": "AmazonReviewsClassification"
 }

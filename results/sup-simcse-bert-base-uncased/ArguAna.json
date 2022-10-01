@@ -27,5 +27,6 @@
         "recall_at_1000": 0.99004,
         "recall_at_3": 0.35917,
         "recall_at_5": 0.4808
-    }
+    },
+    "mteb_dataset_name": "ArguAna"
 }

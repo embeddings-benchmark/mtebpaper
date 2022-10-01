@@ -17,5 +17,6 @@
             }
         },
         "evaluation_time": 124.77
-    }
+    },
+    "mteb_dataset_name": "STS22"
 }

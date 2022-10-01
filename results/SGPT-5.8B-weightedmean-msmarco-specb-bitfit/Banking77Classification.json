@@ -8,5 +8,6 @@
         "main_score": 0.8449350649350649
     },
     "dataset_version": null,
-    "mteb_version": "0.0.2"
+    "mteb_version": "0.0.2",
+    "mteb_dataset_name": "Banking77Classification"
 }

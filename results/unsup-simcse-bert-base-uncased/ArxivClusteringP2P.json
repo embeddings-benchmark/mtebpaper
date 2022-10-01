@@ -5,5 +5,6 @@
         "evaluation_time": 4881.57,
         "v_measure": 0.3260699748580497,
         "v_measure_std": 0.14765383802111917
-    }
+    },
+    "mteb_dataset_name": "ArxivClusteringP2P"
 }

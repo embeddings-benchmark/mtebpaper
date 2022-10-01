@@ -14,5 +14,6 @@
         }
     },
     "dataset_version": null,
-    "mteb_version": "0.0.2"
+    "mteb_version": "0.0.2",
+    "mteb_dataset_name": "STS16"
 }

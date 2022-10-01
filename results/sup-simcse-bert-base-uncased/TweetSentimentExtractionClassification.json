@@ -8,5 +8,6 @@
         "f1": 0.6004867288299415,
         "f1_stderr": 0.016309792007524977,
         "main_score": 0.5973401245048104
-    }
+    },
+    "mteb_dataset_name": "TweetSentimentExtractionClassification"
 }

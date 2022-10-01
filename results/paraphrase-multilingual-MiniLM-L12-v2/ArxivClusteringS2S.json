@@ -1,9 +1,10 @@
 {
-  "dataset_version": null,
-  "mteb_version": "0.0.2",
-  "test": {
-    "evaluation_time": 211.08,
-    "v_measure": 0.3155188436835847,
-    "v_measure_std": 0.14526815191791143
-  }
+    "dataset_version": null,
+    "mteb_version": "0.0.2",
+    "test": {
+        "evaluation_time": 211.08,
+        "v_measure": 0.3155188436835847,
+        "v_measure_std": 0.14526815191791143
+    },
+    "mteb_dataset_name": "ArxivClusteringS2S"
 }

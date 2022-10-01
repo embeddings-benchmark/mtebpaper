@@ -1,21 +1,22 @@
 {
-  "dataset_version": null,
-  "mteb_version": "0.0.2",
-  "test": {
-    "en-en": {
-      "cos_sim": {
-        "pearson": 0.8563510653472044,
-        "spearman": 0.8698674844768606
-      },
-      "euclidean": {
-        "pearson": 0.85205080538809,
-        "spearman": 0.8553630494151886
-      },
-      "manhattan": {
-        "pearson": 0.8548612469885626,
-        "spearman": 0.8581741413931921
-      }
+    "dataset_version": null,
+    "mteb_version": "0.0.2",
+    "test": {
+        "en-en": {
+            "cos_sim": {
+                "pearson": 0.8563510653472044,
+                "spearman": 0.8698674844768606
+            },
+            "euclidean": {
+                "pearson": 0.85205080538809,
+                "spearman": 0.8553630494151886
+            },
+            "manhattan": {
+                "pearson": 0.8548612469885626,
+                "spearman": 0.8581741413931921
+            }
+        },
+        "evaluation_time": 2.89
     },
-    "evaluation_time": 2.89
-  }
+    "mteb_dataset_name": "STS17"
 }

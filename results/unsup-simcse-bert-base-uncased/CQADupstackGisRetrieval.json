@@ -27,5 +27,6 @@
         "recall_at_1000": 0.54559,
         "recall_at_3": 0.09134,
         "recall_at_5": 0.11356
-    }
+    },
+    "mteb_dataset_name": "CQADupstackGisRetrieval"
 }

@@ -5,5 +5,6 @@
         "evaluation_time": 681.88,
         "v_measure": 0.24902697594424988,
         "v_measure_std": 0.0037117084408982686
-    }
+    },
+    "mteb_dataset_name": "BiorxivClusteringP2P"
 }

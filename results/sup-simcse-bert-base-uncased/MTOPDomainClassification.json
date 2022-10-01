@@ -10,5 +10,6 @@
             "main_score": 0.8428636570907433
         },
         "evaluation_time": 9.72
-    }
+    },
+    "mteb_dataset_name": "MTOPDomainClassification"
 }

@@ -1,19 +1,20 @@
 {
-  "dataset_version": null,
-  "mteb_version": "0.0.2",
-  "test": {
-    "cos_sim": {
-      "pearson": 0.7914135324779876,
-      "spearman": 0.7893131657588254
+    "dataset_version": null,
+    "mteb_version": "0.0.2",
+    "test": {
+        "cos_sim": {
+            "pearson": 0.7914135324779876,
+            "spearman": 0.7893131657588254
+        },
+        "euclidean": {
+            "pearson": 0.7866293725040928,
+            "spearman": 0.7893131657588254
+        },
+        "evaluation_time": 2.28,
+        "manhattan": {
+            "pearson": 0.7803571368923918,
+            "spearman": 0.7869396177000191
+        }
     },
-    "euclidean": {
-      "pearson": 0.7866293725040928,
-      "spearman": 0.7893131657588254
-    },
-    "evaluation_time": 2.28,
-    "manhattan": {
-      "pearson": 0.7803571368923918,
-      "spearman": 0.7869396177000191
-    }
-  }
+    "mteb_dataset_name": "BIOSSES"
 }

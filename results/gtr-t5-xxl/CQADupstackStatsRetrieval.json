@@ -27,5 +27,6 @@
         "recall_at_1000": 0.78619,
         "recall_at_3": 0.31165,
         "recall_at_5": 0.34857
-    }
+    },
+    "mteb_dataset_name": "CQADupstackStatsRetrieval"
 }

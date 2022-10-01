@@ -27,5 +27,6 @@
         "recall_at_1000": 0.99883,
         "recall_at_3": 0.83495,
         "recall_at_5": 0.88729
-    }
+    },
+    "mteb_dataset_name": "QuoraRetrieval"
 }

@@ -4,5 +4,6 @@
         "mrr": 0.7708657608934617
     },
     "dataset_version": null,
-    "mteb_version": "0.0.2"
+    "mteb_version": "0.0.2",
+    "mteb_dataset_name": "AskUbuntuDupQuestions"
 }

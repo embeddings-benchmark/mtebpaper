@@ -10,5 +10,6 @@
         "f1": 0.6933461109690607,
         "f1_stderr": 0.04432296697848916,
         "main_score": 0.696284
-    }
+    },
+    "mteb_dataset_name": "ImdbClassification"
 }

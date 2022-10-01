@@ -27,5 +27,6 @@
         "recall_at_1000": 0.44738,
         "recall_at_3": 0.04723,
         "recall_at_5": 0.06998
-    }
+    },
+    "mteb_dataset_name": "DBPedia"
 }

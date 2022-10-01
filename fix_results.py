@@ -20,6 +20,8 @@ for file_name in files:
             results["dataset_version"] = None
         if "mteb_version" not in results:
             results["mteb_version"] = "0.0.2"
+        #if "dataset_name" not in results:
+        results["mteb_dataset_name"] = file_name.split("/")[-1].replace(".json", "")
         if "STS22" in file_name:
             for split, split_results in results.items():
                 if isinstance(split_results, dict):

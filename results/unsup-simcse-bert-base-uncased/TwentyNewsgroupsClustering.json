@@ -5,5 +5,6 @@
         "evaluation_time": 29.32,
         "v_measure": 0.23205752453237888,
         "v_measure_std": 0.01869737662248273
-    }
+    },
+    "mteb_dataset_name": "TwentyNewsgroupsClustering"
 }

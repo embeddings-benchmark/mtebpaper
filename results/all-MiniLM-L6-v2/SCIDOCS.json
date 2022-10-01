@@ -27,5 +27,6 @@
         "recall_at_1000": 0.7849,
         "recall_at_3": 0.11658,
         "recall_at_5": 0.15923
-    }
+    },
+    "mteb_dataset_name": "SCIDOCS"
 }

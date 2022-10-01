@@ -15,5 +15,6 @@
             "pearson": 0.49171964856370337,
             "spearman": 0.4886298212512842
         }
-    }
+    },
+    "mteb_dataset_name": "STSBenchmark"
 }

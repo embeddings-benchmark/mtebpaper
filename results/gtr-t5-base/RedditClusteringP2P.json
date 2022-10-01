@@ -5,5 +5,6 @@
         "evaluation_time": 2466.24,
         "v_measure": 0.585344949362798,
         "v_measure_std": 0.11545088428737668
-    }
+    },
+    "mteb_dataset_name": "RedditClusteringP2P"
 }

@@ -27,5 +27,6 @@
         "recall_at_1000": 0.91489,
         "recall_at_3": 0.30361,
         "recall_at_5": 0.36222
-    }
+    },
+    "mteb_dataset_name": "SciFact"
 }

@@ -1,19 +1,20 @@
 {
-  "dataset_version": null,
-  "mteb_version": "0.0.2",
-  "test": {
-    "cos_sim": {
-      "pearson": NaN,
-      "spearman": NaN
+    "dataset_version": null,
+    "mteb_version": "0.0.2",
+    "test": {
+        "cos_sim": {
+            "pearson": NaN,
+            "spearman": NaN
+        },
+        "euclidean": {
+            "pearson": NaN,
+            "spearman": NaN
+        },
+        "evaluation_time": 10.72,
+        "manhattan": {
+            "pearson": NaN,
+            "spearman": NaN
+        }
     },
-    "euclidean": {
-      "pearson": NaN,
-      "spearman": NaN
-    },
-    "evaluation_time": 10.72,
-    "manhattan": {
-      "pearson": NaN,
-      "spearman": NaN
-    }
-  }
+    "mteb_dataset_name": "STS16"
 }

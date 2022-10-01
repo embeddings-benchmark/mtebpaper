@@ -5,5 +5,6 @@
         "mrr": 0.48454993739920216
     },
     "dataset_version": null,
-    "mteb_version": "0.0.2"
+    "mteb_version": "0.0.2",
+    "mteb_dataset_name": "StackOverflowDupQuestions"
 }

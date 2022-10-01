@@ -1,9 +1,10 @@
 {
-  "dataset_version": null,
-  "mteb_version": "0.0.2",
-  "test": {
-    "evaluation_time": 15.97,
-    "v_measure": 0.30865683359199025,
-    "v_measure_std": 0.011772424269443412
-  }
+    "dataset_version": null,
+    "mteb_version": "0.0.2",
+    "test": {
+        "evaluation_time": 15.97,
+        "v_measure": 0.30865683359199025,
+        "v_measure_std": 0.011772424269443412
+    },
+    "mteb_dataset_name": "MedrxivClusteringS2S"
 }

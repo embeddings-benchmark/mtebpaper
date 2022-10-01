@@ -15,5 +15,6 @@
             "pearson": 0.7748139570630969,
             "spearman": 0.7250375595654097
         }
-    }
+    },
+    "mteb_dataset_name": "SICK-R"
 }

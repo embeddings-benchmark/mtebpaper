@@ -1,9 +1,10 @@
 {
-  "dataset_version": null,
-  "mteb_version": "0.0.2",
-  "test": {
-    "evaluation_time": 95.14,
-    "v_measure": 0.3313311628622569,
-    "v_measure_std": 0.01757571540243887
-  }
+    "dataset_version": null,
+    "mteb_version": "0.0.2",
+    "test": {
+        "evaluation_time": 95.14,
+        "v_measure": 0.3313311628622569,
+        "v_measure_std": 0.01757571540243887
+    },
+    "mteb_dataset_name": "StackExchangeClusteringP2P"
 }

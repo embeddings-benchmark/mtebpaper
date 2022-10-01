@@ -44,5 +44,6 @@
             "ap": 0.7628732783437441,
             "f1": 0.6884738816069289
         }
-    }
+    },
+    "mteb_dataset_name": "TwitterURLCorpus"
 }

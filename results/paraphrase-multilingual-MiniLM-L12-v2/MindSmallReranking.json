@@ -1,9 +1,10 @@
 {
-  "dataset_version": null,
-  "mteb_version": "0.0.2",
-  "test": {
-    "evaluation_time": 636.61,
-    "map": 0.30369306610973984,
-    "mrr": 0.31263592799793427
-  }
+    "dataset_version": null,
+    "mteb_version": "0.0.2",
+    "test": {
+        "evaluation_time": 636.61,
+        "map": 0.30369306610973984,
+        "mrr": 0.31263592799793427
+    },
+    "mteb_dataset_name": "MindSmallReranking"
 }

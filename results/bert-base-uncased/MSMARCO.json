@@ -54,5 +54,6 @@
         "recall_at_1000": 0.17071,
         "recall_at_3": 0.00667,
         "recall_at_5": 0.00954
-    }
+    },
+    "mteb_dataset_name": "MSMARCO"
 }

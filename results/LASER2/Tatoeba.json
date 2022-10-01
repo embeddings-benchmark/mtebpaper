@@ -675,5 +675,6 @@
             "precision": 0.94875,
             "recall": 0.965
         }
-    }
+    },
+    "mteb_dataset_name": "Tatoeba"
 }

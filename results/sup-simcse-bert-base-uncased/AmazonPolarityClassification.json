@@ -10,5 +10,6 @@
         "f1": 0.8238897178059448,
         "f1_stderr": 0.020331128102144987,
         "main_score": 0.8247332500000001
-    }
+    },
+    "mteb_dataset_name": "AmazonPolarityClassification"
 }

@@ -27,5 +27,6 @@
         "recall_at_1000": 0.86711,
         "recall_at_3": 0.28411,
         "recall_at_5": 0.35815
-    }
+    },
+    "mteb_dataset_name": "NQ"
 }
