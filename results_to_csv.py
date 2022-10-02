@@ -3,7 +3,6 @@ Usage: python results_to_csv.py results_folder_path
 Make sure the final directory results_folder_path is the name of your model
 """
 import csv
-import io
 import json
 import os
 import sys
@@ -125,7 +124,7 @@ for file_name in os.listdir(results_folder):
     if not file_name.endswith(".json"):
         print(f"Skipping non-json {file_name}")
         continue
-    with io.open(os.path.join(results_folder, file_name), "r", encoding="utf-8") as f:
+    with open(os.path.join(results_folder, file_name), "r", encoding="utf-8") as f:
         results = json.load(f)
         all_results = {**all_results, **{file_name.replace(".json", ""): results}}
 
@@ -173,7 +172,7 @@ def get_rows(task, dataset, limit_langs=[]):
     return rows
 
 
-with io.open(csv_file, "w", encoding="utf-8") as f:
+with open(csv_file, "w", encoding="utf-8") as f:
     writer = csv.writer(f)
     writer.writerow(["model", "task", "dataset", "language", "metric", "value"])
     for task, dataset_list in [

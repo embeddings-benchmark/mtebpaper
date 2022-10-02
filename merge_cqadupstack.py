@@ -27,7 +27,6 @@ NOAVG_KEYS = [
 import os
 import sys
 import json
-import io
 import glob
 
 results_folder = sys.argv[1]
@@ -38,7 +37,7 @@ print("Found CQADupstack files: ", files)
 if len(files) == len(TASK_LIST_CQA):
     all_results = {}
     for file_name in files:
-        with io.open(file_name, 'r', encoding='utf-8') as f:
+        with open(file_name, 'r', encoding='utf-8') as f:
             results = json.load(f)
             for split, split_results in results.items():
                 if split not in ("train", "validation", "test"):
@@ -52,7 +51,7 @@ if len(files) == len(TASK_LIST_CQA):
                     all_results[split][metric] = score
 
     print("Saving ", all_results)
-    with io.open(os.path.join(results_folder, "CQADupstackRetrieval.json"), 'w', encoding='utf-8') as f:
+    with open(os.path.join(results_folder, "CQADupstackRetrieval.json"), 'w', encoding='utf-8') as f:
         json.dump(all_results, f)
 else:
     print(f"Missing files {set(TASK_LIST_CQA) - set(files)} or got too many files.")

@@ -3,7 +3,6 @@ Iterates over json results for custom fixes
 Usage: python fix_results.py results_folder_path
 """
 import glob
-import io
 import json
 import sys
 import os
@@ -14,7 +13,7 @@ files = glob.glob(f'{results_folder.strip("/")}/*/*.json')
 print("Found files: ", files)
 
 for file_name in files:
-    with io.open(file_name, 'r', encoding='utf-8') as f:
+    with open(file_name, 'r', encoding='utf-8') as f:
         results = json.load(f)
         if "dataset_version" not in results:
             results["dataset_version"] = None
@@ -38,10 +37,10 @@ for file_name in files:
                 results.setdefault(split, {})
         # Merge MSMARCO dev & test split runs
         elif "MSMARCO." in file_name and os.path.exists(file_name.replace("MSMARCO.", "MSMARCO-test.")):
-            with io.open(file_name.replace("MSMARCO.", "MSMARCO-test."), 'r', encoding='utf-8') as f:
+            with open(file_name.replace("MSMARCO.", "MSMARCO-test."), 'r', encoding='utf-8') as f:
                 results_test = json.load(f)
             results["test"] = results_test["test"]
 
-        with io.open(file_name, 'w', encoding='utf-8') as f:
+        with open(file_name, 'w', encoding='utf-8') as f:
             json.dump(results, f, indent=4)
 

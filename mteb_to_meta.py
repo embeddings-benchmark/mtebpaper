@@ -1,9 +1,11 @@
 """
-Usage: python mteb_to_meta.py path_to_results_folder
+Usage: python mteb_meta.py path_to_results_folder
 
 Creates evaluation results metadata for the model card. 
 E.g.
 ---
+tags:
+- mteb
 model-index:
 - name: SGPT-5.8B-weightedmean-msmarco-specb-bitfit
   results:
@@ -14,18 +16,23 @@ model-index:
       name: MTEB Banking77
       config: default
       split: test
+      revision: 44fa15921b4c889113cc5df03dd4901b49161ab7
     metrics:
     - type: accuracy
       value: 84.49350649350649
 ---
 """
 
-import io
 import json
+import logging
 import os
 import sys
 
 from mteb import MTEB
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 
 results_folder = sys.argv[1].strip("/")
 model_name = results_folder.split("/")[-1]
@@ -34,23 +41,23 @@ all_results = {}
 
 for file_name in os.listdir(results_folder):
     if not file_name.endswith(".json"):
-        print(f"Skipping non-json {file_name}")
+        logger.info(f"Skipping non-json {file_name}")
         continue
-    with io.open(os.path.join(results_folder, file_name), "r", encoding="utf-8") as f:
+    with open(os.path.join(results_folder, file_name), "r", encoding="utf-8") as f:
         results = json.load(f)
         all_results = {**all_results, **{file_name.replace(".json", ""): results}}
 
-MODEL_META = "---\nmodel-index:\n"
-
 MARKER = "---"
+TAGS = "tags:"
+MTEB_TAG = "- mteb"
 HEADER = "model-index:"
 MODEL = f"- name: {model_name}"
 RES = "  results:"
 
-META_STRING = "\n".join([MARKER, HEADER, MODEL, RES])
+META_STRING = "\n".join([MARKER, TAGS, MTEB_TAG, HEADER, MODEL, RES])
 
 
-ONE_TASK = "  - task:\n      type: {}\n    dataset:\n      type: {}\n      name: {}\n      config: {}\n      split: {}\n    metrics:"
+ONE_TASK = "  - task:\n      type: {}\n    dataset:\n      type: {}\n      name: {}\n      config: {}\n      split: {}\n      revision: {}\n    metrics:"
 ONE_METRIC = "    - type: {}\n      value: {}"
 SKIP_KEYS = ["std", "evaluation_time", "main_score", "threshold"]
 
@@ -63,12 +70,13 @@ for ds_name, res_dict in sorted(all_results.items()):
     hf_hub_name = mteb_desc.get("hf_hub_name", mteb_desc.get("beir_name"))
     if "CQADupstack" in ds_name:
         hf_hub_name = "BeIR/cqadupstack"
-    mteb_type = mteb_desc.get("type")
+    mteb_type = mteb_desc["type"]
+    revision = res_dict["dataset_version"]
     split = "test"
     if ds_name == "MSMARCO":
         split = "dev" if "dev" in res_dict else "validation"
     if split not in res_dict:
-        print(f"Skipping {ds_name} as split {split} not present.")
+        logger.info(f"Skipping {ds_name} as split {split} not present.")
         continue
     res_dict = res_dict.get(split)
     for lang in mteb_desc["eval_langs"]:
@@ -84,7 +92,8 @@ for ds_name, res_dict in sorted(all_results.items()):
             hf_hub_name,
             mteb_name,
             lang if len(mteb_desc["eval_langs"]) > 1 else "default",
-            split
+            split,
+            revision
         )
         for (metric, score) in test_result_lang.items():
             if not isinstance(score, dict):
@@ -94,7 +103,7 @@ for ds_name, res_dict in sorted(all_results.items()):
                     continue
                 META_STRING += "\n" + ONE_METRIC.format(
                     f"{metric}_{sub_metric}" if metric != sub_metric else metric,
-                    # All MTEB scores are 0-1, multiply them by 100 for reasons:
+                    # All MTEB scores are 0-1, multiply them by 100 for 3 reasons:
                     # 1) It's easier to visually digest (You need two chars less: "0.1" -> "1")
                     # 2) Others may multiply them by 100, when building on MTEB making it confusing what the range is
                     # This happend with Text and Code Embeddings paper (OpenAI) vs original BEIR paper
@@ -103,5 +112,7 @@ for ds_name, res_dict in sorted(all_results.items()):
                 )
 
 META_STRING += "\n" + MARKER
-with open("./mteb_metadata.md", "w") as f:
+if os.path.exists("./mteb_metadata.md"):
+    logger.warning("Overwriting mteb_metadata.md")
+with open(f"./mteb_metadata.md", "w") as f:
     f.write(META_STRING)

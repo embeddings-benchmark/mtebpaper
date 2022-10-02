@@ -2,7 +2,6 @@
 Usage: 
 Inspired by Fig 3 from https://arxiv.org/pdf/2011.04006.pdf
 """
-import io
 import json
 import os
 import sys
@@ -198,7 +197,7 @@ for model_name in os.listdir(results_folder):
             if not file_name.endswith(".json"):
                 print(f"Skipping non-json {file_name}")
                 continue
-            with io.open(os.path.join(model_res_folder, file_name), "r", encoding="utf-8") as f:
+            with open(os.path.join(model_res_folder, file_name), "r", encoding="utf-8") as f:
                 results = json.load(f)
                 all_results[model_name] = {**all_results[model_name], **{file_name.replace(".json", ""): results}}
 
