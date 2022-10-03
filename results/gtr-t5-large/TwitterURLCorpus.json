@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "cos_sim": {
@@ -45,5 +44,6 @@
             "f1": 0.773079980317196
         }
     },
-    "mteb_dataset_name": "TwitterURLCorpus"
+    "mteb_dataset_name": "TwitterURLCorpus",
+    "dataset_revision": "8b6510b0b1fa4e4c4f879467980e9be563ec1cdf"
 }

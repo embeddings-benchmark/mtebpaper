@@ -26,7 +26,7 @@
         "recall_at_3": 0.86902,
         "recall_at_5": 0.91238
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "QuoraRetrieval"
+    "mteb_dataset_name": "QuoraRetrieval",
+    "dataset_revision": "6205996560df11e3a3da9ab4f926788fc30a7db4"
 }

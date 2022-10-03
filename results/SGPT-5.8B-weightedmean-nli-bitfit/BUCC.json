@@ -26,7 +26,7 @@
             "recall": 0.00315955766192733
         }
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "BUCC"
+    "mteb_dataset_name": "BUCC",
+    "dataset_revision": "d51519689f32196a32af33b075a01d0e7c51e252"
 }

@@ -254,7 +254,7 @@
             }
         }
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "STS22"
+    "mteb_dataset_name": "STS22",
+    "dataset_revision": "2de6ce8c1921b71a755b262c6b57fef195dd7906"
 }

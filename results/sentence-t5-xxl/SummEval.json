@@ -10,7 +10,7 @@
         },
         "evaluation_time": 199.06
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "SummEval"
+    "mteb_dataset_name": "SummEval",
+    "dataset_revision": "8753c2788d36c01fc6f05d03fe3f7268d63f9122"
 }

@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "evaluation_time": 8959.62,
@@ -28,5 +27,6 @@
         "recall_at_3": 0.14684,
         "recall_at_5": 0.18141
     },
-    "mteb_dataset_name": "DBPedia"
+    "mteb_dataset_name": "DBPedia",
+    "dataset_revision": "f097057d03ed98220bc7309ddb10b71a54d667d6"
 }

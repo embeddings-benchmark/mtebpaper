@@ -26,7 +26,7 @@
         "recall_at_3": 0.00382,
         "recall_at_5": 0.0054
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "TRECCOVID"
+    "mteb_dataset_name": "TRECCOVID",
+    "dataset_revision": "2c8041b2c07a79b6f7ba8fe6acc72e5d9f92d217"
 }

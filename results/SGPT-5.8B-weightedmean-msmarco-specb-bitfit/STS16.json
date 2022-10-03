@@ -14,7 +14,7 @@
             "spearman": 0.7138968946669431
         }
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "STS16"
+    "mteb_dataset_name": "STS16",
+    "dataset_revision": "360a0b2dff98700d09e634a01e1cc1624d3e42cd"
 }

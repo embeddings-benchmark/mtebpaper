@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "accuracy": 0.6404799999999999,
@@ -11,5 +10,6 @@
         "f1_stderr": 0.0317267000377415,
         "main_score": 0.6404799999999999
     },
-    "mteb_dataset_name": "ImdbClassification"
+    "mteb_dataset_name": "ImdbClassification",
+    "dataset_revision": "8d743909f834c38949e8323a8a6ce8721ea6c7f4"
 }

@@ -1,5 +1,4 @@
 {
-    "dataset_version": "6d1ba47164174a496b7fa5d3569dae26a6813b80",
     "mteb_version": "0.0.2",
     "test": {
         "en": {
@@ -18,5 +17,6 @@
         },
         "evaluation_time": 19.09
     },
-    "mteb_dataset_name": "STS22"
+    "mteb_dataset_name": "STS22",
+    "dataset_revision": "2de6ce8c1921b71a755b262c6b57fef195dd7906"
 }

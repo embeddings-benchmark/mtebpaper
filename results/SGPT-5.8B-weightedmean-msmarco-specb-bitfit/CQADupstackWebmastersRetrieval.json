@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "evaluation_time": 2264.66,
@@ -34,5 +33,6 @@
         "recall_at_3": 0.36926,
         "recall_at_5": 0.43245
     },
-    "mteb_dataset_name": "CQADupstackWebmastersRetrieval"
+    "mteb_dataset_name": "CQADupstackWebmastersRetrieval",
+    "dataset_revision": "2b9f5791698b5be7bc5e10535c8690f20043c3db"
 }

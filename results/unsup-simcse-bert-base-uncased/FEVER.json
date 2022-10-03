@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "evaluation_time": 19072.4,
@@ -28,5 +27,6 @@
         "recall_at_3": 0.1967,
         "recall_at_5": 0.24681
     },
-    "mteb_dataset_name": "FEVER"
+    "mteb_dataset_name": "FEVER",
+    "dataset_revision": "1429cf27e393599b8b359b9b72c666f96b2525f9"
 }

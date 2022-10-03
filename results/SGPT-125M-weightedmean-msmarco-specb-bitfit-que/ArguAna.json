@@ -26,7 +26,7 @@
         "recall_at_3": 0.46871,
         "recall_at_5": 0.59033
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "ArguAna"
+    "mteb_dataset_name": "ArguAna",
+    "dataset_revision": "5b3e3697907184a9b77a3c99ee9ea1a9cbb1e4e3"
 }

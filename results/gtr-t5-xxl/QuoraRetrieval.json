@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "evaluation_time": 8290.92,
@@ -28,5 +27,6 @@
         "recall_at_3": 0.8784,
         "recall_at_5": 0.92224
     },
-    "mteb_dataset_name": "QuoraRetrieval"
+    "mteb_dataset_name": "QuoraRetrieval",
+    "dataset_revision": "6205996560df11e3a3da9ab4f926788fc30a7db4"
 }

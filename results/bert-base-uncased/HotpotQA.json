@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "evaluation_time": 10128.87,
@@ -28,5 +27,6 @@
         "recall_at_3": 0.06435,
         "recall_at_5": 0.08022
     },
-    "mteb_dataset_name": "HotpotQA"
+    "mteb_dataset_name": "HotpotQA",
+    "dataset_revision": "766870b35a1b9ca65e67a0d1913899973551fc6c"
 }

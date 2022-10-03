@@ -119,7 +119,7 @@ class OpenAIEmbedder:
         self.engine = engine
         self.max_token_len = 2046 # 2048 - 2 special tokens
         self.batch_size = batch_size
-        self.save_emb = False # Problematic
+        self.save_emb = False # Problematic as the filenames end up being the same
         self.base_path = f"embeddings/{engine.split('/')[-1]}/"
         self.tokenizer = GPT2TokenizerFast.from_pretrained("gpt2")
         self.task_name = task_name

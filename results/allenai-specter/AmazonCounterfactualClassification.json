@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "de": {
@@ -40,5 +39,6 @@
             "main_score": 0.4386509635974304
         }
     },
-    "mteb_dataset_name": "AmazonCounterfactualClassification"
+    "mteb_dataset_name": "AmazonCounterfactualClassification",
+    "dataset_revision": "2d8a100785abf0ae21420d2a55b0c56e3e1ea996"
 }

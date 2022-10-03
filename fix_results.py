@@ -7,6 +7,8 @@ import json
 import sys
 import os
 
+from mteb import MTEB
+
 results_folder = sys.argv[1]
 files = glob.glob(f'{results_folder.strip("/")}/*/*.json')
 
@@ -15,12 +17,28 @@ print("Found files: ", files)
 for file_name in files:
     with open(file_name, 'r', encoding='utf-8') as f:
         results = json.load(f)
-        if "dataset_version" not in results:
-            results["dataset_version"] = None
+        if "dataset_version" in results:
+            results.pop("dataset_version")
         if "mteb_version" not in results:
             results["mteb_version"] = "0.0.2"
-        #if "dataset_name" not in results:
-        results["mteb_dataset_name"] = file_name.split("/")[-1].replace(".json", "")
+        if "mteb_dataset_name" not in results:
+            results["mteb_dataset_name"] = file_name.split("/")[-1].replace(".json", "")
+        if "dataset_revision" not in results:
+            print(file_name)
+            mteb_desc = (
+                MTEB(tasks=[file_name.split("/")[-1].replace(".json", "").replace("CQADupstackRetrieval", "CQADupstackAndroidRetrieval")])
+                .tasks[0]
+                .description
+            )
+            import huggingface_hub
+            if "hf_hub_name" in mteb_desc:
+                hf_hub_name = mteb_desc.get("hf_hub_name")
+            else:
+                hf_hub_name = "BeIR/" + mteb_desc.get("beir_name")
+            if "cqadupstack" in hf_hub_name:
+                hf_hub_name = "BeIR/cqadupstack-qrels"
+            results["dataset_revision"] = huggingface_hub.hf_api.dataset_info(hf_hub_name).sha
+
         if "STS22" in file_name:
             for split, split_results in results.items():
                 if isinstance(split_results, dict):

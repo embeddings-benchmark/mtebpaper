@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "dev": {
         "evaluation_time": 23155.45,
         "map_at_1": 0.04807,
@@ -55,5 +54,6 @@
         "recall_at_3": 0.01979,
         "recall_at_5": 0.02959
     },
-    "mteb_dataset_name": "MSMARCO"
+    "mteb_dataset_name": "MSMARCO",
+    "dataset_revision": "e6838a846e2408f22cf5cc337ebc83e0bcf77849"
 }

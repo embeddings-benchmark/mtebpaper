@@ -4,7 +4,7 @@
         "v_measure": 0.2612166047215606,
         "v_measure_std": 0.017398758295650536
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "MedrxivClusteringP2P"
+    "mteb_dataset_name": "MedrxivClusteringP2P",
+    "dataset_revision": "dcefc037ef84348e49b0d29109e891c01067226b"
 }

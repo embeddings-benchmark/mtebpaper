@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "evaluation_time": 8.88,
@@ -28,5 +27,6 @@
         "recall_at_3": 0.12584,
         "recall_at_5": 0.15023
     },
-    "mteb_dataset_name": "CQADupstackProgrammersRetrieval"
+    "mteb_dataset_name": "CQADupstackProgrammersRetrieval",
+    "dataset_revision": "2b9f5791698b5be7bc5e10535c8690f20043c3db"
 }

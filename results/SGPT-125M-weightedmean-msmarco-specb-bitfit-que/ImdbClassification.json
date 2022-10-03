@@ -9,7 +9,7 @@
         "f1_stderr": 0.046729535979483976,
         "main_score": 0.586696
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "ImdbClassification"
+    "mteb_dataset_name": "ImdbClassification",
+    "dataset_revision": "8d743909f834c38949e8323a8a6ce8721ea6c7f4"
 }

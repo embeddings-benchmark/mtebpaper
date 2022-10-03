@@ -19,7 +19,7 @@
             "main_score": 0.65428027901078
         }
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "MTOPIntentClassification"
+    "mteb_dataset_name": "MTOPIntentClassification",
+    "dataset_revision": "6299947a7777084cc2d4b64235bf7190381ce755"
 }

@@ -15,7 +15,7 @@
         "f1_stderr": 0.020424381768096876,
         "main_score": 0.41819999999999996
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "EmotionClassification"
+    "mteb_dataset_name": "EmotionClassification",
+    "dataset_revision": "829147f8f75a25f005913200eb5ed41fae320aa1"
 }

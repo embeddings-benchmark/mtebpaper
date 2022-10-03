@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "de-en": {
@@ -28,5 +27,6 @@
             "recall": 0.010005265929436546
         }
     },
-    "mteb_dataset_name": "BUCC"
+    "mteb_dataset_name": "BUCC",
+    "dataset_revision": "d51519689f32196a32af33b075a01d0e7c51e252"
 }

@@ -7,7 +7,7 @@
         "f1_stderr": 0.031625293531795155,
         "main_score": 0.4872665534804754
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "TweetSentimentExtractionClassification"
+    "mteb_dataset_name": "TweetSentimentExtractionClassification",
+    "dataset_revision": "62146448f05be9e52a36b8ee9936447ea787eede"
 }

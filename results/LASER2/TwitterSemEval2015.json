@@ -43,7 +43,7 @@
             "f1": 0.5697118332311466
         }
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "TwitterSemEval2015"
+    "mteb_dataset_name": "TwitterSemEval2015",
+    "dataset_revision": "70970daeab8776df92f5ea462b6173c0b46fd2d1"
 }

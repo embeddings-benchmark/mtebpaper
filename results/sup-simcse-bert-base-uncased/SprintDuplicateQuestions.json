@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "cos_sim": {
@@ -45,5 +44,6 @@
             "f1": 0.6963350785340313
         }
     },
-    "mteb_dataset_name": "SprintDuplicateQuestions"
+    "mteb_dataset_name": "SprintDuplicateQuestions",
+    "dataset_revision": "5a8256d0dff9c4bd3be3ba3e67e4e70173f802ea"
 }

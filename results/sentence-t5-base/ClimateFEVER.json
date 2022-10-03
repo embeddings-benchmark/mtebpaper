@@ -26,7 +26,7 @@
         "recall_at_3": 0.07686,
         "recall_at_5": 0.09879
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "ClimateFEVER"
+    "mteb_dataset_name": "ClimateFEVER",
+    "dataset_revision": "392b78eb68c07badcd7c2cd8f39af108375dfcce"
 }

@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "cos_sim": {
@@ -16,5 +15,6 @@
             "spearman": 0.8051452267103
         }
     },
-    "mteb_dataset_name": "STS13"
+    "mteb_dataset_name": "STS13",
+    "dataset_revision": "1591bfcbe8c69d4bf7fe2a16e2451017832cafb9"
 }

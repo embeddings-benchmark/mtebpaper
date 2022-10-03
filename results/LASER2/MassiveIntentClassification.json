@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "af": {
@@ -361,5 +360,6 @@
             "main_score": 0.3292871553463349
         }
     },
-    "mteb_dataset_name": "MassiveIntentClassification"
+    "mteb_dataset_name": "MassiveIntentClassification",
+    "dataset_revision": "072a486a144adf7f4479a4a0dddb2152e161e1ea"
 }

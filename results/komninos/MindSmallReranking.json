@@ -4,7 +4,7 @@
         "map": 0.28921918247348344,
         "mrr": 0.2974700632835201
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "MindSmallReranking"
+    "mteb_dataset_name": "MindSmallReranking",
+    "dataset_revision": "3bdac13927fdc888b903db93b2ffdbd90b295a69"
 }

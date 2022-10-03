@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "evaluation_time": 626.47,
@@ -34,5 +33,6 @@
         "recall_at_3": 0.11068,
         "recall_at_5": 0.14818
     },
-    "mteb_dataset_name": "SCIDOCS"
+    "mteb_dataset_name": "SCIDOCS",
+    "dataset_revision": "5c59ef3e437a0a9651c8fe6fde943e7dce59fba5"
 }

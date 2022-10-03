@@ -4,7 +4,7 @@
         "map": 0.6585199009344481,
         "mrr": 0.7847700391329201
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "AskUbuntuDupQuestions"
+    "mteb_dataset_name": "AskUbuntuDupQuestions",
+    "dataset_revision": "4d853f94cd57d85ec13805aeeac3ae3e5eb4c49c"
 }

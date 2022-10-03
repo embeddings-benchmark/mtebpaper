@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "evaluation_time": 111.07,
@@ -34,5 +33,6 @@
         "recall_at_3": 0.52205,
         "recall_at_5": 0.64154
     },
-    "mteb_dataset_name": "ArguAna"
+    "mteb_dataset_name": "ArguAna",
+    "dataset_revision": "5b3e3697907184a9b77a3c99ee9ea1a9cbb1e4e3"
 }

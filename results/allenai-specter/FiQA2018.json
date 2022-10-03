@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "evaluation_time": 187.31,
@@ -34,5 +33,6 @@
         "recall_at_3": 0.03956,
         "recall_at_5": 0.04995
     },
-    "mteb_dataset_name": "FiQA2018"
+    "mteb_dataset_name": "FiQA2018",
+    "dataset_revision": "41b686a7f28c59bcaaa5791efd47c67c8ebe28be"
 }

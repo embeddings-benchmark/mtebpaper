@@ -16,7 +16,7 @@
         },
         "evaluation_time": 2.27
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "STS17"
+    "mteb_dataset_name": "STS17",
+    "dataset_revision": "9fc37e8c632af1c87a3d23e685d49552a02582a0"
 }

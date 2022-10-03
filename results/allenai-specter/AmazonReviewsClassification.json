@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "de": {
@@ -46,5 +45,6 @@
             "main_score": 0.20492
         }
     },
-    "mteb_dataset_name": "AmazonReviewsClassification"
+    "mteb_dataset_name": "AmazonReviewsClassification",
+    "dataset_revision": "c379a6705fec24a2493fa68e011692605f44e119"
 }

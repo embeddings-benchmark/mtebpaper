@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "evaluation_time": 810.57,
@@ -34,5 +33,6 @@
         "recall_at_3": 0.00681,
         "recall_at_5": 0.01023
     },
-    "mteb_dataset_name": "TRECCOVID"
+    "mteb_dataset_name": "TRECCOVID",
+    "dataset_revision": "2c8041b2c07a79b6f7ba8fe6acc72e5d9f92d217"
 }

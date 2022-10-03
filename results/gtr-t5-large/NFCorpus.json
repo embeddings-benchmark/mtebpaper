@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "evaluation_time": 122.75,
@@ -34,5 +33,6 @@
         "recall_at_3": 0.10356,
         "recall_at_5": 0.12549
     },
-    "mteb_dataset_name": "NFCorpus"
+    "mteb_dataset_name": "NFCorpus",
+    "dataset_revision": "7eb63cc0c1eb59324d709ebed25fcab851fa7610"
 }

@@ -11,7 +11,7 @@
         },
         "evaluation_time": 13.99
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "AmazonCounterfactualClassification"
+    "mteb_dataset_name": "AmazonCounterfactualClassification",
+    "dataset_revision": "2d8a100785abf0ae21420d2a55b0c56e3e1ea996"
 }

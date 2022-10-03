@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "evaluation_time": 589.14,
@@ -34,5 +33,6 @@
         "recall_at_3": 0.04168,
         "recall_at_5": 0.07673
     },
-    "mteb_dataset_name": "Touche2020"
+    "mteb_dataset_name": "Touche2020",
+    "dataset_revision": "527b7d77e16e343303e68cb6af11d6e18b9f7b3b"
 }

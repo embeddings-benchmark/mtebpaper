@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "af": {
@@ -361,5 +360,6 @@
             "main_score": 0.07138533960995293
         }
     },
-    "mteb_dataset_name": "MassiveScenarioClassification"
+    "mteb_dataset_name": "MassiveScenarioClassification",
+    "dataset_revision": "7d571f92784cd94a019292a1f45445077d0ef634"
 }

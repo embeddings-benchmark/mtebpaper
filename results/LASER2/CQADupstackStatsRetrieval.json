@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "evaluation_time": 344.51,
@@ -28,5 +27,6 @@
         "recall_at_3": 0.04728,
         "recall_at_5": 0.05725
     },
-    "mteb_dataset_name": "CQADupstackStatsRetrieval"
+    "mteb_dataset_name": "CQADupstackStatsRetrieval",
+    "dataset_revision": "2b9f5791698b5be7bc5e10535c8690f20043c3db"
 }

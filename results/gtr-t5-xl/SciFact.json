@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "evaluation_time": 123.33,
@@ -34,5 +33,6 @@
         "recall_at_3": 0.64578,
         "recall_at_5": 0.68844
     },
-    "mteb_dataset_name": "SciFact"
+    "mteb_dataset_name": "SciFact",
+    "dataset_revision": "a75ae049398addde9b70f6b268875f5cbce99089"
 }

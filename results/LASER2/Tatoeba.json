@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "afr-eng": {
@@ -676,5 +675,6 @@
             "recall": 0.965
         }
     },
-    "mteb_dataset_name": "Tatoeba"
+    "mteb_dataset_name": "Tatoeba",
+    "dataset_revision": "ed9e4a974f867fd9736efcf222fc3a26487387a5"
 }

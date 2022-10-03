@@ -1,5 +1,4 @@
 {
-    "dataset_version": null,
     "mteb_version": "0.0.2",
     "test": {
         "en": {
@@ -11,5 +10,6 @@
         },
         "evaluation_time": 49.93
     },
-    "mteb_dataset_name": "MassiveIntentClassification"
+    "mteb_dataset_name": "MassiveIntentClassification",
+    "dataset_revision": "072a486a144adf7f4479a4a0dddb2152e161e1ea"
 }

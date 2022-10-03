@@ -42,7 +42,7 @@
             "f1": 0.7657057281916886
         }
     },
-    "dataset_version": null,
     "mteb_version": "0.0.2",
-    "mteb_dataset_name": "TwitterURLCorpus"
+    "mteb_dataset_name": "TwitterURLCorpus",
+    "dataset_revision": "8b6510b0b1fa4e4c4f879467980e9be563ec1cdf"
 }
