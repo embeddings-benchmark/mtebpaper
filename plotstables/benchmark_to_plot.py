@@ -251,7 +251,7 @@ with open(benchmark_json, "r") as f:
 
 import numpy as np
 
-fig, ax = plt.subplots(figsize=(8,8))
+fig, ax = plt.subplots(figsize=(14,8))
 
 for k, v in gpu_bench.items():
     if k in ("specs", "sgpt-bloom-7b1-msmarco", "paraphrase-multilingual-MiniLM-L12-v2", "paraphrase-multilingual-mpnet-base-v2"):

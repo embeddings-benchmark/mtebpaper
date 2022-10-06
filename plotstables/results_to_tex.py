@@ -158,6 +158,7 @@ SUPERVISED_MODELS = [
     "paraphrase-multilingual-mpnet-base-v2",
     "contriever-base-msmarco",
     "text-similarity-ada-001",
+    "text-search-ada-query-001",
     "SGPT-125M-weightedmean-nli-bitfit",
     "SGPT-5.8B-weightedmean-nli-bitfit",
     "SGPT-125M-weightedmean-msmarco-specb-bitfit",
@@ -205,7 +206,8 @@ MODEL_TO_NAME = {
     "all-mpnet-base-v2": "MPNet",
     "paraphrase-multilingual-mpnet-base-v2": "MPNet-multilingual",
     "allenai-specter": "SPECTER",
-    "text-similarity-ada-001": "Ada Similarity"
+    "text-similarity-ada-001": "Ada Similarity",
+    "text-search-ada-query-001": "Ada Search Query"
 }
 
 
