@@ -279,18 +279,18 @@ for k, v in gpu_bench.items():
     # Empirical offsets
     x_offset = y_offset = 0
     if model_name in ("ST5-Base"):
-        x_offset = 0.7 * speed
+        x_offset = 0.5 * speed
     elif model_name in ("GTR-Base"):
-        x_offset = 0.7 * speed
+        x_offset = 0.5 * speed
         y_offset = -0.01 * score
     elif model_name in ("Contriever"):
-        x_offset = -0.45 * speed
+        x_offset = -0.14 * speed
         y_offset = 0.018 * score
     elif model_name in ("LaBSE"):
-        x_offset = 0.65 * speed
+        x_offset = 0.45 * speed
         y_offset = 0.01 * score
     elif model_name in ("GTR-XXL", "ST5-XXL"):
-        x_offset = -1.1 * speed
+        x_offset = -0.65 * speed
         if model_name == "GTR-XXL":
             y_offset = 0.01 * score
     elif model_name == "Komninos":
@@ -305,11 +305,14 @@ for k, v in gpu_bench.items():
     elif model_name.startswith("SGPT-125M-nli"):
         x_offset = -0.45 * speed
         y_offset = -0.008 * score
+    elif model_name.startswith("SGPT-125M-msmarco"):
+        x_offset = -0.2 * speed
+        y_offset = 0.01 * score
     elif model_name.startswith("MiniLM-L12"):
         y_offset = -0.01 * score
-        x_offset = -0.35 * speed
+        x_offset = -0.15 * speed
     elif model_arch in ("BERT", "MiniLM", "MPNet", "LASER") or model_name.startswith("SGPT-125M"):
-        x_offset = -0.48 * speed
+        x_offset = -0.2 * speed
     
     ax.text(
         speed - x_offset,
