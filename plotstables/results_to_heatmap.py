@@ -161,23 +161,23 @@ MODEL_TO_NAME = {
 SELFSUPERVISED_MODELS = [
     "glove.6B.300d",
     "komninos",
-    "LASER2",
-    "LaBSE",
     "bert-base-uncased",
-    "msmarco-bert-co-condensor",
-    "allenai-specter",
     "unsup-simcse-bert-base-uncased",
 ]
 
 SUPERVISED_MODELS = [
     "sup-simcse-bert-base-uncased",
+    "msmarco-bert-co-condensor",
+    "contriever-base-msmarco",
+    "allenai-specter",
+    "LaBSE",
+    "LASER2",
     "all-MiniLM-L6-v2",
     "all-MiniLM-L12-v2",
     "paraphrase-multilingual-MiniLM-L12-v2",
     "all-mpnet-base-v2",
     "paraphrase-multilingual-mpnet-base-v2",
-    "contriever-base-msmarco",
-#    "text-similarity-ada-001",
+    "text-similarity-ada-001",
     "SGPT-125M-weightedmean-nli-bitfit",
     "SGPT-5.8B-weightedmean-nli-bitfit",
     "SGPT-125M-weightedmean-msmarco-specb-bitfit",
@@ -190,8 +190,8 @@ SUPERVISED_MODELS = [
     "gtr-t5-xl",
     "gtr-t5-xxl", # 4.8B
     "sentence-t5-base", # 110M
-    "sentence-t5-large", # 110M
-    "sentence-t5-xl", # 110M
+    "sentence-t5-large",
+    "sentence-t5-xl",
     "sentence-t5-xxl", # 4.8B
 ]
 

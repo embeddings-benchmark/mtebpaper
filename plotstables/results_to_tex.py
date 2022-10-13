@@ -138,27 +138,27 @@ BITEXT_MODELS = MULTILING_MODELS = [
     # "sgpt-bloom-1b3-nli",
 ]
 
+
 SELFSUPERVISED_MODELS = [
     "glove.6B.300d",
     "komninos",
-    "LASER2",
-    "LaBSE",
     "bert-base-uncased",
-    "msmarco-bert-co-condensor",
-    "allenai-specter",
     "unsup-simcse-bert-base-uncased",
 ]
 
 SUPERVISED_MODELS = [
     "sup-simcse-bert-base-uncased",
+    "msmarco-bert-co-condensor",
+    "contriever-base-msmarco",
+    "allenai-specter",
+    "LaBSE",
+    "LASER2",
     "all-MiniLM-L6-v2",
     "all-MiniLM-L12-v2",
     "paraphrase-multilingual-MiniLM-L12-v2",
     "all-mpnet-base-v2",
     "paraphrase-multilingual-mpnet-base-v2",
-    "contriever-base-msmarco",
     "text-similarity-ada-001",
-    "text-search-ada-query-001",
     "SGPT-125M-weightedmean-nli-bitfit",
     "SGPT-5.8B-weightedmean-nli-bitfit",
     "SGPT-125M-weightedmean-msmarco-specb-bitfit",
@@ -171,8 +171,8 @@ SUPERVISED_MODELS = [
     "gtr-t5-xl",
     "gtr-t5-xxl", # 4.8B
     "sentence-t5-base", # 110M
-    "sentence-t5-large", # 110M
-    "sentence-t5-xl", # 110M
+    "sentence-t5-large",
+    "sentence-t5-xl",
     "sentence-t5-xxl", # 4.8B
 ]
 
@@ -301,7 +301,7 @@ def get_table(models, task_list, limit_langs=[], skip_langs=[], name="table"):
         f.write(TABLE)
 
 
-get_table(SELFSUPERVISED_MODELS, TASK_LIST_EN, limit_langs=["en", "en-en",], name="selfsupervised_en")
+get_table(SELFSUPERVISED_MODELS + SUPERVISED_MODELS, TASK_LIST_EN, limit_langs=["en", "en-en",], name="all_en")
 get_table(SUPERVISED_MODELS, TASK_LIST_EN, limit_langs=["en", "en-en",], name="supervised_en")
 get_table(BITEXT_MODELS, TASK_LIST_BITEXT, limit_langs=[], name="bitext")
 get_table(MULTILING_MODELS, TASK_LIST_CLASSIFICATION, limit_langs=[], skip_langs=["en", "en-en", "en-ext"], name="multilingclf")
