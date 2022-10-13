@@ -302,7 +302,6 @@ def get_table(models, task_list, limit_langs=[], skip_langs=[], name="table"):
 
 
 get_table(SELFSUPERVISED_MODELS + SUPERVISED_MODELS, TASK_LIST_EN, limit_langs=["en", "en-en",], name="all_en")
-get_table(SUPERVISED_MODELS, TASK_LIST_EN, limit_langs=["en", "en-en",], name="supervised_en")
 get_table(BITEXT_MODELS, TASK_LIST_BITEXT, limit_langs=[], name="bitext")
 get_table(MULTILING_MODELS, TASK_LIST_CLASSIFICATION, limit_langs=[], skip_langs=["en", "en-en", "en-ext"], name="multilingclf")
 get_table(MULTILING_MODELS, TASK_LIST_STS, limit_langs=[], skip_langs=["en", "en-en", "en-ext"], name="multilingsts")
