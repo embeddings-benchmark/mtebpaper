@@ -1,5 +1,5 @@
 """
-Usage: python results_to_csv.py results_folder_path
+Usage: python results_to_tex.py results_folder_path
 results_folder_path contains results of multiple models whose folders should be named after them
 """
 import json

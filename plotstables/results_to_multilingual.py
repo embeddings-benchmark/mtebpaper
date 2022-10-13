@@ -1,5 +1,5 @@
 """
-Usage: python results_to_csv.py results_folder_path
+Usage: python results_to_multilingual.py results_folder_path
 Make sure the final directory results_folder_path is the name of your model
 """
 import json
