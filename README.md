@@ -1,6 +1,6 @@
 # MTEB Scripts
 
-This repository contains scripts used for MTEB benchmarking.
+This repository contains scripts used for [MTEB](https://github.com/embeddings-benchmark/mteb) benchmarking. Some scripts rely on a results folder, which can be obtained via `git clone https://huggingface.co/datasets/mteb/results`.
 
 <!-- TOC -->
 
@@ -15,7 +15,7 @@ This repository contains scripts used for MTEB benchmarking.
 
 ## Benchmark
 
-Basic
+Basic with Internet
 ```python
 from mteb import MTEB
 from sentence_transformers import SentenceTransformer
@@ -26,25 +26,7 @@ evaluation = MTEB(tasks=["Banking77Classification"])
 evaluation.run(model, output_folder=f"results/{model_name}")
 ```
 
-Online
-```python
-import os
-os.environ["HF_DATASETS_OFFLINE"]="0" # 1 for offline
-os.environ["TRANSFORMERS_OFFLINE"]="0" # 1 for offline
-os.environ["TRANSFORMERS_CACHE"]="/gpfswork/rech/six/commun/models"
-os.environ["HF_DATASETS_CACHE"]="/gpfswork/rech/six/commun/datasets"
-os.environ["HF_MODULES_CACHE"]="/gpfswork/rech/six/commun/modules"
-os.environ["HF_METRICS_CACHE"]="/gpfswork/rech/six/commun/metrics"
-from mteb import MTEB
-from sentence_transformers import SentenceTransformer
-model_path = "/gpfswork/rech/six/commun/models/Muennighoff_SGPT-125M-weightedmean-nli-bitfit"
-model_name = model_path.split("/")[-1].split("_")[-1]
-model = SentenceTransformer(model_path)
-evaluation = MTEB(tasks=["Banking77Classification"])
-evaluation.run(model, output_folder=f"results/{model_name}")
-```
-
-Offline
+No Internet Access (Download data first)
 ```python
 import os
 os.environ["HF_DATASETS_OFFLINE"]="1" # 1 for offline
@@ -74,6 +56,7 @@ conda activate hf-prod
 # pt-1.10.1 / cuda 11.3
 conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
 
+# Custom fork that uses offline datasets
 !pip install --upgrade git+https://github.com/Muennighoff/mteb.git@offlineaccess
 !pip install --upgrade git+https://github.com/Muennighoff/sentence-transformers.git@sgpt_poolings
 # If you want to run BEIR tasks
