@@ -1,6 +1,9 @@
+# pip install GitPython mteb beir seaborn
 import os
 import random
 
+import seaborn as sns
+import matplotlib.pyplot as plt
 from mteb import MTEB
 from mteb.evaluation.evaluators.utils import cos_sim
 import numpy as np
@@ -8,9 +11,31 @@ import pandas as pd
 from sentence_transformers import SentenceTransformer
 import torch
 
+
+if os.path.exists("sim_data.csv"):
+    data_emb_df = (pd.read_csv("sim_data.csv", index_col=0) * 100).round(0).astype(int)
+    plt.figure(figsize=(40, 24))
+    # define the mask to set the values in the upper triangle to True
+    mask = np.triu(np.ones_like(data_emb_df, dtype=np.bool))
+    heatmap = sns.heatmap(
+        data_emb_df, 
+        mask=mask, 
+        vmin=data_emb_df.values.min(), 
+        vmax=data_emb_df.values.max(), 
+        annot=True, 
+        cmap='Blues',
+        fmt='g',
+    )
+    heatmap.set_xticklabels(heatmap.get_xmajorticklabels(), fontsize=16)#, fontweight="bold")
+    heatmap.set_yticklabels(heatmap.get_ymajorticklabels(), fontsize=16)#, fontweight="bold")
+    # Save
+    plt.savefig('heatmap_data.pdf', dpi=450, bbox_inches='tight')
+    exit()
+
+
 ### GLOBAL VARIABLES ###
 
-DATAPATH = "/gpfsscratch/rech/six/commun/commun/experiments/muennighoff/mteb"
+DATAPATH = "./"
 
 SEED = 42
 
@@ -141,6 +166,8 @@ def get_samples_beir(hf_hub_name):
     split = "validation" if "MSMARCO" in hf_hub_name else "test"
     if not os.path.exists(path):
         from beir import util
+        if "cqadupstack" in hf_hub_name:
+            hf_hub_name = "cqadupstack"
         url = f"https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/{hf_hub_name}.zip"
         util.download_and_unzip(url, DATAPATH)
     corpus, queries, relevant_docs = BeirDataLoader(path).load(split=split)
@@ -161,7 +188,7 @@ def load_data(hf_hub_name, subset=None):
         dataset = load_dataset(path, subset)
     else:
         from git import Repo
-        Repo.clone_from("https://huggingface.co/datasets/" + hf_hub_name, path)
+        Repo.clone_from("https://huggingface.co/datasets/mteb/" + hf_hub_name, path)
         dataset = load_dataset(path, subset)
     return dataset
 
@@ -189,7 +216,7 @@ def get_samples_ds(hf_hub_name):
 
 
 embeddings = {}
-model = SentenceTransformer("/gpfswork/rech/six/commun/models/sentence-transformers_sentence-t5-xxl")
+model = SentenceTransformer("sentence-transformers/sentence-t5-xxl")
 
 # Optionally custom selection
 # TASKS = ["ArguAna", "ClimateFEVER", "DBPedia", "FEVER", "FiQA2018", "HotpotQA", "NFCorpus", "NQ", "QuoraRetrieval", "SCIDOCS", "SciFact", "Touche2020", "TRECCOVID"]
@@ -230,7 +257,7 @@ mask = np.triu(np.ones_like(data_df, dtype=np.bool))
 heatmap = sns.heatmap(data_df, mask=mask, vmin=data_df.values.min(), vmax=data_df.values.max(), annot=True, cmap='Blues')
 heatmap.set_title('Similarity of MTEB datasets', fontdict={'fontsize':18}, pad=16)
 
-plt.savefig('heatmap_data.png', dpi=300, bbox_inches='tight')
+plt.savefig('heatmap_data.pdf', dpi=300, bbox_inches='tight')
 """
 
 
@@ -243,8 +270,6 @@ for i, task_1 in enumerate(TASKS):
 data_emb_df = pd.DataFrame(data_dict_emb)
 data_emb_df.set_index(data_emb_df.columns, inplace=True)
 
-import seaborn as sns
-import matplotlib.pyplot as plt
 
 plt.figure(figsize=(36, 24))
 # define the mask to set the values in the upper triangle to True
@@ -253,8 +278,8 @@ heatmap = sns.heatmap(data_emb_df, mask=mask, vmin=data_emb_df.values.min(), vma
 #heatmap.set_title('Similarity of MTEB datasets', fontdict={'fontsize':18}, pad=16)
 
 # Save
-data_emb_df.to_csv("data.csv")
-plt.savefig('heatmap_data.png', dpi=450, bbox_inches='tight')
+data_emb_df.to_csv("sim_data.csv")
+plt.savefig('heatmap_data.pdf', dpi=450, bbox_inches='tight')
 
 
 # Plot 3: Min (/Max) embeddings & then compute cos_sim
@@ -275,5 +300,5 @@ mask = np.triu(np.ones_like(data_emb_df, dtype=np.bool))
 heatmap = sns.heatmap(data_emb_df, mask=mask, vmin=data_emb_df.values.min(), vmax=data_emb_df.values.max(), annot=True, cmap='Blues')
 heatmap.set_title('Similarity of MTEB datasets', fontdict={'fontsize':18}, pad=16)
 
-plt.savefig('heatmap_data.png', dpi=300, bbox_inches='tight')
+plt.savefig('heatmap_data.pdf', dpi=300, bbox_inches='tight')
 """

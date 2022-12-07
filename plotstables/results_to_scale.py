@@ -253,8 +253,8 @@ for ax, (task_name, task_list, limit_langs, metric) in zip(axes.flatten(), TASK_
         # Shade doesn't look good, as std is too big
         # ax.fill_between(model_xticks_num, [avg-std for avg, std in zip(avg_scores, std_scores)], [avg+std for avg, std in zip(avg_scores, std_scores)], color=colors.get(shades[i]), alpha=0.5)
 
-    ax.set_ylabel(f"Average Performance ({metric})", fontsize=15)
-    ax.set_xlabel("Model Parameters (Billions)", fontsize=15)
+    ax.set_ylabel(f"Average Performance ({metric})", fontsize=16)
+    ax.set_xlabel("Model Parameters (Billions)", fontsize=16)
     ax.set_xticks(model_xticks_num_global, model_xticks_global)
     ax.set_title(task_name, fontweight="bold", fontsize=20)
     ax.grid(alpha=0.5)
@@ -271,4 +271,4 @@ fig.legend(
     fontsize=15,
 )
 
-plt.savefig('scale.png', dpi=300, bbox_inches='tight')
+plt.savefig('scale.pdf', dpi=300, bbox_inches='tight')

@@ -177,7 +177,7 @@ SUPERVISED_MODELS = [
     "paraphrase-multilingual-MiniLM-L12-v2",
     "all-mpnet-base-v2",
     "paraphrase-multilingual-mpnet-base-v2",
-    "text-similarity-ada-001",
+    # "text-similarity-ada-001",
     "SGPT-125M-weightedmean-nli-bitfit",
     "SGPT-5.8B-weightedmean-nli-bitfit",
     "SGPT-125M-weightedmean-msmarco-specb-bitfit",
@@ -259,12 +259,15 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 plt.figure(figsize=(20, 10))
+
+model_df = (model_df.corr() * 100).round(0).astype(int)
+
 # define the mask to set the values in the upper triangle to True
-mask = np.triu(np.ones_like(model_df.corr(), dtype=np.bool))
-heatmap = sns.heatmap(model_df.corr(), mask=mask, vmin=model_df.values.min(), vmax=model_df.values.max(), annot=True, cmap='Blues')
+mask = np.triu(np.ones_like(model_df, dtype=np.bool))
+heatmap = sns.heatmap(model_df, mask=mask, vmin=model_df.values.min(), vmax=model_df.values.max(), annot=True, fmt='g', cmap='Blues')
 # heatmap.set_title('Pearson Correlations of scores on MTEB', fontdict={'fontsize':18}, pad=16);
 
-plt.savefig('heatmap_model.png', dpi=300, bbox_inches='tight')
+plt.savefig('heatmap_model.pdf', dpi=300, bbox_inches='tight')
 
 data_dict = []
 
@@ -278,14 +281,15 @@ for model in MODEL_TO_NAME:
     data_dict.append(results)
 
 data_df = pd.DataFrame(data_dict)
+data_df = (data_df.corr() * 100).round(0).astype(int)
 
 plt.figure(figsize=(20, 10))
 # define the mask to set the values in the upper triangle to True
-mask = np.triu(np.ones_like(data_df.corr(), dtype=np.bool))
-heatmap = sns.heatmap(data_df.corr(), mask=mask, vmin=data_df.values.min(), vmax=data_df.values.max(), annot=True, cmap='Blues')
+mask = np.triu(np.ones_like(data_df, dtype=np.bool))
+heatmap = sns.heatmap(data_df, mask=mask, vmin=data_df.values.min(), vmax=data_df.values.max(), annot=True, fmt='g', cmap='Blues')
 # heatmap.set_title('Pearson Correlations of tasks on MTEB', fontdict={'fontsize':18}, pad=16)
 
-plt.savefig('heatmap_tasks.png', dpi=300, bbox_inches='tight')
+plt.savefig('heatmap_tasks.pdf', dpi=300, bbox_inches='tight')
 
 exit()
 # The last heatmap is not used
@@ -306,4 +310,4 @@ mask = np.triu(np.ones_like(data_df.corr(), dtype=np.bool))
 heatmap = sns.heatmap(data_df.corr(), mask=mask, vmin=-1, vmax=1, annot=True, cmap='Blues')
 heatmap.set_title('Pearson Correlations of scores on MTEB', fontdict={'fontsize':18}, pad=16)
 
-plt.savefig('heatmap_data.png', dpi=300, bbox_inches='tight')
+plt.savefig('heatmap_data.pdf', dpi=300, bbox_inches='tight')

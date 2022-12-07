@@ -157,12 +157,12 @@ for i, model in enumerate(BITEXT_MODELS):
     model_name = MODEL_TO_NAME.get(model, model)
     ax.plot(x_langs, y_scores, linewidth=6.0, label=model_name, marker=markers[i], color=MODEL_TO_COLOR.get(model_name.split("-")[0]))
 
-ax.set_ylabel("F1 score", fontsize=20)
+ax.set_ylabel("F1 score", fontsize=22)
 ax.margins(x=0.01) # Reduce whitespace left & right
 
-plt.xticks(rotation=45) #plt.xticks(rotation=90, ha='right')
+plt.xticks(rotation=45, fontsize=20) #plt.xticks(rotation=90, ha='right')
 plt.legend(fontsize=25)
-plt.savefig('multilingual_tatoeba.png', dpi=300, bbox_inches='tight')
+plt.savefig('multilingual_tatoeba.pdf', dpi=300, bbox_inches='tight')
 
 
 ### CLASSIFICATION ###
@@ -215,12 +215,12 @@ for i, model in enumerate(BITEXT_MODELS):
     model_name = MODEL_TO_NAME.get(model, model)
     ax.plot(x_langs, y_scores, linewidth=6.0, label=model_name, marker=markers[i], color=MODEL_TO_COLOR.get(model_name.split("-")[0]))
 
-ax.set_ylabel("Accuracy", fontsize=20)
+ax.set_ylabel("Accuracy", fontsize=22)
 
-plt.xticks(rotation=45) #plt.xticks(rotation=90, ha='right')
+plt.xticks(rotation=45, fontsize=20) #plt.xticks(rotation=90, ha='right')
 # plt.legend(fontsize=15)
 
-plt.savefig('multilingual_clf.png', dpi=300, bbox_inches='tight')
+plt.savefig('multilingual_clf.pdf', dpi=300, bbox_inches='tight')
 
 
 
@@ -319,13 +319,11 @@ for i, model in enumerate(BITEXT_MODELS):
         linewidth=6.0,
     )
 
-ax_multi.set_ylabel("Cos. Sim. Spearman Corr.", fontsize=20)
-#plt.xticks(rotation=45)
-#ax_cross.xticks(rotation=45)
-#print("Got ticks", ax_multi.get_xticklabels())
-#ax_multi.set_xticks(ax_multi.get_xticks(), ax_multi.get_xticklabels(), rotation=45, ha='right')
-#ax_cross.set_xticks(ax_cross.get_xticks(), ax_cross.get_xticklabels(), rotation=45, ha='right')
+ax_multi.set_ylabel("Cos. Sim. Spearman Corr.", fontsize=22)
 
-# plt.legend(fontsize=15)
+ax_multi.tick_params(axis='both', which='minor', labelsize=20)
+ax_multi.tick_params(axis='both', which='major', labelsize=20)
+ax_cross.tick_params(axis='both', which='minor', labelsize=20, rotation=45)
+ax_cross.tick_params(axis='both', which='major', labelsize=20, rotation=45)
 
-plt.savefig('multilingual_sts.png', dpi=300, bbox_inches='tight')
+plt.savefig('multilingual_sts.pdf', dpi=300, bbox_inches='tight')

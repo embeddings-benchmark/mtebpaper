@@ -343,7 +343,6 @@ lgnd = plt.legend(
 # Rescale bubbles to have the same size
 for handle in lgnd.legendHandles:
     handle.set_sizes([70.0])
-    
 
 
-plt.savefig('benchmark.png', dpi=300, bbox_inches='tight')
+plt.savefig('benchmark.pdf', dpi=300, bbox_inches='tight')
