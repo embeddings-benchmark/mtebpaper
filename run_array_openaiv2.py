@@ -1,5 +1,6 @@
 """
-openai==0.11.4
+openai==0.25.0
+tiktoken==0.1.1
 """
 import argparse
 import logging
