@@ -155,7 +155,7 @@ class OpenAIEmbedder:
                 used_indices = []
                 for j, txt in enumerate(batch):
                     # tokens = self.tokenizer.encode(txt, add_special_tokens=False)
-                    tokens = enc.encode(txt)
+                    tokens = self.tokenizer.encode(txt)
                     token_len = len(tokens)
                     if token_len == 0:
                         raise ValueError("Empty items should be cleaned prior to running")
