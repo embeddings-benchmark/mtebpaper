@@ -198,7 +198,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--startid", type=int)
     parser.add_argument("--endid", type=int)
-    parser.add_argument("--engine", type=str, default="text-similarity-ada-001")
+    parser.add_argument("--engine", type=str, default="text-embedding-ada-002")
     parser.add_argument("--lang", type=str, default="en")
     parser.add_argument("--taskname", type=str, default=None)
     parser.add_argument("--batchsize", type=int, default=2048)
