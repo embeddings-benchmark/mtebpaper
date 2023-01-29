@@ -3,6 +3,12 @@ import logging
 import os
 from typing import Dict, List, Union
 
+from mteb import MTEB
+import numpy as np
+from sentence_transformers import SentenceTransformer
+import torch.multiprocessing as mp
+from torch import Tensor
+
 logging.basicConfig(level=logging.INFO)
 
 logger = logging.getLogger("main")
@@ -14,10 +20,6 @@ os.environ["HF_DATASETS_CACHE"]="/gpfswork/rech/six/commun/datasets"
 os.environ["HF_MODULES_CACHE"]="/gpfswork/rech/six/commun/modules"
 os.environ["HF_METRICS_CACHE"]="/gpfswork/rech/six/commun/metrics"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-
-from mteb import MTEB
-from sentence_transformers import SentenceTransformer
-import torch.multiprocessing as mp
 
 
 TASK_LIST_CLASSIFICATION = [
@@ -115,6 +117,7 @@ class SentenceTransformerSpecb(SentenceTransformer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         tokens = ["[SOS]", "{SOS}"]
+        self.sep = " "
         self._first_module().tokenizer.add_tokens(tokens, special_tokens=True)
         self._first_module().auto_model.resize_token_embeddings(len(self._first_module().tokenizer))
         # Will be replaced with the rep tokens in the model ones
@@ -146,13 +149,13 @@ class SentenceTransformerSpecb(SentenceTransformer):
         # Will be replaced with [ in the models tokenization
         # If we would put [ here, there is a risk of it getting chained with a different token when encoding
         queries = ["[SOS]" + q for q in queries]
-        return self.model.encode(queries, batch_size=batch_size, **kwargs)
+        return super().encode(queries, batch_size=batch_size, **kwargs)
     
     def encode_corpus(self, corpus: List[Dict[str, str]], batch_size: int = 8, **kwargs) -> Union[List[Tensor], np.ndarray, Tensor]:
         # Will be replaced with { in the models tokenization
         # If we would put { here, there is a risk of it getting chained with a different token when encoding
         sentences = [("{SOS}" + doc["title"] + self.sep + doc["text"]).strip() if "title" in doc else "{SOS}" + doc["text"].strip() for doc in corpus]
-        return self.model.encode(sentences, batch_size=batch_size, **kwargs)
+        return super().encode(sentences, batch_size=batch_size, **kwargs)
 
     def encode_corpus_parallel(
         self, corpus: List[Dict[str, str]], pool: Dict[str, object], batch_size: int, chunk_id: int, **kwargs
