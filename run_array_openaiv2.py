@@ -1,6 +1,6 @@
 """
-openai==0.25.0
-tiktoken==0.1.1
+openai==0.26.4
+tiktoken==0.2.0
 """
 import argparse
 import logging
@@ -8,6 +8,7 @@ import os
 import pathlib
 import pickle
 
+from mteb import MTEB
 import openai
 import tiktoken
 from transformers import GPT2TokenizerFast
@@ -23,9 +24,6 @@ os.environ["HF_METRICS_CACHE"]="/gpfswork/rech/six/commun/metrics"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 API_KEY = "YOUR_KEY"
-
-from mteb import MTEB
-
 
 TASK_LIST_CLASSIFICATION = [
     "AmazonCounterfactualClassification",
@@ -113,18 +111,19 @@ TASK_LIST_STS = [
 ]
 
 TASK_LIST = TASK_LIST_CLASSIFICATION + TASK_LIST_CLUSTERING + TASK_LIST_PAIR_CLASSIFICATION + TASK_LIST_RERANKING + TASK_LIST_RETRIEVAL + TASK_LIST_STS
+
 class OpenAIEmbedder:
     """
-    Benchmark OpenAIs embeddings endpoint on USEB.
+    Benchmark OpenAIs embeddings endpoint.
     """
     def __init__(self, engine, task_name=None, batch_size=32, save_emb=False, **kwargs):
         self.engine = engine
-        self.max_token_len = 2046 # 2048 - 2 special tokens
+        self.max_token_len = 8191
         self.batch_size = batch_size
-        self.save_emb = False # Problematic as the filenames end up being the same
+        self.save_emb = save_emb # Problematic as the filenames may end up being the same
         self.base_path = f"embeddings/{engine.split('/')[-1]}/"
         # self.tokenizer = GPT2TokenizerFast.from_pretrained("gpt2")
-        self.tokenizer = tiktoken.get_encoding("cl100k_base")
+        self.tokenizer = tiktoken.encoding_for_model(engine)
         self.task_name = task_name
 
         if save_emb:
@@ -143,7 +142,7 @@ class OpenAIEmbedder:
 
         fin_embeddings = []
 
-        embedding_path = f"{self.base_path}/{self.task_name}_{sentences[0][:5]}_{sentences[-1][-5:]}.pickle"
+        embedding_path = f"{self.base_path}/{self.task_name}_{sentences[0][:10]}_{sentences[-1][-10:]}.pickle"
         if sentences and os.path.exists(embedding_path):
             loaded = pickle.load(open(embedding_path, "rb"))
             fin_embeddings = loaded["fin_embeddings"]
@@ -157,8 +156,9 @@ class OpenAIEmbedder:
                     # tokens = self.tokenizer.encode(txt, add_special_tokens=False)
                     tokens = self.tokenizer.encode(txt)
                     token_len = len(tokens)
-                    if token_len == 0:
-                        raise ValueError("Empty items should be cleaned prior to running")
+                    if not(txt):
+                        print("Detected empty item, which is not allowed by the OpenAI API - Replacing with empty space")
+                        txt = " "
                     if token_len > self.max_token_len:
                         tokens = tokens[:self.max_token_len]
                     # For some characters the API raises weird errors, e.g. input=[[126]]
@@ -169,7 +169,9 @@ class OpenAIEmbedder:
 
                 out = [[]] * len(batch)
                 if all_tokens:
-                    response = openai.Engine(id=self.engine).embeddings(input=all_tokens)
+                    response = openai.Embedding.create(input=all_tokens, model=self.engine)
+                    # May want to sleep here to avoid getting too many requests error
+                    # time.sleep(1)
                     assert len(response["data"]) == len(
                         all_tokens
                     ), f"Sent {len(all_tokens)}, got {len(response['data'])}"
@@ -207,17 +209,17 @@ def parse_args():
 
 def main(args):
 
-    # Different batch size than the arg
-    # The below is used to send X embeddings to the API
-    # The CLI arg is how much will be saved / pickle file
+    # There are two different batch sizes
+    # OpenAIEmbedder(...) batch size arg is used to send X embeddings to the API
+    # evaluation.run(...) batch size arg is how much will be saved / pickle file (as it's the total sent to the embed function)
 
     for task in TASK_LIST[args.startid:args.endid]:
         print("Running task: ", task)
-        model = OpenAIEmbedder(args.engine, task_name=task, batchsize=256, save_emb=True)
+        model = OpenAIEmbedder(args.engine, task_name=task, batch_size=args.batchsize, save_emb=True)
         eval_splits = ["validation"] if task == "MSMARCO" else ["test"]
         model_name = args.engine.split("/")[-1].split("_")[-1]
         evaluation = MTEB(tasks=[task], task_langs=[args.lang])
-        evaluation.run(model, output_folder=f"results/{model_name}", batch_size=args.batchsize, eval_splits=eval_splits)
+        evaluation.run(model, output_folder=f"results/{model_name}", batch_size=args.batchsize, eval_splits=eval_splits, corpus_chunk_size=10000)
 
 if __name__ == "__main__":
     args = parse_args()
