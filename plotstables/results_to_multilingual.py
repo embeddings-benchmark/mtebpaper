@@ -218,7 +218,7 @@ for i, model in enumerate(BITEXT_MODELS):
 ax.set_ylabel("Accuracy", fontsize=22)
 
 plt.xticks(rotation=45, fontsize=20) #plt.xticks(rotation=90, ha='right')
-# plt.legend(fontsize=15)
+plt.legend(fontsize=25)
 
 plt.savefig('multilingual_clf.pdf', dpi=300, bbox_inches='tight')
 
