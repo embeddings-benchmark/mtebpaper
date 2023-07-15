@@ -154,11 +154,11 @@ class OpenAIEmbedder:
                 used_indices = []
                 for j, txt in enumerate(batch):
                     # tokens = self.tokenizer.encode(txt, add_special_tokens=False)
-                    tokens = self.tokenizer.encode(txt)
-                    token_len = len(tokens)
                     if not(txt):
                         print("Detected empty item, which is not allowed by the OpenAI API - Replacing with empty space")
                         txt = " "
+                    tokens = self.tokenizer.encode(txt)
+                    token_len = len(tokens)
                     if token_len > self.max_token_len:
                         tokens = tokens[:self.max_token_len]
                     # For some characters the API raises weird errors, e.g. input=[[126]]
