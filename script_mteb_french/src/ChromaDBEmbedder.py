@@ -4,7 +4,8 @@ from chromadb import EmbeddingFunction
 
 class ChromaDBEmbedder:
     """Handles the mecanics of producing and saving embeddings in chromaDB
-    It needs an embedding function, as described in the chromaDB's documentation
+    It needs an embedding function, as described in the chromaDB's documentation : https://docs.trychroma.com/embeddings
+    This embedding function specifies the wey embeddings are obtained, from a model or api
     """
     def __init__(
             self,
@@ -34,14 +35,18 @@ class ChromaDBEmbedder:
         if isinstance(sentences, str):
             sentences = [sentences]
 
-        all_embeddings = []
+        # use a dict to store a mapping of {sentence: embedding}
+        # we have to do this because collection.get() returns embeddings in a random order...
+        sent_emb_mapping = {}
         for i in range(0, len(sentences), self.batch_size):
             batch_sentences = sentences[i : i + self.batch_size]
             # check if we have the embedding in chroma
             sentences_in_chroma = self.collection.get(ids=batch_sentences, include=["documents", "embeddings"])
-            # if we already have all the sentences in chroma, add those embeddings those to return
+
+            # if we already have all the sentences in chroma, add those embeddings to the mapping dict
             if len(batch_sentences) == len(sentences_in_chroma["documents"]):
-                all_embeddings.extend(sentences_in_chroma["embeddings"])
+                sent_emb_mapping = sent_emb_mapping | dict(zip(sentences_in_chroma["ids"], sentences_in_chroma["embeddings"]))
+
             # if we don't have all the sentences in chroma...
             else:
                 missing_sentences = [s for s in batch_sentences if s not in sentences_in_chroma["ids"]]
@@ -51,12 +56,17 @@ class ChromaDBEmbedder:
                         documents=missing_sentences,
                         ids=missing_sentences
                         )
-                    all_embeddings.extend(self.collection.get(ids=batch_sentences, include=["embeddings"])["embeddings"])
+                    embs = self.collection.get(ids=batch_sentences, include=["embeddings"])
+                    sent_emb_mapping = sent_emb_mapping | dict(zip(embs["ids"], embs["embeddings"]))
                 else:
-                    all_embeddings.extend(self.embedding_function(missing_sentences) + sentences_in_chroma["embeddings"])
+                    # first add what we have in chroma
+                    sent_emb_mapping = sent_emb_mapping | dict(zip(sentences_in_chroma["ids"], sentences_in_chroma["embeddings"]))
+                    # then add what we obtain from encoding function
+                    sent_emb_mapping = sent_emb_mapping | dict(zip(missing_sentences, self.embedding_function(missing_sentences)))
                 # we may need to wait to avoid throttling the api
                 # time.sleep(1)
-        return all_embeddings
+        # return embeddings in correct order
+        return [sent_emb_mapping[s] for s in sentences]
 
   
     @property
