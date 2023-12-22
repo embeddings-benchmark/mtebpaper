@@ -6,8 +6,10 @@ from src.ModelConfig import ModelConfig
 
 # Build list of model configs to use for benchmark
 ## ModelConfig(model_name, model_type, max_token_length(optional))
+# TODO: add mecanic to model config to just build model config from model name, avoiding the user to use ModelConfig
 MODELS = [
-    ModelConfig("voyage-lite-01", model_type="voyage_ai")
+    ModelConfig("voyage-lite-01", model_type="voyage_ai"),
+    ModelConfig("dangvantuan/sentence-camembert-base", model_type="sentence_transformer")
     ]
 
 TASKS = [
