@@ -1,8 +1,11 @@
 from typing import List
 import chromadb
-from chromadb import Documents, EmbeddingFunction, Embeddings
+from chromadb import EmbeddingFunction
 
-class APIEmbedder:
+class ChromaDBEmbedder:
+    """Handles the mecanics of producing and saving embeddings in chromaDB
+    It needs an embedding function, as described in the chromaDB's documentation
+    """
     def __init__(
             self,
             embedding_function:EmbeddingFunction=None,
@@ -12,23 +15,24 @@ class APIEmbedder:
             path_to_chromadb="./chromaDB",
             **kwargs,
         ):
+        self.client = chromadb.PersistentClient(path=path_to_chromadb)
+
         self.batch_size = batch_size
         self.save_embbeddings = save_embbedings
-        self.task_name = task_name
-
         if embedding_function is None:
             raise ValueError(f"You must provide an embedding function. Embedding functions available are {chromadb.utils.embedding_functions.get_builtins()}. For more information, please visit : https://docs.trychroma.com/embeddings")
         else:
             self.embedding_function = embedding_function
-
-        client = chromadb.PersistentClient(path=path_to_chromadb)
-        self.collection = client.get_or_create_collection(
-            name=self.task_name,
-            embedding_function=self.embedding_function
-            )
+        self._task_name = task_name
+        # setup the chromaDB collection
+        self.set_collection(self.task_name)
 
 
-    def encode(self, sentences:List[str]):
+    def encode(self, sentences:List[str], **kwargs):
+
+        # if sentences is a string, change to List[str]
+        if isinstance(sentences, str):
+            sentences = [sentences]
 
         all_embeddings = []
         for i in range(0, len(sentences), self.batch_size):
@@ -53,6 +57,27 @@ class APIEmbedder:
                 # we may need to wait to avoid throttling the api
                 # time.sleep(1)
         return all_embeddings
-            
+
+  
+    @property
+    def task_name(self):
+        return self._task_name
 
 
+    @task_name.setter
+    def task_name(self, value):
+        # if attribute "task_name" changes, change the collection
+        self.set_collection(value)
+        self._task_name = value
+
+
+    def set_collection(self, collection_name:str):
+        """Set the collection. Used whenever self.task_name is changed
+
+        Args:
+            collection_name (str): the name of the collection
+        """
+        self.collection = self.client.get_or_create_collection(
+            name=collection_name,
+            embedding_function=self.embedding_function
+            )
