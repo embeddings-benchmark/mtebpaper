@@ -1,4 +1,5 @@
 from .VoyageAIEmbeddingFunction import VoyageAIEmbeddingFunction
+from .SentenceTransformerEmbeddingFunction import SentenceTransformerEmbeddingFunction
 from .ChromaDBEmbedder import ChromaDBEmbedder
 
 class ModelConfig(ChromaDBEmbedder):
@@ -22,15 +23,17 @@ class ModelConfig(ChromaDBEmbedder):
         self.model_name = model_name
         self._model_type = model_type\
             if model_type in self._max_token_per_model.keys()\
-            else ModelConfig.infer_model_type(model_name)
+            else self.infer_model_type(model_name)
         self._max_token_length = max_token_length
         self.embedding_function = self.get_embedding_function()
 
         # inherit the saving of embeddings, and encoding logic from ChromDBEmbedder
+        save_embbeddings = False if model_type == "sentence_transformer" else True
         super().__init__(
             self.embedding_function,
             task_name=task_name,
             path_to_chromadb=f"./ChromaDB/{self.model_name}",
+            save_embbedings=save_embbeddings
             )
 
 
@@ -42,7 +45,8 @@ class ModelConfig(ChromaDBEmbedder):
                 "voyage-lite-01": 4096,
                 "voyage-lite-01-instruct": 4096
                 },
-            "open_ai": 8191
+            "open_ai": 8191,
+            "sentence_transformer": 4096
         }
     
         
@@ -81,7 +85,7 @@ class ModelConfig(ChromaDBEmbedder):
         self._max_token_length = value
 
 
-    def infer_model_type(self):
+    def infer_model_type(self, model_name):
         print("The provided model type is not recognized. Trying to infer model type using model name...")
         raise NotImplementedError(f"Please specify model type among supported types : {self._available_model_types}")
     
@@ -93,4 +97,4 @@ class ModelConfig(ChromaDBEmbedder):
             case "open_ai":
                 raise NotImplementedError()
             case "sentence_transformer":
-                raise NotImplementedError()
+                return SentenceTransformerEmbeddingFunction(self.model_name, self.max_token_length)
