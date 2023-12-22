@@ -1,2 +1,4 @@
 *.DS_Store
 results
+.env
+__pycache__
