@@ -1,11 +1,11 @@
+import os
 from dotenv import load_dotenv
 import tiktoken
 import voyageai as vai
 from chromadb import EmbeddingFunction, Documents, Embeddings
 
-# load the API key
+# load the API key from .env
 load_dotenv()
-
 
 class VoyageAIEmbeddingFunction(EmbeddingFunction):
     def __init__(self,
@@ -17,6 +17,7 @@ class VoyageAIEmbeddingFunction(EmbeddingFunction):
         # Use tiktoken to compute token length
         # As we may not know the exact tokenizer used for the model, we generically use the one of adav2
         self.tokenizer = tiktoken.get_encoding("cl100k_base")
+        vai.api_key = os.environ.get("VOYAGE_API_KEY", None)
 
 
     def truncate_sentences(self, sentences:Documents) -> Documents:
