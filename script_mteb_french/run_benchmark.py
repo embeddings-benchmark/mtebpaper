@@ -36,7 +36,7 @@ def main(args):
     for model_config in MODELS:
         for task in TASKS:
             # change the task in the model config ! This is important to specify the chromaDB collection !
-            model_config.task_name = task
+            model_config.collection_name = task
             model_name = model_config.model_name
             print("Running task: ", task, "with model", model_name)
             eval_splits = ["validation"] if task == "MSMARCO" else ["test"]
