@@ -12,7 +12,7 @@ class VoyageAIEmbeddingFunction(EmbeddingFunction):
             model_name:str="voyage-lite-01",
             max_token_length:int=4096,
             ):
-        self.model_name = model_name
+        self._model_name = model_name
         self.max_token_length = max_token_length
         # Use tiktoken to compute token length
         # As we may not know the exact tokenizer used for the model, we generically use the one of adav2
@@ -40,6 +40,6 @@ class VoyageAIEmbeddingFunction(EmbeddingFunction):
 
     def __call__(self, input: Documents) -> Embeddings:
         input = self.truncate_sentences(input)
-        embeddings = vai.get_embeddings(input, model=self.model_name, input_type=None)
+        embeddings = vai.get_embeddings(input, model=self._model_name, input_type=None)
         return embeddings
 
