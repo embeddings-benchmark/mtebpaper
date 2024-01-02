@@ -1,6 +1,12 @@
+import os
+from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction
+from dotenv import load_dotenv
+
 from .VoyageAIEmbeddingFunction import VoyageAIEmbeddingFunction
 from .SentenceTransformerEmbeddingFunction import SentenceTransformerEmbeddingFunction
 from .ChromaDBEmbedder import ChromaDBEmbedder
+
+load_dotenv()
 
 class ModelConfig(ChromaDBEmbedder):
     """simple class to get the model name and type
@@ -63,13 +69,13 @@ class ModelConfig(ChromaDBEmbedder):
 
     @property
     def max_token_length(self):
-        
         if self.model_type == "voyage_ai":
             true_max = self._max_token_per_model[self.model_type][self.model_name]
         else:
             true_max = self._max_token_per_model[self.model_type]
         if self._max_token_length is None or self._max_token_length >= true_max:
             return true_max
+        
         return self._max_token_length
 
 
@@ -92,8 +98,17 @@ class ModelConfig(ChromaDBEmbedder):
     def get_embedding_function(self):
         match self.model_type:
             case "voyage_ai":
+                api_key = os.environ.get("VOYAGE_API_KEY", None)
+                if api_key is None:
+                    raise ValueError("Please make sure 'VOYAGE_API_KEY' is setup as an environment variable")
                 return VoyageAIEmbeddingFunction(self.model_name, self.max_token_length)
             case "open_ai":
-                raise NotImplementedError()
+                api_key = os.environ.get("OPENAI_API_KEY", None)
+                if api_key is None:
+                    raise ValueError("Please make sure 'OPENAI_API_KEY' is setup as an environment variable")
+                return OpenAIEmbeddingFunction(
+                    api_key=api_key,
+                    model_name=self.model_name
+                    )
             case "sentence_transformer":
                 return SentenceTransformerEmbeddingFunction(self.model_name, self.max_token_length)

@@ -18,7 +18,7 @@ class ChromaDBEmbedder:
             **kwargs,
         ):
         self.client = chromadb.PersistentClient(
-            path=os.path.join(path_to_chromadb, embedding_function.model_name)
+            path=os.path.join(path_to_chromadb, embedding_function._model_name)
             )
 
         self.batch_size = batch_size

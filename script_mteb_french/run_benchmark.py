@@ -9,13 +9,14 @@ from src.ModelConfig import ModelConfig
 # TODO: add mecanic to model config to just build model config from model name, avoiding the user to use ModelConfig
 MODELS = [
     ModelConfig("voyage-lite-01", model_type="voyage_ai"),
-    ModelConfig("dangvantuan/sentence-camembert-base", model_type="sentence_transformer")
+    ModelConfig("dangvantuan/sentence-camembert-base", model_type="sentence_transformer"),
+    ModelConfig("intfloat/multilingual-e5-large", model_type="sentence_transformer"),
+    ModelConfig("text-embedding-ada-002", model_type="open_ai")
     ]
 
 TASKS = [
     "SyntecRetrieval"
 ]
-
 
 def parse_args() -> argparse.Namespace:
     """Parse command line arguments
