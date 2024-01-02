@@ -1,26 +1,30 @@
 import tiktoken
+import torch
 from sentence_transformers import SentenceTransformer
 from chromadb import EmbeddingFunction, Documents, Embeddings
 
 """
-IMPORTANT: THIS SCRIPT MAY NOT BE USEFULL !!
-try using instead:
-
+IMPORTANT: This script is used to override this :
 from chromadb.utils.embedding_functions import SentenceTransformerEmbeddingFunction
 
-emb_func = SentenceTransformerEmbeddingFunction(hf_model_name)
+as the embedding function provided by chroma generates bug for not native sentence_transformer models
 """
 class SentenceTransformerEmbeddingFunction(EmbeddingFunction):
     def __init__(self,
             model_name:str="dangvantuan/sentence-camembert-base",
             max_token_length:int=4096,
+            normalize_embeddings=True
             ):
-        self.model_name = model_name
+        self._model_name = model_name
+        self.normalize_embeddings = normalize_embeddings
         self.max_token_length = max_token_length
         # Use tiktoken to compute token length
         # As we may not know the exact tokenizer used for the model, we generically use the one of adav2
         self.tokenizer = tiktoken.get_encoding("cl100k_base")
-        self.model = SentenceTransformer(model_name)
+        self.model = SentenceTransformer(
+            model_name,
+            device="cuda" if torch.cuda.is_available() else "cpu"
+            )
 
 
     def truncate_sentences(self, sentences:Documents) -> Documents:
@@ -44,7 +48,7 @@ class SentenceTransformerEmbeddingFunction(EmbeddingFunction):
     def __call__(self, input: Documents) -> Embeddings:
         input = list(input)
         input = self.truncate_sentences(input)
-        embeddings = self.model.encode(input, normalize_embeddings=False)
+        embeddings = self.model.encode(input, normalize_embeddings=self.normalize_embeddings)
         embeddings = embeddings.tolist()
         return embeddings
 
