@@ -17,10 +17,11 @@ class VoyageAIEmbeddingFunction(CustomEmbeddingFunction):
         
         self._model_name = model_name
 
-        vai.api_key = os.environ.get("VOYAGE_API_KEY", None)
+        api_key = os.environ.get("VOYAGE_API_KEY", None)
+        if api_key is None:
+            raise ValueError("Please make sure 'VOYAGE_API_KEY' is setup as an environment variable")
+        vai.api_key = api_key
 
 
     def encode_sentences(self, input:Documents) -> Embeddings: 
         return vai.get_embeddings(input, model=self._model_name, input_type=None)
-
-
