@@ -1,5 +1,7 @@
-import sys
 import json
+from typing import Dict
+import sys
+
 from huggingface_hub import HfFileSystem
 from sentence_transformers import SentenceTransformer
 
@@ -23,7 +25,16 @@ SENTENCE_TRANSFORMER_MODELS = [
 HFFS = HfFileSystem()
 
 
-def get_model_specs(model_name):
+def get_model_specs(model_name:str) -> Dict:
+    """Get the specifications of a HF model
+
+    Args:
+        model_name (str): the hf name of the model
+            (i.e. 'sentence-transformers/all-MiniLM-L6-v2')
+
+    Returns:
+        Dict: the specifications of the model
+    """
         
     model = SentenceTransformer(model_name)
     specs = {
@@ -35,7 +46,7 @@ def get_model_specs(model_name):
     return specs
 
 
-def get_size_of_object(model, seen=None):
+def get_size_of_object(model:SentenceTransformer, seen=None) -> float:
     """Recursively finds size of objects"""
     size = sys.getsizeof(model)
     if seen is None:
