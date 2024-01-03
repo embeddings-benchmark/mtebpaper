@@ -1,8 +1,9 @@
 import tiktoken
 from chromadb import EmbeddingFunction, Documents, Embeddings
+from abc import ABC, abstractmethod
 
 
-class CustomEmbeddingFunction(EmbeddingFunction):
+class CustomEmbeddingFunction(EmbeddingFunction, ABC):
     def __init__(self,
             max_token_length:int=4096,
             ):
@@ -12,7 +13,7 @@ class CustomEmbeddingFunction(EmbeddingFunction):
         self.tokenizer = tiktoken.get_encoding("cl100k_base")
 
 
-    def truncate_sentences(self, sentences:Documents) -> Documents:
+    def truncate_documents(self, sentences:Documents) -> Documents:
         """Truncates the sentences considering the max context window of the model
 
         Args:
@@ -39,14 +40,25 @@ class CustomEmbeddingFunction(EmbeddingFunction):
         Returns:
             Embeddings: the encoded sentences
         """ 
-        input = self.truncate_sentences(input)
-        embeddings = self.encode_sentences(input)
+        input = self.truncate_documents(input)
+        embeddings = self.encode_documents(input)
 
         return embeddings
     
     
-    def encode_sentences(self, input: Documents) -> Embeddings:
-        """Needs to be implemented by the sub class
+    @abstractmethod
+    def encode_documents(self, input: Documents) -> Embeddings:
+        """Needs to be implemented by the child class. Takes a list of strings
+        and returns the corresponding embedding
+
+        Args:
+            input (Documents): list of documents (strings)
+
+        Raises:
+            NotImplementedError: Needs to be implements by child class
+
+        Returns:
+            Embeddings: list of embeddings
         """
 
         raise NotImplementedError()
