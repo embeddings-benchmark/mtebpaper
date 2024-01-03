@@ -3,10 +3,22 @@ import json
 from huggingface_hub import HfFileSystem
 from sentence_transformers import SentenceTransformer
 
+"""
+This script's purpose is to get the specifications of models in terms of :
+- Size (in GB)
+- number of parameters
+- input size (number of tokens)
+- Embedding size (vector dimension)
+
+Just specify the names of the HF models for which you want the specs,
+as a list of names named SENTENCE_TRANSFORMER_MODELS
+"""
 
 SENTENCE_TRANSFORMER_MODELS = [
     "bert-base-multilingual-cased",
+    "dangvantuan/sentence-camembert-base"
 ]
+
 
 HFFS = HfFileSystem()
 
@@ -16,7 +28,7 @@ def get_model_specs(model_name):
     model = SentenceTransformer(model_name)
     specs = {
         "size_in_GB": get_size_using_HF_filsystem(model_name),
-        "n_params": model._parameters,
+        "n_params": model._parameters, # TODO: Change with Wissam's method
         "input_size": model._modules.get("0").max_seq_length,
         "embedding_size": model.encode("dummy sentence").shape[0]
     }
