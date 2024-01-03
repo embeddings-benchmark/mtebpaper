@@ -27,8 +27,9 @@ class ChromaDBEmbedder:
         self.client = chromadb.PersistentClient(
             path=path_to_chromadb
             )
+        collection_name = embedding_function.model_name.replace("/", "-")[:63]
         self.collection = self.client.get_or_create_collection(
-            name=embedding_function.model_name,
+            name=collection_name,
             embedding_function=self.embedding_function
             )
 
