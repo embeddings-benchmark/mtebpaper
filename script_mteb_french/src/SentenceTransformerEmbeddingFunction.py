@@ -27,7 +27,7 @@ class SentenceTransformerEmbeddingFunction(CustomEmbeddingFunction):
             )
     
 
-    def encode_sentences(self, input:Documents) -> Embeddings:
+    def encode_documents(self, input:Documents) -> Embeddings:
         embeddings = self.model.encode(input, normalize_embeddings=self.normalize_embeddings)
 
         return embeddings.tolist()

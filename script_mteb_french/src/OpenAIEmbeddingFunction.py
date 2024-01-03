@@ -30,5 +30,5 @@ class OpenAIEmbeddingFunction(CustomEmbeddingFunction, OAIEMbFunc):
         
         self._model_name = model_name
 
-    def encode_sentences(self, input:Documents) -> Embeddings: 
+    def encode_documents(self, input:Documents) -> Embeddings: 
         return OAIEMbFunc.__call__(self, input)
