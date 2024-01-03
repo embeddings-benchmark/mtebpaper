@@ -25,6 +25,11 @@ class SentenceTransformerEmbeddingFunction(CustomEmbeddingFunction):
             model_name,
             device="cuda" if torch.cuda.is_available() else "cpu"
             )
+        
+    
+    @property
+    def model_name(self):
+        return self._model_name
     
 
     def encode_documents(self, input:Documents) -> Embeddings:

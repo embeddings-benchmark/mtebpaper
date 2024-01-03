@@ -13,6 +13,12 @@ class CustomEmbeddingFunction(EmbeddingFunction, ABC):
         self.tokenizer = tiktoken.get_encoding("cl100k_base")
 
 
+    @property
+    @abstractmethod
+    def model_name(self):
+        pass
+
+
     def truncate_documents(self, sentences:Documents) -> Documents:
         """Truncates the sentences considering the max context window of the model
 

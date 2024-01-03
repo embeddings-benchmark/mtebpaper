@@ -28,7 +28,11 @@ class OpenAIEmbeddingFunction(CustomEmbeddingFunction, OAIEMbFunc):
             model_name=model_name
             )
         
-        self._model_name = model_name
 
+    @property
+    def model_name(self):
+        return self._model_name
+    
+    
     def encode_documents(self, input:Documents) -> Embeddings: 
         return OAIEMbFunc.__call__(self, input)

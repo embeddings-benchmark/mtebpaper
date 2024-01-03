@@ -11,7 +11,12 @@ load_dotenv()
 class ModelConfig(ChromaDBEmbedder):
     """simple class to get the model name and type
     """
-    def __init__(self, model_name:str, model_type:str=None, max_token_length:int=None, collection_name:str="default_collection"):
+    def __init__(
+            self,
+            model_name:str,
+            model_type:str=None,
+            max_token_length:int=None,
+            ):
         """The model configuration to use for the benchmark
 
         Args:
@@ -37,7 +42,6 @@ class ModelConfig(ChromaDBEmbedder):
         save_embbeddings = False if model_type == "sentence_transformer" else True
         super().__init__(
             self.embedding_function,
-            collection_name=collection_name,
             save_embbedings=save_embbeddings
             )
 

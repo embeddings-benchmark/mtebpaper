@@ -23,5 +23,10 @@ class VoyageAIEmbeddingFunction(CustomEmbeddingFunction):
         vai.api_key = api_key
 
 
+    @property
+    def model_name(self):
+        return self._model_name
+
+
     def encode_documents(self, input:Documents) -> Embeddings: 
         return vai.get_embeddings(input, model=self._model_name, input_type=None)

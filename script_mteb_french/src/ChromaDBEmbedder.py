@@ -11,26 +11,26 @@ class ChromaDBEmbedder:
     def __init__(
             self,
             embedding_function:EmbeddingFunction=None,
-            collection_name:str="default_collection",
             batch_size:int=32,
             save_embbedings:bool=True,
             path_to_chromadb="./ChromaDB",
             **kwargs,
         ):
-        self.client = chromadb.PersistentClient(
-            path=os.path.join(path_to_chromadb, embedding_function._model_name)
-            )
-
         self.batch_size = batch_size
         self.save_embbeddings = save_embbedings
         if embedding_function is None:
             raise ValueError(f"You must provide an embedding function. Embedding functions available are {chromadb.utils.embedding_functions.get_builtins()}. For more information, please visit : https://docs.trychroma.com/embeddings")
         else:
             self.embedding_function = embedding_function
-        self._collection_name = collection_name
-        # setup the chromaDB collection
-        self.set_collection(self.collection_name)
 
+        # setup the chromaDB collection
+        self.client = chromadb.PersistentClient(
+            path=path_to_chromadb
+            )
+        self.collection = self.client.get_or_create_collection(
+            name=embedding_function.model_name,
+            embedding_function=self.embedding_function
+            )
 
     def encode(self, sentences:List[str], **kwargs):
 
@@ -70,27 +70,3 @@ class ChromaDBEmbedder:
                 # time.sleep(1)
         # return embeddings in correct order
         return [sent_emb_mapping[s] for s in sentences]
-
-  
-    @property
-    def collection_name(self):
-        return self._collection_name
-
-
-    @collection_name.setter
-    def collection_name(self, value):
-        # if attribute "collection_name" changes, change the collection
-        self.set_collection(value)
-        self._collection_name = value
-
-
-    def set_collection(self, collection_name:str):
-        """Set the collection. Used whenever self.collection_name is changed
-
-        Args:
-            collection_name (str): the name of the collection
-        """
-        self.collection = self.client.get_or_create_collection(
-            name=collection_name,
-            embedding_function=self.embedding_function
-            )
