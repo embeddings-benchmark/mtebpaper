@@ -1,7 +1,7 @@
 import os
-from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction
 from dotenv import load_dotenv
 
+from .OpenAIEmbeddingFunction import OpenAIEmbeddingFunction
 from .VoyageAIEmbeddingFunction import VoyageAIEmbeddingFunction
 from .SentenceTransformerEmbeddingFunction import SentenceTransformerEmbeddingFunction
 from .ChromaDBEmbedder import ChromaDBEmbedder
@@ -98,17 +98,8 @@ class ModelConfig(ChromaDBEmbedder):
     def get_embedding_function(self):
         match self.model_type:
             case "voyage_ai":
-                api_key = os.environ.get("VOYAGE_API_KEY", None)
-                if api_key is None:
-                    raise ValueError("Please make sure 'VOYAGE_API_KEY' is setup as an environment variable")
                 return VoyageAIEmbeddingFunction(self.model_name, self.max_token_length)
             case "open_ai":
-                api_key = os.environ.get("OPENAI_API_KEY", None)
-                if api_key is None:
-                    raise ValueError("Please make sure 'OPENAI_API_KEY' is setup as an environment variable")
-                return OpenAIEmbeddingFunction(
-                    api_key=api_key,
-                    model_name=self.model_name
-                    )
+                return OpenAIEmbeddingFunction(self.model_name, self.max_token_length)
             case "sentence_transformer":
                 return SentenceTransformerEmbeddingFunction(self.model_name, self.max_token_length)
