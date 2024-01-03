@@ -1,4 +1,5 @@
 from .ChromaDBEmbedder import ChromaDBEmbedder
+from .CustomEmbeddingFunction import CustomEmbeddingFunction
 from .VoyageAIEmbeddingFunction import VoyageAIEmbeddingFunction
 from .SentenceTransformerEmbeddingFunction import SentenceTransformerEmbeddingFunction
 from .ModelConfig import ModelConfig
