@@ -1,7 +1,7 @@
 """This script is used to download all models, for them to be used even without internet"""
 
 
-SENTENCE_TRANSORMERS_MODELS = [
+SENTENCE_TRANSORMER_MODELS = [
     "camembert/camembert-base",
     "camembert/camembert-large",
     "bert-base-multilingual-cased",

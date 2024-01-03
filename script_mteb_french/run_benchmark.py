@@ -11,7 +11,7 @@ benchmark_is_ready = False
 #############################
 # Step 1 : Setup model list #
 #############################
-SENTENCE_TRANSORMERS_MODELS = [
+SENTENCE_TRANSORMER_MODELS = [
     "camembert/camembert-base",
     "camembert/camembert-large",
     "bert-base-multilingual-cased",
@@ -65,13 +65,15 @@ TASKS = [
 # Build list of model configs based on the lists above
 ## ModelConfig(model_name, model_type, max_token_length(optional))
 if benchmark_is_ready:
-    MODELS = [ModelConfig(name, model_type="sentence_transformer") for name in SENTENCE_TRANSORMERS_MODELS]
+    MODELS = [ModelConfig(name, model_type="sentence_transformer") for name in SENTENCE_TRANSORMER_MODELS]
     MODELS.extend([ModelConfig(name, model_type="voyage_ai") for name in VOYAGE_MODELS])
     MODELS.extend([ModelConfig(name, model_type="open_ai") for name in OPEN_AI_MODELS])
     MODELS.extend([ModelConfig(name, model_type="laser") for name in LASER_MODELS])
 else:
     MODELS = [
-        ModelConfig("Geotrend/distilbert-base-fr-cased", model_type="sentence_transformer"),
+        #ModelConfig("text-embedding-ada-002", model_type="open_ai"),
+        #ModelConfig("voyage-lite-01", model_type="voyage_ai"),
+        ModelConfig("sentence-transformers/all-MiniLM-L6-v2", model_type="sentence_transformer")
         ]
 
 
@@ -94,7 +96,6 @@ def main(args):
     for model_config in MODELS:
         for task in TASKS:
             # change the task in the model config ! This is important to specify the chromaDB collection !
-            model_config.collection_name = task
             model_name = model_config.model_name
             print("Running task: ", task, "with model", model_name)
             eval_splits = ["validation"] if task == "MSMARCO" else ["test"]
