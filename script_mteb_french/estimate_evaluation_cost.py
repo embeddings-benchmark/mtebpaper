@@ -43,22 +43,16 @@ TASK_LIST_PAIR_CLASSIFICATION = [
     "OpusparcusPC",
 ]
 
-TASK_LIST_RERANKING = [
-    "SyntecReranking",
-    "AlloprofReranking"
-]
+TASK_LIST_RERANKING = ["SyntecReranking", "AlloprofReranking"]
 
 TASK_LIST_RETRIEVAL = [
-    "AlloprofRetrieval", 
-    "BSARDRetrieval", 
+    "AlloprofRetrieval",
+    "BSARDRetrieval",
     "HagridRetrieval",
-    "SyntecRetrieval"
+    "SyntecRetrieval",
 ]
 
-TASK_LIST_STS = [
-    "STSBenchmarkMultilingualSTS",
-    "STS22"
-]
+TASK_LIST_STS = ["STSBenchmarkMultilingualSTS", "STS22"]
 
 TASK_LIST_SUMMARIZATION = [
     "SummEvalFr",
@@ -89,7 +83,10 @@ TASKS_LANGS = ["fr"]
 # TODO : add argparser
 # TODO: dump result in a file ?
 
-def estimate_cost_retrieval_task(task:mteb.tasks.Retrieval, price_per_1k_tokens=0.0001):
+
+def estimate_cost_retrieval_task(
+    task: mteb.tasks.Retrieval, price_per_1k_tokens=0.0001
+):
     """Evaluates the cost for a retrieval task
 
     Args:
@@ -105,26 +102,34 @@ def estimate_cost_retrieval_task(task:mteb.tasks.Retrieval, price_per_1k_tokens=
     task.load_data()
     total_n_tokens = 0
     for key in task.queries.keys():
-        queries_encodings_lengths = sum([len(tokenizer.encode(s)) for s in task.queries[key].values()])
-        documents_encodings_lengths = sum([len(tokenizer.encode(s["text"])) for s in task.corpus[key].values()])
-        total_n_tokens += (queries_encodings_lengths + documents_encodings_lengths)
+        queries_encodings_lengths = sum(
+            [len(tokenizer.encode(s)) for s in task.queries[key].values()]
+        )
+        documents_encodings_lengths = sum(
+            [len(tokenizer.encode(s["text"])) for s in task.corpus[key].values()]
+        )
+        total_n_tokens += queries_encodings_lengths + documents_encodings_lengths
     cost = round(total_n_tokens / 1000 * price_per_1k_tokens, 2)
     print(task.description["name"], ":", cost, "$")
 
     return cost
 
 
-def estimate_cost_reranking_task(task:mteb.tasks.Retrieval, price_per_1k_tokens=0.0001):
+def estimate_cost_reranking_task(
+    task: mteb.tasks.Retrieval, price_per_1k_tokens=0.0001
+):
     tokenizer = tiktoken.get_encoding("cl100k_base")
     task.load_data()
     encodings_lengths = task.dataset.map(
         lambda x: {
-            "n_tokens":
-                   len(tokenizer.encode(x["query"])) 
-                   + sum([len(tokenizer.encode(s)) for s in x["positive"]])
-                   + sum([len(tokenizer.encode(s)) for s in x["negative"]])
-                   })
-    cost = round(sum(encodings_lengths["test"]["n_tokens"]) / 1000 * price_per_1k_tokens, 2)
+            "n_tokens": len(tokenizer.encode(x["query"]))
+            + sum([len(tokenizer.encode(s)) for s in x["positive"]])
+            + sum([len(tokenizer.encode(s)) for s in x["negative"]])
+        }
+    )
+    cost = round(
+        sum(encodings_lengths["test"]["n_tokens"]) / 1000 * price_per_1k_tokens, 2
+    )
     print(task.description["name"], ":", cost, "$")
 
     return cost

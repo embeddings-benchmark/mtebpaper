@@ -8,15 +8,16 @@ from .ChromaDBEmbedder import ChromaDBEmbedder
 
 load_dotenv()
 
+
 class ModelConfig(ChromaDBEmbedder):
-    """simple class to get the model name and type
-    """
+    """simple class to get the model name and type"""
+
     def __init__(
-            self,
-            model_name:str,
-            model_type:str=None,
-            max_token_length:int=None,
-            ):
+        self,
+        model_name: str,
+        model_type: str = None,
+        max_token_length: int = None,
+    ):
         """The model configuration to use for the benchmark
 
         Args:
@@ -32,19 +33,17 @@ class ModelConfig(ChromaDBEmbedder):
         self._available_model_types = list(self._max_token_per_model.keys())
 
         self.model_name = model_name
-        self._model_type = model_type\
-            if model_type in self._max_token_per_model.keys()\
+        self._model_type = (
+            model_type
+            if model_type in self._max_token_per_model.keys()
             else self.infer_model_type(model_name)
+        )
         self._max_token_length = max_token_length
         self.embedding_function = self.get_embedding_function()
 
         # inherit the saving of embeddings, and encoding logic from ChromDBEmbedder
         save_embbeddings = False if model_type == "sentence_transformer" else True
-        super().__init__(
-            self.embedding_function,
-            save_embbedings=save_embbeddings
-            )
-
+        super().__init__(self.embedding_function, save_embbedings=save_embbeddings)
 
     @property
     def _max_token_per_model(self):
@@ -52,24 +51,23 @@ class ModelConfig(ChromaDBEmbedder):
             "voyage_ai": {
                 "voyage-01": 4096,
                 "voyage-lite-01": 4096,
-                "voyage-lite-01-instruct": 4096
-                },
+                "voyage-lite-01-instruct": 4096,
+            },
             "open_ai": 8191,
-            "sentence_transformer": 4096
+            "sentence_transformer": 4096,
         }
-    
-        
+
     @property
     def model_type(self):
         return self._model_type
 
-
     @model_type.setter
     def model_type(self, value):
         if value not in self._max_token_per_model.keys():
-            raise ValueError(f"Please specify model type among supported types {self._available_model_types}")
+            raise ValueError(
+                f"Please specify model type among supported types {self._available_model_types}"
+            )
         self._model_type = value
-
 
     @property
     def max_token_length(self):
@@ -79,9 +77,8 @@ class ModelConfig(ChromaDBEmbedder):
             true_max = self._max_token_per_model[self.model_type]
         if self._max_token_length is None or self._max_token_length >= true_max:
             return true_max
-        
-        return self._max_token_length
 
+        return self._max_token_length
 
     @max_token_length.setter
     def max_token_length(self, value):
@@ -90,14 +87,18 @@ class ModelConfig(ChromaDBEmbedder):
         else:
             true_max = self._max_token_per_model[self.model_type]
         if value >= true_max:
-            raise ValueError(f"The max token length for model {self.model_name} is '{true_max}'")
+            raise ValueError(
+                f"The max token length for model {self.model_name} is '{true_max}'"
+            )
         self._max_token_length = value
 
-
     def infer_model_type(self, model_name):
-        print("The provided model type is not recognized. Trying to infer model type using model name...")
-        raise NotImplementedError(f"Please specify model type among supported types : {self._available_model_types}")
-    
+        print(
+            "The provided model type is not recognized. Trying to infer model type using model name..."
+        )
+        raise NotImplementedError(
+            f"Please specify model type among supported types : {self._available_model_types}"
+        )
 
     def get_embedding_function(self):
         match self.model_type:
@@ -106,4 +107,6 @@ class ModelConfig(ChromaDBEmbedder):
             case "open_ai":
                 return OpenAIEmbeddingFunction(self.model_name, self.max_token_length)
             case "sentence_transformer":
-                return SentenceTransformerEmbeddingFunction(self.model_name, self.max_token_length)
+                return SentenceTransformerEmbeddingFunction(
+                    self.model_name, self.max_token_length
+                )

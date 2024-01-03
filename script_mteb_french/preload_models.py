@@ -25,14 +25,10 @@ SENTENCE_TRANSORMER_MODELS = [
     "Geotrend/bert-base-25lang-cased",
     "Geotrend/bert-base-15lang-cased",
     "Geotrend/bert-base-10lang-cased",
-    "shibing624/text2vec-base-multilingual"
+    "shibing624/text2vec-base-multilingual",
 ]
 
 
-LASER_MODELS = [
-    "Laser2"
-]
+LASER_MODELS = ["Laser2"]
 
-VOYAGE_MODELS = [
-    "Voyage"
-]
+VOYAGE_MODELS = ["Voyage"]

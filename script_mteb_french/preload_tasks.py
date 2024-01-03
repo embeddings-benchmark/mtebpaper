@@ -1,3 +1,6 @@
+import os
+from mteb import MTEB
+
 """Downloads all MTEB tasks"""
 
 TASK_LIST_CLASSIFICATION = [
@@ -23,22 +26,16 @@ TASK_LIST_PAIR_CLASSIFICATION = [
     "OpusparcusPC",
 ]
 
-TASK_LIST_RERANKING = [
-    "SyntecReranking",
-    "AlloprofReranking"
-]
+TASK_LIST_RERANKING = ["SyntecReranking", "AlloprofReranking"]
 
 TASK_LIST_RETRIEVAL = [
-    "AlloprofRetrieval", 
-    "BSARDRetrieval", 
+    "AlloprofRetrieval",
+    "BSARDRetrieval",
     "HagridRetrieval",
-    "SyntecRetrieval"
+    "SyntecRetrieval",
 ]
 
-TASK_LIST_STS = [
-    "STSBenchmarkMultilingualSTS",
-    "STS22"
-]
+TASK_LIST_STS = ["STSBenchmarkMultilingualSTS", "STS22"]
 
 TASK_LIST_SUMMARIZATION = [
     "SummEvalFr",
@@ -61,15 +58,13 @@ TASK_LIST = (
     + TASK_LIST_BITEXTMINING
 )
 
-import os
-os.environ["HF_DATASETS_OFFLINE"]="0" # 1 for offline
-os.environ["TRANSFORMERS_OFFLINE"]="0" # 1 for offline
-os.environ["TRANSFORMERS_CACHE"]="C:/Users/mathi/.cache/huggingface/models"
-os.environ["HF_DATASETS_CACHE"]="C:/Users/mathi/.cache/huggingface/datasets"
-os.environ["HF_MODULES_CACHE"]="C:/Users/mathi/.cache/huggingface/modules"
-os.environ["HF_METRICS_CACHE"]="C:/Users/mathi/.cache/huggingface/metrics"
+os.environ["HF_DATASETS_OFFLINE"] = "0"  # 1 for offline
+os.environ["TRANSFORMERS_OFFLINE"] = "0"  # 1 for offline
+os.environ["TRANSFORMERS_CACHE"] = "C:/Users/mathi/.cache/huggingface/models"
+os.environ["HF_DATASETS_CACHE"] = "C:/Users/mathi/.cache/huggingface/datasets"
+os.environ["HF_MODULES_CACHE"] = "C:/Users/mathi/.cache/huggingface/modules"
+os.environ["HF_METRICS_CACHE"] = "C:/Users/mathi/.cache/huggingface/metrics"
 
-from mteb import MTEB
 evaluation = MTEB(tasks=TASK_LIST, task_langs=["fr"])
 
 for task in evaluation.tasks:

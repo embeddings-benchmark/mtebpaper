@@ -18,14 +18,14 @@ as a list of names named SENTENCE_TRANSFORMER_MODELS
 
 SENTENCE_TRANSFORMER_MODELS = [
     "bert-base-multilingual-cased",
-    "dangvantuan/sentence-camembert-base"
+    "dangvantuan/sentence-camembert-base",
 ]
 
 
 HFFS = HfFileSystem()
 
 
-def get_model_specs(model_name:str) -> Dict:
+def get_model_specs(model_name: str) -> Dict:
     """Get the specifications of a HF model
 
     Args:
@@ -35,18 +35,18 @@ def get_model_specs(model_name:str) -> Dict:
     Returns:
         Dict: the specifications of the model
     """
-        
+
     model = SentenceTransformer(model_name)
     specs = {
         "size_in_GB": get_size_using_HF_filsystem(model_name),
-        "n_params": model._parameters, # TODO: Change with Wissam's method
+        "n_params": model._parameters,  # TODO: Change with Wissam's method
         "input_size": model._modules.get("0").max_seq_length,
-        "embedding_size": model.encode("dummy sentence").shape[0]
+        "embedding_size": model.encode("dummy sentence").shape[0],
     }
     return specs
 
 
-def get_size_of_object(model:SentenceTransformer, seen=None) -> float:
+def get_size_of_object(model: SentenceTransformer, seen=None) -> float:
     """Recursively finds size of objects"""
     size = sys.getsizeof(model)
     if seen is None:
@@ -60,14 +60,14 @@ def get_size_of_object(model:SentenceTransformer, seen=None) -> float:
     if isinstance(model, dict):
         size += sum([get_size_of_object(v, seen) for v in model.values()])
         size += sum([get_size_of_object(k, seen) for k in model.keys()])
-    elif hasattr(model, '__dict__'):
+    elif hasattr(model, "__dict__"):
         size += get_size_of_object(model.__dict__, seen)
-    elif hasattr(model, '__iter__') and not isinstance(model, (str, bytes, bytearray)):
+    elif hasattr(model, "__iter__") and not isinstance(model, (str, bytes, bytearray)):
         size += sum([get_size_of_object(i, seen) for i in model])
-    return round(size/1000000, 3)
+    return round(size / 1000000, 3)
 
 
-def get_size_using_HF_filsystem(model_name:str):
+def get_size_using_HF_filsystem(model_name: str):
     """Uses the huggingface filesystem
     to find the model_pytorch.bin
 
@@ -76,8 +76,14 @@ def get_size_using_HF_filsystem(model_name:str):
     """
     files = HFFS.ls(model_name, detail=True)
 
-    return next((round(f["size"]/1e9,3) for f in files
-        if f["name"] == f"{model_name}/pytorch_model.bin"), None)
+    return next(
+        (
+            round(f["size"] / 1e9, 3)
+            for f in files
+            if f["name"] == f"{model_name}/pytorch_model.bin"
+        ),
+        None,
+    )
 
 
 SPECS = {}
