@@ -43,7 +43,10 @@ class ModelConfig(ChromaDBEmbedder):
 
         # inherit the saving of embeddings, and encoding logic from ChromDBEmbedder
         save_embbeddings = False if model_type == "sentence_transformer" else True
-        super().__init__(self.embedding_function, save_embbedings=save_embbeddings)
+        super().__init__(
+            self.embedding_function,
+            save_embbedings=save_embbeddings,
+            )
 
     @property
     def _max_token_per_model(self):
