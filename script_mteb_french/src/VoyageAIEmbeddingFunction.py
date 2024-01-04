@@ -3,13 +3,13 @@ from chromadb import Documents, Embeddings
 from dotenv import load_dotenv
 import voyageai as vai
 
-from .CustomEmbeddingFunction import CustomEmbeddingFunction
+from .AbstractEmbeddingFunction import AbstractEmbeddingFunction
 
 # load the API key from .env
 load_dotenv()
 
 
-class VoyageAIEmbeddingFunction(CustomEmbeddingFunction):
+class VoyageAIEmbeddingFunction(AbstractEmbeddingFunction):
     def __init__(
         self,
         model_name: str = "voyage-lite-01",

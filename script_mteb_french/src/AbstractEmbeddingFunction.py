@@ -3,7 +3,7 @@ from chromadb import EmbeddingFunction, Documents, Embeddings
 from abc import ABC, abstractmethod
 
 
-class CustomEmbeddingFunction(EmbeddingFunction, ABC):
+class AbstractEmbeddingFunction(EmbeddingFunction, ABC):
     def __init__(
         self,
         max_token_length: int = 4096,

@@ -3,7 +3,7 @@ from chromadb import Documents, Embeddings
 from dotenv import load_dotenv
 from openai import OpenAI
 
-from .CustomEmbeddingFunction import CustomEmbeddingFunction
+from .AbstractEmbeddingFunction import AbstractEmbeddingFunction
 from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction as OAIEMbFunc
 
 
@@ -11,13 +11,13 @@ from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction as OAIEMb
 load_dotenv()
 
 
-class OpenAIEmbeddingFunction(CustomEmbeddingFunction, OAIEMbFunc):
+class OpenAIEmbeddingFunction(AbstractEmbeddingFunction, OAIEMbFunc):
     def __init__(
         self,
         model_name: str = "text-embedding-ada-002",
         max_token_length: int = 8191,
     ):
-        CustomEmbeddingFunction.__init__(self, max_token_length=max_token_length)
+        AbstractEmbeddingFunction.__init__(self, max_token_length=max_token_length)
 
         api_key = os.environ.get("OPENAI_API_KEY", None)
         if api_key is None:

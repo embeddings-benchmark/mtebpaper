@@ -2,7 +2,7 @@ import torch
 from sentence_transformers import SentenceTransformer
 from chromadb import Documents, Embeddings
 
-from .CustomEmbeddingFunction import CustomEmbeddingFunction
+from .AbstractEmbeddingFunction import AbstractEmbeddingFunction
 
 """
 IMPORTANT: This script is used to override this :
@@ -12,7 +12,7 @@ as the embedding function provided by chroma generates bug for not native senten
 """
 
 
-class SentenceTransformerEmbeddingFunction(CustomEmbeddingFunction):
+class SentenceTransformerEmbeddingFunction(AbstractEmbeddingFunction):
     def __init__(
         self,
         model_name: str = "dangvantuan/sentence-camembert-base",
