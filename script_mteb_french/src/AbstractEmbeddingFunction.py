@@ -27,13 +27,17 @@ class AbstractEmbeddingFunction(EmbeddingFunction, ABC):
         Returns:
             Documents: the truncated documents
         """
-        for i, s in enumerate(sentences):
-            tokenized_strings = self.tokenizer.encode(s)
+        truncated_input = []
+        for s in sentences:
+            tokenized_string = self.tokenizer.encode(s)
             # if string too large, truncate, decode, and replace
-            if len(tokenized_strings) > self.max_token_length:
-                s = s[: self.max_token_length]
-                sentences[i] = self.tokenizer.decode(s)
-        return sentences
+            if len(tokenized_string) > self.max_token_length:
+                tokenized_string = tokenized_string[: self.max_token_length]
+                truncated_input.append(self.tokenizer.decode(tokenized_string))
+            else:
+                truncated_input.append(s)
+
+        return truncated_input
 
     def __call__(self, input: Documents) -> Embeddings:
         """Wrapper that truncates the documents, encodes them
@@ -44,8 +48,8 @@ class AbstractEmbeddingFunction(EmbeddingFunction, ABC):
         Returns:
             Embeddings: the encoded sentences
         """
-        input = self.truncate_documents(input)
-        embeddings = self.encode_documents(input)
+        truncated_input = self.truncate_documents(input)
+        embeddings = self.encode_documents(truncated_input)
 
         return embeddings
 
