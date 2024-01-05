@@ -39,11 +39,14 @@ class ChromaDBEmbedder:
         if isinstance(sentences, str):
             sentences = [sentences]
 
+        # remove duplicate sentences, because chromaDB throws error if we get the same sentence
+        # multiple times in one call
+        unique_sentences = list(set(sentences))
         # use a dict to store a mapping of {sentence: embedding}
         # we have to do this because collection.get() returns embeddings in a random order...
         sent_emb_mapping = {}
-        for i in range(0, len(sentences), self.batch_size):
-            batch_sentences = sentences[i : i + self.batch_size]
+        for i in range(0, len(unique_sentences), self.batch_size):
+            batch_sentences = unique_sentences[i : i + self.batch_size]
             # check if we have the embedding in chroma
             sentences_in_chroma = self.collection.get(
                 ids=batch_sentences, include=["documents", "embeddings"]
