@@ -4,10 +4,6 @@ from mteb import MTEB
 
 from src.ModelConfig import ModelConfig
 
-
-# if False, default sample models will be used, instead of those specified in the lists
-# will be removed when everything is ready
-benchmark_is_ready = False
 #############################
 # Step 1 : Setup model list #
 #############################
@@ -37,9 +33,9 @@ SENTENCE_TRANSORMER_MODELS = [
     "Geotrend/bert-base-10lang-cased",
     "shibing624/text2vec-base-multilingual",
     "izhx/udever-bloom-560m",
-    "izhx/udever-bloom-1b1",
-    "izhx/udever-bloom-3b",
-    "izhx/udever-bloom-7b1"
+    #"izhx/udever-bloom-1b1",
+    #"izhx/udever-bloom-3b",
+    #"izhx/udever-bloom-7b1"
 ]
 
 
@@ -49,28 +45,63 @@ VOYAGE_MODELS = ["voyage-lite-01", "voyage-01"]
 
 OPEN_AI_MODELS = ["text-embedding-ada-002"]
 
+MODELS = [ModelConfig(name, model_type="sentence_transformer") for name in SENTENCE_TRANSORMER_MODELS]
+
+
 ########################
 # Step 2 : Setup tasks #
 ########################
-TASKS = ["SyntecRetrieval", "AlloprofRetrieval"]
+TASK_LIST_CLASSIFICATION = [
+    "AmazonReviewsClassification",
+    "MasakhaNEWSClassification",
+    "MassiveIntentClassification",
+    "MassiveScenarioClassification",
+    "MTOPDomainClassification",
+    "MTOPIntentClassification",
+]
+
+TASK_LIST_CLUSTERING = [
+    "AlloProfClusteringP2P",
+    "AlloProfClusteringS2S",
+    "HALClusteringS2S",
+    "MasakhaNEWSClusteringP2P",
+    "MasakhaNEWSClusteringS2S",
+    "MLSUMClusteringP2P",
+    "MLSUMClusteringS2S",
+]
+
+TASK_LIST_PAIR_CLASSIFICATION = [
+    "OpusparcusPC",
+]
+
+TASK_LIST_RERANKING = [
+    "SyntecReranking",
+    "AlloprofReranking"
+]
+
+TASK_LIST_RETRIEVAL = [
+    "AlloprofRetrieval", 
+    "BSARDRetrieval", 
+    "SyntecRetrieval"
+]
+
+TASK_LIST_STS = [
+    "SummEvalFr",
+    "STSBenchmarkMultilingualSTS",
+    "STS22",
+    "SICKFr"
+]
+
+TASK_LIST_BITEXTMINING = [
+    "DiaBLaBitextMining",
+    "FloresBitextMining",
+]
+
+TASKS = TASK_LIST_RETRIEVAL
 
 ##########################
 # Step 3 : Run benchmark #
 ##########################
-
-# Build list of model configs based on the lists above
-## ModelConfig(model_name, model_type, max_token_length(optional))
-if benchmark_is_ready:
-    MODELS = [
-        ModelConfig(name, model_type="sentence_transformer")
-        for name in SENTENCE_TRANSORMER_MODELS
-    ]
-    MODELS.extend([ModelConfig(name, model_type="voyage_ai") for name in VOYAGE_MODELS])
-    MODELS.extend([ModelConfig(name, model_type="open_ai") for name in OPEN_AI_MODELS])
-    MODELS.extend([ModelConfig(name, model_type="laser") for name in LASER_MODELS])
-else:
-    MODELS = [ModelConfig(name, model_type="voyage_ai") for name in VOYAGE_MODELS]
-
 
 def parse_args() -> argparse.Namespace:
     """Parse command line arguments
