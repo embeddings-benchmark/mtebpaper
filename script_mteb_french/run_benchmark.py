@@ -39,7 +39,6 @@ SENTENCE_TRANSORMER_MODELS = [
     "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
     "intfloat/multilingual-e5-base",
     "intfloat/multilingual-e5-large",
-    "woody72/multilingual-e5-base",
     "distilbert-base-uncased",
     "Geotrend/distilbert-base-25lang-cased",
     "Geotrend/distilbert-base-en-fr-es-pt-it-cased",
@@ -54,6 +53,10 @@ SENTENCE_TRANSORMER_MODELS = [
     #"izhx/udever-bloom-3b", # too big
     #"izhx/udever-bloom-7b1", # too big
     #"intfloat/e5-mistral-7b-instruct", # too big
+    "sentence-transformers/sentence-t5-base",
+    "sentence-transformers/sentence-t5-large",
+    #"sentence-transformers/sentence-t5-xl",
+    #"sentence-transformers/sentence-t5-xxl",
 ]
 
 
