@@ -1,3 +1,4 @@
+from sentence_transformers import SentenceTransformer
 """This script is used to download all models, for them to be used even without internet"""
 
 
@@ -15,6 +16,7 @@ SENTENCE_TRANSORMER_MODELS = [
     "sentence-transformers/all-MiniLM-L6-v2",
     "sentence-transformers/all-MiniLM-L12-v2",
     "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "intfloat/multilingual-e5-base",
     "intfloat/multilingual-e5-large",
     "woody72/multilingual-e5-base",
     "distilbert-base-uncased",
@@ -28,7 +30,5 @@ SENTENCE_TRANSORMER_MODELS = [
     "shibing624/text2vec-base-multilingual",
 ]
 
-
-LASER_MODELS = ["Laser2"]
-
-VOYAGE_MODELS = ["Voyage"]
+for model_name in SENTENCE_TRANSORMER_MODELS:
+    _ = SentenceTransformer(model_name)
