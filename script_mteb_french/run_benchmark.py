@@ -49,10 +49,11 @@ SENTENCE_TRANSORMER_MODELS = [
     "Geotrend/bert-base-15lang-cased",
     "Geotrend/bert-base-10lang-cased",
     "shibing624/text2vec-base-multilingual",
-    "izhx/udever-bloom-560m",
+    #"izhx/udever-bloom-560m", # too big
     #"izhx/udever-bloom-1b1", # too big
     #"izhx/udever-bloom-3b", # too big
     #"izhx/udever-bloom-7b1", # too big
+    #"intfloat/e5-mistral-7b-instruct", # too big
 ]
 
 
@@ -118,7 +119,7 @@ TASK_LIST_BITEXTMINING = [
     "FloresBitextMining",
 ]
 
-TASKS = TASK_LIST_RERANKING
+TASKS = TASK_LIST_RETRIEVAL
 
 ##########################
 # Step 3 : Run benchmark #
