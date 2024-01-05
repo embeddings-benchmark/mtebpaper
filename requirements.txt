@@ -1,0 +1,12 @@
+# python 3.10.13
+chromadb==0.4.21
+datasets==2.15.0
+huggingface-hub==0.18
+mteb[beir]==1.1.1
+numpy==1.26.2
+openai==1.6.1
+pandas==2.1.3
+sentence-transformers==2.2.2
+tiktoken==0.5.2
+torch==2.1.1
+voyageai==0.1.5
