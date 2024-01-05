@@ -1,5 +1,4 @@
 *.DS_Store
-results
 .env
 __pycache__
 chromaDB
