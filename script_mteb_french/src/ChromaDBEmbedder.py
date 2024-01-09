@@ -1,7 +1,16 @@
+try:
+    import chromadb
+    from chromadb import EmbeddingFunction
+except Exception:
+    __import__('pysqlite3')
+    import sys
+    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+    
+    import chromadb
+    from chromadb import EmbeddingFunction
+
 import os
 from typing import List
-import chromadb
-from chromadb import EmbeddingFunction
 
 
 class ChromaDBEmbedder:

@@ -1,4 +1,4 @@
 *.DS_Store
 .env
 __pycache__
-chromaDB
+ChromaDB

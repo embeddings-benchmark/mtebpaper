@@ -24,15 +24,12 @@ Example: MODELS = [ModelConfig("intfloat/multilingual-e5-base", model_type="sent
 # Step 1 : Setup model list #
 #############################
 SENTENCE_TRANSORMER_MODELS = [
-    #"camembert/camembert-base", # bug
-    #"camembert/camembert-large", # bug
     "bert-base-multilingual-cased",
     "bert-base-multilingual-uncased",
     "flaubert/flaubert_base_uncased",
     "flaubert/flaubert_base_cased",
     "flaubert/flaubert_large_cased",
     "dangvantuan/sentence-camembert-base",
-    #"dangvantuan/sentence-camembert-large", # bug
     "sentence-transformers/distiluse-base-multilingual-cased-v2",
     "sentence-transformers/all-MiniLM-L6-v2",
     "sentence-transformers/all-MiniLM-L12-v2",
@@ -48,17 +45,24 @@ SENTENCE_TRANSORMER_MODELS = [
     "Geotrend/bert-base-15lang-cased",
     "Geotrend/bert-base-10lang-cased",
     "shibing624/text2vec-base-multilingual",
-    #"izhx/udever-bloom-560m", # too big
-    #"izhx/udever-bloom-1b1", # too big
-    #"izhx/udever-bloom-3b", # too big
-    #"izhx/udever-bloom-7b1", # too big
-    #"intfloat/e5-mistral-7b-instruct", # too big
+    "izhx/udever-bloom-560m",
+    "izhx/udever-bloom-1b1",
     "sentence-transformers/sentence-t5-base",
     "sentence-transformers/sentence-t5-large",
-    #"sentence-transformers/sentence-t5-xl",
-    #"sentence-transformers/sentence-t5-xxl",
+    "sentence-transformers/sentence-t5-xl",
+    "sentence-transformers/sentence-t5-xxl",
 ]
 
+"""
+SENTENCE_TRANSORMER_MODELS = [
+    "camembert/camembert-base", # bug
+    "camembert/camembert-large", # bug
+    "dangvantuan/sentence-camembert-large", # bug
+    "izhx/udever-bloom-3b", # too big
+    "izhx/udever-bloom-7b1", # too big
+    "intfloat/e5-mistral-7b-instruct", # too big
+]
+"""
 
 LASER_MODELS = ["Laser2"]
 
@@ -66,8 +70,11 @@ VOYAGE_MODELS = ["voyage-lite-01", "voyage-01"]
 
 OPEN_AI_MODELS = ["text-embedding-ada-002"]
 
-MODELS = [ModelConfig(name, model_type="sentence_transformer") for name in SENTENCE_TRANSORMER_MODELS]
-#MODELS = [ModelConfig("Geotrend/bert-base-25lang-cased", model_type="sentence_transformer")]
+MODELS = [
+    ModelConfig(name, model_type="sentence_transformer")
+    for name in SENTENCE_TRANSORMER_MODELS
+]
+# MODELS = [ModelConfig("Geotrend/bert-base-25lang-cased", model_type="sentence_transformer")]
 
 
 ########################
@@ -75,7 +82,7 @@ MODELS = [ModelConfig(name, model_type="sentence_transformer") for name in SENTE
 ########################
 TASK_LIST_CLASSIFICATION = [
     "AmazonReviewsClassification",
-    "MasakhaNEWSClassification",
+    "MasakhaNEWSClassification", # bug when evealuating with bloom, need to enable truncation
     "MassiveIntentClassification",
     "MassiveScenarioClassification",
     "MTOPDomainClassification",
@@ -96,22 +103,11 @@ TASK_LIST_PAIR_CLASSIFICATION = [
     "OpusparcusPC",
 ]
 
-TASK_LIST_RERANKING = [
-    "SyntecReranking",
-    "AlloprofReranking"
-]
+TASK_LIST_RERANKING = ["SyntecReranking", "AlloprofReranking"]
 
-TASK_LIST_RETRIEVAL = [
-    "AlloprofRetrieval", 
-    "BSARDRetrieval", 
-    "SyntecRetrieval"
-]
+TASK_LIST_RETRIEVAL = ["AlloprofRetrieval", "BSARDRetrieval", "SyntecRetrieval"]
 
-TASK_LIST_STS = [
-    "STSBenchmarkMultilingualSTS",
-    "STS22",
-    "SICKFr"
-]
+TASK_LIST_STS = ["STSBenchmarkMultilingualSTS", "STS22", "SICKFr"]
 
 TASK_LIST_SUMMARIZATION = [
     "SummEvalFr",
@@ -122,11 +118,12 @@ TASK_LIST_BITEXTMINING = [
     "FloresBitextMining",
 ]
 
-TASKS = TASK_LIST_RETRIEVAL
+TASKS = TASK_LIST_CLASSIFICATION
 
 ##########################
 # Step 3 : Run benchmark #
 ##########################
+
 
 def parse_args() -> argparse.Namespace:
     """Parse command line arguments
