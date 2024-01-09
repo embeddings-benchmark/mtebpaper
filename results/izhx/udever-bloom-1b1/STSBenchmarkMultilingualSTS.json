@@ -3,19 +3,19 @@
   "mteb_dataset_name": "STSBenchmarkMultilingualSTS",
   "mteb_version": "1.1.2.dev0",
   "test": {
-    "evaluation_time": 2.21,
+    "evaluation_time": 11.05,
     "fr": {
       "cos_sim": {
-        "pearson": 0.3223135684077685,
-        "spearman": 0.33408260645805227
+        "pearson": 0.5151468685060621,
+        "spearman": 0.49972945094496773
       },
       "euclidean": {
-        "pearson": 0.3574750600604372,
-        "spearman": 0.33408260645805227
+        "pearson": 0.5219178136772654,
+        "spearman": 0.49972945094496773
       },
       "manhattan": {
-        "pearson": 0.34997183604765175,
-        "spearman": 0.32847317099008655
+        "pearson": 0.5846466160992992,
+        "spearman": 0.5587754714088655
       }
     }
   }

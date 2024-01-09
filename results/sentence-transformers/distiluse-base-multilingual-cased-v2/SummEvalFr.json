@@ -4,13 +4,13 @@
   "mteb_version": "1.1.2.dev0",
   "test": {
     "cos_sim": {
-      "pearson": 0.2966345669878592,
-      "spearman": 0.2942790176376187
+      "pearson": 0.29334130639171846,
+      "spearman": 0.28121115462556573
     },
     "dot": {
-      "pearson": 0.29663456470886407,
-      "spearman": 0.2942790176376187
+      "pearson": 0.2933413079404232,
+      "spearman": 0.28121115462556573
     },
-    "evaluation_time": 7.5
+    "evaluation_time": 3.47
   }
 }
