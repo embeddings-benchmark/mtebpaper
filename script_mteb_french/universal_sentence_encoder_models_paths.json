@@ -1,0 +1,4 @@
+{
+    "vprelovac/universal-sentence-encoder-multilingual-3": "https://tfhub.dev/google/universal-sentence-encoder-multilingual/3",
+    "vprelovac/universal-sentence-encoder-multilingual-large-3": "https://tfhub.dev/google/universal-sentence-encoder--large/3"
+}

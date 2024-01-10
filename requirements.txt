@@ -12,3 +12,5 @@ torch==2.1.1
 voyageai==0.1.5
 sacremoses==0.1.1
 pysqlite3-binary==0.5.2.post2
+tensorflow[and-cuda]
+tensorflow-text==2.15.0

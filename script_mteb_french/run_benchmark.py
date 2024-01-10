@@ -69,6 +69,10 @@ SENTENCE_TRANSORMER_MODELS = [
 ]
 """
 
+UNIVERSAL_SENTENCE_ENCODER_MODELS = [
+    "vprelovac/universal-sentence-encoder-multilingual-3"
+]
+
 LASER_MODELS = ["Laser2"]
 
 VOYAGE_MODELS = ["voyage-lite-01", "voyage-01"]
@@ -76,8 +80,8 @@ VOYAGE_MODELS = ["voyage-lite-01", "voyage-01"]
 OPEN_AI_MODELS = ["text-embedding-ada-002"]
 
 MODELS = [
-    ModelConfig(name, model_type="sentence_transformer")
-    for name in SENTENCE_TRANSORMER_MODELS
+    ModelConfig(name, model_type="universal_sentence_encoder")
+    for name in UNIVERSAL_SENTENCE_ENCODER_MODELS
 ]
 # MODELS = [ModelConfig("Geotrend/bert-base-25lang-cased", model_type="sentence_transformer")]
 
@@ -123,7 +127,7 @@ TASK_LIST_BITEXTMINING = [
     "FloresBitextMining",
 ]
 
-TASKS = TASK_LIST_CLASSIFICATION + TASK_LIST_CLUSTERING + TASK_LIST_PAIR_CLASSIFICATION + TASK_LIST_RERANKING + TASK_LIST_RETRIEVAL + TASK_LIST_STS + TASK_LIST_SUMMARIZATION
+TASKS = TASK_LIST_CLASSIFICATION + TASK_LIST_CLUSTERING + TASK_LIST_PAIR_CLASSIFICATION + TASK_LIST_RERANKING + TASK_LIST_STS
 
 ##########################
 # Step 3 : Run benchmark #
