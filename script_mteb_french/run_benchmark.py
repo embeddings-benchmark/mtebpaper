@@ -79,10 +79,10 @@ VOYAGE_MODELS = ["voyage-lite-01", "voyage-01"]
 
 OPEN_AI_MODELS = ["text-embedding-ada-002"]
 
-MODELS = [
-    ModelConfig(name, model_type="universal_sentence_encoder")
-    for name in UNIVERSAL_SENTENCE_ENCODER_MODELS
-]
+COHERE_MODELS = ["embed-multilingual-light-v3.0", "embed-multilingual-v3.0"]
+
+MODELS = [ModelConfig(name, model_type="cohere") for name in COHERE_MODELS]
+
 # MODELS = [ModelConfig("Geotrend/bert-base-25lang-cased", model_type="sentence_transformer")]
 
 
@@ -91,7 +91,7 @@ MODELS = [
 ########################
 TASK_LIST_CLASSIFICATION = [
     "AmazonReviewsClassification",
-    "MasakhaNEWSClassification", # bug when evealuating with bloom, need to enable truncation
+    "MasakhaNEWSClassification",  # bug when evealuating with bloom, need to enable truncation
     "MassiveIntentClassification",
     "MassiveScenarioClassification",
     "MTOPDomainClassification",
@@ -127,7 +127,15 @@ TASK_LIST_BITEXTMINING = [
     "FloresBitextMining",
 ]
 
-TASKS = TASK_LIST_CLASSIFICATION + TASK_LIST_CLUSTERING + TASK_LIST_PAIR_CLASSIFICATION + TASK_LIST_RERANKING + TASK_LIST_STS
+TASKS = (
+    TASK_LIST_CLASSIFICATION
+    + TASK_LIST_CLUSTERING
+    + TASK_LIST_PAIR_CLASSIFICATION
+    + TASK_LIST_RERANKING
+    + TASK_LIST_RETRIEVAL
+    + TASK_LIST_STS
+    + TASK_LIST_SUMMARIZATION
+)
 
 ##########################
 # Step 3 : Run benchmark #

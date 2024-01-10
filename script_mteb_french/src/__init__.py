@@ -1,5 +1,6 @@
 from .AbstractEmbeddingFunction import AbstractEmbeddingFunction
 from .ChromaDBEmbedder import ChromaDBEmbedder
+from .CohereEmbeddingFunction import CohereEmbeddingFunction
 from .ModelConfig import ModelConfig
 from .OpenAIEmbeddingFunction import OpenAIEmbeddingFunction
 from .SentenceTransformerEmbeddingFunction import SentenceTransformerEmbeddingFunction

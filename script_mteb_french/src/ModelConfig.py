@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 
 from .ChromaDBEmbedder import ChromaDBEmbedder
+from .CohereEmbeddingFunction import CohereEmbeddingFunction
 from .OpenAIEmbeddingFunction import OpenAIEmbeddingFunction
 from .SentenceTransformerEmbeddingFunction import SentenceTransformerEmbeddingFunction
 from .UniversalSentenceEncoderEmbeddingFunction import (
@@ -54,6 +55,7 @@ class ModelConfig(ChromaDBEmbedder):
     @property
     def _max_token_per_model(self):
         return {
+            "cohere": 4096,
             "voyage_ai": {
                 "voyage-01": 4096,
                 "voyage-lite-01": 4096,
@@ -109,6 +111,8 @@ class ModelConfig(ChromaDBEmbedder):
 
     def get_embedding_function(self):
         match self.model_type:
+            case "cohere":
+                return CohereEmbeddingFunction(self.model_name, self.max_token_length)
             case "voyage_ai":
                 return VoyageAIEmbeddingFunction(self.model_name, self.max_token_length)
             case "open_ai":
