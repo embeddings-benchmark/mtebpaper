@@ -1,0 +1,15 @@
+{
+  "dataset_revision": "d80d48c1eb48d3562165c59d59d0034df9fff0bf",
+  "mteb_dataset_name": "MTOPDomainClassification",
+  "mteb_version": "1.1.2.dev0",
+  "test": {
+    "evaluation_time": 3.69,
+    "fr": {
+      "accuracy": 0.8413717507046664,
+      "accuracy_stderr": 0.010344831193926792,
+      "f1": 0.8360072280905483,
+      "f1_stderr": 0.01076070445993987,
+      "main_score": 0.8413717507046664
+    }
+  }
+}

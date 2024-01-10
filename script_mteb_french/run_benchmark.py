@@ -33,9 +33,12 @@ SENTENCE_TRANSORMER_MODELS = [
     "sentence-transformers/distiluse-base-multilingual-cased-v2",
     "sentence-transformers/all-MiniLM-L6-v2",
     "sentence-transformers/all-MiniLM-L12-v2",
+    "sentence-transformers/LaBSE",
+    "sentence-transformers/multi-qa-MiniLM-L6-cos-v1",
     "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
     "intfloat/multilingual-e5-base",
     "intfloat/multilingual-e5-large",
+    "intfloat/multilingual-e5-small",
     "distilbert-base-uncased",
     "Geotrend/distilbert-base-25lang-cased",
     "Geotrend/distilbert-base-en-fr-es-pt-it-cased",
@@ -61,6 +64,8 @@ SENTENCE_TRANSORMER_MODELS = [
     "izhx/udever-bloom-3b", # too big
     "izhx/udever-bloom-7b1", # too big
     "intfloat/e5-mistral-7b-instruct", # too big
+    "xlm-roberta-base", # bug
+    "xlm-roberta-large" # bug
 ]
 """
 
@@ -118,7 +123,7 @@ TASK_LIST_BITEXTMINING = [
     "FloresBitextMining",
 ]
 
-TASKS = TASK_LIST_CLASSIFICATION
+TASKS = TASK_LIST_CLASSIFICATION + TASK_LIST_CLUSTERING + TASK_LIST_PAIR_CLASSIFICATION + TASK_LIST_RERANKING + TASK_LIST_RETRIEVAL + TASK_LIST_STS + TASK_LIST_SUMMARIZATION
 
 ##########################
 # Step 3 : Run benchmark #
