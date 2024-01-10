@@ -56,11 +56,7 @@ class ModelConfig(ChromaDBEmbedder):
     def _max_token_per_model(self):
         return {
             "cohere": 4096,
-            "voyage_ai": {
-                "voyage-01": 4096,
-                "voyage-lite-01": 4096,
-                "voyage-lite-01-instruct": 4096,
-            },
+            "voyage_ai": 4000,
             "open_ai": 8191,
             "sentence_transformer": 4096,
             "universal_sentence_encoder": 4096,
@@ -80,10 +76,7 @@ class ModelConfig(ChromaDBEmbedder):
 
     @property
     def max_token_length(self):
-        if self.model_type == "voyage_ai":
-            true_max = self._max_token_per_model[self.model_type][self.model_name]
-        else:
-            true_max = self._max_token_per_model[self.model_type]
+        true_max = self._max_token_per_model[self.model_type]
         if self._max_token_length is None or self._max_token_length >= true_max:
             return true_max
 
@@ -91,10 +84,7 @@ class ModelConfig(ChromaDBEmbedder):
 
     @max_token_length.setter
     def max_token_length(self, value):
-        if self.model_type == "voyage_ai":
-            true_max = self._max_token_per_model[self.model_type][self.model_name]
-        else:
-            true_max = self._max_token_per_model[self.model_type]
+        true_max = self._max_token_per_model[self.model_type]
         if value >= true_max:
             raise ValueError(
                 f"The max token length for model {self.model_name} is '{true_max}'"

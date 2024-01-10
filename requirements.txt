@@ -14,4 +14,4 @@ tensorflow[and-cuda]
 tensorflow-text==2.15.0
 tiktoken==0.5.2
 torch==2.1.1
-voyageai==0.1.5
+voyageai==0.1.6

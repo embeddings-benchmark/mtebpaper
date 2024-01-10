@@ -75,13 +75,13 @@ UNIVERSAL_SENTENCE_ENCODER_MODELS = [
 
 LASER_MODELS = ["Laser2"]
 
-VOYAGE_MODELS = ["voyage-lite-01", "voyage-01"]
+VOYAGE_MODELS = ["voyage-02"]
 
 OPEN_AI_MODELS = ["text-embedding-ada-002"]
 
 COHERE_MODELS = ["embed-multilingual-light-v3.0", "embed-multilingual-v3.0"]
 
-MODELS = [ModelConfig(name, model_type="cohere") for name in COHERE_MODELS]
+MODELS = [ModelConfig(name, model_type="voyage_ai") for name in VOYAGE_MODELS]
 
 # MODELS = [ModelConfig("Geotrend/bert-base-25lang-cased", model_type="sentence_transformer")]
 
