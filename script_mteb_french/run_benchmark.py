@@ -58,16 +58,20 @@ SENTENCE_TRANSORMER_MODELS = [
 
 """
 SENTENCE_TRANSORMER_MODELS = [
-    "camembert/camembert-base", # bug
-    "camembert/camembert-large", # bug
-    "dangvantuan/sentence-camembert-large", # bug
     "izhx/udever-bloom-3b", # too big
     "izhx/udever-bloom-7b1", # too big
     "intfloat/e5-mistral-7b-instruct", # too big
-    "xlm-roberta-base", # bug
-    "xlm-roberta-large" # bug
 ]
 """
+
+# these model max_length is indicated to be 514 whereas the embedding layer actually supports 512
+SENTENCE_TRANSORMER_MODELS_WITH_ERRORS = [
+    "camembert/camembert-base",
+    "camembert/camembert-large",
+    "dangvantuan/sentence-camembert-large",
+    "xlm-roberta-base",
+    "xlm-roberta-large"
+]
 
 UNIVERSAL_SENTENCE_ENCODER_MODELS = [
     "vprelovac/universal-sentence-encoder-multilingual-3"
@@ -81,7 +85,11 @@ OPEN_AI_MODELS = ["text-embedding-ada-002"]
 
 COHERE_MODELS = ["embed-multilingual-light-v3.0", "embed-multilingual-v3.0"]
 
-MODELS = [ModelConfig(name, model_type="cohere") for name in COHERE_MODELS]
+MODELS = [ModelConfig(name, model_type="sentence_transformer") for name in SENTENCE_TRANSORMER_MODELS_WITH_ERRORS]
+
+# fix for sequence length
+for model_config in MODELS:
+    model_config.embedding_function.model._first_module().max_seq_length = 512
 
 # MODELS = [ModelConfig("Geotrend/bert-base-25lang-cased", model_type="sentence_transformer")]
 
