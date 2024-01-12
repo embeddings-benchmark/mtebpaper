@@ -1,0 +1,15 @@
+{
+  "dataset_revision": "8ccc72e69e65f40c70e117d8b3c08306bb788b60",
+  "mteb_dataset_name": "MasakhaNEWSClassification",
+  "mteb_version": "1.1.2.dev0",
+  "test": {
+    "evaluation_time": 36.0,
+    "fra": {
+      "accuracy": 0.6575829383886257,
+      "accuracy_stderr": 0.04167181373239093,
+      "f1": 0.6087867938455519,
+      "f1_stderr": 0.04262022429284466,
+      "main_score": 0.6575829383886257
+    }
+  }
+}
