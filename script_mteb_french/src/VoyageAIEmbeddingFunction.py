@@ -1,4 +1,5 @@
 import os
+import time
 from chromadb import Documents, Embeddings
 from dotenv import load_dotenv
 import voyageai as vai
@@ -13,7 +14,7 @@ class VoyageAIEmbeddingFunction(AbstractEmbeddingFunction):
     def __init__(
         self,
         model_name: str = "voyage-lite-01",
-        max_token_length: int = 4096,
+        max_token_length: int = 4000,
     ):
         super().__init__(max_token_length)
 
@@ -26,9 +27,12 @@ class VoyageAIEmbeddingFunction(AbstractEmbeddingFunction):
             )
         vai.api_key = api_key
 
+        self.client = vai.Client()
+
     @property
     def model_name(self):
         return self._model_name
 
     def encode_documents(self, input: Documents) -> Embeddings:
-        return vai.get_embeddings(input, model=self._model_name, input_type=None)
+        time.sleep(0.1) # avoid api throttling
+        return self.client.embed(input, model=self._model_name, input_type=None, truncation=True).embeddings

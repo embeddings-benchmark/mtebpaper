@@ -79,7 +79,7 @@ UNIVERSAL_SENTENCE_ENCODER_MODELS = [
 
 LASER_MODELS = ["Laser2"]
 
-VOYAGE_MODELS = ["voyage-lite-01", "voyage-01"]
+VOYAGE_MODELS = ["voyage-02"]
 
 OPEN_AI_MODELS = ["text-embedding-ada-002"]
 
