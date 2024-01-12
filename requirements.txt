@@ -10,8 +10,8 @@ pandas==2.1.3
 pysqlite3-binary==0.5.2.post2
 sacremoses==0.1.1
 sentence-transformers==2.2.2
-tensorflow[and-cuda]
 tensorflow-text==2.15.0
 tiktoken==0.5.2
 torch==2.1.1
 voyageai==0.1.5
+tensorflow[and-cuda]
