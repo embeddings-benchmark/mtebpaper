@@ -1,0 +1,13 @@
+{
+  "dataset_revision": "5345895c56a601afe1a98519ce3199be60a27dba",
+  "mteb_dataset_name": "DiaBLaBitextMining",
+  "mteb_version": "1.1.2.dev0",
+  "test": {
+    "accuracy": 0.010960334029227558,
+    "evaluation_time": 6.29,
+    "f1": 0.00960085495576101,
+    "main_score": 0.00960085495576101,
+    "precision": 0.009138444289801284,
+    "recall": 0.010960334029227558
+  }
+}

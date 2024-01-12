@@ -93,7 +93,6 @@ for model_config in MODELS:
 
 # MODELS = [ModelConfig("Geotrend/bert-base-25lang-cased", model_type="sentence_transformer")]
 
-
 ########################
 # Step 2 : Setup tasks #
 ########################
@@ -132,18 +131,10 @@ TASK_LIST_SUMMARIZATION = [
 
 TASK_LIST_BITEXTMINING = [
     "DiaBLaBitextMining",
-    "FloresBitextMining",
+    #"FloresBitextMining",
 ]
 
-TASKS = (
-    TASK_LIST_CLASSIFICATION
-    + TASK_LIST_CLUSTERING
-    + TASK_LIST_PAIR_CLASSIFICATION
-    + TASK_LIST_RERANKING
-    + TASK_LIST_RETRIEVAL
-    + TASK_LIST_STS
-    + TASK_LIST_SUMMARIZATION
-)
+TASKS = TASK_LIST_BITEXTMINING
 
 ##########################
 # Step 3 : Run benchmark #
