@@ -1,0 +1,29 @@
+{
+    "PRICE_FOR_1K_TOKENS_IN_$": 0.0001,
+    "PRICE_FOR_TASK_EVALUATION": {
+        "DiaBLaBitextMining": 0.01,
+        "AmazonReviewsClassification": 0.05,
+        "MasakhaNEWSClassification": 0.26,
+        "MassiveIntentClassification": 0.01,
+        "MassiveScenarioClassification": 0.01,
+        "MTOPDomainClassification": 0.01,
+        "MTOPIntentClassification": 0.01,
+        "AlloProfClusteringP2P": 0.26,
+        "AlloProfClusteringS2S": 0.0,
+        "HALClusteringS2S": 0.21,
+        "MasakhaNEWSClusteringP2P": 0.29,
+        "MasakhaNEWSClusteringS2S": 0.0,
+        "MLSUMClusteringP2P": 1.71,
+        "MLSUMClusteringS2S": 0.03,
+        "OpusparcusPC": 0.01,
+        "AlloprofReranking": 10.92,
+        "SyntecReranking": 0.02,
+        "AlloprofRetrieval": 0.32,
+        "BSARDRetrieval": 0.55,
+        "SyntecRetrieval": 0.0,
+        "SICKFr": 0.02,
+        "STS22": 0.02,
+        "STSBenchmarkMultilingualSTS": 0.01,
+        "SummEvalFr": 0.03
+    }
+}
