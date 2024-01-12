@@ -25,6 +25,16 @@ cd script_mteb_french
 python run_benchmark.py
 ```
 
+By default the benchmark runs on sentence_transformer models but you can specify the type with the argument `--model_type`:
+```bash
+# default ['sentence_transformer']
+python run_benchmark.py
+# choosing other type ['voyage_ai']
+python run_benchmark.py --model_type voyage_ai
+# running on two types ['voyage_ai', 'sentence_transformer']
+python run_benchmark.py --model_type voyage_ai sentence_transformer
+```
+
 ## Running using Docker
 
 * Navigate to the repository root folder

@@ -64,7 +64,7 @@ SENTENCE_TRANSORMER_MODELS = [
 ]
 """
 
-# these model max_length is indicated to be 514 whereas the embedding layer actually supports 512
+# these models max_length is indicated to be 514 whereas the embedding layer actually supports 512
 SENTENCE_TRANSORMER_MODELS_WITH_ERRORS = [
     "camembert/camembert-base",
     "camembert/camembert-large",
@@ -85,13 +85,14 @@ OPEN_AI_MODELS = ["text-embedding-ada-002"]
 
 COHERE_MODELS = ["embed-multilingual-light-v3.0", "embed-multilingual-v3.0"]
 
-MODELS = [ModelConfig(name, model_type="sentence_transformer") for name in SENTENCE_TRANSORMER_MODELS_WITH_ERRORS]
-
-# fix for sequence length
-for model_config in MODELS:
-    model_config.embedding_function.model._first_module().max_seq_length = 512
-
-# MODELS = [ModelConfig("Geotrend/bert-base-25lang-cased", model_type="sentence_transformer")]
+TYPES_TO_MODELS = {
+    "sentence_transformer": SENTENCE_TRANSORMER_MODELS + SENTENCE_TRANSORMER_MODELS_WITH_ERRORS,
+    "universal_sentence_encoder": UNIVERSAL_SENTENCE_ENCODER_MODELS,
+    "laser": LASER_MODELS,
+    "voyage_ai": VOYAGE_MODELS,
+    "open_ai": OPEN_AI_MODELS,
+    "cohere": COHERE_MODELS,
+}
 
 ########################
 # Step 2 : Setup tasks #
@@ -150,13 +151,19 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--lang", type=str, default="fr")
     parser.add_argument("--batchsize", type=int, default=32)
+    parser.add_argument("--model_type", nargs='+', default=["sentence_transformer"])
     args = parser.parse_args()
 
     return args
 
 
 def main(args):
-    for model_config in MODELS:
+    print("Running benchmark with the following model types: ", args.model_type)
+    models = [ModelConfig(name, model_type=model_type) for model_type in args.model_type for name in TYPES_TO_MODELS[model_type]]
+    for model_config in models:
+        # fix the max_seq_length for some models with errors
+        if model_config.model_name in SENTENCE_TRANSORMER_MODELS_WITH_ERRORS:
+            model_config.embedding_function.model._first_module().max_seq_length = 512
         for task in TASKS:
             # change the task in the model config ! This is important to specify the chromaDB collection !
             model_name = model_config.model_name
