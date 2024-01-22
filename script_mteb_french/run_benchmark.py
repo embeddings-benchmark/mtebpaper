@@ -70,14 +70,14 @@ SENTENCE_TRANSORMER_MODELS_WITH_ERRORS = [
     "camembert/camembert-large",
     "dangvantuan/sentence-camembert-large",
     "xlm-roberta-base",
-    "xlm-roberta-large"
+    "xlm-roberta-large",
 ]
 
 UNIVERSAL_SENTENCE_ENCODER_MODELS = [
     "vprelovac/universal-sentence-encoder-multilingual-3"
 ]
 
-LASER_MODELS = ["Laser2"]
+LASER_MODELS = ["laser2"]
 
 VOYAGE_MODELS = ["voyage-02"]
 
@@ -86,7 +86,8 @@ OPEN_AI_MODELS = ["text-embedding-ada-002"]
 COHERE_MODELS = ["embed-multilingual-light-v3.0", "embed-multilingual-v3.0"]
 
 TYPES_TO_MODELS = {
-    "sentence_transformer": SENTENCE_TRANSORMER_MODELS + SENTENCE_TRANSORMER_MODELS_WITH_ERRORS,
+    "sentence_transformer": SENTENCE_TRANSORMER_MODELS
+    + SENTENCE_TRANSORMER_MODELS_WITH_ERRORS,
     "universal_sentence_encoder": UNIVERSAL_SENTENCE_ENCODER_MODELS,
     "laser": LASER_MODELS,
     "voyage_ai": VOYAGE_MODELS,
@@ -132,10 +133,19 @@ TASK_LIST_SUMMARIZATION = [
 
 TASK_LIST_BITEXTMINING = [
     "DiaBLaBitextMining",
-    #"FloresBitextMining",
+    # "FloresBitextMining",
 ]
 
-TASKS = TASK_LIST_BITEXTMINING
+TASKS = (
+    TASK_LIST_CLASSIFICATION
+    + TASK_LIST_CLUSTERING
+    + TASK_LIST_PAIR_CLASSIFICATION
+    + TASK_LIST_RERANKING
+    + TASK_LIST_RETRIEVAL
+    + TASK_LIST_STS
+    + TASK_LIST_SUMMARIZATION
+    + TASK_LIST_BITEXTMINING
+)
 
 ##########################
 # Step 3 : Run benchmark #
@@ -151,7 +161,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--lang", type=str, default="fr")
     parser.add_argument("--batchsize", type=int, default=32)
-    parser.add_argument("--model_type", nargs='+', default=["sentence_transformer"])
+    parser.add_argument("--model_type", nargs="+", default=["sentence_transformer"])
     args = parser.parse_args()
 
     return args
@@ -159,7 +169,11 @@ def parse_args() -> argparse.Namespace:
 
 def main(args):
     print("Running benchmark with the following model types: ", args.model_type)
-    models = [ModelConfig(name, model_type=model_type) for model_type in args.model_type for name in TYPES_TO_MODELS[model_type]]
+    models = [
+        ModelConfig(name, model_type=model_type)
+        for model_type in args.model_type
+        for name in TYPES_TO_MODELS[model_type]
+    ]
     for model_config in models:
         # fix the max_seq_length for some models with errors
         if model_config.model_name in SENTENCE_TRANSORMER_MODELS_WITH_ERRORS:

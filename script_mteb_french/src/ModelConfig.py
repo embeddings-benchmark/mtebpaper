@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 
 from .ChromaDBEmbedder import ChromaDBEmbedder
 from .CohereEmbeddingFunction import CohereEmbeddingFunction
+from .LaserEmbeddingFunction import LaserEmbeddingFunction
 from .OpenAIEmbeddingFunction import OpenAIEmbeddingFunction
 from .SentenceTransformerEmbeddingFunction import SentenceTransformerEmbeddingFunction
 from .UniversalSentenceEncoderEmbeddingFunction import (
@@ -46,7 +47,14 @@ class ModelConfig(ChromaDBEmbedder):
         self.embedding_function = self.get_embedding_function()
 
         # inherit the saving of embeddings, and encoding logic from ChromDBEmbedder
-        save_embbeddings = False if (model_type == "sentence_transformer" or model_type == "universal_sentence_encoder") else True
+        save_embbeddings = (
+            False
+            if (
+                model_type == "sentence_transformer"
+                or model_type == "universal_sentence_encoder"
+            )
+            else True
+        )
         super().__init__(
             self.embedding_function,
             save_embbedings=save_embbeddings,
@@ -56,6 +64,7 @@ class ModelConfig(ChromaDBEmbedder):
     def _max_token_per_model(self):
         return {
             "cohere": 4096,
+            "laser": 512,
             "voyage_ai": 4000,
             "open_ai": 8191,
             "sentence_transformer": 4096,
@@ -103,6 +112,8 @@ class ModelConfig(ChromaDBEmbedder):
         match self.model_type:
             case "cohere":
                 return CohereEmbeddingFunction(self.model_name, self.max_token_length)
+            case "laser":
+                return LaserEmbeddingFunction(self.model_name, self.max_token_length)
             case "voyage_ai":
                 return VoyageAIEmbeddingFunction(self.model_name, self.max_token_length)
             case "open_ai":
