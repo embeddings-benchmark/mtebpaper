@@ -86,13 +86,13 @@ TASK_LIST_SUMMARIZATION = [
     "SummEval",
 ]
 
-TASK_LIST_BITEXT = [
+TASK_LIST_BITEXTMINING = [
     "BUCC",
     "Tatoeba",
 ]
 
 TASK_LIST = (
-    TASK_LIST_BITEXT
+    TASK_LIST_BITEXTMINING
     + TASK_LIST_CLASSIFICATION
     + TASK_LIST_CLUSTERING
     + TASK_LIST_PAIR_CLASSIFICATION
@@ -110,7 +110,7 @@ TASK_LIST_NAMES = [
     ("Retrieval", TASK_LIST_RETRIEVAL, ["en", "en-en"]),
     ("STS", TASK_LIST_STS, ["en", "en-en"]),
     ("all", TASK_LIST, ["en", "en-en"]),
-    ("BitextMining", TASK_LIST_BITEXT, []),
+    ("BitextMining", TASK_LIST_BITEXTMINING, []),
 ]
 
 results_folder = sys.argv[1]
@@ -176,7 +176,7 @@ with open(csv_file, "w", encoding="utf-8") as f:
     writer = csv.writer(f)
     writer.writerow(["model", "task", "dataset", "language", "metric", "value"])
     for task, dataset_list in [
-        ("BitextMining", TASK_LIST_BITEXT),
+        ("BitextMining", TASK_LIST_BITEXTMINING),
         ("Classification", TASK_LIST_CLASSIFICATION),
         ("Clustering", TASK_LIST_CLUSTERING),
         ("PairClassification", TASK_LIST_PAIR_CLASSIFICATION),
@@ -190,7 +190,7 @@ with open(csv_file, "w", encoding="utf-8") as f:
 
     # Add average scores
     for task, dataset_list, limit_langs in [
-        ("BitextMining", TASK_LIST_BITEXT, []),
+        ("BitextMining", TASK_LIST_BITEXTMINING, []),
         ("Classification", TASK_LIST_CLASSIFICATION, ["en", "en-en"]),
         ("Clustering", TASK_LIST_CLUSTERING, ["en", "en-en"]),
         ("PairClassification", TASK_LIST_PAIR_CLASSIFICATION, ["en", "en-en"]),

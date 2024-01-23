@@ -31,4 +31,6 @@ class OpenAIEmbeddingFunction(AbstractEmbeddingFunction, OAIEMbFunc):
         return self._model_name
 
     def encode_documents(self, input: Documents) -> Embeddings:
+        # replace empty string by space to avoid API error
+        input = [i if i else " " for i in input]
         return OAIEMbFunc.__call__(self, input)

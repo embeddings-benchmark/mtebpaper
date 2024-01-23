@@ -1,0 +1,51 @@
+{
+  "dataset_revision": "9e9b1f8ef51616073f47f306f7f47dd91663f86a",
+  "mteb_dataset_name": "OpusparcusPC",
+  "mteb_version": "1.1.2.dev0",
+  "test": {
+    "evaluation_time": 61.28,
+    "fr": {
+      "cos_sim": {
+        "accuracy": 0.9990069513406157,
+        "accuracy_threshold": 0.767655871890483,
+        "ap": 1.0,
+        "f1": 0.9995032290114257,
+        "f1_threshold": 0.767655871890483,
+        "precision": 1.0,
+        "recall": 0.9990069513406157
+      },
+      "dot": {
+        "accuracy": 0.9990069513406157,
+        "accuracy_threshold": 0.7676559199722575,
+        "ap": 1.0,
+        "f1": 0.9995032290114257,
+        "f1_threshold": 0.7676559199722575,
+        "precision": 1.0,
+        "recall": 0.9990069513406157
+      },
+      "euclidean": {
+        "accuracy": 0.9990069513406157,
+        "accuracy_threshold": 0.6814929976426073,
+        "ap": 1.0,
+        "f1": 0.9995032290114257,
+        "f1_threshold": 0.6814929976426073,
+        "precision": 1.0,
+        "recall": 0.9990069513406157
+      },
+      "manhattan": {
+        "accuracy": 0.9990069513406157,
+        "accuracy_threshold": 21.389309323442035,
+        "ap": 1.0,
+        "f1": 0.9995032290114257,
+        "f1_threshold": 21.389309323442035,
+        "precision": 1.0,
+        "recall": 0.9990069513406157
+      },
+      "max": {
+        "accuracy": 0.9990069513406157,
+        "ap": 1.0,
+        "f1": 0.9995032290114257
+      }
+    }
+  }
+}
