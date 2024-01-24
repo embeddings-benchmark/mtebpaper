@@ -3,7 +3,7 @@
   "mteb_dataset_name": "AlloprofReranking",
   "mteb_version": "1.1.2.dev0",
   "test": {
-    "evaluation_time": 25.05,
+    "evaluation_time": 25.57,
     "map": 0.5622529766312828,
     "mrr": 0.5744998460149596
   }

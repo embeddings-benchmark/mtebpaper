@@ -1,10 +1,10 @@
 {
-  "dataset_revision": "3e394f99549416c102c44af9b38460d0d07fa10f",
+  "dataset_revision": "392ba3f5bcc8c51f578786c1fc3dae648662cb9b",
   "mteb_dataset_name": "AlloProfClusteringS2S",
   "mteb_version": "1.1.2.dev0",
   "test": {
-    "evaluation_time": 2.25,
-    "v_measure": 0.1444933095231007,
-    "v_measure_std": 0.027611904994847208
+    "evaluation_time": 2.41,
+    "v_measure": 0.14459750073719238,
+    "v_measure_std": 0.027574603590791454
   }
 }

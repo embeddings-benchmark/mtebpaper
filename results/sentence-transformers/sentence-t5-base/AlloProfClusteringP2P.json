@@ -3,7 +3,7 @@
   "mteb_dataset_name": "AlloProfClusteringP2P",
   "mteb_version": "1.1.2.dev0",
   "test": {
-    "evaluation_time": 14.53,
+    "evaluation_time": 15.14,
     "v_measure": 0.5844150763298186,
     "v_measure_std": 0.033190975816271846
   }

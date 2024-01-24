@@ -34,7 +34,7 @@ class UniversalSentenceEncoderEmbeddingFunction(AbstractEmbeddingFunction):
         return self._model_name
 
     def encode_documents(self, input: Documents) -> Embeddings:
-        return self.model(input)
+        return self.model(input).numpy()
     
     @classmethod
     def _load_model_paths(cls):
