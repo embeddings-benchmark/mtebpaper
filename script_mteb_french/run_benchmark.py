@@ -74,7 +74,8 @@ SENTENCE_TRANSORMER_MODELS_WITH_ERRORS = [
 ]
 
 UNIVERSAL_SENTENCE_ENCODER_MODELS = [
-    "vprelovac/universal-sentence-encoder-multilingual-3"
+    "vprelovac/universal-sentence-encoder-multilingual-3",
+    "vprelovac/universal-sentence-encoder-multilingual-large-3",
 ]
 
 LASER_MODELS = ["laser2"]
