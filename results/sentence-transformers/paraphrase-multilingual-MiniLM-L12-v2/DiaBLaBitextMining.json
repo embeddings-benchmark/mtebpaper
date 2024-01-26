@@ -3,11 +3,13 @@
   "mteb_dataset_name": "DiaBLaBitextMining",
   "mteb_version": "1.1.2.dev0",
   "test": {
-    "accuracy": 0.7834029227557411,
-    "evaluation_time": 6.78,
-    "f1": 0.755734499784604,
-    "main_score": 0.755734499784604,
-    "precision": 0.7436175177563488,
-    "recall": 0.7834029227557411
+    "evaluation_time": 8.61,
+    "fr-en": {
+      "accuracy": 0.8107167710508003,
+      "f1": 0.7772438859983376,
+      "main_score": 0.7772438859983376,
+      "precision": 0.7637658654697831,
+      "recall": 0.8107167710508003
+    }
   }
 }

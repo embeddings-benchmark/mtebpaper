@@ -35,6 +35,21 @@ python run_benchmark.py --model_type voyage_ai
 python run_benchmark.py --model_type voyage_ai sentence_transformer
 ```
 
+You can also run the benchmark on one model only by specifying `--model_name`:
+```bash
+# default ['sentence_transformer'] -> all models of this type
+python run_benchmark.py
+# running on one model 'camembert-base'
+python run_benchmark.py --model_type sentence_transformer --model_name "xlm-roberta-base"
+```
+Note that the `model_name` should be included in models of specified `model_type`.
+
+You can run the benchmark on one task type in ["all", "classification", "clustering", "reranking", "retrieval", "pair_classification", "sts", "summarization", "bitextmining"], default is set to "all" and will run all tasks :
+```bash
+# running 'sentence_transformer' models on 'classification' task
+python run_benchmark.py --model_type sentence_transformer --task_type classification
+```
+
 ## Running using Docker
 
 * Navigate to the repository root folder

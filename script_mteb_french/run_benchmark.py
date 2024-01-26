@@ -1,8 +1,16 @@
+import sys
 import argparse
+import logging
 
 from mteb import MTEB
 
 from src.ModelConfig import ModelConfig
+
+logging.basicConfig(
+    stream=sys.stdout,
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
 
 """
 How to use ?
@@ -101,7 +109,7 @@ TYPES_TO_MODELS = {
 ########################
 TASK_LIST_CLASSIFICATION = [
     "AmazonReviewsClassification",
-    "MasakhaNEWSClassification",  # bug when evealuating with bloom, need to enable truncation
+    "MasakhaNEWSClassification",
     "MassiveIntentClassification",
     "MassiveScenarioClassification",
     "MTOPDomainClassification",
@@ -134,23 +142,114 @@ TASK_LIST_SUMMARIZATION = [
 
 TASK_LIST_BITEXTMINING = [
     "DiaBLaBitextMining",
-    # "FloresBitextMining",
+    "FloresBitextMining",
 ]
 
 TASKS = (
     TASK_LIST_CLASSIFICATION
     + TASK_LIST_CLUSTERING
-    + TASK_LIST_PAIR_CLASSIFICATION
     + TASK_LIST_RERANKING
     + TASK_LIST_RETRIEVAL
+    + TASK_LIST_PAIR_CLASSIFICATION
     + TASK_LIST_STS
     + TASK_LIST_SUMMARIZATION
     + TASK_LIST_BITEXTMINING
 )
 
+TYPES_TO_TASKS = {
+    "all": TASKS,
+    "classification": TASK_LIST_CLASSIFICATION,
+    "clustering": TASK_LIST_CLUSTERING,
+    "reranking": TASK_LIST_RERANKING,
+    "retrieval": TASK_LIST_RETRIEVAL,
+    "pair_classification": TASK_LIST_PAIR_CLASSIFICATION,
+    "sts": TASK_LIST_STS,
+    "summarization": TASK_LIST_SUMMARIZATION,
+    "bitextmining": TASK_LIST_BITEXTMINING,
+}
+
 ##########################
 # Step 3 : Run benchmark #
 ##########################
+
+
+def run_bitext_mining_tasks(args, model_config: ModelConfig, task: str):
+    """Runs Bitext Mining tasks"""
+    model_name = model_config.model_name
+    model_config.batch_size = args.batchsize
+
+    eval_splits = ["dev"] if task == "FloresBitextMining" else ["test"]
+
+    if task == "DiaBLaBitextMining":
+        evaluation = MTEB(tasks=[task], task_langs=[args.lang, "en"])
+        evaluation.run(
+            model_config,
+            output_folder=f"results/{model_name}",
+            batch_size=args.batchsize,
+            eval_splits=eval_splits,
+        )
+    elif task == "FloresBitextMining":
+        evaluation = MTEB(tasks=[task], task_langs=[args.lang, args.other_lang])
+        evaluation.run(
+            model_config,
+            output_folder=f"results/{model_name}",
+            batch_size=args.batchsize,
+            eval_splits=eval_splits,
+        )
+
+
+def get_models(model_name, model_type, max_token_length) -> list[ModelConfig]:
+    """Returns ModelConfig of input model_name or all ModelConfig model_type's list of models"""
+    if model_name:
+        logging.info(f"Running benchmark with the following model: {model_name}")
+        if len(model_type) > 1:
+            raise Exception(
+                "Only one model type needs to be specified when a model name is given."
+            )
+
+        model_type_value = model_type[0]
+        available_models_for_type = TYPES_TO_MODELS[model_type_value]
+
+        if model_name not in available_models_for_type:
+            raise Exception(
+                f"Model name not in {available_models_for_type}.\n\
+                Please select a correct model name corresponding to your model type."
+            )
+
+        if max_token_length:
+            return [
+                ModelConfig(
+                    model_name=model_name,
+                    model_type=model_type_value,
+                    max_token_length=max_token_length,
+                )
+            ]
+        else:
+            return [ModelConfig(model_name=model_name, model_type=model_type_value)]
+    else:
+        logging.info(f"Running benchmark with the following model types: {model_type}")
+        if max_token_length:
+            return [
+                ModelConfig(
+                    name, model_type=model_type, max_token_length=max_token_length
+                )
+                for model_type in model_type
+                for name in TYPES_TO_MODELS[model_type]
+            ]
+        else:
+            return [
+                ModelConfig(name, model_type=model_type)
+                for model_type in model_type
+                for name in TYPES_TO_MODELS[model_type]
+            ]
+
+
+def get_tasks(task_type):
+    return [
+        (task_type, task)
+        for task_type in task_type
+        for task in TYPES_TO_TASKS[task_type]
+    ]
 
 
 def parse_args() -> argparse.Namespace:
@@ -163,35 +262,67 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--lang", type=str, default="fr")
     parser.add_argument("--batchsize", type=int, default=32)
     parser.add_argument("--model_type", nargs="+", default=["sentence_transformer"])
+    parser.add_argument(
+        "--model_name", type=str, default=None, help="Run evaluation on one model only."
+    )
+    parser.add_argument(
+        "--task_type",
+        nargs="+",
+        default=["all"],
+        help="Choose tasks to run the evaluation on.",
+    )
+    parser.add_argument(
+        "--other_lang",
+        type=str,
+        default="en",
+        help="Other language for Bitext Mining task",
+    )
+    parser.add_argument("--max_token_length", type=int, default=None)
     args = parser.parse_args()
 
     return args
 
 
 def main(args):
-    print("Running benchmark with the following model types: ", args.model_type)
-    models = [
-        ModelConfig(name, model_type=model_type)
-        for model_type in args.model_type
-        for name in TYPES_TO_MODELS[model_type]
-    ]
+    # Select tasks to run evaluation on, default is set to all tasks
+    tasks = get_tasks(task_type=args.task_type)
+
+    # Running one model at a time or all models
+    models = get_models(
+        model_name=args.model_name,
+        model_type=args.model_type,
+        max_token_length=args.max_token_length,
+    )
+
+    # Running evaluation on all models for selected tasks
     for model_config in models:
         # fix the max_seq_length for some models with errors
         if model_config.model_name in SENTENCE_TRANSORMER_MODELS_WITH_ERRORS:
             model_config.embedding_function.model._first_module().max_seq_length = 512
-        for task in TASKS:
-            # change the task in the model config ! This is important to specify the chromaDB collection !
-            model_name = model_config.model_name
-            model_config.batch_size = args.batchsize
-            print("Running task: ", task, "with model", model_name)
-            eval_splits = ["validation"] if task == "MSMARCO" else ["test"]
-            evaluation = MTEB(tasks=[task], task_langs=[args.lang])
-            evaluation.run(
-                model_config,
-                output_folder=f"results/{model_name}",
-                batch_size=args.batchsize,
-                eval_splits=eval_splits,
-            )
+
+        for task_type, task in tasks:
+            if (task_type == "bitextmining") or ("BitextMining" in task):
+                logging.warning(
+                    "If other_lang is not specified in args, then it is set to 'en' by default"
+                )
+                logging.info(
+                    f"Running task: {task} with model {model_config.model_name}"
+                )
+                run_bitext_mining_tasks(args=args, model_config=model_config, task=task)
+            else:
+                # change the task in the model config ! This is important to specify the chromaDB collection !
+                eval_splits = ["validation"] if task == "MSMARCO" else ["test"]
+                model_name = model_config.model_name
+                model_config.batch_size = args.batchsize
+                logging.info(f"Running task: {task} with model {model_name}")
+                eval_splits = ["validation"] if task == "MSMARCO" else ["test"]
+                evaluation = MTEB(tasks=[task], task_langs=[args.lang])
+                evaluation.run(
+                    model_config,
+                    output_folder=f"results/{model_name}",
+                    batch_size=args.batchsize,
+                    eval_splits=eval_splits,
+                )
 
 
 if __name__ == "__main__":
