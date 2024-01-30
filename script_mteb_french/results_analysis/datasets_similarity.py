@@ -162,6 +162,16 @@ def _extend_lang_code(langs):
 
 
 def get_all_samples(tasks:list[str], n_samples:int=90, langs:list[str]="fr") -> tuple[list[str], list[str]]:
+    """Get the samples from the dataset of each task
+
+    Args:
+        tasks (list[str]): list of task names
+        n_samples (int, optional): the mount of samples to get. Defaults to 90.
+        langs (list[str], optional): the langs from which the samples are taken. Defaults to "fr".
+
+    Returns:
+        tuple[list[str], list[str]]: the list of task names, and the list of list of samples
+    """
 
     task_types = ["bitextmining", "classification", "clustering", "pairclassification", "reranking", "retrieval", "sts", "summarization"]
     text_keys_of_tasks = ["sentence1", "text", "sentences", "sent1", "negatives", "text", "sentence1", "human_summaries"]
@@ -289,12 +299,8 @@ if __name__ == '__main__':
 
     data_emb_df = pd.DataFrame(data_dict_emb)
     data_emb_df.set_index(data_emb_df.columns, inplace=True)
-
     plt.figure(figsize=(36, 24))
     # define the mask to set the values in the upper triangle to True
     mask = np.triu(np.ones_like(data_emb_df, dtype=bool))
     heatmap = sns.heatmap(data_emb_df, mask=mask, vmin=data_emb_df.values.min(), vmax=data_emb_df.values.max(), annot=True, cmap='Blues')
-    #heatmap.set_title('Similarity of MTEB datasets', fontdict={'fontsize':18}, pad=16)
-    # Save
-    # data_emb_df.to_csv("sim_data.csv")
     plt.savefig(os.path.join(args.output_folder, f'cosim_{args.task_type}.png'), dpi=300, bbox_inches='tight')
