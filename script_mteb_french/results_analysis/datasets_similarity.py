@@ -6,15 +6,18 @@ from argparse import ArgumentParser, Namespace
 import numpy as np
 import mteb
 from mteb import MTEB
+from mteb.evaluation.evaluators.utils import cos_sim
 from mteb import LangMapping 
 from tqdm import tqdm
 from sentence_transformers import SentenceTransformer
 from sklearn.decomposition import PCA
 import torch
+import pandas as pd
 
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
+import seaborn as sns
 
 
 TASK_LIST_CLASSIFICATION = [
@@ -231,7 +234,6 @@ if __name__ == '__main__':
     logging.getLogger().setLevel(logging.INFO)
 
     args = parse_args()
-    print(torch.cuda.is_available())
 
     if not os.path.exists(args.output_folder):
         os.makedirs(args.output_folder)
@@ -274,6 +276,25 @@ if __name__ == '__main__':
     ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
     ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     ax.grid(False)
-
     plt.savefig(os.path.join(args.output_folder, f"PCA_components_{args.task_type}.png"), bbox_inches='tight')
     logging.info(f"PCA plots done !")
+
+    # Plot Averaged embeddings cosine similarities
+    emb_dict = {}
+    for i, task in enumerate(tasks_names):
+        emb_dict[task] = embeddings[i*args.n_samples:(i+1)*args.n_samples]
+    data_dict_emb = []
+    for i, task_1 in enumerate(tasks_names):
+        data_dict_emb.append({task_2: cos_sim(np.mean(emb_dict[task_1], axis=0), np.mean(emb_dict[task_2], axis=0)).item() for task_2 in tasks_names})
+
+    data_emb_df = pd.DataFrame(data_dict_emb)
+    data_emb_df.set_index(data_emb_df.columns, inplace=True)
+
+    plt.figure(figsize=(36, 24))
+    # define the mask to set the values in the upper triangle to True
+    mask = np.triu(np.ones_like(data_emb_df, dtype=bool))
+    heatmap = sns.heatmap(data_emb_df, mask=mask, vmin=data_emb_df.values.min(), vmax=data_emb_df.values.max(), annot=True, cmap='Blues')
+    #heatmap.set_title('Similarity of MTEB datasets', fontdict={'fontsize':18}, pad=16)
+    # Save
+    # data_emb_df.to_csv("sim_data.csv")
+    plt.savefig(os.path.join(args.output_folder, f'cosim_{args.task_type}.png'), dpi=300, bbox_inches='tight')
