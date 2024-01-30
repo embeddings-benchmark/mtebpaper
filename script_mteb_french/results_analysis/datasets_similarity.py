@@ -75,7 +75,7 @@ TYPES_TO_TASKS = {
     "clustering": TASK_LIST_CLUSTERING,
     "reranking": TASK_LIST_RERANKING,
     "retrieval": TASK_LIST_RETRIEVAL,
-    "pair_classification": TASK_LIST_PAIR_CLASSIFICATION,
+    "pairclassification": TASK_LIST_PAIR_CLASSIFICATION,
     "sts": TASK_LIST_STS,
     "summarization": TASK_LIST_SUMMARIZATION,
     "bitextmining": TASK_LIST_BITEXTMINING,
@@ -163,7 +163,7 @@ def _extend_lang_code(langs):
 
 def get_all_samples(tasks:list[str], n_samples:int=90, langs:list[str]="fr") -> tuple[list[str], list[str]]:
 
-    task_types = ["bitextmining", "classification", "clustering", "pair_classification", "reranking", "retrieval", "sts", "summarization"]
+    task_types = ["bitextmining", "classification", "clustering", "pairclassification", "reranking", "retrieval", "sts", "summarization"]
     text_keys_of_tasks = ["sentence1", "text", "sentences", "sent1", "negatives", "text", "sentence1", "human_summaries"]
     task_type_to_text_key = dict(zip(task_types, text_keys_of_tasks))
 
