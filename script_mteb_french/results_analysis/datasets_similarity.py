@@ -229,7 +229,7 @@ if __name__ == '__main__':
         y = reduced[i*args.n_samples:(i+1)*args.n_samples, 1]
         centroid = (x.mean(), y.mean())
         ax.scatter(x, y, s=.5, color=color)
-        ax.scatter(centroid[0], centroid[1], lw=1, s=50, color=color, label=name, edgecolors="black")
+        ax.scatter(centroid[0], centroid[1], lw=1, s=50, color=color, label=f"{i+1} - {name}", edgecolors="black")
         ellipse = Ellipse(xy=centroid, width=x.std(), height=y.std(), fc=color, lw=0, alpha=.3)
         ax.add_patch(ellipse)
     # Setup legend on the side
