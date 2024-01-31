@@ -4,6 +4,8 @@ import mteb
 from mteb import MTEB
 import tiktoken
 
+from utils.tasks_list import get_tasks
+
 """
 This script is used to evaluate the cost of evaluating a task.
 
@@ -20,55 +22,6 @@ we are using clk100_base from tiktoken by default. (approx 2.5 tokens/words)
 - We do not take into account that the benchmark uses static storage with chromaDB
 => Overall the output costs may likely be overestimated
 """
-TASK_LIST_BITEXTMINING = [
-    "DiaBLaBitextMining",
-    #"FloresBitextMining",
-]
-
-TASK_LIST_CLASSIFICATION = [
-    "AmazonReviewsClassification",
-    "MasakhaNEWSClassification",
-    "MassiveIntentClassification",
-    "MassiveScenarioClassification",
-    "MTOPDomainClassification",
-    "MTOPIntentClassification",
-]
-
-TASK_LIST_CLUSTERING = [
-    "AlloProfClusteringP2P",
-    "AlloProfClusteringS2S",
-    "HALClusteringS2S",
-    "MasakhaNEWSClusteringP2P",
-    "MasakhaNEWSClusteringS2S",
-    "MLSUMClusteringP2P",
-    "MLSUMClusteringS2S",
-]
-
-TASK_LIST_PAIR_CLASSIFICATION = [
-    "OpusparcusPC",
-]
-
-TASK_LIST_RERANKING = ["SyntecReranking", "AlloprofReranking"]
-
-TASK_LIST_RETRIEVAL = ["AlloprofRetrieval", "BSARDRetrieval", "SyntecRetrieval"]
-
-TASK_LIST_STS = ["STSBenchmarkMultilingualSTS", "STS22", "SICKFr"]
-
-TASK_LIST_SUMMARIZATION = [
-    "SummEvalFr",
-]
-
-
-TASK_LIST = (
-    TASK_LIST_BITEXTMINING
-    + TASK_LIST_CLASSIFICATION
-    + TASK_LIST_CLUSTERING
-    + TASK_LIST_PAIR_CLASSIFICATION
-    + TASK_LIST_RERANKING
-    + TASK_LIST_RETRIEVAL
-    + TASK_LIST_STS
-    + TASK_LIST_SUMMARIZATION
-)
 
 PRICE_PER_1K_TOKEN = 0.0001
 
@@ -330,6 +283,8 @@ def estimate_cost_Summarization_task(
 
     return cost
 
+
+TASK_LIST = [task_name for _, task_name in get_tasks()]
 
 costs_dump = {"PRICE_FOR_1K_TOKENS_IN_$": PRICE_PER_1K_TOKEN, "PRICE_FOR_TASK_EVALUATION": {}}
 evaluation = MTEB(tasks=TASK_LIST, task_langs=TASKS_LANGS)

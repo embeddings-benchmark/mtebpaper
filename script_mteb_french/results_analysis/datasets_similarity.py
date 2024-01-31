@@ -19,67 +19,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
 import seaborn as sns
 
-
-TASK_LIST_CLASSIFICATION = [
-    "AmazonReviewsClassification",
-    "MasakhaNEWSClassification",
-    "MassiveIntentClassification",
-    "MassiveScenarioClassification",
-    "MTOPDomainClassification",
-    "MTOPIntentClassification",
-]
-
-TASK_LIST_CLUSTERING = [
-    "AlloProfClusteringP2P",
-    "AlloProfClusteringS2S",
-    "HALClusteringS2S",
-    "MasakhaNEWSClusteringP2P",
-    "MasakhaNEWSClusteringS2S",
-    "MLSUMClusteringP2P",
-    "MLSUMClusteringS2S",
-]
-
-TASK_LIST_PAIR_CLASSIFICATION = [
-    "OpusparcusPC",
-]
-
-TASK_LIST_RERANKING = ["SyntecReranking", "AlloprofReranking"]
-
-TASK_LIST_RETRIEVAL = ["AlloprofRetrieval", "BSARDRetrieval", "SyntecRetrieval"]
-
-TASK_LIST_STS = ["STSBenchmarkMultilingualSTS", "STS22", "SICKFr"]
-
-TASK_LIST_SUMMARIZATION = [
-    "SummEvalFr",
-]
-
-TASK_LIST_BITEXTMINING = [
-    "DiaBLaBitextMining",
-    "FloresBitextMining",
-]
-
-TASKS = (
-    TASK_LIST_CLASSIFICATION
-    + TASK_LIST_CLUSTERING
-    + TASK_LIST_RERANKING
-    + TASK_LIST_RETRIEVAL
-    + TASK_LIST_PAIR_CLASSIFICATION
-    + TASK_LIST_STS
-    + TASK_LIST_SUMMARIZATION
-    + TASK_LIST_BITEXTMINING
-)
-
-TYPES_TO_TASKS = {
-    "all": TASKS,
-    "classification": TASK_LIST_CLASSIFICATION,
-    "clustering": TASK_LIST_CLUSTERING,
-    "reranking": TASK_LIST_RERANKING,
-    "retrieval": TASK_LIST_RETRIEVAL,
-    "pairclassification": TASK_LIST_PAIR_CLASSIFICATION,
-    "sts": TASK_LIST_STS,
-    "summarization": TASK_LIST_SUMMARIZATION,
-    "bitextmining": TASK_LIST_BITEXTMINING,
-}
+from ..utils.tasks_list import get_tasks
 
 
 def get_samples_from_dataset(
@@ -174,7 +114,7 @@ def get_all_samples(tasks:list[str], n_samples:int=90, langs:list[str]="fr") -> 
     """
 
     task_types = ["bitextmining", "classification", "clustering", "pairclassification", "reranking", "retrieval", "sts", "summarization"]
-    text_keys_of_tasks = ["sentence1", "text", "sentences", "sent1", "negatives", "text", "sentence1", "human_summaries"]
+    text_keys_of_tasks = ["sentence1", "text", "sentences", "sent1", "negative", "text", "sentence1", "human_summaries"]
     task_type_to_text_key = dict(zip(task_types, text_keys_of_tasks))
 
     tasks_names = []
@@ -229,7 +169,7 @@ def parse_args() -> Namespace:
         (argparse.Namespace): the arguments
     """
     parser = ArgumentParser()
-    parser.add_argument("--task_type", type=str, choices=list(TYPES_TO_TASKS.keys()), default="all")
+    parser.add_argument("--task_type", type=str, default="all")
     parser.add_argument("--langs", type=list[str], default=["fr"])
     parser.add_argument("--output_folder", type=str, default="./datasets_similarity_analysis")
     parser.add_argument("--model_name", type=str, default="intfloat/multilingual-e5-large")
@@ -250,10 +190,11 @@ if __name__ == '__main__':
 
     _EXTENDED_LANGS = _extend_lang_code(args.langs) + ["fr-en"]
     RNG = np.random.default_rng(seed=args.seed)
+    TASK_LIST = [task_name for _, task_name in get_tasks(args.task_type)]
 
     # get samples and embeddings
-    logging.info(f"Getting samples for {len(TYPES_TO_TASKS[args.task_type])} tasks...")
-    tasks_names, tasks_samples = get_all_samples(TYPES_TO_TASKS[args.task_type], args.n_samples, _EXTENDED_LANGS)
+    logging.info(f"Getting samples for {len(TASK_LIST)} tasks...")
+    tasks_names, tasks_samples = get_all_samples(TASK_LIST, args.n_samples, _EXTENDED_LANGS)
     logging.info(f"Embedding samples...")
     embeddings = get_embeddings(tasks_samples, args.model_name)
 
