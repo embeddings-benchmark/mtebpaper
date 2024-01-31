@@ -231,7 +231,10 @@ if __name__ == '__main__':
         ax.scatter(centroid[0], centroid[1], lw=2, s=50, color=color, label=name)
         ellipse = Ellipse(xy=centroid, width=x.std(), height=y.std(), fc=color, lw=0, alpha=.2)
         ax.add_patch(ellipse)
-        ax.annotate(name[0] + name[-1], centroid, xytext=(centroid[0] - .04, centroid[1] - .04), arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"))
+        ax.annotate(name[0] + name[-1], centroid,
+                    xytext=(centroid[0] - .04, centroid[1] - .04),
+                    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2")
+                    )
     # Setup legend on the side
     box = ax.get_position()
     ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
