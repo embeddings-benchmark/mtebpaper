@@ -31,10 +31,7 @@ TASK_LIST_SUMMARIZATION = [
     "SummEvalFr",
 ]
 
-TASK_LIST_BITEXTMINING = [
-    "DiaBLaBitextMining",
-    #"FloresBitextMining",
-]
+TASK_LIST_BITEXTMINING = [ "DiaBLaBitextMining", "FloresBitextMining"]
 
 TASKS = (
     TASK_LIST_CLASSIFICATION
@@ -69,7 +66,8 @@ def get_tasks(task_types:list[str]=["all"]) -> list[tuple[str, str]]:
     Returns:
         list[tuple[str, str]]: the list of tuple (task_type, task_name)
     """
-
+    if not isinstance(task_types, list):
+        task_types = [task_types]
     assert all([t in TYPES_TO_TASKS.keys() for t in task_types]), (
         f"All types provided in 'task_type' argument must be in {list(TYPES_TO_TASKS.keys())}. Got {task_types}"
     )

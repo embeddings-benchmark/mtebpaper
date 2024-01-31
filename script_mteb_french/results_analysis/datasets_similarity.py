@@ -17,9 +17,10 @@ import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
+from matplotlib.colors import hsv_to_rgb
 import seaborn as sns
 
-from ..utils.tasks_list import get_tasks
+from ..utils.tasks_list import get_tasks, TYPES_TO_TASKS
 
 
 def get_samples_from_dataset(
@@ -58,7 +59,7 @@ def get_samples_from_dataset(
             samples.extend(dataset[split][text_key])
     # flatten in case we have a list of list of strings (e.g. clustering tasks)
     if isinstance(samples[0], list):
-        samples = np.concatenate(samples).flatten()
+        samples = np.concatenate(samples[:100]).flatten()
 
     return RNG.choice(samples, size=n_samples, replace=False)
 
@@ -101,7 +102,7 @@ def _extend_lang_code(langs):
     return total_langs
 
 
-def get_all_samples(tasks:list[str], n_samples:int=90, langs:list[str]="fr") -> tuple[list[str], list[str]]:
+def get_all_samples(tasks:list[str], n_samples:int=90, langs:list[str]="fr") -> dict[str, list[str]]:
     """Get the samples from the dataset of each task
 
     Args:
@@ -110,18 +111,17 @@ def get_all_samples(tasks:list[str], n_samples:int=90, langs:list[str]="fr") -> 
         langs (list[str], optional): the langs from which the samples are taken. Defaults to "fr".
 
     Returns:
-        tuple[list[str], list[str]]: the list of task names, and the list of list of samples
+        tuple[list[str], list[str]]: a dict with {"task name" : [tasks samples], ...}
     """
 
     task_types = ["bitextmining", "classification", "clustering", "pairclassification", "reranking", "retrieval", "sts", "summarization"]
     text_keys_of_tasks = ["sentence1", "text", "sentences", "sent1", "negative", "text", "sentence1", "human_summaries"]
     task_type_to_text_key = dict(zip(task_types, text_keys_of_tasks))
 
-    tasks_names = []
-    tasks_samples = []
+    task_samples_dict = {}
     evaluation = MTEB(tasks=tasks, task_langs=langs)
     for task in tqdm(evaluation.tasks):
-        task.load_data()
+        task.load_data(eval_splits=task.description.get("eval_splits", []))
         text_key = task_type_to_text_key[task.description["type"].lower()]
         match task.description["type"].lower():
             case "retrieval":
@@ -134,18 +134,17 @@ def get_all_samples(tasks:list[str], n_samples:int=90, langs:list[str]="fr") -> 
                     langs=langs
                     )
 
-        tasks_names.append(task.description["name"])
-        tasks_samples.append(samples)
+        task_samples_dict[task.description["name"]] = samples
 
-    assert all([len(ts) == n_samples for ts in tasks_samples]), (
+    assert all([len(ts) == n_samples for ts in list(task_samples_dict.values())]), (
         "A task doesn't have the required number of samples :"
-        f"{tasks_names[[len(ts) == n_samples for ts in tasks_samples].index(False)]}",
+        f"{list(task_samples_dict.keys())[[len(ts) == n_samples for ts in list(task_samples_dict.values())].index(False)]}",
     )
 
-    return tasks_names, tasks_samples
+    return task_samples_dict
 
 
-def get_embeddings(samples:list[str], model_name:str="intfloat/multilingual-e5-large") -> np.array:
+def get_embeddings(samples:list[str]) -> np.array:
     """Gets the embeddings of a list of strings
 
     Args:
@@ -156,8 +155,7 @@ def get_embeddings(samples:list[str], model_name:str="intfloat/multilingual-e5-l
     Returns:
         np.array: the embeddings
     """
-    model = SentenceTransformer(model_name, device="cuda" if torch.cuda.is_available() else "cpu")
-    embeddings = np.concatenate([model.encode(s) for s in tqdm(samples)])
+    embeddings = MODEL.encode(samples)
 
     return embeddings
 
@@ -190,17 +188,20 @@ if __name__ == '__main__':
 
     _EXTENDED_LANGS = _extend_lang_code(args.langs) + ["fr-en"]
     RNG = np.random.default_rng(seed=args.seed)
-    TASK_LIST = [task_name for _, task_name in get_tasks(args.task_type)]
+    TASK_LIST = get_tasks(args.task_type)
+    TASK_NAMES = [name for _, name in TASK_LIST]
+    MODEL = SentenceTransformer(args.model_name, device="cuda" if torch.cuda.is_available() else "cpu")
 
     # get samples and embeddings
-    logging.info(f"Getting samples for {len(TASK_LIST)} tasks...")
-    tasks_names, tasks_samples = get_all_samples(TASK_LIST, args.n_samples, _EXTENDED_LANGS)
+    logging.info(f"Getting samples for {len(TASK_NAMES)} tasks...")
+    tasks_samples_dict = get_all_samples(TASK_NAMES, args.n_samples, _EXTENDED_LANGS)
     logging.info(f"Embedding samples...")
-    embeddings = get_embeddings(tasks_samples, args.model_name)
+    tasks_embeddings_dict = {k: get_embeddings(v) for k, v in tasks_samples_dict.items()}
 
     # Run PCA
     logging.info(f"Computing PCA...")
     pca = PCA(n_components=10)
+    embeddings = [i for j in list(tasks_embeddings_dict.values()) for i in j]
     reduced = pca.fit_transform(embeddings)
 
     # Plot explained variance
@@ -209,19 +210,28 @@ if __name__ == '__main__':
     plt.savefig(os.path.join(args.output_folder, f"PCA_explained_variance_ratio_{args.task_type}.png"), bbox_inches='tight')
 
     # Plot PCA components
-    labels = np.concatenate([np.full((args.n_samples), i) for i in range(len(tasks_samples))]).flatten()
+    types_to_colors = {
+        k : [hsv_to_rgb((j/len(TYPES_TO_TASKS), i, 1))
+             for i in np.arange(.3, 1, .8/len(v))]
+        for j, (k,v) in enumerate(TYPES_TO_TASKS.items())
+    }
+    task_name_to_color = {
+        i:j
+        for k, v in TYPES_TO_TASKS.items()
+        for i, j in zip(v, types_to_colors[k])
+    }
+    labels = np.concatenate([np.full((args.n_samples), i) for i in range(len(tasks_samples_dict))]).flatten()
     fig, ax = plt.subplots()
-    cmap = matplotlib.colormaps["plasma"]
-    n_colors = len(tasks_names)
-    colors = [cmap(i) for i in np.arange(0, 1, 1/n_colors)]
-    for i, (name, color) in enumerate(zip(tasks_names, colors)):
+    for i, name in enumerate(tasks_embeddings_dict.keys()):
+        color = task_name_to_color[name]
         x = reduced[i*args.n_samples:(i+1)*args.n_samples, 0]
         y = reduced[i*args.n_samples:(i+1)*args.n_samples, 1]
         centroid = (x.mean(), y.mean())
-        ax.scatter(x, y, s=1, color=color)
+        ax.scatter(x, y, s=.5, color=color)
         ax.scatter(centroid[0], centroid[1], lw=2, s=50, color=color, label=name)
         ellipse = Ellipse(xy=centroid, width=x.std(), height=y.std(), fc=color, lw=0, alpha=.2)
         ax.add_patch(ellipse)
+        ax.annotate(name[0] + name[-1], centroid, xytext=(centroid[0] - .04, centroid[1] - .04), arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"))
     # Setup legend on the side
     box = ax.get_position()
     ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
@@ -231,12 +241,9 @@ if __name__ == '__main__':
     logging.info(f"PCA plots done !")
 
     # Plot Averaged embeddings cosine similarities
-    emb_dict = {}
-    for i, task in enumerate(tasks_names):
-        emb_dict[task] = embeddings[i*args.n_samples:(i+1)*args.n_samples]
     data_dict_emb = []
-    for i, task_1 in enumerate(tasks_names):
-        data_dict_emb.append({task_2: cos_sim(np.mean(emb_dict[task_1], axis=0), np.mean(emb_dict[task_2], axis=0)).item() for task_2 in tasks_names})
+    for i, task_1 in enumerate(tasks_embeddings_dict.keys()):
+        data_dict_emb.append({task_2: cos_sim(np.mean(tasks_embeddings_dict[task_1], axis=0), np.mean(tasks_embeddings_dict[task_2], axis=0)).item() for task_2 in tasks_embeddings_dict.keys()})
 
     data_emb_df = pd.DataFrame(data_dict_emb)
     data_emb_df.set_index(data_emb_df.columns, inplace=True)
