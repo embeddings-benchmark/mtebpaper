@@ -211,7 +211,7 @@ if __name__ == '__main__':
 
     # Plot PCA components
     types_to_colors = {
-        k : [hsv_to_rgb((j/len(TYPES_TO_TASKS), i, 1))
+        k : [hsv_to_rgb(((j/1.5)/len(TYPES_TO_TASKS), i, 1))
              for i in np.arange(.3, 1, .8/len(v))]
         for j, (k,v) in enumerate(TYPES_TO_TASKS.items())
     }
@@ -221,6 +221,7 @@ if __name__ == '__main__':
         for i, j in zip(v, types_to_colors[k])
     }
     labels = np.concatenate([np.full((args.n_samples), i) for i in range(len(tasks_samples_dict))]).flatten()
+    plt.figure(figsize=(36, 24))
     fig, ax = plt.subplots()
     for i, name in enumerate(tasks_embeddings_dict.keys()):
         color = task_name_to_color[name]
@@ -228,13 +229,9 @@ if __name__ == '__main__':
         y = reduced[i*args.n_samples:(i+1)*args.n_samples, 1]
         centroid = (x.mean(), y.mean())
         ax.scatter(x, y, s=.5, color=color)
-        ax.scatter(centroid[0], centroid[1], lw=2, s=50, color=color, label=name)
-        ellipse = Ellipse(xy=centroid, width=x.std(), height=y.std(), fc=color, lw=0, alpha=.2)
+        ax.scatter(centroid[0], centroid[1], lw=1, s=50, color=color, label=name, edgecolors="black")
+        ellipse = Ellipse(xy=centroid, width=x.std(), height=y.std(), fc=color, lw=0, alpha=.3)
         ax.add_patch(ellipse)
-        ax.annotate(name[0] + name[-1], centroid,
-                    xytext=(centroid[0] - .04, centroid[1] - .04),
-                    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2")
-                    )
     # Setup legend on the side
     box = ax.get_position()
     ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
