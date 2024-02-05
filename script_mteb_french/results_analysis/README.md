@@ -42,3 +42,12 @@ You can analyse the correlation between you results using this script and the fo
 ```
 python .\script_mteb_french\results_analysis\dataset_correlation.py --results_folder ./results
 ```
+
+### dataset_similarity.py
+
+This script is used for evaluating the semantic similarity between datasets. Use the following command :
+```
+python -m script_mteb_french.results_analysis.dataset_similarity --task_type <task-type>
+
+```
+

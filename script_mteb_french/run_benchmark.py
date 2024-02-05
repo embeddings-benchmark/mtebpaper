@@ -5,6 +5,7 @@ import logging
 from mteb import MTEB
 
 from src.ModelConfig import ModelConfig
+from utils.tasks_list import get_tasks
 
 logging.basicConfig(
     stream=sys.stdout,
@@ -88,7 +89,7 @@ UNIVERSAL_SENTENCE_ENCODER_MODELS = [
 
 LASER_MODELS = ["laser2"]
 
-VOYAGE_MODELS = ["voyage-02"]
+VOYAGE_MODELS = ["voyage-2", "voyage-code-2"]
 
 OPEN_AI_MODELS = ["text-embedding-ada-002"]
 
@@ -102,70 +103,6 @@ TYPES_TO_MODELS = {
     "voyage_ai": VOYAGE_MODELS,
     "open_ai": OPEN_AI_MODELS,
     "cohere": COHERE_MODELS,
-}
-
-########################
-# Step 2 : Setup tasks #
-########################
-TASK_LIST_CLASSIFICATION = [
-    "AmazonReviewsClassification",
-    "MasakhaNEWSClassification",
-    "MassiveIntentClassification",
-    "MassiveScenarioClassification",
-    "MTOPDomainClassification",
-    "MTOPIntentClassification",
-]
-
-TASK_LIST_CLUSTERING = [
-    "AlloProfClusteringP2P",
-    "AlloProfClusteringS2S",
-    "HALClusteringS2S",
-    "MasakhaNEWSClusteringP2P",
-    "MasakhaNEWSClusteringS2S",
-    "MLSUMClusteringP2P",
-    "MLSUMClusteringS2S",
-]
-
-TASK_LIST_PAIR_CLASSIFICATION = [
-    "OpusparcusPC",
-]
-
-TASK_LIST_RERANKING = ["SyntecReranking", "AlloprofReranking"]
-
-TASK_LIST_RETRIEVAL = ["AlloprofRetrieval", "BSARDRetrieval", "SyntecRetrieval"]
-
-TASK_LIST_STS = ["STSBenchmarkMultilingualSTS", "STS22", "SICKFr"]
-
-TASK_LIST_SUMMARIZATION = [
-    "SummEvalFr",
-]
-
-TASK_LIST_BITEXTMINING = [
-    "DiaBLaBitextMining",
-    "FloresBitextMining",
-]
-
-TASKS = (
-    TASK_LIST_CLASSIFICATION
-    + TASK_LIST_CLUSTERING
-    + TASK_LIST_RERANKING
-    + TASK_LIST_RETRIEVAL
-    + TASK_LIST_PAIR_CLASSIFICATION
-    + TASK_LIST_STS
-    + TASK_LIST_SUMMARIZATION
-    + TASK_LIST_BITEXTMINING
-)
-
-TYPES_TO_TASKS = {
-    "all": TASKS,
-    "classification": TASK_LIST_CLASSIFICATION,
-    "clustering": TASK_LIST_CLUSTERING,
-    "reranking": TASK_LIST_RERANKING,
-    "retrieval": TASK_LIST_RETRIEVAL,
-    "pair_classification": TASK_LIST_PAIR_CLASSIFICATION,
-    "sts": TASK_LIST_STS,
-    "summarization": TASK_LIST_SUMMARIZATION,
-    "bitextmining": TASK_LIST_BITEXTMINING,
 }
 
 ##########################
@@ -244,14 +181,6 @@ def get_models(model_name, model_type, max_token_length) -> list[ModelConfig]:
             ]
 
 
-def get_tasks(task_type):
-    return [
-        (task_type, task)
-        for task_type in task_type
-        for task in TYPES_TO_TASKS[task_type]
-    ]
-
-
 def parse_args() -> argparse.Namespace:
     """Parse command line arguments
 
@@ -285,7 +214,7 @@ def parse_args() -> argparse.Namespace:
 
 def main(args):
     # Select tasks to run evaluation on, default is set to all tasks
-    tasks = get_tasks(task_type=args.task_type)
+    tasks = get_tasks(args.task_type)
 
     # Running one model at a time or all models
     models = get_models(
