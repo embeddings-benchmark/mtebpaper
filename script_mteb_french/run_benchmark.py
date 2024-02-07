@@ -45,6 +45,7 @@ SENTENCE_TRANSORMER_MODELS = [
     "sentence-transformers/LaBSE",
     "sentence-transformers/multi-qa-MiniLM-L6-cos-v1",
     "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "sentence-transformers/paraphrase-multilingual-mpnet-base-v2",
     "intfloat/multilingual-e5-base",
     "intfloat/multilingual-e5-large",
     "intfloat/multilingual-e5-small",
@@ -64,15 +65,8 @@ SENTENCE_TRANSORMER_MODELS = [
     "sentence-transformers/sentence-t5-xl",
     "sentence-transformers/sentence-t5-xxl",
     "intfloat/e5-mistral-7b-instruct",
-    "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
+    "Wissam42/sentence-croissant-llm-base"
 ]
-
-"""
-SENTENCE_TRANSORMER_MODELS = [
-    "izhx/udever-bloom-3b", # too big
-    "izhx/udever-bloom-7b1", # too big
-]
-"""
 
 # these models max_length is indicated to be 514 whereas the embedding layer actually supports 512
 SENTENCE_TRANSORMER_MODELS_WITH_ERRORS = [
