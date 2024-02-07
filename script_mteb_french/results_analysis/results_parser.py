@@ -220,10 +220,11 @@ class ResultsParser:
             raise ValueError(f"'format' argument should be either excel, latex or csv, not {format}")
         
         match output_format:
+            case "csv":
+                results_df.style.clear()
+                results_df.to_csv("results.csv")
             case "excel":
                 results_df.to_excel("results.xlsx")
-            case "csv":
-                results_df.to_csv("results.csv")
             case "latex":
                 results_df.to_latex("results.tex")
         print("Done !")
