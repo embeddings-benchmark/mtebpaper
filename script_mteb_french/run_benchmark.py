@@ -63,7 +63,8 @@ SENTENCE_TRANSORMER_MODELS = [
     "sentence-transformers/sentence-t5-large",
     "sentence-transformers/sentence-t5-xl",
     "sentence-transformers/sentence-t5-xxl",
-    "intfloat/e5-mistral-7b-instruct"
+    "intfloat/e5-mistral-7b-instruct",
+    "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
 ]
 
 """
