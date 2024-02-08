@@ -1,0 +1,261 @@
+{
+    "bert-base-multilingual-cased": {
+        "computed_size_in_gb": 0.71141376,
+        "files_size_in_gb": null,
+        "n_params": 177853440,
+        "input_size": 512,
+        "embedding_size": 768
+    },
+    "bert-base-multilingual-uncased": {
+        "computed_size_in_gb": 0.669425664,
+        "files_size_in_gb": null,
+        "n_params": 167356416,
+        "input_size": 512,
+        "embedding_size": 768
+    },
+    "flaubert/flaubert_base_uncased": {
+        "computed_size_in_gb": 0.549285888,
+        "files_size_in_gb": null,
+        "n_params": 137321472,
+        "input_size": 512,
+        "embedding_size": 768
+    },
+    "flaubert/flaubert_base_cased": {
+        "computed_size_in_gb": 0.552932352,
+        "files_size_in_gb": null,
+        "n_params": 138233088,
+        "input_size": 512,
+        "embedding_size": 768
+    },
+    "flaubert/flaubert_large_cased": {
+        "computed_size_in_gb": 1.492856832,
+        "files_size_in_gb": null,
+        "n_params": 373214208,
+        "input_size": 512,
+        "embedding_size": 1024
+    },
+    "dangvantuan/sentence-camembert-base": {
+        "computed_size_in_gb": 0.442487808,
+        "files_size_in_gb": null,
+        "n_params": 110621952,
+        "input_size": 128,
+        "embedding_size": 768
+    },
+    "sentence-transformers/distiluse-base-multilingual-cased-v2": {
+        "computed_size_in_gb": 0.540511232,
+        "files_size_in_gb": null,
+        "n_params": 135127808,
+        "input_size": 128,
+        "embedding_size": 512
+    },
+    "sentence-transformers/all-MiniLM-L6-v2": {
+        "computed_size_in_gb": 0.090852864,
+        "files_size_in_gb": null,
+        "n_params": 22713216,
+        "input_size": 256,
+        "embedding_size": 384
+    },
+    "sentence-transformers/all-MiniLM-L12-v2": {
+        "computed_size_in_gb": 0.13344,
+        "files_size_in_gb": null,
+        "n_params": 33360000,
+        "input_size": 128,
+        "embedding_size": 384
+    },
+    "sentence-transformers/LaBSE": {
+        "computed_size_in_gb": 1.88606976,
+        "files_size_in_gb": null,
+        "n_params": 471517440,
+        "input_size": 256,
+        "embedding_size": 768
+    },
+    "sentence-transformers/multi-qa-MiniLM-L6-cos-v1": {
+        "computed_size_in_gb": 0.090852864,
+        "files_size_in_gb": null,
+        "n_params": 22713216,
+        "input_size": 512,
+        "embedding_size": 384
+    },
+    "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2": {
+        "computed_size_in_gb": 0.47061504,
+        "files_size_in_gb": null,
+        "n_params": 117653760,
+        "input_size": 128,
+        "embedding_size": 384
+    },
+    "intfloat/multilingual-e5-base": {
+        "computed_size_in_gb": 1.112174592,
+        "files_size_in_gb": null,
+        "n_params": 278043648,
+        "input_size": 512,
+        "embedding_size": 768
+    },
+    "intfloat/multilingual-e5-large": {
+        "computed_size_in_gb": 2.239561728,
+        "files_size_in_gb": null,
+        "n_params": 559890432,
+        "input_size": 512,
+        "embedding_size": 1024
+    },
+    "intfloat/multilingual-e5-small": {
+        "computed_size_in_gb": 0.47061504,
+        "files_size_in_gb": null,
+        "n_params": 117653760,
+        "input_size": 512,
+        "embedding_size": 384
+    },
+    "distilbert-base-uncased": {
+        "computed_size_in_gb": 0.26545152,
+        "files_size_in_gb": null,
+        "n_params": 66362880,
+        "input_size": 512,
+        "embedding_size": 768
+    },
+    "Geotrend/distilbert-base-25lang-cased": {
+        "computed_size_in_gb": 0.432761856,
+        "files_size_in_gb": null,
+        "n_params": 108190464,
+        "input_size": 512,
+        "embedding_size": 768
+    },
+    "Geotrend/distilbert-base-en-fr-es-pt-it-cased": {
+        "computed_size_in_gb": 0.304269312,
+        "files_size_in_gb": null,
+        "n_params": 76067328,
+        "input_size": 512,
+        "embedding_size": 768
+    },
+    "Geotrend/distilbert-base-en-fr-cased": {
+        "computed_size_in_gb": 0.27431424,
+        "files_size_in_gb": null,
+        "n_params": 68578560,
+        "input_size": 512,
+        "embedding_size": 768
+    },
+    "Geotrend/distilbert-base-fr-cased": {
+        "computed_size_in_gb": 0.246936576,
+        "files_size_in_gb": null,
+        "n_params": 61734144,
+        "input_size": 512,
+        "embedding_size": 768
+    },
+    "Geotrend/bert-base-25lang-cased": {
+        "computed_size_in_gb": 0.605239296,
+        "files_size_in_gb": null,
+        "n_params": 151309824,
+        "input_size": 512,
+        "embedding_size": 768
+    },
+    "Geotrend/bert-base-15lang-cased": {
+        "computed_size_in_gb": 0.56404992,
+        "files_size_in_gb": null,
+        "n_params": 141012480,
+        "input_size": 512,
+        "embedding_size": 768
+    },
+    "Geotrend/bert-base-10lang-cased": {
+        "computed_size_in_gb": 0.550966272,
+        "files_size_in_gb": null,
+        "n_params": 137741568,
+        "input_size": 512,
+        "embedding_size": 768
+    },
+    "shibing624/text2vec-base-multilingual": {
+        "computed_size_in_gb": 0.47061504,
+        "files_size_in_gb": null,
+        "n_params": 117653760,
+        "input_size": 256,
+        "embedding_size": 384
+    },
+    "izhx/udever-bloom-560m": {
+        "computed_size_in_gb": 2.236858368,
+        "files_size_in_gb": null,
+        "n_params": 559214592,
+        "input_size": null,
+        "embedding_size": 1024
+    },
+    "izhx/udever-bloom-1b1": {
+        "computed_size_in_gb": 4.261257216,
+        "files_size_in_gb": null,
+        "n_params": 1065314304,
+        "input_size": null,
+        "embedding_size": 1536
+    },
+    "sentence-transformers/sentence-t5-base": {
+        "computed_size_in_gb": 0.440873472,
+        "files_size_in_gb": null,
+        "n_params": 110218368,
+        "input_size": 256,
+        "embedding_size": 768
+    },
+    "sentence-transformers/sentence-t5-large": {
+        "computed_size_in_gb": 1.34290432,
+        "files_size_in_gb": null,
+        "n_params": 335726080,
+        "input_size": 256,
+        "embedding_size": 768
+    },
+    "sentence-transformers/sentence-t5-xl": {
+        "computed_size_in_gb": 4.966785024,
+        "files_size_in_gb": null,
+        "n_params": 1241696256,
+        "input_size": 256,
+        "embedding_size": 768
+    },
+    "camembert/camembert-base": {
+        "computed_size_in_gb": 0.442487808,
+        "files_size_in_gb": null,
+        "n_params": 110621952,
+        "input_size": 514,
+        "embedding_size": 768
+    },
+    "camembert/camembert-large": {
+        "computed_size_in_gb": 1.346646016,
+        "files_size_in_gb": null,
+        "n_params": 336661504,
+        "input_size": 514,
+        "embedding_size": 1024
+    },
+    "dangvantuan/sentence-camembert-large": {
+        "computed_size_in_gb": 1.346646016,
+        "files_size_in_gb": null,
+        "n_params": 336661504,
+        "input_size": 514,
+        "embedding_size": 1024
+    },
+    "xlm-roberta-base": {
+        "computed_size_in_gb": 1.112174592,
+        "files_size_in_gb": null,
+        "n_params": 278043648,
+        "input_size": 514,
+        "embedding_size": 768
+    },
+    "xlm-roberta-large": {
+        "computed_size_in_gb": 2.239561728,
+        "files_size_in_gb": null,
+        "n_params": 559890432,
+        "input_size": 514,
+        "embedding_size": 1024
+    },
+    "vprelovac/universal-sentence-encoder-multilingual-3": {
+        "computed_size_in_gb": 0.275708928,
+        "files_size_in_gb": null,
+        "n_params": 68927232,
+        "input_size": null,
+        "embedding_size": 512
+    },
+    "vprelovac/universal-sentence-encoder-multilingual-large-3": {
+        "computed_size_in_gb": 0.340852736,
+        "files_size_in_gb": null,
+        "n_params": 85213184,
+        "input_size": null,
+        "embedding_size": 512
+    },
+    "laser2": {
+        "computed_size_in_gb": 0.178463744,
+        "files_size_in_gb": null,
+        "n_params": 44615936,
+        "input_size": null,
+        "embedding_size": 1024
+    }
+}

@@ -1,9 +1,12 @@
 import json
 from typing import Dict
 import sys
+import os
 
 from huggingface_hub import HfFileSystem
 import model_spec_utils
+from run_benchmark import TYPES_TO_MODELS
+import pandas as pd
 
 """
 This script's purpose is to get the specifications of models in terms of :
@@ -12,35 +15,15 @@ This script's purpose is to get the specifications of models in terms of :
 - Number of parameters
 - Input size (number of tokens)
 - Embedding size (vector dimension)
-
-Just specify the names of the models for which you want the specs,
-as lists (SENTENCE_TRANSFORMER_MODELS, UDEVER_BLOOM_MODELS, TFHUB_MODELS, 
-LASER_MODELS)
 """
 
-SENTENCE_TRANSFORMER_MODELS = [
-    "bert-base-multilingual-cased",
-    "dangvantuan/sentence-camembert-base",
-]
-
-UDEVER_BLOOM_MODELS = [
-    'izhx/udever-bloom-560m'
-]
-
-TFHUB_MODELS = [
-    'https://tfhub.dev/google/universal-sentence-encoder-multilingual/3'
-]
-
-LASER_MODELS = [
-    'french'
-]
-
 GET_SPEC_FUNCTIONS = {
-    "sentence_transformers": "get_sentence_transformers_model_specs",
+    "sentence_transformer": "get_sentence_transformers_model_specs",
     "udever_bloom": "get_udever_bloom_model_specs",
-    "tfhub": "get_tfhub_model_specs",
-    "laser": "get_laser_model_specs"
+    "universal_sentence_encoder": "get_tfhub_model_specs",
+    "laser": "get_laser_model_specs",
 }
+ADD_TO_CHARACTERISTICS_CSV = True
 
 HFFS = HfFileSystem()
 
@@ -57,10 +40,16 @@ def get_model_specs(model_name: str, model_type: str) -> Dict:
         Dict: the specifications of the model
     """
 
-    num_params, embedding_size, input_size = getattr(model_spec_utils, GET_SPEC_FUNCTIONS[model_type])(model_name)
+    num_params, embedding_size, input_size = getattr(
+        model_spec_utils, GET_SPEC_FUNCTIONS[model_type]
+    )(model_name)
 
     model_size_float32_in_gb = num_params * 4 / 1e9
-    model_size_with_hf_filesystem = get_size_using_HF_filsystem(model_name) if model_type in ["sentence_transformers", "udever_bloom"] else None
+    model_size_with_hf_filesystem = (
+        get_size_using_HF_filsystem(model_name)
+        if model_type in ["sentence_transformers", "udever_bloom"]
+        else None
+    )
     specs = {
         "computed_size_in_gb": model_size_float32_in_gb,
         "files_size_in_gb": model_size_with_hf_filesystem,
@@ -111,15 +100,50 @@ def get_size_using_HF_filsystem(model_name: str):
     )
 
 
-SPECS = {}
-for model_name in SENTENCE_TRANSFORMER_MODELS:
-    SPECS[model_name] = get_model_specs(model_name, "sentence_transformers")
-for model_name in UDEVER_BLOOM_MODELS:
-    SPECS[model_name] = get_model_specs(model_name, "udever_bloom")
-for model_name in TFHUB_MODELS:
-    SPECS[model_name] = get_model_specs(model_name, "tfhub")
-for model_name in LASER_MODELS:
-    SPECS[model_name] = get_model_specs(model_name, "laser")
+results_path = "results_analysis/model_specs.json"
 
-with open("model_specs.json", "w") as f:
-    json.dump(SPECS, f)
+if os.path.exists(results_path):
+    with open(results_path) as f:
+        SPECS = json.load(f)
+else:
+    SPECS = {}
+
+for model_type in ["sentence_transformer", "universal_sentence_encoder", "laser"]:
+    for model_name in TYPES_TO_MODELS[model_type]:
+        print(f"Getting specs for {model_name}")
+        if model_name in SPECS:
+            print("Already computed")
+        else:
+            SPECS[model_name] = get_model_specs(model_name, model_type)
+            with open(results_path, "w") as f:
+                json.dump(SPECS, f, indent=4)
+
+if ADD_TO_CHARACTERISTICS_CSV:
+    computed_specs_df = (
+        pd.DataFrame.from_records(SPECS)
+        .transpose()
+        .reset_index()
+        .rename(
+            columns={
+                "index": "model",
+                "computed_size_in_gb": "size_gb2",
+                "n_params": "number_params2",
+                "input_size": "seq_len2",
+                "embedding_size": "embedding_dim2",
+            }
+        )[["model", "number_params2", "size_gb2", "seq_len2", "embedding_dim2"]]
+    )
+    base_file_df = pd.read_csv("results_analysis/models_characteristics.csv")
+    merged_df = base_file_df.merge(computed_specs_df, on="model", how="left")
+    merged_df["number_params"] = merged_df["number_params2"].fillna(
+        merged_df["number_params"]
+    )
+    merged_df["size_gb"] = merged_df["size_gb2"].fillna(merged_df["size_gb"])
+    merged_df["seq_len"] = merged_df["seq_len2"].fillna(merged_df["seq_len"])
+    merged_df["embedding_dim"] = merged_df["embedding_dim2"].fillna(
+        merged_df["embedding_dim"]
+    )
+    merged_df = merged_df.drop(
+        columns=["number_params2", "size_gb2", "seq_len2", "embedding_dim2"]
+    )
+    merged_df.to_csv("results_analysis/models_characteristics.csv", index=False)
