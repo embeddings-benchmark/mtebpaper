@@ -128,7 +128,6 @@ class ResultsParser:
         key = subkey if subkey else self.lang
         selected_split = split if split else self.split
         result = task_results[selected_split]
-        print(result)
         if key in result:
             result = result[key]
         if task_name in self.tasks_main_scores_map:

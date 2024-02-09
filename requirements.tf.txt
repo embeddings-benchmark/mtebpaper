@@ -15,3 +15,4 @@ tensorflow-text>=2.12.0
 tiktoken==0.5.2
 voyageai==0.1.6
 tensorflow[and-cuda]
+scikit_posthocs==0.8.1
