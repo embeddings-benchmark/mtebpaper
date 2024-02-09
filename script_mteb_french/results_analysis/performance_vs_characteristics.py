@@ -20,6 +20,33 @@ CHARACTERISTICS = {
     "tuned_on_sentence_sim": "numerical",
 }
 
+CHARACTERISTICS_DISPLAY_NAMES = {
+    "finetuned": "Finetuned vs pretrained",
+    "multilingual_or_french": "Language",
+    "number_params": "Model number of parameters",
+    "size_gb": "Model size",
+    "seq_len": "Max sequence length",
+    "embedding_dim": "Embedding dimension",
+    "model_type": "Model type",
+    "license": "License",
+    "tuned_on_sentence_sim": "Tuned for sentence similarity",
+}
+
+COLS_TO_KEEP_GLOBAL_CORRELATION = {
+    "score": "Model ranking",
+    "finetuned": "Finetuned vs pretrained",
+    "number_params": "Model number of parameters",
+    "seq_len": "Max sequence length",
+    "embedding_dim": "Embedding dimension",
+    "tuned_on_sentence_sim": "Tuned for sentence similarity",
+    "bilingual": "Bilingual",
+    "english": "English",
+    "english_plus": "English tuned on other languages",
+    "french": "French",
+    "multilingual": "Multilingual",
+    "Closed source": "Closed source",
+}
+
 
 def parse_args() -> Namespace:
     """Parse command line arguments
@@ -49,7 +76,6 @@ def prepare_data(
     if mode == "avg":
         data = data.groupby("model").mean().reset_index()
     data = data.merge(characteristics_df, on="model", how="left")
-    data = data.dropna(axis=0, how="any")
     return data
 
 
@@ -59,12 +85,14 @@ def global_correlation(
     data = prepare_data(results_df, characteristics_df, mode="avg")
     data = data.drop(columns=["model"])
     # get dummies for categorical variables
-    data = pd.get_dummies(data, prefix='', prefix_sep='')
+    data = pd.get_dummies(data, prefix="", prefix_sep="")
+    data = data[list(COLS_TO_KEEP_GLOBAL_CORRELATION.keys())]
+    data = data.rename(columns=COLS_TO_KEEP_GLOBAL_CORRELATION)
     # compute correlation matrix
     corr_matrix = data.corr(method="pearson")
     mask = np.tril(np.ones_like(corr_matrix, dtype=bool))
     corr_matrix = corr_matrix.where(mask)
-    # plot correlation heatmap 
+    # plot correlation heatmap
     plt.figure(figsize=(12, 10))
     plt.title("Correlation heatmap")
     sns.heatmap(corr_matrix, center=0, cmap="coolwarm")
@@ -82,12 +110,15 @@ def perfomance_vs_characteristic_plot(
     mode: str = "avg",
 ):
     data = prepare_data(results_df, characteristics_df, mode)
+    data[target_characteristic] = data[target_characteristic].apply(lambda x: COLS_TO_KEEP_GLOBAL_CORRELATION[x] if x in COLS_TO_KEEP_GLOBAL_CORRELATION else x)
     # Set seaborn style
     sns.set(style="whitegrid")
+    sns.set_palette("Set2")
     plt.figure(figsize=(10, 8))
-    plt.title(f"Performance vs {target_characteristic}")
-    plt.xlabel(target_characteristic)
-    plt.ylabel("Score")
+    charac_display_name = CHARACTERISTICS_DISPLAY_NAMES[target_characteristic]
+    plt.title(f"Model ranking vs {charac_display_name.lower()}")
+    plt.xlabel(charac_display_name)
+    plt.ylabel("Model ranking")
     if characteristic_type == "categorical":
         sns.boxplot(data=data, x=target_characteristic, y="score")
     elif characteristic_type == "numerical":
@@ -102,19 +133,11 @@ if __name__ == "__main__":
     args = parse_args()
     rp = ResultsParser()
     results_df = rp(args.results_folder, return_main_scores=False)
-    results_df = results_df.drop(
-        columns=[
-            ("BitextMining", "DiaBLaBitextMining"),
-            ("BitextMining", "FloresBitextMining"),
-        ]
-    )
     results_df = results_df.droplevel(0, axis=1)
     results_df = results_df.reset_index()
     results_df["model"] = results_df["model"].apply(
         lambda x: x.replace(args.results_folder, "")
     )
-    # this should not be necessary with final csv
-    results_df = results_df.dropna(axis=1, how="all").dropna(axis=0, how="any")
     characteristics_df = pd.read_csv(args.characteristics_csv)
     global_correlation(results_df, characteristics_df, args.output_folder)
     for k, v in CHARACTERISTICS.items():

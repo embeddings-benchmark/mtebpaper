@@ -44,5 +44,7 @@ vprelovac/universal-sentence-encoder-multilingual-3,1,multilingual,68927232.0,0.
 vprelovac/universal-sentence-encoder-multilingual-large-3,1,multilingual,85213184.0,0.340852736,,512.0,constrative,Apache-2.0,1
 xlm-roberta-base,0,multilingual,278043648.0,1.112174592,514.0,768.0,pooling,MIT,0
 xlm-roberta-large,0,multilingual,559890432.0,2.239561728,514.0,1024.0,pooling,MIT,0
-Wissam42/sentence-croissant-llm-base,1,french,1279887360.0,5.11954944,256.0,2048.0,constrative,MIT,1
-sentence-transformers/paraphrase-multilingual-mpnet-base-v2,0,multilingual,278043648.0,1.112174592,128.0,768.0,constrative,Apache-2.0,1
+Wissam42/sentence-croissant-llm-base,1,french,1279887360.0,5.11954944,256.0,2048.0,contrastive,MIT,1
+sentence-transformers/paraphrase-multilingual-mpnet-base-v2,0,multilingual,278043648.0,1.112174592,128.0,768.0,contrastive,Apache-2.0,1
+voyage-2,1,english,,,4000.0,1024.0,,Closed source,
+voyage-code-2,1,english,,,16000.0,1536.0,,Closed source,
