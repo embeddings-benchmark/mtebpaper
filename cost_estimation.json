@@ -1,7 +1,6 @@
 {
     "PRICE_FOR_1K_TOKENS_IN_$": 0.0001,
     "PRICE_FOR_TASK_EVALUATION": {
-        "DiaBLaBitextMining": 0.01,
         "AmazonReviewsClassification": 0.05,
         "MasakhaNEWSClassification": 0.26,
         "MassiveIntentClassification": 0.01,
@@ -15,15 +14,103 @@
         "MasakhaNEWSClusteringS2S": 0.0,
         "MLSUMClusteringP2P": 1.71,
         "MLSUMClusteringS2S": 0.03,
-        "OpusparcusPC": 0.01,
-        "AlloprofReranking": 10.92,
-        "SyntecReranking": 0.02,
-        "AlloprofRetrieval": 0.32,
+        "SyntecReranking": 0.03,
+        "AlloprofReranking": 18.19,
+        "AlloprofRetrieval": 0.27,
         "BSARDRetrieval": 0.55,
         "SyntecRetrieval": 0.0,
-        "SICKFr": 0.02,
-        "STS22": 0.02,
+        "OpusparcusPC": 0.01,
         "STSBenchmarkMultilingualSTS": 0.01,
-        "SummEvalFr": 0.03
+        "STS22": 0.02,
+        "SICKFr": 0.02,
+        "SummEvalFr": 0.03,
+        "DiaBLaBitextMining": 0.01,
+        "FloresBitextMining": 0.01
+    },
+    "AVERAGE_TOKENS_PER_SAMPLE": {
+        "AmazonReviewsClassification": {
+            "avg_n_tokens_per_sample": 48.97
+        },
+        "MasakhaNEWSClassification": {
+            "avg_n_tokens_per_sample": 1386.24
+        },
+        "MassiveIntentClassification": {
+            "avg_n_tokens_per_sample": 11.41
+        },
+        "MassiveScenarioClassification": {
+            "avg_n_tokens_per_sample": 11.41
+        },
+        "MTOPDomainClassification": {
+            "avg_n_tokens_per_sample": 12.41
+        },
+        "MTOPIntentClassification": {
+            "avg_n_tokens_per_sample": 12.41
+        },
+        "AlloProfClusteringP2P": {
+            "avg_n_tokens_per_sample": 1021.79
+        },
+        "AlloProfClusteringS2S": {
+            "avg_n_tokens_per_sample": 8.81
+        },
+        "HALClusteringS2S": {
+            "avg_n_tokens_per_sample": 24.1
+        },
+        "MasakhaNEWSClusteringP2P": {
+            "avg_n_tokens_per_sample": 1398.1
+        },
+        "MasakhaNEWSClusteringS2S": {
+            "avg_n_tokens_per_sample": 21.44
+        },
+        "MLSUMClusteringP2P": {
+            "avg_n_tokens_per_sample": 1082.76
+        },
+        "MLSUMClusteringS2S": {
+            "avg_n_tokens_per_sample": 20.8
+        },
+        "SyntecReranking": {
+            "avg_n_tokens_per_sample_query": 19.22,
+            "avg_n_tokens_per_sample_positive": 392.19,
+            "avg_n_tokens_per_sample_negative": 1318.42
+        },
+        "AlloprofReranking": {
+            "avg_n_tokens_per_sample_query": 48.83,
+            "avg_n_tokens_per_sample_positive": 1500.58,
+            "avg_n_tokens_per_sample_negative": 7547.37
+        },
+        "AlloprofRetrieval": {
+            "avg_n_tokens_per_sample_query": 48.31,
+            "avg_n_tokens_per_sample_document": 1117.91
+        },
+        "BSARDRetrieval": {
+            "avg_n_tokens_per_sample_query": 144.03,
+            "avg_n_tokens_per_sample_document": 24530.8
+        },
+        "SyntecRetrieval": {
+            "avg_n_tokens_per_sample_query": 19.22,
+            "avg_n_tokens_per_sample_document": 295.65
+        },
+        "OpusparcusPC": {
+            "avg_n_tokens_per_sample": 9.19
+        },
+        "STSBenchmarkMultilingualSTS": {
+            "avg_n_tokens_per_sample": 20.01
+        },
+        "STS22": {
+            "avg_n_tokens_per_sample": 722.15
+        },
+        "SICKFr": {
+            "avg_n_tokens_per_sample": 15.15
+        },
+        "SummEvalFr": {
+            "avg_n_tokens_per_sample_text": 657.08,
+            "avg_n_tokens_per_sample_human_summaries": 71.18,
+            "avg_n_tokens_per_sample_machine_summaries": 107.56
+        },
+        "DiaBLaBitextMining": {
+            "avg_n_tokens_per_sample": 12.02
+        },
+        "FloresBitextMining": {
+            "avg_n_tokens_per_sample": 33.42
+        }
     }
 }
