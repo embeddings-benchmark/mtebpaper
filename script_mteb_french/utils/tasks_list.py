@@ -1,3 +1,4 @@
+
 TASK_LIST_CLASSIFICATION = [
     "AmazonReviewsClassification",
     "MasakhaNEWSClassification",
@@ -19,19 +20,38 @@ TASK_LIST_CLUSTERING = [
 
 TASK_LIST_PAIR_CLASSIFICATION = [
     "OpusparcusPC",
+    "PawsX",
 ]
 
-TASK_LIST_RERANKING = ["SyntecReranking", "AlloprofReranking"]
+TASK_LIST_RERANKING = [
+    "SyntecReranking",
+    "AlloprofReranking"
+]
 
-TASK_LIST_RETRIEVAL = ["AlloprofRetrieval", "BSARDRetrieval", "SyntecRetrieval"]
+TASK_LIST_RETRIEVAL = [
+    "AlloprofRetrieval", 
+    "BSARDRetrieval",
+    "SyntecRetrieval",
+    "XPQARetrieval",
+    "MintakaRetrieval",
+]
 
-TASK_LIST_STS = ["STSBenchmarkMultilingualSTS", "STS22", "SICKFr"]
+TASK_LIST_STS = [
+    "STSBenchmarkMultilingualSTS",
+    "STS22",
+    "SICKFr"
+]
+
+TASK_LIST_BITEXTMINING = [
+    "DiaBLaBitextMining",
+    "FloresBitextMining",
+    "TatoebaBitextMining",
+    "BUCCBitextMining"
+]
 
 TASK_LIST_SUMMARIZATION = [
     "SummEvalFr",
 ]
-
-TASK_LIST_BITEXTMINING = [ "DiaBLaBitextMining", "FloresBitextMining"]
 
 TASKS = (
     TASK_LIST_CLASSIFICATION

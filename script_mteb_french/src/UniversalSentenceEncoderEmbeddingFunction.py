@@ -34,7 +34,8 @@ class UniversalSentenceEncoderEmbeddingFunction(AbstractEmbeddingFunction):
         return self._model_name
 
     def encode_documents(self, input: Documents) -> Embeddings:
-        return self.model(input).numpy().tolist()
+        truncated_documents = [" ".join(x.split(' ')[:self.max_token_length]) for x in input]
+        return self.model(truncated_documents).numpy().tolist()
     
     @classmethod
     def _load_model_paths(cls):
