@@ -1,4 +1,5 @@
 import os
+import time
 from chromadb import Documents, Embeddings
 from dotenv import load_dotenv
 from mistralai.client import MistralClient
@@ -16,6 +17,7 @@ class MistralAIEmbeddingFunction(AbstractEmbeddingFunction):
         model_name: str = "mistral-embed",
         max_token_length: int = 8191,
     ):
+        self._model_name = model_name
         AbstractEmbeddingFunction.__init__(self, max_token_length=max_token_length)
 
         api_key = os.environ.get("MISTRAL_API_KEY", None)
@@ -33,8 +35,10 @@ class MistralAIEmbeddingFunction(AbstractEmbeddingFunction):
 
     def encode_documents(self, input: Documents) -> Embeddings:
         embeddings_batch_response = self.client.embeddings(
-            model=self.model,
+            model=self.model_name,
             input=input,
         )
+        # rate limit of 2 requests per seconds
+        time.sleep(.5)
 
         return  [emb.embedding for emb in embeddings_batch_response.data]
