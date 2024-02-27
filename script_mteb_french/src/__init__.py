@@ -9,3 +9,4 @@ from .UniversalSentenceEncoderEmbeddingFunction import (
     UniversalSentenceEncoderEmbeddingFunction,
 )
 from .VoyageAIEmbeddingFunction import VoyageAIEmbeddingFunction
+from .MistralAIEmbeddingFunction import MistralAIEmbeddingFunction

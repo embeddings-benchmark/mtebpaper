@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from .ChromaDBEmbedder import ChromaDBEmbedder
 from .CohereEmbeddingFunction import CohereEmbeddingFunction
 from .LaserEmbeddingFunction import LaserEmbeddingFunction
+from .MistralAIEmbeddingFunction import MistralAIEmbeddingFunction
 from .OpenAIEmbeddingFunction import OpenAIEmbeddingFunction
 from .SentenceTransformerEmbeddingFunction import SentenceTransformerEmbeddingFunction
 from .UniversalSentenceEncoderEmbeddingFunction import (
@@ -69,6 +70,7 @@ class ModelConfig(ChromaDBEmbedder):
             "open_ai": 8191,
             "sentence_transformer": 4096,
             "universal_sentence_encoder": 4096,
+            "mistral_ai": 4096,
         }
 
     @property
@@ -124,5 +126,9 @@ class ModelConfig(ChromaDBEmbedder):
                 )
             case "universal_sentence_encoder":
                 return UniversalSentenceEncoderEmbeddingFunction(
+                    self.model_name, self.max_token_length
+                )
+            case "mistral_ai":
+                return MistralAIEmbeddingFunction(
                     self.model_name, self.max_token_length
                 )
