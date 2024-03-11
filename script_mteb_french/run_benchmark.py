@@ -86,7 +86,7 @@ LASER_MODELS = ["laser2"]
 
 VOYAGE_MODELS = ["voyage-2", "voyage-code-2"]
 
-OPEN_AI_MODELS = ["text-embedding-ada-002"]
+OPEN_AI_MODELS = ["text-embedding-ada-002", "text-embedding-3-small", "text-embedding-3-large"]
 
 COHERE_MODELS = ["embed-multilingual-light-v3.0", "embed-multilingual-v3.0"]
 

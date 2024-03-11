@@ -1,0 +1,40 @@
+{
+  "dataset_revision": "c99d599f0a6ab9b85b065da6f9d94f9cf731679f",
+  "mteb_dataset_name": "XPQARetrieval",
+  "mteb_version": "1.1.3.dev0",
+  "test": {
+    "evaluation_time": 101.16,
+    "fr": {
+      "map_at_1": 0.45291,
+      "map_at_10": 0.68955,
+      "map_at_100": 0.70347,
+      "map_at_1000": 0.70374,
+      "map_at_3": 0.62286,
+      "map_at_5": 0.66486,
+      "mrr_at_1": 0.69693,
+      "mrr_at_10": 0.76806,
+      "mrr_at_100": 0.77194,
+      "mrr_at_1000": 0.77201,
+      "mrr_at_3": 0.75234,
+      "mrr_at_5": 0.76055,
+      "ndcg_at_1": 0.69693,
+      "ndcg_at_10": 0.74907,
+      "ndcg_at_100": 0.78783,
+      "ndcg_at_1000": 0.79178,
+      "ndcg_at_3": 0.69931,
+      "ndcg_at_5": 0.71363,
+      "precision_at_1": 0.69693,
+      "precision_at_10": 0.16983,
+      "precision_at_100": 0.02016,
+      "precision_at_1000": 0.00207,
+      "precision_at_3": 0.41923,
+      "precision_at_5": 0.2964,
+      "recall_at_1": 0.45291,
+      "recall_at_10": 0.83438,
+      "recall_at_100": 0.97314,
+      "recall_at_1000": 0.998,
+      "recall_at_3": 0.67474,
+      "recall_at_5": 0.75191
+    }
+  }
+}
