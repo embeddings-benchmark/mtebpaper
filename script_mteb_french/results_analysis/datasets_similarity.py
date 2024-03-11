@@ -1,3 +1,4 @@
+import json 
 
 import logging
 import os
@@ -14,7 +15,6 @@ from sklearn.decomposition import PCA
 import torch
 import pandas as pd
 
-import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
 from matplotlib.colors import hsv_to_rgb
@@ -169,7 +169,7 @@ def parse_args() -> Namespace:
     parser = ArgumentParser()
     parser.add_argument("--task_type", type=str, default="all")
     parser.add_argument("--langs", type=list[str], default=["fr"])
-    parser.add_argument("--output_folder", type=str, default="./datasets_similarity_analysis")
+    parser.add_argument("--output_folder", type=str, default="./analyses_outputs/datasets_similarity")
     parser.add_argument("--model_name", type=str, default="intfloat/multilingual-e5-large")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--n_samples", type=int, default=90)
@@ -182,7 +182,6 @@ if __name__ == '__main__':
     logging.getLogger().setLevel(logging.INFO)
 
     args = parse_args()
-
     if not os.path.exists(args.output_folder):
         os.makedirs(args.output_folder)
 
@@ -198,6 +197,9 @@ if __name__ == '__main__':
     logging.info(f"Embedding samples...")
     tasks_embeddings_dict = {k: get_embeddings(v) for k, v in tasks_samples_dict.items()}
 
+    with open("task_embs_dict.json", "w") as f:
+        dumpable = {k: v.tolist() for k,v in tasks_embeddings_dict.items()}
+        json.dump(dumpable, f)
     # Run PCA
     logging.info(f"Computing PCA...")
     pca = PCA(n_components=10)
@@ -221,7 +223,7 @@ if __name__ == '__main__':
         for i, j in zip(v, types_to_colors[k])
     }
     labels = np.concatenate([np.full((args.n_samples), i) for i in range(len(tasks_samples_dict))]).flatten()
-    plt.figure(figsize=(36, 24))
+    plt.figure(figsize=(20, 10))
     fig, ax = plt.subplots()
     for i, name in enumerate(tasks_embeddings_dict.keys()):
         color = task_name_to_color[name]
@@ -235,9 +237,9 @@ if __name__ == '__main__':
     # Setup legend on the side
     box = ax.get_position()
     ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
-    ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+    ax.legend(loc='center left', bbox_to_anchor=(1, 0.47), fontsize=8, frameon=False)
     ax.grid(False)
-    plt.savefig(os.path.join(args.output_folder, f"PCA_components_{args.task_type}.png"), bbox_inches='tight')
+    plt.savefig(os.path.join(args.output_folder, f"PCA_components_{args.task_type}.svg"), bbox_inches='tight')
     logging.info(f"PCA plots done !")
 
     # Plot Averaged embeddings cosine similarities
@@ -247,8 +249,11 @@ if __name__ == '__main__':
 
     data_emb_df = pd.DataFrame(data_dict_emb)
     data_emb_df.set_index(data_emb_df.columns, inplace=True)
-    plt.figure(figsize=(36, 24))
+    plt.figure(figsize=(24, 16))
     # define the mask to set the values in the upper triangle to True
     mask = np.triu(np.ones_like(data_emb_df, dtype=bool))
-    heatmap = sns.heatmap(data_emb_df, mask=mask, vmin=data_emb_df.values.min(), vmax=data_emb_df.values.max(), annot=True, cmap='Blues')
-    plt.savefig(os.path.join(args.output_folder, f'cosim_{args.task_type}.png'), dpi=300, bbox_inches='tight')
+    with sns.plotting_context("notebook", font_scale=1.4):
+        sns.heatmap(data_emb_df, mask=mask, vmin=data_emb_df.values.min(), vmax=data_emb_df.values.max(), annot=True, cmap='coolwarm')
+    #set plt font size
+    plt.rcParams.update({'font.size': 16})
+    plt.savefig(os.path.join(args.output_folder, f'cosim_{args.task_type}.pdf'), bbox_inches='tight')

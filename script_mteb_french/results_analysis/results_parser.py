@@ -234,18 +234,21 @@ class ResultsParser:
         return style
     
     @staticmethod
-    def _save_as_file(results_df:pd.DataFrame, output_format:str="excel"):
+    def _save_as_file(results_df:pd.DataFrame, output_format:str="excel", output_folder:str="./", **kwargs):
         if output_format not in ["excel", "latex", "csv"]:
             raise ValueError(f"'format' argument should be either excel, latex or csv, not {format}")
+        
+        if not os.path.exists(output_folder):
+            os.makedirs(output_folder)
         
         match output_format:
             case "csv":
                 results_df.style.clear()
-                results_df.to_csv("results.csv")
+                results_df.to_csv(os.path.join(output_folder, "results.csv"))
             case "excel":
-                results_df.to_excel("results.xlsx")
+                results_df.to_excel(os.path.join(output_folder, "results.xlsx"))
             case "latex":
-                results_df.to_latex("results.tex")
+                results_df.to_latex(os.path.join(output_folder, "results.tex"))
         print("Done !")
 
 
@@ -259,6 +262,7 @@ def parse_args() -> Namespace:
     parser.add_argument("--results_folder", required=True, type=str)
     parser.add_argument("--output_format", type=str, choices=["excel", "csv", "latex"], default="excel")
     parser.add_argument("--apply_style", type=bool, default=True)
+    parser.add_argument("--output_folder", type=str, default="./analyses_outputs/")
     args = parser.parse_args()
 
     return args

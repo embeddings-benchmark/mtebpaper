@@ -3,11 +3,11 @@ bert-base-multilingual-cased,0,multilingual,177853440.0,0.71141376,512.0,768.0,p
 bert-base-multilingual-uncased,0,multilingual,167356416.0,0.669425664,512.0,768.0,pooling,Apache-2.0,0
 camembert/camembert-base,0,french,110621952.0,0.442487808,514.0,768.0,pooling,MIT,0
 camembert/camembert-large,0,french,336661504.0,1.346646016,514.0,1024.0,pooling,MIT,0
-dangvantuan/sentence-camembert-base,1,french,110621952.0,0.442487808,128.0,768.0,constrative,Apache-2.0,1
-dangvantuan/sentence-camembert-large,1,french,336661504.0,1.346646016,514.0,1024.0,constrative,Apache-2.0,1
+dangvantuan/sentence-camembert-base,1,french,110621952.0,0.442487808,128.0,768.0,contrastive,Apache-2.0,1
+dangvantuan/sentence-camembert-large,1,french,336661504.0,1.346646016,514.0,1024.0,contrastive,Apache-2.0,1
 distilbert-base-uncased,0,english,66362880.0,0.26545152,512.0,768.0,pooling,Apache-2.0,0
-embed-multilingual-light-v3.0,1,multilingual,,,512.0,384.0,,Closed source,
-embed-multilingual-v3.0,1,multilingual,,,512.0,1024.0,,Closed source,
+Cohere-embed-multilingual-light-v3.0,1,multilingual,,,512.0,384.0,,Closed source,
+Cohere-embed-multilingual-v3.0,1,multilingual,,,512.0,1024.0,,Closed source,
 flaubert/flaubert_base_cased,0,french,138233088.0,0.552932352,512.0,768.0,pooling,MIT,0
 flaubert/flaubert_base_uncased,0,french,137321472.0,0.549285888,512.0,768.0,pooling,MIT,0
 flaubert/flaubert_large_cased,0,french,373214208.0,1.492856832,512.0,1024.0,pooling,MIT,0
@@ -18,30 +18,30 @@ Geotrend/distilbert-base-25lang-cased,0,multilingual,108190464.0,0.432761856,512
 Geotrend/distilbert-base-en-fr-cased,0,bilingual,68578560.0,0.27431424,512.0,768.0,pooling,Apache-2.0,0
 Geotrend/distilbert-base-en-fr-es-pt-it-cased,0,multilingual,76067328.0,0.304269312,512.0,768.0,pooling,Apache-2.0,0
 Geotrend/distilbert-base-fr-cased,0,french,61734144.0,0.246936576,512.0,768.0,pooling,Apache-2.0,0
-intfloat/multilingual-e5-base,0,multilingual,278043648.0,1.112174592,512.0,768.0,constrative,MIT,1
-intfloat/multilingual-e5-large,0,multilingual,559890432.0,2.239561728,512.0,1024.0,constrative,MIT,1
-intfloat/multilingual-e5-small,0,multilingual,117653760.0,0.47061504,512.0,384.0,constrative,MIT,1
-intfloat/e5-mistral-7b-instruct,1,english_plus,7110660096.0,28.442640384,32768.0,4096.0,constrative,MIT,1
-izhx/udever-bloom-1b1,1,multilingual,1065314304.0,4.261257216,2048.0,1536.0,constrative,bigscience-bloom-rail-1.0,1
-izhx/udever-bloom-560m,1,multilingual,559214592.0,2.236858368,2048.0,1024.0,constrative,bigscience-bloom-rail-1.0,1
+intfloat/multilingual-e5-base,0,multilingual,278043648.0,1.112174592,512.0,768.0,contrastive,MIT,1
+intfloat/multilingual-e5-large,0,multilingual,559890432.0,2.239561728,512.0,1024.0,contrastive,MIT,1
+intfloat/multilingual-e5-small,0,multilingual,117653760.0,0.47061504,512.0,384.0,contrastive,MIT,1
+intfloat/e5-mistral-7b-instruct,1,english_plus,7110660096.0,28.442640384,32768.0,4096.0,contrastive,MIT,1
+izhx/udever-bloom-1b1,1,multilingual,1065314304.0,4.261257216,2048.0,1536.0,contrastive,bigscience-bloom-rail-1.0,1
+izhx/udever-bloom-560m,1,multilingual,559214592.0,2.236858368,2048.0,1024.0,contrastive,bigscience-bloom-rail-1.0,1
 laser2,1,multilingual,44615936.0,0.178463744,,1024.0,recurrent,BSD License,1
-sentence-transformers/all-MiniLM-L12-v2,1,english_plus,33360000.0,0.13344,128.0,384.0,constrative,Apache-2.0,1
-sentence-transformers/all-MiniLM-L6-v2,1,english_plus,22713216.0,0.090852864,256.0,384.0,constrative,Apache-2.0,1
-sentence-transformers/distiluse-base-multilingual-cased-v2,1,multilingual,135127808.0,0.540511232,128.0,512.0,constrative,Apache-2.0,1
-sentence-transformers/LaBSE,1,multilingual,471517440.0,1.88606976,256.0,768.0,constrative,Apache-2.0,1
-sentence-transformers/multi-qa-MiniLM-L6-cos-v1,1,english,22713216.0,0.090852864,512.0,384.0,constrative,,1
-sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2,1,multilingual,117653760.0,0.47061504,128.0,384.0,constrative,Apache-2.0,1
-sentence-transformers/sentence-t5-base,1,multilingual,110218368.0,0.440873472,256.0,768.0,constrative,Apache-2.0,1
-sentence-transformers/sentence-t5-large,1,multilingual,335726080.0,1.34290432,256.0,768.0,constrative,Apache-2.0,1
-sentence-transformers/sentence-t5-xl,1,multilingual,1241696256.0,4.966785024,256.0,768.0,constrative,Apache-2.0,1
-sentence-transformers/sentence-t5-xxl,1,multilingual,4865577984.0,19.462311936,256.0,768.0,constrative,Apache-2.0,1
-shibing624/text2vec-base-multilingual,1,multilingual,117653760.0,0.47061504,256.0,384.0,constrative,Apache-2.0,1
+sentence-transformers/all-MiniLM-L12-v2,1,english_plus,33360000.0,0.13344,128.0,384.0,contrastive,Apache-2.0,1
+sentence-transformers/all-MiniLM-L6-v2,1,english_plus,22713216.0,0.090852864,256.0,384.0,contrastive,Apache-2.0,1
+sentence-transformers/distiluse-base-multilingual-cased-v2,1,multilingual,135127808.0,0.540511232,128.0,512.0,contrastive,Apache-2.0,1
+sentence-transformers/LaBSE,1,multilingual,471517440.0,1.88606976,256.0,768.0,contrastive,Apache-2.0,1
+sentence-transformers/multi-qa-MiniLM-L6-cos-v1,1,english,22713216.0,0.090852864,512.0,384.0,contrastive,,1
+sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2,1,multilingual,117653760.0,0.47061504,128.0,384.0,contrastive,Apache-2.0,1
+sentence-transformers/sentence-t5-base,1,multilingual,110218368.0,0.440873472,256.0,768.0,contrastive,Apache-2.0,1
+sentence-transformers/sentence-t5-large,1,multilingual,335726080.0,1.34290432,256.0,768.0,contrastive,Apache-2.0,1
+sentence-transformers/sentence-t5-xl,1,multilingual,1241696256.0,4.966785024,256.0,768.0,contrastive,Apache-2.0,1
+sentence-transformers/sentence-t5-xxl,1,multilingual,4865577984.0,19.462311936,256.0,768.0,contrastive,Apache-2.0,1
+shibing624/text2vec-base-multilingual,1,multilingual,117653760.0,0.47061504,256.0,384.0,contrastive,Apache-2.0,1
 text-embedding-ada-002,1,multilingual,,,8191.0,1536.0,,Closed source,
 voyage-01,1,english,,,4000.0,1024.0,,Closed source,
 voyage-02,1,english,,,4000.0,1024.0,,Closed source,
 voyage-lite-01,1,english,,,4000.0,1024.0,,Closed source,
-vprelovac/universal-sentence-encoder-multilingual-3,1,multilingual,68927232.0,0.275708928,,512.0,constrative,Apache-2.0,1
-vprelovac/universal-sentence-encoder-multilingual-large-3,1,multilingual,85213184.0,0.340852736,,512.0,constrative,Apache-2.0,1
+vprelovac/universal-sentence-encoder-multilingual-3,1,multilingual,68927232.0,0.275708928,,512.0,contrastive,Apache-2.0,1
+vprelovac/universal-sentence-encoder-multilingual-large-3,1,multilingual,85213184.0,0.340852736,,512.0,contrastive,Apache-2.0,1
 xlm-roberta-base,0,multilingual,278043648.0,1.112174592,514.0,768.0,pooling,MIT,0
 xlm-roberta-large,0,multilingual,559890432.0,2.239561728,514.0,1024.0,pooling,MIT,0
 Wissam42/sentence-croissant-llm-base,1,french,1279887360.0,5.11954944,256.0,2048.0,contrastive,MIT,1

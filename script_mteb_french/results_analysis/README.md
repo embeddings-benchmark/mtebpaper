@@ -40,7 +40,7 @@ python .\script_mteb_french\results_analysis\results_parser.py --results_folder 
 
 You can analyse the correlation between you results using this script and the following command : 
 ```
-python .\script_mteb_french\results_analysis\dataset_correlation.py --results_folder ./results
+python .\script_mteb_french\results_analysis\dataset_correlation.py --results_folder ./path/to/results/folder
 ```
 
 ### dataset_similarity.py
@@ -51,3 +51,16 @@ python -m script_mteb_french.results_analysis.dataset_similarity --task_type <ta
 
 ```
 
+### performance_vs_characteristics.py
+
+This script is used for evaluating the correlation between results of a model and its characteristics (input shape, embedding shape, ...). In order to be used, ***you need the caracteristics of the models to be up gathered in a csv file.*** (for an example, look at *model_characteristics.csv*).
+```
+python ./script_mteb_french/results_analysis/performance_vs_characteristics.py --results_folder ./path/to/results/folder --characteristics_csv ./path/to/csv/file.csv
+```
+
+### statistical_tests.py
+
+This script is used to perform statistical tests on the results : it is used to obtain the conover friedman matrix and critical difference diagram.
+```
+python ./script_mteb_french/results_analysis/statistical_tests.py --results_folder ./path/to/results/folder
+```
