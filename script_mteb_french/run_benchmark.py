@@ -101,7 +101,6 @@ TYPES_TO_MODELS = {
     "open_ai": OPEN_AI_MODELS,
     "cohere": COHERE_MODELS,
     "mistral_ai": MISTRAL_MODELS,
-
 }
 
 ##########################
@@ -239,11 +238,17 @@ def main(args):
                 run_bitext_mining_tasks(args=args, model_config=model_config, task=task)
             else:
                 # change the task in the model config ! This is important to specify the chromaDB collection !
-                eval_splits = ["validation"] if task == "MSMARCO" else ["test"]
+                match task:
+                    case "MSMARCO":
+                        eval_splits = ["validation"]
+                    case "OpusparcusPC":
+                        eval_splits = ["validation.full", "test.full"]
+                    case other:
+                        eval_splits = ["test"]
                 model_name = model_config.model_name
                 model_config.batch_size = args.batchsize
                 logging.info(f"Running task: {task} with model {model_name}")
-                eval_splits = ["validation"] if task == "MSMARCO" else ["test"]
+                #################################
                 evaluation = MTEB(tasks=[task], task_langs=[args.lang])
                 evaluation.run(
                     model_config,
