@@ -1,10 +1,10 @@
 # python 3.10.13
 chromadb==0.4.21
 cohere==4.41
-datasets==2.15.0
+datasets>=2.19.0
 huggingface-hub==0.18
 laser_encoders==0.0.1
-mteb[beir] @ git+https://github.com/Lyon-NLP/mteb-french.git #removing the other mteb above for now (to adapt when mteb-french gets merged)
+mteb @ git+https://github.com/Lyon-NLP/mteb-french.git #removing the other mteb above for now (to adapt when mteb-french gets merged)
 numpy==1.26.2
 openai==1.6.1
 pandas==2.1.3
