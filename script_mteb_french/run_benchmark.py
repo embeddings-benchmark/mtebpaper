@@ -65,7 +65,13 @@ SENTENCE_TRANSORMER_MODELS = [
     "sentence-transformers/sentence-t5-xl",
     "sentence-transformers/sentence-t5-xxl",
     "intfloat/e5-mistral-7b-instruct",
-    "Wissam42/sentence-croissant-llm-base"
+    "Wissam42/sentence-croissant-llm-base",
+    "OrdalieTech/Solon-embeddings-large-0.1",
+    "OrdalieTech/Solon-embeddings-base-0.1",
+    "manu/sentence_croissant_alpha_v0.3",
+    "manu/sentence_croissant_alpha_v0.2",
+    "manu/bge-m3-custom-fr",
+    "BAAI/bge-m3",
 ]
 
 # these models max_length is indicated to be 514 whereas the embedding layer actually supports 512

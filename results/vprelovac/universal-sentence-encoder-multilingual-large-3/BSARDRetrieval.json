@@ -1,9 +1,9 @@
 {
   "dataset_revision": "5effa1b9b5fa3b0f9e12523e6e43e5f86a6e6d59",
   "mteb_dataset_name": "BSARDRetrieval",
-  "mteb_version": "1.1.2.dev0",
+  "mteb_version": "1.1.3.dev0",
   "test": {
-    "evaluation_time": 6624.12,
+    "evaluation_time": 257.37,
     "map_at_1": 0.0,
     "map_at_10": 0.0,
     "map_at_100": 0.0,
@@ -19,7 +19,7 @@
     "ndcg_at_1": 0.0,
     "ndcg_at_10": 0.0,
     "ndcg_at_100": 0.0,
-    "ndcg_at_1000": 0.00756,
+    "ndcg_at_1000": 0.00757,
     "ndcg_at_3": 0.0,
     "ndcg_at_5": 0.0,
     "precision_at_1": 0.0,
