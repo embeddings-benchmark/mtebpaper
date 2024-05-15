@@ -1,9 +1,9 @@
 {
   "dataset_revision": "9e9b1f8ef51616073f47f306f7f47dd91663f86a",
   "mteb_dataset_name": "OpusparcusPC",
-  "mteb_version": "1.1.3.dev0",
+  "mteb_version": "1.7.56",
   "test.full": {
-    "evaluation_time": 75.81,
+    "evaluation_time": 2.66,
     "fr": {
       "cos_sim": {
         "accuracy": 0.8358310626702997,
@@ -49,7 +49,7 @@
     }
   },
   "validation.full": {
-    "evaluation_time": 77.29,
+    "evaluation_time": 8.4,
     "fr": {
       "cos_sim": {
         "accuracy": 0.8390313390313391,
