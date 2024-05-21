@@ -2,18 +2,18 @@ import os
 import warnings
 import json
 from argparse import ArgumentParser, Namespace
+from mteb import MTEB
 from mteb.abstasks import AbsTask
 import pandas as pd
-from mteb import MTEB
 
 DATASET_KEYS = {
     "DiaBLaBitextMining": ["fr-en"],
     "FloresBitextMining": MTEB(tasks=['FloresBitextMining'], task_langs=['fr', 'en']).tasks[0].langs,
-    "MasakhaNEWSClassification": MTEB(tasks=['MasakhaNEWSClassification'], task_langs=['fr']).tasks[0].langs
+    "MasakhaNEWSClassification": MTEB(tasks=['MasakhaNEWSClassification'], task_langs=['fr']).tasks[0].langs,
+    "MasakhaNEWSClusteringS2S": MTEB(tasks=['MasakhaNEWSClusteringS2S'], task_langs=['fr']).tasks[0].langs,
+    "MasakhaNEWSClusteringP2P": MTEB(tasks=['MasakhaNEWSClusteringP2P'], task_langs=['fr']).tasks[0].langs,
 }
-DATASET_SPLIT = {
-    "FloresBitextMining": "dev",
-}
+
 
 MODELS_TO_IGNORE = ['voyage-01', 'voyage-02', 'voyage-lite-01']
 
@@ -21,12 +21,13 @@ MODELS_TO_IGNORE = ['voyage-01', 'voyage-02', 'voyage-lite-01']
 class ResultsParser:
     """A class to parse the results of MTEB evaluations
     """
-    def __init__(self, split:str="test", lang:str="fr") -> None:
-        self.split = split
+    def __init__(self, lang:str="fr") -> None:
         self.lang = lang
 
         self.tasks_main_scores_map = ResultsParser.get_tasks_attribute("main_score")
+        self.tasks_main_scores_map["SyntecRetrieval"] = "ndcg_at_10" # Quick fix to match old results. Sould modify main metric for syntecretrieval in mteb module
         self.tasks_type_map = ResultsParser.get_tasks_attribute("type")
+        self.eval_splits_map = ResultsParser.get_tasks_attribute("eval_splits")
 
 
     def __call__(self, results_folder:str, apply_style:bool=False, save_results:bool=True, return_main_scores:bool=False, **kwargs) -> pd.DataFrame:
@@ -93,7 +94,7 @@ class ResultsParser:
 
         Args:
             attribute (str): the name of the attribute. Must belong to the
-                "description" property of the task.
+                "metadata" property of the task.
 
         Returns:
             dict: a mapping with keys being the tasks names 
@@ -106,8 +107,8 @@ class ResultsParser:
             for cls in cat_cls.__subclasses__()
             if cat_cls.__name__.startswith("AbsTask")
         ]
-        tasks_dict = {cls.description["name"]: cls for cls in tasks_cls}
-        tasks_attribute = {k: v.description[attribute] for k, v in tasks_dict.items()}
+        tasks_dict = {cls.metadata.name: cls for cls in tasks_cls}
+        tasks_attribute = {k: vars(v.metadata)[attribute] for k, v in tasks_dict.items()}
 
         return tasks_attribute
 
@@ -117,8 +118,8 @@ class ResultsParser:
 
         Args:
             task_name (str): the name of the task. e.g. "SickFr"
-            task_type (str): the type of task. e.g "STS"
             task_results (str): the results of that task. e.g the content of the json result file
+            split (str, optional): the split to get the results from. Defaults to 'test'.
 
         Returns:
             result (float): the value of the metric for obtained for that task
@@ -155,8 +156,6 @@ class ResultsParser:
 
         Args:
             result_dict (dict): the result dict returned from load_json_files()
-            split (str, optional): the split to get the results from. Defaults to 'test'.
-            lang (str, optional): the language to get the results from. Defaults to 'fr'.
 
         Returns:
             pd.DataFrame: the results as a df
@@ -173,12 +172,14 @@ class ResultsParser:
                             subkeys = DATASET_KEYS[task_name]
                         else:
                             subkeys = [None]
-                        for subkey in subkeys:
-                            result, result_name_score = self._get_task_score(task_name, task_results, subkey, DATASET_SPLIT.get(task_name))
-                            dataset_name = f"{task_name}_{subkey}" if subkey and task_type == "BitextMining" else task_name
-                            self.tasks_type_map[dataset_name] = task_type
-                            results_records.append({'model': model_name, 'dataset': dataset_name, 'result': result})
-                            tasks_main_scores_subset.append(result_name_score)
+                        for split in self.eval_splits_map[task_name]:
+                            if split in task_results:
+                                for subkey in subkeys:
+                                    result, result_name_score = self._get_task_score(task_name, task_results, subkey, split)
+                                    dataset_name = f"{task_name}_{split}_{subkey}" if subkey and task_type == "BitextMining" else f"{task_name}_{split}"
+                                    self.tasks_type_map[dataset_name] = task_type
+                                    results_records.append({'model': model_name, 'dataset': dataset_name, 'result': result})
+                                    tasks_main_scores_subset.append(result_name_score)
                     else:
                         warnings.warn(f"Task name '{task_name}' not found in MTEB module.")
         results_df = pd.DataFrame.from_records(results_records)
