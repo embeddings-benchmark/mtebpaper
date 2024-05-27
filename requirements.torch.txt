@@ -2,6 +2,7 @@
 chromadb==0.4.21
 cohere==4.41
 datasets>=2.19.0
+FlagEmbedding==1.2.10
 huggingface-hub==0.18
 laser_encoders==0.0.1
 mteb @ git+https://github.com/Lyon-NLP/mteb-french.git #removing the other mteb above for now (to adapt when mteb-french gets merged)

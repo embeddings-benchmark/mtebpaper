@@ -1,0 +1,30 @@
+{
+  "dataset_revision": "e077ab4cf4774a1e36d86d593b150422fafd8e8a",
+  "evaluation_time": 33.184362173080444,
+  "kg_co2_emissions": null,
+  "mteb_version": "1.11.10",
+  "scores": {
+    "test": [
+      {
+        "cos_sim": {
+          "pearson": 0.812459252690355,
+          "spearman": 0.7550779819674533
+        },
+        "euclidean": {
+          "pearson": 0.7781293615779897,
+          "spearman": 0.7550765184317035
+        },
+        "hf_subset": "default",
+        "languages": [
+          "fra-Latn"
+        ],
+        "main_score": 0.7550779819674533,
+        "manhattan": {
+          "pearson": 0.7779666695540622,
+          "spearman": 0.7547622425462558
+        }
+      }
+    ]
+  },
+  "task_name": "SICKFr"
+}

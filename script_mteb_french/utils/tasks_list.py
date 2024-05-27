@@ -43,7 +43,7 @@ TASK_LIST_STS = [
 ]
 
 TASK_LIST_BITEXTMINING = [
-    "DiaBLaBitextMining",
+    "DiaBlaBitextMining",
     "FloresBitextMining",
     "TatoebaBitextMining",
     "BUCCBitextMining"

@@ -6,6 +6,7 @@ from mteb import MTEB
 
 from src.ModelConfig import ModelConfig
 from utils.tasks_list import get_tasks
+from constants import DEFAULT_MAX_TOKEN_LENGTH
 
 logging.basicConfig(
     stream=sys.stdout,
@@ -79,6 +80,7 @@ SENTENCE_TRANSORMER_MODELS_WITH_ERRORS = [
     "camembert/camembert-base",
     "camembert/camembert-large",
     "dangvantuan/sentence-camembert-large",
+    "Lajavaness/sentence-camembert-large",
     "xlm-roberta-base",
     "xlm-roberta-large",
 ]
@@ -98,6 +100,8 @@ COHERE_MODELS = ["embed-multilingual-light-v3.0", "embed-multilingual-v3.0"]
 
 MISTRAL_MODELS = ["mistral-embed"]
 
+FLAG_EMBED_MODELS = ["BAAI/bge-m3", "manu/bge-m3-custom-fr"]
+
 TYPES_TO_MODELS = {
     "sentence_transformer": SENTENCE_TRANSORMER_MODELS
     + SENTENCE_TRANSORMER_MODELS_WITH_ERRORS,
@@ -107,6 +111,7 @@ TYPES_TO_MODELS = {
     "open_ai": OPEN_AI_MODELS,
     "cohere": COHERE_MODELS,
     "mistral_ai": MISTRAL_MODELS,
+    "flag_embed": FLAG_EMBED_MODELS,
 }
 
 ##########################
@@ -121,7 +126,7 @@ def run_bitext_mining_tasks(args, model_config: ModelConfig, task: str):
 
     eval_splits = ["dev"] if task == "FloresBitextMining" else ["test"]
 
-    if task == "DiaBLaBitextMining":
+    if task == "DiaBlaBitextMining":
         evaluation = MTEB(tasks=[task], task_langs=[args.lang, "en"])
         evaluation.run(
             model_config,
@@ -157,32 +162,15 @@ def get_models(model_name, model_type, max_token_length) -> list[ModelConfig]:
                 Please select a correct model name corresponding to your model type."
             )
 
-        if max_token_length:
-            return [
-                ModelConfig(
-                    model_name=model_name,
-                    model_type=model_type_value,
-                    max_token_length=max_token_length,
-                )
-            ]
-        else:
-            return [ModelConfig(model_name=model_name, model_type=model_type_value)]
-    else:
-        logging.info(f"Running benchmark with the following model types: {model_type}")
-        if max_token_length:
-            return [
-                ModelConfig(
-                    name, model_type=model_type, max_token_length=max_token_length
-                )
-                for model_type in model_type
-                for name in TYPES_TO_MODELS[model_type]
-            ]
-        else:
-            return [
-                ModelConfig(name, model_type=model_type)
-                for model_type in model_type
-                for name in TYPES_TO_MODELS[model_type]
-            ]
+        return [ModelConfig(model_name=model_name, model_type=model_type_value, max_token_length=max_token_length)]
+    logging.info(f"Running benchmark with the following model types: {model_type}")
+    return [
+        ModelConfig(
+            name, model_type=model_type, max_token_length=max_token_length, use_fp16=args.use_fp16
+        )
+        for model_type in model_type
+        for name in TYPES_TO_MODELS[model_type]
+    ]
 
 
 def parse_args() -> argparse.Namespace:
@@ -210,7 +198,8 @@ def parse_args() -> argparse.Namespace:
         default="en",
         help="Other language for Bitext Mining task",
     )
-    parser.add_argument("--max_token_length", type=int, default=None)
+    parser.add_argument("--max_token_length", type=int, default=DEFAULT_MAX_TOKEN_LENGTH)
+    parser.add_argument("--use_fp16", type=bool, default=True, help="Load FlagEmbeddings models in fp16.")
     args = parser.parse_args()
 
     return args

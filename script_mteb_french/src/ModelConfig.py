@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 
 from .ChromaDBEmbedder import ChromaDBEmbedder
 from .CohereEmbeddingFunction import CohereEmbeddingFunction
+from .FlagEmbeddingFunction import FlagEmbeddingFunction
 from .LaserEmbeddingFunction import LaserEmbeddingFunction
 from .MistralAIEmbeddingFunction import MistralAIEmbeddingFunction
 from .OpenAIEmbeddingFunction import OpenAIEmbeddingFunction
@@ -23,6 +24,7 @@ class ModelConfig(ChromaDBEmbedder):
         model_name: str,
         model_type: str = None,
         max_token_length: int = None,
+        use_fp16: bool = False,
     ):
         """The model configuration to use for the benchmark
 
@@ -45,6 +47,7 @@ class ModelConfig(ChromaDBEmbedder):
             else self.infer_model_type(model_name)
         )
         self._max_token_length = max_token_length
+        self.use_fp16 = use_fp16
         self.embedding_function = self.get_embedding_function()
 
         # inherit the saving of embeddings, and encoding logic from ChromDBEmbedder
@@ -71,6 +74,7 @@ class ModelConfig(ChromaDBEmbedder):
             "sentence_transformer": 4096,
             "universal_sentence_encoder": 4096,
             "mistral_ai": 4096,
+            "flag_embed": 8192,
         }
 
     @property
@@ -132,3 +136,5 @@ class ModelConfig(ChromaDBEmbedder):
                 return MistralAIEmbeddingFunction(
                     self.model_name, self.max_token_length
                 )
+            case "flag_embed":
+                return FlagEmbeddingFunction(self.model_name, self.max_token_length, use_fp16=self.use_fp16)
