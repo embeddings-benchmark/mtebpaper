@@ -1,0 +1,35 @@
+{
+  "dataset_revision": "5345895c56a601afe1a98519ce3199be60a27dba",
+  "evaluation_time": 47.79724049568176,
+  "kg_co2_emissions": null,
+  "mteb_version": "1.11.19",
+  "scores": {
+    "test": [
+      {
+        "accuracy": 0.8890048712595685,
+        "f1": 0.8694952864886114,
+        "hf_subset": "en-fr",
+        "languages": [
+          "eng-Latn",
+          "fra-Latn"
+        ],
+        "main_score": 0.8694952864886114,
+        "precision": 0.8620344379175826,
+        "recall": 0.8890048712595685
+      },
+      {
+        "accuracy": 0.8890048712595685,
+        "f1": 0.8694952864886114,
+        "hf_subset": "fr-en",
+        "languages": [
+          "fra-Latn",
+          "eng-Latn"
+        ],
+        "main_score": 0.8694952864886114,
+        "precision": 0.8620344379175826,
+        "recall": 0.8890048712595685
+      }
+    ]
+  },
+  "task_name": "DiaBlaBitextMining"
+}
