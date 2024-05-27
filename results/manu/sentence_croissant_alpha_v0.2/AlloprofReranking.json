@@ -1,0 +1,10 @@
+{
+  "dataset_revision": "e40c8a63ce02da43200eccb5b0846fcaa888f562",
+  "mteb_dataset_name": "AlloprofReranking",
+  "mteb_version": "1.7.47",
+  "test": {
+    "evaluation_time": 485.04,
+    "map": 0.6700409780862048,
+    "mrr": 0.6831983167475395
+  }
+}

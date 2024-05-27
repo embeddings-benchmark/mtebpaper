@@ -1,0 +1,20 @@
+{
+  "dataset_revision": "8ccc72e69e65f40c70e117d8b3c08306bb788b60",
+  "mteb_dataset_name": "MasakhaNEWSClusteringS2S",
+  "mteb_version": "1.7.47",
+  "test": {
+    "evaluation_time": 1.23,
+    "fra": {
+      "main_score": 0.3086339630962708,
+      "v_measure": 0.3086339630962708,
+      "v_measure_std": 0.3602592490918623,
+      "v_measures": [
+        1.0,
+        0.025482461106508716,
+        0.27367393764592995,
+        0.02228159888549859,
+        0.2217318178434166
+      ]
+    }
+  }
+}
