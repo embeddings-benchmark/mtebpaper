@@ -1,10 +1,20 @@
 {
-  "dataset_revision": "b205c5084a0934ce8af14338bf03feb19499c84d",
-  "mteb_dataset_name": "SyntecReranking",
-  "mteb_version": "1.9.1",
-  "test": {
-    "evaluation_time": 15.51,
-    "map": 0.8290000000000001,
-    "mrr": 0.8290000000000001
-  }
+  "dataset_revision": "daf0863838cd9e3ba50544cdce3ac2b338a1b0ad",
+  "evaluation_time": 15.32974123954773,
+  "kg_co2_emissions": null,
+  "mteb_version": "1.11.19",
+  "scores": {
+    "test": [
+      {
+        "hf_subset": "default",
+        "languages": [
+          "fra-Latn"
+        ],
+        "main_score": 0.8217023809523809,
+        "map": 0.8217023809523809,
+        "mrr": 0.8217023809523809
+      }
+    ]
+  },
+  "task_name": "SyntecReranking"
 }

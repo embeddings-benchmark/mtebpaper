@@ -1,10 +1,20 @@
 {
-  "dataset_revision": "666fdacebe0291776e86f29345663dfaf80a0db9",
-  "mteb_dataset_name": "AlloprofReranking",
-  "mteb_version": "1.1.2.dev0",
-  "test": {
-    "evaluation_time": 52.93,
-    "map": 0.3209078159887816,
-    "mrr": 0.3240079530299365
-  }
+  "dataset_revision": "65393d0d7a08a10b4e348135e824f385d420b0fd",
+  "evaluation_time": 19.645063877105713,
+  "kg_co2_emissions": null,
+  "mteb_version": "1.11.19",
+  "scores": {
+    "test": [
+      {
+        "hf_subset": "default",
+        "languages": [
+          "fra-Latn"
+        ],
+        "main_score": 0.29307569944428097,
+        "map": 0.29307569944428097,
+        "mrr": 0.28882103791430214
+      }
+    ]
+  },
+  "task_name": "AlloprofReranking"
 }
