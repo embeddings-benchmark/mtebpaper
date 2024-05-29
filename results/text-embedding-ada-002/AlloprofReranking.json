@@ -1,0 +1,20 @@
+{
+  "dataset_revision": "65393d0d7a08a10b4e348135e824f385d420b0fd",
+  "evaluation_time": 105.93800330162048,
+  "kg_co2_emissions": null,
+  "mteb_version": "1.11.19",
+  "scores": {
+    "test": [
+      {
+        "hf_subset": "default",
+        "languages": [
+          "fra-Latn"
+        ],
+        "main_score": 0.7553035636965619,
+        "map": 0.7553035636965619,
+        "mrr": 0.7689472133124983
+      }
+    ]
+  },
+  "task_name": "AlloprofReranking"
+}

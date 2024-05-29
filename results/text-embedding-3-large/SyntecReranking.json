@@ -1,0 +1,20 @@
+{
+  "dataset_revision": "daf0863838cd9e3ba50544cdce3ac2b338a1b0ad",
+  "evaluation_time": 13.717875957489014,
+  "kg_co2_emissions": null,
+  "mteb_version": "1.11.19",
+  "scores": {
+    "test": [
+      {
+        "hf_subset": "default",
+        "languages": [
+          "fra-Latn"
+        ],
+        "main_score": 0.9156666666666666,
+        "map": 0.9156666666666666,
+        "mrr": 0.9156666666666666
+      }
+    ]
+  },
+  "task_name": "SyntecReranking"
+}
