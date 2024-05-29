@@ -6,7 +6,7 @@ from mteb import MTEB
 
 from src.ModelConfig import ModelConfig
 from utils.tasks_list import get_tasks
-from constants import DEFAULT_MAX_TOKEN_LENGTH
+from constants import DEFAULT_MAX_TOKEN_LENGTH, PROMPT_PER_TYPE
 
 logging.basicConfig(
     stream=sys.stdout,
@@ -65,7 +65,6 @@ SENTENCE_TRANSORMER_MODELS = [
     "sentence-transformers/sentence-t5-large",
     "sentence-transformers/sentence-t5-xl",
     "sentence-transformers/sentence-t5-xxl",
-    "intfloat/e5-mistral-7b-instruct",
     "Wissam42/sentence-croissant-llm-base",
     "OrdalieTech/Solon-embeddings-large-0.1",
     "OrdalieTech/Solon-embeddings-base-0.1",
@@ -83,6 +82,10 @@ SENTENCE_TRANSORMER_MODELS_WITH_ERRORS = [
     "Lajavaness/sentence-camembert-large",
     "xlm-roberta-base",
     "xlm-roberta-large",
+]
+
+SENTENCE_TRANSORMER_MODELS_WITH_PROMPT = [
+    "intfloat/e5-mistral-7b-instruct",
 ]
 
 UNIVERSAL_SENTENCE_ENCODER_MODELS = [
@@ -103,8 +106,10 @@ MISTRAL_MODELS = ["mistral-embed"]
 FLAG_EMBED_MODELS = ["BAAI/bge-m3", "manu/bge-m3-custom-fr"]
 
 TYPES_TO_MODELS = {
-    "sentence_transformer": SENTENCE_TRANSORMER_MODELS
-    + SENTENCE_TRANSORMER_MODELS_WITH_ERRORS,
+    "sentence_transformer": 
+    SENTENCE_TRANSORMER_MODELS
+    + SENTENCE_TRANSORMER_MODELS_WITH_ERRORS
+    + SENTENCE_TRANSORMER_MODELS_WITH_PROMPT,
     "universal_sentence_encoder": UNIVERSAL_SENTENCE_ENCODER_MODELS,
     "laser": LASER_MODELS,
     "voyage_ai": VOYAGE_MODELS,
@@ -144,8 +149,11 @@ def run_bitext_mining_tasks(args, model_config: ModelConfig, task: str):
         )
 
 
-def get_models(model_name, model_type, max_token_length) -> list[ModelConfig]:
+def get_models(model_name: str, model_type: str, max_token_length: int, task_type: str = None) -> list[ModelConfig]:
     """Returns ModelConfig of input model_name or all ModelConfig model_type's list of models"""
+    logging.info(f"Running benchmark with the following model types: {model_type}")
+    configs = []
+
     if model_name:
         logging.info(f"Running benchmark with the following model: {model_name}")
         if len(model_type) > 1:
@@ -153,24 +161,32 @@ def get_models(model_name, model_type, max_token_length) -> list[ModelConfig]:
                 "Only one model type needs to be specified when a model name is given."
             )
 
-        model_type_value = model_type[0]
-        available_models_for_type = TYPES_TO_MODELS[model_type_value]
+        # model_type_value = model_type[0]
+        available_models_for_type = TYPES_TO_MODELS[model_type[0]]
 
         if model_name not in available_models_for_type:
             raise Exception(
                 f"Model name not in {available_models_for_type}.\n\
                 Please select a correct model name corresponding to your model type."
             )
+   
+    for mt in model_type:
+        for name in TYPES_TO_MODELS[mt]:
+            if name in SENTENCE_TRANSORMER_MODELS_WITH_PROMPT:
+                configs.append(
+                    ModelConfig(
+                        name, model_type=mt, max_token_length=max_token_length, 
+                        prompts=PROMPT_PER_TYPE, task_type=task_type
+                    )
+                )
+            else:
+                configs.append(
+                    ModelConfig(
+                        name, model_type=mt, max_token_length=max_token_length
+                    )
+                )
 
-        return [ModelConfig(model_name=model_name, model_type=model_type_value, max_token_length=max_token_length)]
-    logging.info(f"Running benchmark with the following model types: {model_type}")
-    return [
-        ModelConfig(
-            name, model_type=model_type, max_token_length=max_token_length, use_fp16=args.use_fp16
-        )
-        for model_type in model_type
-        for name in TYPES_TO_MODELS[model_type]
-    ]
+    return configs
 
 
 def parse_args() -> argparse.Namespace:
@@ -188,7 +204,8 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--task_type",
-        nargs="+",
+        # nargs="+",
+        type=str, 
         default=["all"],
         help="Choose tasks to run the evaluation on.",
     )
@@ -199,7 +216,6 @@ def parse_args() -> argparse.Namespace:
         help="Other language for Bitext Mining task",
     )
     parser.add_argument("--max_token_length", type=int, default=DEFAULT_MAX_TOKEN_LENGTH)
-    parser.add_argument("--use_fp16", type=bool, default=True, help="Load FlagEmbeddings models in fp16.")
     args = parser.parse_args()
 
     return args
@@ -207,13 +223,15 @@ def parse_args() -> argparse.Namespace:
 
 def main(args):
     # Select tasks to run evaluation on, default is set to all tasks
-    tasks = get_tasks(args.task_type)
+    task_type = args.task_type
+    tasks = get_tasks(task_type)
 
     # Running one model at a time or all models
     models = get_models(
         model_name=args.model_name,
         model_type=args.model_type,
         max_token_length=args.max_token_length,
+        task_type=task_type if task_type != "all" else None
     )
 
     # Running evaluation on all models for selected tasks
@@ -242,6 +260,7 @@ def main(args):
                         eval_splits = ["test"]
                 model_name = model_config.model_name
                 model_config.batch_size = args.batchsize
+
                 logging.info(f"Running task: {task} with model {model_name}")
                 #################################
                 evaluation = MTEB(tasks=[task], task_langs=[args.lang])

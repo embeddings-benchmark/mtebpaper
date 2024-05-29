@@ -1,15 +1,62 @@
 {
-  "dataset_revision": "31efe3c427b0bae9c22cbb560b8f15491cc6bed7",
-  "mteb_dataset_name": "MassiveIntentClassification",
-  "mteb_version": "1.1.2.dev0",
-  "test": {
-    "evaluation_time": 206.09,
-    "fr": {
-      "accuracy": 0.4638533960995293,
-      "accuracy_stderr": 0.018070760366170353,
-      "f1": 0.4467562743928945,
-      "f1_stderr": 0.02227694967659545,
-      "main_score": 0.4638533960995293
-    }
-  }
+  "dataset_revision": "4672e20407010da34463acc759c162ca9734bca6",
+  "evaluation_time": 311.0755834579468,
+  "kg_co2_emissions": null,
+  "mteb_version": "1.11.19",
+  "scores": {
+    "test": [
+      {
+        "accuracy": 0.59862138533961,
+        "f1": 0.5575422868757022,
+        "hf_subset": "fr",
+        "languages": [
+          "fra-Latn"
+        ],
+        "main_score": 0.59862138533961,
+        "scores_per_experiment": [
+          {
+            "accuracy": 0.547074646940148,
+            "f1": 0.5324205404753273
+          },
+          {
+            "accuracy": 0.6469401479488904,
+            "f1": 0.6084267918951123
+          },
+          {
+            "accuracy": 0.5736381977135171,
+            "f1": 0.5234073421142822
+          },
+          {
+            "accuracy": 0.6385339609952926,
+            "f1": 0.5862379921899968
+          },
+          {
+            "accuracy": 0.597511768661735,
+            "f1": 0.5511350201794746
+          },
+          {
+            "accuracy": 0.5662407531943511,
+            "f1": 0.5291389253264752
+          },
+          {
+            "accuracy": 0.5991930060524546,
+            "f1": 0.5698813035672743
+          },
+          {
+            "accuracy": 0.5998655010087425,
+            "f1": 0.5473338042782379
+          },
+          {
+            "accuracy": 0.6042367182246133,
+            "f1": 0.5602665994198588
+          },
+          {
+            "accuracy": 0.612979152656355,
+            "f1": 0.5671745493109825
+          }
+        ]
+      }
+    ]
+  },
+  "task_name": "MassiveIntentClassification"
 }

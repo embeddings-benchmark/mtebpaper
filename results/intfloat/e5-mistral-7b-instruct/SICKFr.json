@@ -1,20 +1,30 @@
 {
   "dataset_revision": "e077ab4cf4774a1e36d86d593b150422fafd8e8a",
-  "mteb_dataset_name": "SICKFr",
-  "mteb_version": "1.1.2.dev0",
-  "test": {
-    "cos_sim": {
-      "pearson": 0.6930293610652999,
-      "spearman": 0.6439158828177767
-    },
-    "euclidean": {
-      "pearson": 0.6662172566069396,
-      "spearman": 0.6439158787505813
-    },
-    "evaluation_time": 236.89,
-    "manhattan": {
-      "pearson": 0.6821452740116539,
-      "spearman": 0.6585085264954652
-    }
-  }
+  "evaluation_time": 334.13644576072693,
+  "kg_co2_emissions": null,
+  "mteb_version": "1.11.19",
+  "scores": {
+    "test": [
+      {
+        "cos_sim": {
+          "pearson": 0.8242357265632352,
+          "spearman": 0.7914808164798864
+        },
+        "euclidean": {
+          "pearson": 0.7951618028709236,
+          "spearman": 0.7914808925163027
+        },
+        "hf_subset": "default",
+        "languages": [
+          "fra-Latn"
+        ],
+        "main_score": 0.7914808164798864,
+        "manhattan": {
+          "pearson": 0.8009645746367186,
+          "spearman": 0.7957669954910931
+        }
+      }
+    ]
+  },
+  "task_name": "SICKFr"
 }

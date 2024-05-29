@@ -1,10 +1,32 @@
 {
   "dataset_revision": "b5d54f8f3b61ae17845046286940f03c6bc79bc7",
-  "mteb_dataset_name": "MLSUMClusteringS2S",
-  "mteb_version": "1.1.2.dev0",
-  "test": {
-    "evaluation_time": 678.24,
-    "v_measure": 0.32000091738901953,
-    "v_measure_std": 0.0184166492256432
-  }
+  "evaluation_time": 21449.12542462349,
+  "kg_co2_emissions": null,
+  "mteb_version": "1.11.19",
+  "scores": {
+    "test": [
+      {
+        "hf_subset": "fr",
+        "languages": [
+          "fra-Latn"
+        ],
+        "main_score": 0.4441451479416692,
+        "v_measure": 0.4441451479416692,
+        "v_measure_std": 0.020725356516040745,
+        "v_measures": [
+          0.4315707275170779,
+          0.44822320284828443,
+          0.4602588663891505,
+          0.4369027020625044,
+          0.39666725969895267,
+          0.4624281216309448,
+          0.47540377392772826,
+          0.4479666047308285,
+          0.4307965976650102,
+          0.4512336229462095
+        ]
+      }
+    ]
+  },
+  "task_name": "MLSUMClusteringS2S"
 }

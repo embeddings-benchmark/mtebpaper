@@ -24,6 +24,8 @@ class ModelConfig(ChromaDBEmbedder):
         model_name: str,
         model_type: str = None,
         max_token_length: int = None,
+        prompts: dict = None,
+        task_type: str = None,
         use_fp16: bool = False,
     ):
         """The model configuration to use for the benchmark
@@ -41,6 +43,7 @@ class ModelConfig(ChromaDBEmbedder):
         self._available_model_types = list(self._max_token_per_model.keys())
 
         self.model_name = model_name
+        self.task_type = task_type
         self._model_type = (
             model_type
             if model_type in self._max_token_per_model.keys()
@@ -48,7 +51,7 @@ class ModelConfig(ChromaDBEmbedder):
         )
         self._max_token_length = max_token_length
         self.use_fp16 = use_fp16
-        self.embedding_function = self.get_embedding_function()
+        self.embedding_function = self.get_embedding_function(prompts=prompts)
 
         # inherit the saving of embeddings, and encoding logic from ChromDBEmbedder
         save_embbeddings = (
@@ -114,7 +117,7 @@ class ModelConfig(ChromaDBEmbedder):
             f"Please specify model type among supported types : {self._available_model_types}"
         )
 
-    def get_embedding_function(self):
+    def get_embedding_function(self, prompts: dict=None):
         match self.model_type:
             case "cohere":
                 return CohereEmbeddingFunction(self.model_name, self.max_token_length)
@@ -126,7 +129,8 @@ class ModelConfig(ChromaDBEmbedder):
                 return OpenAIEmbeddingFunction(self.model_name, self.max_token_length)
             case "sentence_transformer":
                 return SentenceTransformerEmbeddingFunction(
-                    self.model_name, self.max_token_length
+                    self.model_name, self.max_token_length,
+                    prompts=prompts, task_type=self.task_type
                 )
             case "universal_sentence_encoder":
                 return UniversalSentenceEncoderEmbeddingFunction(

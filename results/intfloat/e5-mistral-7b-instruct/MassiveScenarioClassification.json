@@ -1,15 +1,62 @@
 {
-  "dataset_revision": "7d571f92784cd94a019292a1f45445077d0ef634",
-  "mteb_dataset_name": "MassiveScenarioClassification",
-  "mteb_version": "1.1.2.dev0",
-  "test": {
-    "evaluation_time": 124.6,
-    "fr": {
-      "accuracy": 0.5385675857431069,
-      "accuracy_stderr": 0.01968530126172928,
-      "f1": 0.5186350449074648,
-      "f1_stderr": 0.020893398459047672,
-      "main_score": 0.5385675857431069
-    }
-  }
+  "dataset_revision": "fad2c6e8459f9e1c45d9315f4953d921437d70f8",
+  "evaluation_time": 178.56223726272583,
+  "kg_co2_emissions": null,
+  "mteb_version": "1.11.19",
+  "scores": {
+    "test": [
+      {
+        "accuracy": 0.6982515131136517,
+        "f1": 0.6990754951935514,
+        "hf_subset": "fr",
+        "languages": [
+          "fra-Latn"
+        ],
+        "main_score": 0.6982515131136517,
+        "scores_per_experiment": [
+          {
+            "accuracy": 0.7114996637525218,
+            "f1": 0.7172214810736501
+          },
+          {
+            "accuracy": 0.7010759919300605,
+            "f1": 0.702252081845234
+          },
+          {
+            "accuracy": 0.6893073301950235,
+            "f1": 0.6950453176698159
+          },
+          {
+            "accuracy": 0.7057834566240753,
+            "f1": 0.6994510949768038
+          },
+          {
+            "accuracy": 0.6845998655010087,
+            "f1": 0.6898831417029556
+          },
+          {
+            "accuracy": 0.6906523201075991,
+            "f1": 0.6825551465321635
+          },
+          {
+            "accuracy": 0.6973772696704774,
+            "f1": 0.6915643190275491
+          },
+          {
+            "accuracy": 0.6909885675857431,
+            "f1": 0.6963706109219391
+          },
+          {
+            "accuracy": 0.7101546738399462,
+            "f1": 0.7042562433899194
+          },
+          {
+            "accuracy": 0.7010759919300605,
+            "f1": 0.7121555147954829
+          }
+        ]
+      }
+    ]
+  },
+  "task_name": "MassiveScenarioClassification"
 }

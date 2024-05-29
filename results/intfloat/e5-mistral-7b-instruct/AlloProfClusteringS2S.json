@@ -1,10 +1,32 @@
 {
   "dataset_revision": "392ba3f5bcc8c51f578786c1fc3dae648662cb9b",
-  "mteb_dataset_name": "AlloProfClusteringS2S",
-  "mteb_version": "1.1.2.dev0",
-  "test": {
-    "evaluation_time": 79.47,
-    "v_measure": 0.2812144287516594,
-    "v_measure_std": 0.025551483347510253
-  }
+  "evaluation_time": 100.37362098693848,
+  "kg_co2_emissions": null,
+  "mteb_version": "1.11.19",
+  "scores": {
+    "test": [
+      {
+        "hf_subset": "default",
+        "languages": [
+          "fra-Latn"
+        ],
+        "main_score": 0.5813416598329056,
+        "v_measure": 0.5813416598329056,
+        "v_measure_std": 0.020951290402803458,
+        "v_measures": [
+          0.5649402771526865,
+          0.5794184904600804,
+          0.5431008082453164,
+          0.5637498022813575,
+          0.595915661715902,
+          0.5796265453463302,
+          0.5697431518771974,
+          0.5938280601557553,
+          0.6142426117039381,
+          0.6088511893904928
+        ]
+      }
+    ]
+  },
+  "task_name": "AlloProfClusteringS2S"
 }
