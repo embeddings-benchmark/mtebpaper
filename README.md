@@ -1,17 +1,22 @@
-# MTEB Scripts
+# MTEB Paper resources
 
-This repository contains scripts used for [MTEB](https://github.com/embeddings-benchmark/mteb) benchmarking. Some scripts rely on a results folder, which can be obtained via `git clone https://huggingface.co/datasets/mteb/results`.
+This repository contains scripts & resources for the [MTEB paper]([https://github.com/embeddings-benchmark/mteb](https://arxiv.org/abs/2210.07316)). Some scripts rely on a results folder, which can be obtained via `git clone https://huggingface.co/datasets/mteb/results`. **These scripts are unlikely to work with the latest version of MTEB but rather the [1.0.0 release](https://github.com/embeddings-benchmark/mteb/releases/tag/1.0.0) when the paper was released.** Please refer to the [MTEB repository](https://github.com/embeddings-benchmark/mteb/tree/main/scripts) for scripts and resources to work with the latest version and please open any issues with MTEB there; if you have issues with the original MTEB paper you can open them here.
 
 <!-- TOC -->
 
-- [MTEB Scripts](#mteb-scripts)
-    - [Benchmark](#benchmark)
-    - [Env Setup](#env-setup)
-    - [Model setup](#model-setup)
-        - [Download](#download)
-        - [Load](#load)
+- [Talks](#talks)
+- [Benchmark](#benchmark)
+- [Env Setup](#env-setup)
+- [Model setup](#model-setup)
+    - [Download](#download)
+    - [Load](#load)
 
 <!-- /TOC -->
+
+## Talks
+
+- [Link to 12min presentation on MTEB](https://www.youtube.com/watch?v=Tilgr1hjziw&t=81s&pp=ygUFTVRFQiA%3D) by Niklas Muennighoff
+- [Link to 5min presentation on MTEB](https://www.youtube.com/watch?v=S6XY9mFRHGs&t=17s&pp=ygUFTVRFQiA%3D) by Nils Reimers
 
 ## Benchmark
 
